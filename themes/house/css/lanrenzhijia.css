@@ -1,0 +1,37 @@
+@charset "utf-8";
+*{ margin:0; padding:0; list-style:none;}
+img{ border:0;}
+/* 代码整理：懒人之家 www.lanrenzhijia.com */
+/* tour */
+#tour{z-index:1;position:relative; width:980px;}
+#img-slider .slide{width:100%;background:#fff;position:absolute;}
+#img-slider .slide .img{margin:10px auto;border:none;}
+#img-slider .img{-webkit-box-shadow:0 1px 0 rgba(204,205,206,5);-moz-box-shadow:0 1px 0 rgba(204,205,206,5);-ms-box-shadow:0 1px 0 rgba(204,205,206,5);box-shadow:0 1px 0 rgba(204,205,206,5);border:1px solid #edeeee;background-color:#fff;width:740px;height:536px;position:relative;}
+#img-slider .img img{display:block;width:100%;}
+
+#img-slider .img:first-child{display:block;}
+
+.switcher-wrap{position:relative;}
+.switcher-wrap.slider{padding-left:190px;padding-right:190px;}
+.switcher-wrap.slider #img-slider .img{-webkit-box-shadow:0 4px 20px rgba(0,0,0,0.4);-moz-box-shadow:0 4px 20px rgba(0,0,0,0.4);-ms-box-shadow:0 4px 20px rgba(0,0,0,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.4);border-color:#fff;}
+.switcher-wrap a.next,.switcher-wrap a.prev{position:absolute;width:50px;height:50px;top:50%;margin-top:-65px;bottom:0;left:5%;background:url(../images/enjoy/j_left.png) no-repeat; height:104px; width:60px;z-index:1000;}
+.switcher-wrap a.prev{right:5%;left:auto;background:url(../images/enjoy/j_right.png) no-repeat; height:104px; width:60px;}
+.switcher-wrap ul.switcher{text-align:center;position:absolute;left:0;right:0;bottom:0;}
+.switcher-wrap ul.switcher li{display:inline-block;padding:2px;border:1px solid #10af8b;border-radius:100%;margin:0 4px;}
+.switcher-wrap ul.switcher li a{display:block;width:14px;height:14px;-webkit-border-radius:100%;-moz-border-radius:100%;-ms-border-radius:100%;border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;-ms-border-radius:100%;border-radius:100%;-o-transition:background 0.30s ease-in-out;-webkit-transition:background 0.30s ease-in-out;-moz-transition:background 0.30s ease-in-out;transition:background 0.30s ease-in-out;}
+.switcher-wrap ul.switcher li a:hover,.switcher-wrap ul.switcher li.active a{background:#10af8b;}
+.switcher-wrap ul.switcher li:last-child{margin-right:0;}
+.enjoy_gdsz{ text-align:center; font-size:16px; padding:20px;}
+.enjoy_gdsz i{ font-style:normal; padding-right:4px;}
+.enjoy_gdsz span{ padding-left:3px;}
+
+.on{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+}
+

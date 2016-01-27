@@ -1,0 +1,477 @@
+<!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Nd3Cbj-HPwggqQPpbGEMlPXe91muGMw&sensor=false"></script>-->
+<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?libraries=places&sensor=false&language=zh-cn"></script>
+<script type="text/javascript" src="/static/map/js/richmarker-compiled.js"></script>
+<script type="text/javascript">
+window.onload=function()//用window的onload事件，窗体加载完毕的时候
+{
+daolumap();
+}
+</script>
+<style>
+.dtck_box{ margin-top:20px;}
+.map_cp{ height:39px; background-color:#ff4e00; overflow: hidden; }
+.map_cpone{ float:left; font-size:14px; color:#FFFFFF; border-right:1px solid #fff; height:31px; line-height:31px; margin:4px 30px 4px 40px; padding-right:25px;}
+.map_cplist{ float:left; height:29px; line-height:29px; margin:5px 30px;}
+.map_cplist a{ display:block; color:#FFFFFF; text-decoration:none;white-space:nowrap;}
+.map_cplist a:hover{ text-decoration:underline;}
+.map_cplist_left{ float:left;}
+.map_cplist_right{ float:left; padding-left:10px; font-size:14px;}
+.maptwo{ float:right;*position:fixed;*right:0;}
+.mapthree{ *position:fixed;*right:91px;}
+.dtck_box_two{ height:430px; overflow:hidden;}
+table{ border-collapse:collapse; margin:0 auto;}
+tr{ text-align:center; height:47px;}
+td{ border:1px solid #d8d8d8;  }
+.xuequ_posotion{ font-size:14px;}
+.xuequ_posotion a{ color:#333333}
+.xuequ_posotion a:hover{ color:#FF6600}
+</style>
+<link href="/themes/house/xuequ/images_index/index.css" rel="stylesheet" type="text/css" />
+
+
+ <?php
+
+$id=(int)$_GET["id"];
+$connection = Yii::app()->db;
+$sql = "select * from h_school where id=".$id."";
+$command = $connection->createCommand($sql);
+$result = $command->queryAll();
+
+$sheng="Ontario";
+$xiangxidizhi=$result[0]["address"];
+$school=$result[0]["school"];
+$paiming=$result[0]["paiming"];
+$pingfen=$result[0]["pingfen"];
+$xingzhi=$result[0]["xingzhi"];
+$tel=$result[0]["tel"];
+$type=$result[0]["type"];
+if($type==0){$typename="小学排名";}else{$typename="中学排名";}
+$jingweidu=actionGetCodeAddress2($sheng.$xiangxidizhi);
+
+ ?>    
+ <div style="width:980px; margin:0 auto;">
+<div class="xuequ_posotion">
+                     <p><a href="/">首页 &nbsp;&nbsp;&gt;&nbsp;&nbsp;</a><a href="index.php?r=column/index">学区专栏</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<font color="#FF6600"><?php echo $typename;?></font></p>
+                     </div>
+
+<table width="980" border="0" cellspacing="0"  cellpadding="0">
+                          <tr style=" background:#e2e2e2; height:32px;">
+                            <td width="66">排名</td>
+                            <td width="220">学校</td>
+                            <td width="103">评分</td>
+                            <td width="103">性质</td>
+                            <td width="165">电话</td>
+                            <td width="356">地址</td>
+            </tr>
+
+      
+                          <tr>
+                            <td><?php echo $paiming; ?></td>
+                            <td><?php echo $school; ?></td>
+                            <td><?php echo $pingfen; ?></td>
+                            <td><?php echo $xingzhi; ?></td>
+                            <td><?php echo $tel; ?></td>
+                            <td><?php echo $xiangxidizhi; ?></td>
+                          </tr>
+
+        </table>
+        </div>
+        <a href="javascript:;" name="fydt" style="text-indent:-99999em; display:block;margin-bottom:25px;zoom: 1;">1</a>
+        <div class="dtck_box hsdts_box5" style="width:980px; margin:0 auto;">
+            <div class="fyxqdown_left_title">
+                <a class="fyxqdown_left_cur" href="javascript:daolumap()">地图</a>
+                <a href="javascript:streetmap(1)">街景</a>
+                <div class="cl"></div>
+            </div>
+            <div class="dtck_box_two" style="background-color: #eee;width: 100%;">
+                <div id="map1" class="dataWrap" style=" display:block;height:430px"></div>
+                <div id="map2" class="dataWrap" style="height:430px"></div>
+            </div>
+            <div class="dtck_box_three">
+                <div class="map_cp">
+                    <div class="map_cpone">周边设施</div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m1.jpg" /></div>
+                            <div class="map_cplist_right">学校</div>
+                        </a>
+                    </div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m2.jpg" /></div>
+                            <div class="map_cplist_right">餐饮</div>
+                        </a>
+                    </div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m3.jpg" /></div>
+                            <div class="map_cplist_right">交通</div>
+                        </a>
+                    </div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m4.jpg" /></div>
+                            <div class="map_cplist_right">购物</div>
+                        </a>
+                    </div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m5.jpg" /></div>
+                            <div class="map_cplist_right">医院</div>
+                        </a>
+                    </div>
+                    <div class="map_cplist">
+                        <a href="javascript:;">
+                            <div class="map_cplist_left"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/house/m6.jpg" /></div>
+                            <div class="map_cplist_right">银行</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+     <?php
+     function actionGetCodeAddress2($location) {
+	$result = array();
+//	$location = $_GET['location'];
+//	echo $location;
+	if (!empty($location)) {
+			$url = 'http://maps.google.cn/maps/api/geocode/json?address=' . trim($location) . ',加拿大&sensor=false&language=zh-CN';
+			//$url = 'http://maps.google.cn/maps/api/geocode/json?address=' . '129 Ulster St,Toronto' . ',加拿大&sensor=false&language=zh-CN';
+			//$url = 'http://maps.google.cn/maps/api/geocode/json?address=129 Ulster St Toronto,加拿大&sensor=false&language=zh-CN';
+			$url = str_replace(' ', '+', $url);
+			// header
+			$userAgent = array(
+					'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/22.0', // FF 22
+					'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36', // Chrome 27
+					'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)', // IE 9
+					'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)', // IE 8
+					'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)', // IE 7
+					'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Maxthon/4.1.0.4000 Chrome/26.0.1410.43 Safari/537.1', // Maxthon 4
+					'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)', // 2345 2
+					'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; QQBrowser/7.3.11251.400)', // QQ 7
+					'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E; SE 2.X MetaSr 1.0)', // Sougo 4
+					'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0) LBBROWSER', //  liebao 4
+			);
+
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+			curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0");
+			curl_setopt($ch, CURLOPT_REFERER, "http://hqn.jschina.com.cn/prop.asp?id=1975");
+			curl_setopt($ch, CURLOPT_TIMEOUT, 16);
+			curl_setopt($ch, CURLOPT_USERAGENT, $userAgent[rand(0, count($userAgent) - 1)]);
+			curl_setopt($ch, CURLOPT_PROXY, null);
+			// 伪造IP头
+			$ip = rand(27, 64) . "." . rand(100, 200) . "." . rand(2, 200) . "." . rand(2, 200);
+			$headerIp = array("X-FORWARDED-FOR:{$ip}", "CLIENT-IP:{$ip}");
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headerIp);
+			// 读取数据
+			$res = @curl_exec($ch);
+			curl_close($ch);
+			$addrInfo = json_decode($res, true);
+			$result['IsError'] = false;
+			$result['lng'] = $addrInfo['results'][0]['geometry']['location']['lng'];
+			$result['lat'] = $addrInfo['results'][0]['geometry']['location']['lat'];
+	} else {
+			$result['IsError'] = true;
+			$result['Message'] = '数据接收失败';
+	}
+	//var_dump ($result);
+	return $result;
+}
+	 ?>
+
+<!-- 房源详情页面结束 -->
+<script>
+    $(document).ready(function() {
+        //搜索条件下拉
+        $(document).ready(function() {
+            $(".syss_xltj").mouseover(function() {
+                $(this).find(".syss_xltjdown").show();
+            });
+            $(".syss_xltj").mouseout(function() {
+                $(this).find(".syss_xltjdown").hide();
+            });
+            //搜索条件删除
+            $(".fyss_tjsc a").click(function() {
+                $(".fyss_tjqr").empty();
+            });
+
+            $(".fyss_qrtj_list").click(function() {
+                $(this).remove();
+            });
+
+        });
+
+        //加入收藏
+        $(".collection").click(function() {
+            var self = $(this);
+            var id = self.attr('data-id');
+            $.post('<?php echo Yii::app()->createUrl('house/collection'); ?>', {'id': id}, function(json) {
+                if (json.status == 200) {
+                    alert(json.msg);
+                    self.addClass("collected");
+                } else if (json.status == 404) {
+                    alert(json.msg);
+                    window.location.href = "<?php echo Yii::app()->createUrl('site/login', array('original' => Yii::app()->request->getUrl())); ?>";
+                } else {
+                    alert(json.msg);
+                }
+            }, 'json');
+
+        });
+
+        //图片视频tab切换
+        $(".fyxq_tab_tp").click(function() {
+            $(this).addClass("fyxq_tab_cur");
+            $(".fyxq_tab_sp").removeClass("fyxq_tab_cur");
+            $(".diflash").show();
+            $(".fyxq_tab_cont_sp").hide();
+        });
+
+        $(".fyxq_tab_sp").click(function() {
+            $(this).addClass("fyxq_tab_cur");
+            $(".fyxq_tab_tp").removeClass("fyxq_tab_cur");
+            $(".diflash").hide();
+            $(".fyxq_tab_cont_sp").show();
+        });
+
+    });
+    //附近房源左右滚动效果
+    $(function() {
+        var i = 4
+        var cont = $(".fjfy_gd_body img").size();
+        var kd = (cont * 198) + "px";
+        var last = (cont - i) * 198 + "px";
+        var page = 1;
+        var o = cont - 3;
+        var page_cont = cont;
+        $(".fjfy_gd_body_left").click(function() {
+            if (page == 1) {
+                $(".fjfy_gd_body").animate({"margin-left": '-=' + last}, 1000);
+                page = o;
+            }
+            else {
+                $(".fjfy_gd_body").animate({"margin-left": "+=198px"}, 1000);
+                page--;
+            }
+            $("i").text(page);
+        });
+
+        $(".fjfy_gd_body_right").click(function() {
+            if (page == o) {
+                $(".fjfy_gd_body").animate({"margin-left": "0"}, 1000);
+                page = 1;
+            }
+            else {
+                $(".fjfy_gd_body").animate({"margin-left": "-=198px"}, 1000);
+                page++;
+            }
+            $("i").text(page);
+        });
+
+    });
+    //热点推荐左右滚动效果
+    $(function() {
+        var i = 4
+        var cont = $(".fjfy_rd_body img").size();
+        var kd = (cont * 198) + "px";
+        var last = (cont - i) * 198 + "px";
+        var page = 1;
+        var o = cont - 3;
+        var page_cont = cont;
+        $(".fjfy_rd_body_left").click(function() {
+            if (page == 1) {
+                $(".fjfy_rd_body").animate({"margin-left": '-=' + last}, 1000);
+                page = o;
+            }
+            else {
+                $(".fjfy_rd_body").animate({"margin-left": "+=198px"}, 1000);
+                page--;
+            }
+            $("i").text(page);
+        });
+
+        $(".fjfy_rd_body_right").click(function() {
+            if (page == o) {
+                $(".fjfy_rd_body").animate({"margin-left": "0"}, 1000);
+                page = 1;
+            }
+            else {
+                $(".fjfy_rd_body").animate({"margin-left": "-=198px"}, 1000);
+                page++;
+            }
+            $("i").text(page);
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    flowplayer("video_wrap", "<?php echo Yii::app()->theme->baseUrl; ?>/js/flowplayer-3.2.12.swf", {
+        clip: {
+            url: "<?php echo Yii::app()->request->baseUrl; ?>" + "/" + "<?php echo $house->video_url; ?>",
+            autoPlay: false,
+            autoBuffering: true
+        },
+        plugins: {
+            controls: {
+                play: true, //开端按钮
+                volume: true, //音量按钮
+                mute: true, //静音按钮
+                fullscreen: true, //全屏按钮
+                scrubber: true, //进度条
+                time: true, //是否显示时候信息
+                autoHide: true    //功能条是否主动隐蔽
+            }
+        }
+    });
+
+    //图片焦点图切换
+    var sj = 5000;
+    $(function() {
+        i = 0
+        n = $(".diflashup span").length;
+        time = setInterval("autoone()", sj);
+    });
+
+    function autoone() {
+        i = i + 1;
+        dq = i - 1;
+        $(".diflashdown span:eq('" + dq + "')").addClass("span_cur").siblings().removeClass("span_cur");
+        $(".diflashup span:eq('" + dq + "')").fadeIn(500).siblings().hide();
+        if (i == n) {
+            i = 0;
+        }
+    }
+
+    $(document).ready(function() {
+        $(".diflashdown span").mouseover(function() {
+            var zs = $(this).index();
+            $(this).addClass("span_cur").siblings().removeClass("span_cur");
+            $(".diflashup span:eq('" + zs + "')").fadeIn(500).siblings().hide();
+            clearTimeout(time);
+        })
+    });
+
+    $(document).ready(function() {
+        $(".diflashdown span").mouseout(function() {
+            var zs = $(this).index();
+            autotwo(zs);
+            time = setInterval("autoone()", sj);
+        })
+    });
+
+    function autotwo(k) {
+        i = k;
+        i = i + 1;
+        dq = i - 1;
+        $(".diflashdown span:eq('" + dq + "')").addClass("span_cur").siblings().removeClass("span_cur");
+        $(".diflashup span:eq('" + dq + "')").fadeIn(500).siblings().hide();
+
+        if (i == n) {
+            i = 0;
+        }
+    }
+
+    //小图片左右滚动
+    $(function() {
+        var page = 1;
+        var t = 4; //每版放4个图片
+        //向后 按钮
+        $(".next-btn").click(function() {    //绑定click事件
+            var content = $(".diflashdown");
+            var content_list = $(".diflashdown_gd");
+            var v_width = content.width();
+            var len = content.find("span").length;
+            var page_count = Math.ceil(len / t);   //只要不是整数，就往大的方向取最小的整数
+            if (!content_list.is(":animated")) {    //判断“内容展示区域”是否正在处于动画
+                if (page == page_count) {  //已经到最后一个版面了,如果再向后，必须跳转到第一个版面。
+                    content_list.animate({left: '0px'}, "slow"); //通过改变left值，跳转到第一个版面
+                    page = 1;
+                } else {
+                    content_list.animate({left: '-=' + v_width}, "slow");  //通过改变left值，达到每次换一个版面
+                    page++;
+                }
+            }
+        });
+        //往前 按钮
+        $(".prev-btn").click(function() {
+            var content = $(".diflashdown");
+            var content_list = $(".diflashdown_gd");
+            var v_width = content.width();
+            var len = content.find("span").length;
+            var page_count = Math.ceil(len / t);   //只要不是整数，就往大的方向取最小的整数
+            if (!content_list.is(":animated")) {    //判断“内容展示区域”是否正在处于动画
+                if (page == 1) {  //已经到第一个版面了,如果再向前，必须跳转到最后一个版面。
+                    content_list.animate({left: '-=' + v_width * (page_count - 1)}, "slow");
+                    page = page_count;
+                } else {
+                    content_list.animate({left: '+=' + v_width}, "slow");
+                    page--;
+                }
+            }
+        });
+    });
+
+    //google地图开始
+    $(function() {
+        mapinit();
+    });
+
+    function mapinit() {
+        ///地图
+        var mapLatLng = new google.maps.LatLng(parseFloat(<?php echo $jingweidu['lat']; ?>), parseFloat(<?php echo $jingweidu['lng']; ?>));
+        var myOptions = {
+            zoom: 13,
+            center: mapLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map1 = new google.maps.Map(document.getElementById('map1'), myOptions);
+        var marker1 = new google.maps.Marker({
+            position: mapLatLng,
+            map: map1
+        });
+    }
+
+    function daolumap() {
+        $('.hsdts_box5 a').removeClass('fyxqdown_left_cur').eq(0).addClass('fyxqdown_left_cur');
+        $('.hsdts_box5 .dataWrap').hide().eq(0).show();
+        var mapLatLng = new google.maps.LatLng(parseFloat(<?php echo $jingweidu['lat']; ?>), parseFloat(<?php echo $jingweidu['lng']; ?>));
+        var myOptions = {
+            zoom: 13,
+            center: mapLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map1 = new google.maps.Map(document.getElementById('map1'), myOptions);
+        var marker1 = new google.maps.Marker({
+            position: mapLatLng,
+            map: map1
+        });
+    }
+
+    function streetmap(loca) {
+        if (true) {
+            var mapLatLng = new google.maps.LatLng(parseFloat(<?php echo $jingweidu['lat']; ?>), parseFloat(<?php echo $jingweidu['lng']; ?>));
+            var panoramaOptions = {pov: {heading: 0, pitch: 0, zoom: 0}, position: mapLatLng};
+            if (loca == 0) {
+                var panorama = new google.maps.StreetViewPanorama(document.getElementById("streetMap"), panoramaOptions);
+            } else if (loca == 1) {
+                $('.hsdts_box5 a').removeClass('fyxqdown_left_cur').eq(1).addClass('fyxqdown_left_cur');
+                $('.hsdts_box5 .dataWrap').hide().eq(1).show();
+                var Streetmap2 = new google.maps.StreetViewPanorama(document.getElementById("map2"), panoramaOptions);
+            } else {
+                $('.hsdts_box5 a').removeClass('fyxqdown_left_cur').eq(1).addClass('fyxqdown_left_cur');
+                $('.hsdts_box5 .dataWrap').hide().eq(1).show();
+                var Streetmap2 = new google.maps.StreetViewPanorama(document.getElementById("map2"), panoramaOptions);
+                var panorama = new google.maps.StreetViewPanorama(document.getElementById("streetMap"), panoramaOptions);
+            }
+        }
+    }
+</script>
