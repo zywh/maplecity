@@ -12,11 +12,30 @@
                     <td width="150">照&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片：</td>
                     <?php foreach($house_list as $house){ ?>
                     <td style="padding: 10px 0;">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house->house_image; ?>" width="158" height="116" alt="房源对比">
+     <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php 
+	 //start here
+	 //echo $house->house_image; 
+	 $county = $house->county;
+	$county = preg_replace('/\s+/', '', $county);
+	$county = str_replace("&","",$county);
+	$dir="mlspic/crea/".$county."/Photo".$house->ml_num."/";
+	$num_files = 0;
+	if(is_dir($dir)){
+		$picfiles = scandir($dir);
+		$num_files = count(scandir($dir))-2;
+	}
+	if ( $num_files > 0)	{
+		  echo $dir.$picfiles[2];
+	}else {
+		echo "/static/images/zanwu.jpg";
+	}
+	 //end here
+	 ?>" width="158" height="116" alt="房源对比">
                     </td>
                     <?php } ?>
                 </tr>
                 <tr>
+
                     <td class="compareType">房源名称：</td>
                     <?php foreach($house_list as $house){ ?>
                         <td>
@@ -69,7 +88,7 @@
                     <?php foreach($house_list as $house){ ?>
                     <td class="fyxq_ptpd">
                                        
-                               <?php if($house->a_c="Central Air"){?>
+                               <?php if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">中央空调</font></span>
                                 <?php }else{?>
@@ -110,7 +129,7 @@
                                <span><s></s>地下室</span>
                                <?php }?>
 
-                               <?php if($house->pool!="None"){?>
+                               <?php if(strpos($house->pool, 'pool') !== false){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">游泳池</font></span>
                                 <?php }else{?>
@@ -118,7 +137,7 @@
                                <span><s></s>游泳池</span>
                                <?php }?>  
                                
-                               <?php if($house->pool="Y"){?>
+                               <?php if($house->fpl_num == "Y"){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">壁炉</font></span>
                                 <?php }else{?>
@@ -150,13 +169,13 @@
                 <tr>
                     <td class="compareType">房屋面积：</td>
                     <?php foreach($house_list as $house){ ?>
-                        <td><?php echo $house->sqft; ?></td>
+                        <td><?php echo $house->sqft; ?> 平方英尺</td>
                     <?php } ?>
                 </tr>
                 <tr>
                     <td class="compareType">土地面积：</td>
                     <?php foreach($house_list as $house){ ?>
-                        <td><?php echo $house->depth; ?></td>
+                        <td><?php echo $house->land_area; ?>平方英尺</td>
                     <?php } ?>
                 </tr>
                 <tr>

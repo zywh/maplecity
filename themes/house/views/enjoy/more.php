@@ -61,7 +61,22 @@
                 <?php foreach($house_list as $house){ ?>
                     <div class="enjoydown_list">
                         <div class="enjoydown_list_pic">
-                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house->house_image; ?>" width="485" height="355"/>
+                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php
+							$county = $house->county;
+							$county = preg_replace('/\s+/', '', $county);
+							$county = str_replace("&","",$county);
+							$dir="mlspic/crea/".$county."/Photo".$house->ml_num."/";
+							$num_files = 0;
+							if(is_dir($dir)){
+									$picfiles =  scandir($dir);
+									$num_files = count(scandir($dir))-2;
+							}
+							$filePath = $dir.$picfiles[2];
+							echo $filePath;
+							
+							//echo $house->house_image; 
+							
+							?>" width="485" height="355"/>
                         </div>
                         <div class="enjoydown_list_info" style="display:block;">
                             <span class="enjoy_dz">地址：<?php echo $house->addr;?>,<?php echo $house->municipality; ?></span>

@@ -10,6 +10,11 @@
  * @property integer $u_resi
  * @property integer $u_condo
  * @property integer $avg_price
+ * @property integer $t_crea
+ * @property integer $avg_crea
+ * @property integer $t_house
+ * @property integer $avg_house
+ * @property integer $u_house
  */
 class Stats extends CActiveRecord
 {
@@ -29,11 +34,11 @@ class Stats extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date, t_resi, t_condo, u_resi, u_condo, avg_price', 'required'),
-			array('t_resi, t_condo, u_resi, u_condo, avg_price', 'numerical', 'integerOnly'=>true),
+			array('date, t_resi, t_condo, u_resi, u_condo, avg_price, t_crea, avg_crea, t_house, avg_house, u_house', 'required'),
+			array('t_resi, t_condo, u_resi, u_condo, avg_price, t_crea, avg_crea, t_house, avg_house, u_house', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('date, t_resi, t_condo, u_resi, u_condo, avg_price', 'safe', 'on'=>'search'),
+			array('date, t_resi, t_condo, u_resi, u_condo, avg_price, t_crea, avg_crea, t_house, avg_house, u_house', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +65,11 @@ class Stats extends CActiveRecord
 			'u_resi' => 'Updated Resi',
 			'u_condo' => 'Updated Condo',
 			'avg_price' => 'Avg Price',
+			't_crea' => 'CREA Total',
+			'avg_crea' => 'CREA Average Price',
+			't_house' => 'Total House',
+			'avg_house' => 'Average House Price',
+			'u_house' => 'House Update',
 		);
 	}
 
@@ -87,6 +97,11 @@ class Stats extends CActiveRecord
 		$criteria->compare('u_resi',$this->u_resi);
 		$criteria->compare('u_condo',$this->u_condo);
 		$criteria->compare('avg_price',$this->avg_price);
+		$criteria->compare('t_crea',$this->t_crea);
+		$criteria->compare('avg_crea',$this->avg_crea);
+		$criteria->compare('t_house',$this->t_house);
+		$criteria->compare('avg_house',$this->avg_house);
+		$criteria->compare('u_house',$this->u_house);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

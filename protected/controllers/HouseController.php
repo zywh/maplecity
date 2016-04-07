@@ -57,7 +57,7 @@ class HouseController extends XFrontBase
     public function actionIndex() {
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/house.css');
         $city_id           = Yii::app()->request->getQuery('cd1', 0);
-        $district_id       = Yii::app()->request->getQuery('cd2', 0);
+        $district_id       = Yii::app()->request->getQuery('cd2', 0); //used to be Region search. Change it to municipality search
         $investType_id     = Yii::app()->request->getQuery('cd3', 0);
         $propertyType_id   = Yii::app()->request->getQuery('cd4', 0);
         $total_price       = Yii::app()->request->getQuery('cd5', 0);
@@ -68,6 +68,7 @@ class HouseController extends XFrontBase
         $prop_featx_out    = Yii::app()->request->getQuery('cd10', 0);
 		$prop_featx_out2   = Yii::app()->request->getQuery('cd11', 0);
 		$prop_featx_out3   = Yii::app()->request->getQuery('cd12', 0);
+		$type 			   = Yii::app()->request->getQuery('type', 'sale');
 		$bath_tot   = Yii::app()->request->getQuery('cd13', 0);
 		$style   = Yii::app()->request->getQuery('cd14', 0);
 		$comp_pts   = Yii::app()->request->getQuery('cd15', 0);
@@ -76,9 +77,13 @@ class HouseController extends XFrontBase
 		$pool   = Yii::app()->request->getQuery('cd18', 0);
         $time_sort         = Yii::app()->request->getQuery('time_sort', 'DESC');
         $price_sort        = Yii::app()->request->getQuery('price_sort');
+        $type        = Yii::app()->request->getQuery('type');
         $diy_word          = null;
 
-        $city_list = City::model()->findAll(array('order'=>'id ASC'));
+        //$city_list = City::model()->findAll(array('order'=>'id ASC'));
+        $city_list = City::model()->findAll(array('condition'=>'avail=1','order'=>'id ASC'));
+        //$province_list  = Province::model()->findAll(array('condition'=>'avail=1','order'=>'id ASC'));
+
         if(!empty($city_id)){
             $district_list = District::model()->findAll('city_id=:city_id',array(':city_id'=>$city_id));
         }else{
@@ -90,43 +95,47 @@ class HouseController extends XFrontBase
         //按搜索条件查询房源信息
         $criteria = new CDbCriteria();
 		
-//省份
-        if(!empty($city_id)) $criteria->addCondition('area!=""');
-//地区
-        if(!empty($district_id)){
-		    if($district_id==1){
-		    $criteria->addCondition('area="Toronto"');
-		    }
-			elseif($district_id==2){
-			$criteria->addCondition('area="Durham"');
-			}
-			elseif($district_id==3){
-			$criteria->addCondition('area="Peel"');
-			}
-			elseif($district_id==4){
-			$criteria->addCondition('area="Halton"');
-			}
-			elseif($district_id==5){
-			$criteria->addCondition('area="York"');
-			}
+		//Search By Sale or Lease Type
+		//$criteria->addCondition('s_r ="Sale"');
+		
+	    if ( $type == "sale" )  {
+			$criteria->addCondition('s_r = "Sale"');
 		}
+		elseif ( $type == "rent" ){
+			$criteria->addCondition('s_r = "Lease"');
+		}
+
+		//省份
+        //if(!empty($city_id)) $criteria->addCondition('area!=""');
+        if(!empty($city_id)) $criteria->addCondition('city_id='.$city_id);
+		//地区
+
+	 if(!empty($district_id)){
+	
+		$criteria->addCondition('t.municipality ="'.$district_id.'"');
+
+	}
 		
 //挂牌时间
 
 		if(!empty($investType_id)){
 		
-if($investType_id==1){
-//查询一周数据
-$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(pix_updt)');
-}
-elseif($investType_id==2){
-//查询一月数据
-$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(pix_updt)');
-}
-elseif($investType_id==3){
-//查询三月数据
-$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= date(pix_updt)');
-}
+			if($investType_id==1){
+				//数据
+				$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 1 DAY) <= date(pix_updt)');
+			}
+			elseif($investType_id==2){
+				//查询7数据
+				$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(pix_updt)');
+			}
+			elseif($investType_id==3){
+				//查询1月数据
+				$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(pix_updt)');
+			}
+			elseif($investType_id==4){
+				//查询三月数据
+				$criteria->addCondition('DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= date(pix_updt)');
+			}
 		}
 		
 		
@@ -197,84 +206,55 @@ if(!empty($prop_featx_out3)){
 //物业类型
         if(!empty($propertyType_id)) {
 			$criteria->addCondition('propertyType_id="'.$propertyType_id.'"');
-			//if($propertyType_id==1){
-			//$criteria->addCondition('type_own1_out="Detached"');
-			//}
-			//elseif($propertyType_id==2){
-			//$criteria->addCondition('type_own1_out="Townhouse" or type_own1_out="Att∕Row∕Twnhouse" or type_own1_out="Triplex" or type_own1_out="Fourplex" or type_own1_out="Multiplex"');
-			//}
-			//elseif($propertyType_id==3){
-			//$criteria->addCondition('lp_dol>3000000');
-			//}	
-			//elseif($propertyType_id==4){
-			//$criteria->addCondition('type_own1_out="Semi-Detached" or type_own1_out="Link" or type_own1_out="Duplex"');
-			//}
-			//elseif($propertyType_id==5){
-			//$criteria->addCondition('type_own1_out="Cottage" or type_own1_out="Rural Resid"');
-			//}
-			//elseif($propertyType_id==6){
-			//$criteria->addCondition('type_own1_out="Farm"');
-			//}
-			//elseif($propertyType_id==7){
-			//$criteria->addCondition('type_own1_out="Vacant Land"');
-			//}
-			//elseif($propertyType_id==8){
-			//$criteria->addCondition('type_own1_out="Mobile/Trailer" or type_own1_out="Det W/Com Elements" or type_own1_out="Store W/Apt/offc"');
-			//}
+	
 		
 		}
-		//挂牌价格
-        if(!empty($total_price)){
-		
-		     if($total_price==1){
-			 $criteria->addCondition('lp_dol<300000');
-			 }
-			 elseif($total_price==2){
-			 $criteria->addCondition('lp_dol>=300000 and lp_dol<500000');
-			 }
-			 elseif($total_price==3){
-			 $criteria->addCondition('lp_dol>500000 and lp_dol<1000000');
-			 }
-			 elseif($total_price==4){
-			 $criteria->addCondition('lp_dol>1000000 and lp_dol<1500000');
-			 }
-			 elseif($total_price==5){
-			 $criteria->addCondition('lp_dol>1500000 and lp_dol<3000000');
-			 }
-			 elseif($total_price==6){
-			 $criteria->addCondition('lp_dol>3000000');
-			 }
 
-        }
+		if(strpos($total_price, '-') !== false  ){
+		
+			 
+			$price = explode('-', $total_price);
+			$minPrice = intval($price[0]) *10000;
+			$maxPrice = intval($price[1]) *10000;
+			if ($maxPrice != 0 || $minPrice != 0) {
+			    if ($maxPrice > $minPrice) {
+					$criteria->addCondition('lp_dol <'.$maxPrice);
+				}
+			
+				$criteria->addCondition('lp_dol >='.$minPrice);
+			}
+		}
+
+	
 		//房屋面积
         if(!empty($house_area)){
 		 
 		    if($house_area==1){
-			$criteria->addCondition('sqft<700');
+			$criteria->addCondition('house_area<700 and house_area > 1');
 			}
 		    elseif($house_area==2){
-			$criteria->addCondition('sqft>700 and sqft<1100');
+			$criteria->addCondition('house_area>=700 and house_area<1100');
 			}
 		    elseif($house_area==3){
-			$criteria->addCondition('sqft>1100 and sqft<1500');
+			$criteria->addCondition('house_area>=1100 and house_area<1500');
 			}
 		    elseif($house_area==4){
-			$criteria->addCondition('sqft>1500 and sqft<2000');
+			$criteria->addCondition('house_area>=1500 and house_area<2000');
 			}
 		    elseif($house_area==5){
-			$criteria->addCondition('sqft>2000 and sqft<2500');
+			$criteria->addCondition('house_area>=2000 and house_area<2500');
 			}
 		    elseif($house_area==6){
-			$criteria->addCondition('sqft>2500 and sqft<3000');
+			$criteria->addCondition('house_area>=2500 and house_area<3000');
 			}
 		    elseif($house_area==7){
-			$criteria->addCondition('sqft>3000 and sqft<3500');
+			$criteria->addCondition('house_area>=3000 and house_area<3500');
 			}
 		    elseif($house_area==8){
-			$criteria->addCondition('sqft>3500 and sqft<4000');
+			$criteria->addCondition('house_area>=3500 and house_area<4000');
 			}
 		    elseif($house_area==9){
-			$criteria->addCondition('sqft>4000');
+			$criteria->addCondition('house_area>=4000');
 			}
 			
         }
@@ -282,32 +262,32 @@ if(!empty($prop_featx_out3)){
         if(!empty($land_area)){
 		
 		  if($land_area==1){
-		  $criteria->addCondition('depth*front_ft<1000');
+		  $criteria->addCondition('land_area<2000 and land_area > 100');
 		  }
 		  elseif($land_area==2){
-		  $criteria->addCondition('depth*front_ft>=1000 and depth*front_ft<2000');
+		  $criteria->addCondition('land_area>=2000 and land_area<4000');
 		  }
 		  elseif($land_area==3){
-		  $criteria->addCondition('depth*front_ft>=2000 and depth*front_ft<3000');
+		  $criteria->addCondition('land_area>=4000 and land_area<6000');
 		  }
 		  elseif($land_area==4){
-		  $criteria->addCondition('depth*front_ft>=3000 and depth*front_ft<4000');
+		  $criteria->addCondition('land_area>=6000 and land_area<12000');
 		  }
 		  elseif($land_area==5){
-		  $criteria->addCondition('depth*front_ft>=4000 and depth*front_ft<5000');
+		  $criteria->addCondition('land_area>=12000 and land_area<20000');
 		  }
 		  elseif($land_area==6){
-		  $criteria->addCondition('depth*front_ft>=5000 and depth*front_ft<6000');
+		  $criteria->addCondition('land_area>=20000 and land_area<43560');
 		  }
 		  elseif($land_area==7){
-		  $criteria->addCondition('depth*front_ft>6000');
+		  $criteria->addCondition('land_area>=43560');
 		  }
 		  
 		  
         }
         if(!empty($bedroom_num)){
             if($bedroom_num <= 5){
-                $criteria->addCondition('br='.$bedroom_num);
+                $criteria->addCondition('br>'.$bedroom_num);
             }else{
                 $criteria->addCondition('br>='.$bedroom_num);
             }
@@ -365,7 +345,8 @@ if(!empty($prop_featx_out3)){
         }
         if(!empty($pool)){
 		    if($pool=="1"){
-			 $criteria->addCondition('pool="Abv" or pool="Grnd" or pool="Indoor" or pool="Inground"');
+			 //$criteria->addCondition('pool="Abv" or pool="Grnd" or pool="Indoor" or pool="Inground"');
+			 $criteria->addCondition('pool like "%pool%"');
 			}
            elseif($pool=="2"){
 		   $criteria->addCondition('pool="" or pool="None"');
@@ -374,15 +355,16 @@ if(!empty($prop_featx_out3)){
 		
 		
 		
-        $criteria->order = 'id DESC';
+        #$criteria->order = 'id DESC';
+        $criteria->order = 'city_id ASC,lp_dol DESC';
         if(!empty($time_sort)){
-            $criteria->order = 'pix_updt '.$time_sort;
+            $criteria->order = 'pix_updt '.$time_sort.', city_id ASC,lp_dol DESC';
         }
         if(!empty($price_sort)){
             $criteria->order = 'lp_dol '.$price_sort;
         }
 		
-	$criteria->with = array('mname','propertyType');
+	$criteria->with = array('mname','propertyType','city');
         $count = House::model()->count($criteria);
         $pager = new CPagination($count);
         $pager->pageSize = 10;
@@ -426,7 +408,8 @@ if(!empty($prop_featx_out3)){
             'count'             => $count,
             'house_list'        => $house_list,
             'collection_list'   => $collection_list,
-            "pages"             => $pager
+            "pages"             => $pager,
+            "type"             => $type
         );
         $this->render('index',$data);
     }
@@ -435,6 +418,10 @@ if(!empty($prop_featx_out3)){
      * 房源详情
      */
     public function actionView($id){
+      	ini_set("log_errors", 1);
+        ini_set("error_log", "/tmp/php-error.log");
+
+
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/house.css');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/flowplayer-3.2.11.min.js');
 
@@ -458,6 +445,8 @@ if(!empty($prop_featx_out3)){
 		
         //$house = House::model()->find('id=:id',array(':id'=>$id));
 		$house = House::model()->find($criteria);
+ 		error_log($house->pool);
+
         $layouts = Layout::model()->findAll('house_id=:house_id',array(':house_id'=>$id));
         $matches = Match::model()->findAll();
 
@@ -557,4 +546,89 @@ if(!empty($prop_featx_out3)){
             'matches'=>$matches
         ));
     }
+
+	public function actionGetCityList(){
+		$db = Yii::app()->db;
+		//$result = array();
+		$term = trim($_GET['term']);
+		$city_id = trim($_GET['cd1']);
+		$chinese = preg_match("/\p{Han}+/u", $term);
+		//
+		
+		//Generate Count by municipality
+		if ( $city_id == '0' ) {
+			
+			if ($chinese) { //if province = 0 and chinese search
+			
+				$sql = "
+				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+				FROM h_mname m, h_city c 
+				WHERE  m.province = c.englishname 
+				AND  m.municipality_cname like '".$term."%' 
+				AND  m.count > 10 order by count desc limit 10;
+				";			
+			
+			} else { //if province = 0  and english search
+			
+				$sql = "
+				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+				FROM h_mname m, h_city c 
+				WHERE  m.province = c.englishname 
+				AND  municipality like '".$term."%' 
+				AND  m.count > 10 order by count desc limit 10;
+				";
+			}
+			
+		} else{  //if province is NOT 0
+			
+			if ($chinese) { //if province = 0 and chinese search			
+			
+				$sql = "
+				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+				FROM h_mname m, h_city c 
+				WHERE m.province = c.englishname 
+				AND  c.id=".$city_id." 
+				AND m.municipality_cname like '".$term."%'  
+				AND  m.count > 10 order by count desc limit 10;
+				";		
+			} else {
+				
+				$sql = "
+				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+				FROM h_mname m, h_city c 
+				WHERE m.province = c.englishname 
+				AND  c.id=".$city_id." 
+				AND m.municipality like '".$term."%' 
+				AND  m.count > 10 order by count desc limit 10;
+				";		
+			}
+			
+		
+		
+		}
+			
+		$resultsql = $db->createCommand($sql)->query();
+		
+		foreach($resultsql as $row){
+
+			$result['id'] = $row["citye"]; 
+			if ( $chinese ) {
+			  	
+				$result['value'] = $row["cityc"].", ".$row["provincec"]; 
+				$results[] = $result;
+				
+			} else {
+				$result['value'] = $row["citye"].", ". $row["provincee"]; 
+				$results[] = $result;
+			}
+	
+	
+		}
+		
+
+		 echo json_encode($results);
+    
+	//Function END  
+    }
+	
 }

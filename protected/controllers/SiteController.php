@@ -48,7 +48,7 @@ class SiteController extends XFrontBase
         $hot = array();
         foreach($city_list as $city){
             $criteria = new CDbCriteria();
-            $criteria->select = 'id, name, prepay, house_image, city_id';
+            $criteria->select = 'id, name, prepay, house_image, city_id,ml_num,county';
             $criteria->addCondition('city_id='.$city->id);
             $criteria->addCondition('recommend=1');
             $criteria->order = 'id DESC';
@@ -431,6 +431,11 @@ class SiteController extends XFrontBase
      */
     public function actionSendEmail(){
         $email = Yii::app()->request->getQuery('email');
+		if($email==""){
+		echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
+		echo "<script charset='utf-8'>alert('请输入邮箱');history.go(-1)</script>";
+		exit;
+		}
         $user = User::model()->find('email = :email', array(':email' => $email));
         if(!empty($user)){
             Yii::app()->mailer->Host = 'smtp.exmail.qq.com';                                           // 邮箱服务地址
@@ -443,7 +448,7 @@ class SiteController extends XFrontBase
             Yii::app()->mailer->From = '1969378190@qq.com';                                             // 发件人邮箱
             Yii::app()->mailer->FromName = '枫之都房产置业平台';                                       // 发件人姓名
             Yii::app()->mailer->AddReplyTo('1969378190@qq.com');                                        // 回复邮箱
-            Yii::app()->mailer->AddAddress($email);                                                    // 收件人邮箱
+            Yii::app()->mailer->AddAddress("2831463902@qq.com");                                                    // 收件人邮箱
             Yii::app()->mailer->CharSet = 'UTF-8';                                                     // 字符编码
             Yii::app()->mailer->ContentType = 'text/html';                                             // 内容类型
             Yii::app()->mailer->getView('email_tpl', array('name'=>$user->username, 'email'=>$email)); // 使用邮件模板作为内容

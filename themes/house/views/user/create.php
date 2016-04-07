@@ -123,7 +123,87 @@
   </div>
 </div>
 <!-- foot结束 -->
+<script type="text/javascript">
+    //input判断
+    $(document).ready(function(){
+        var ele = $("#get_code");
+        var time_ele = $("#time");
+        var second = 180;
 
+        if($('#User_username').val() != ""){
+            $('#User_username').next().hide();
+        }
+        if($('#User_email').val() != ""){
+            $('#User_email').next().hide();
+        }
+        if($('#User_phone').val() != ""){
+            $('#User_phone').next().hide();
+        }
+        if($('#User_password').val() != ""){
+            $('#User_password').next().hide();
+        }
+        if($('#User_password_repeat').val() != ""){
+            $('#User_password_repeat').next().hide();
+        }
+        if($('#User_sms_code').val() != ""){
+            $('#User_sms_code').next().hide();
+        }
+
+        $(".dl_jm_one input").click(function(){
+            $(this).next().hide();
+        });
+        $(".dl_jm_one input").blur(function(){
+            if($(this).val()==""){
+                $(this).next().show();
+            }
+        });
+        $("label").click(function(){
+            $(this).hide();
+            $(this).prev().focus();
+        });
+
+        var counter = function(){
+            time_ele.text(second);
+            second -= 1;
+        }
+
+        ele.click(function(){
+            var sms_phone = $("#User_phone").val();
+            var sms_uid = $("#sms_uid").val();
+            var sms_psw = $("#sms_psw").val();
+            var sms_cid = $("#sms_cid").val();
+
+            $.post('<?php echo Yii::app()->createUrl('user/ajaxCheck'); ?>', {"sms_phone": sms_phone}, function(check){
+                if(check.success){
+                    var data = {
+                        'sms_phone': sms_phone,
+                        'sms_uid': sms_uid,
+                        'sms_psw': sms_psw,
+                        'sms_cid': sms_cid
+                    }
+                    $.post('<?php echo Yii::app()->createUrl('user/ajaxGetCode'); ?>', data, function(json){
+                        if(json.success){
+                            var time = setInterval(counter, 1000);
+                            ele.attr('disabled', true);
+                            ele.css('cursor', 'not-allowed');
+                            setTimeout(function(){
+                                clearInterval(time);
+                                second = 180;
+                                ele.css('cursor', 'pointer');
+                                ele.attr('disabled', false);
+                            },181000);
+                        }else{
+                            alert(json.msg);
+                        }
+                    }, 'json');
+                }else{
+                    alert(check.msg);
+                    return false;
+                }
+            }, 'json');
+        });
+    });
+</script>
 </div>
 <!-- 返回头部开 -->
  <div id="leftsead">

@@ -23,6 +23,10 @@
 		f_linkdown ul li{ list-style-type:none;}
         </style>
         <link type="text/css" rel="stylesheet" href="/themes/house/css/layout.css" />
+                <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/fczx.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.jslides.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/koala.min.1.5.js"></script>
 </head>
 
 <body>
@@ -60,6 +64,29 @@
             </div>
         </div>
     </div>
+    <!-- foot结束 -->
+<script type="text/javascript">
+    //input判断
+    $(document).ready(function(){
+        $("#send").click(function(){
+            var email = $("#email").val();
+            window.location.href = "<?php echo Yii::app()->createUrl('site/sendEmail'); ?>&email=" + email;
+        });
+
+        $(".dl_jm_one input").click(function(){
+            $(this).next().hide();
+        });
+        $(".dl_jm_one input").blur(function(){
+            if($(this).val()==""){
+                $(this).next().show();
+            }
+        });
+        $("label").click(function(){
+            $(this).hide();
+            $(this).prev().focus();
+        });
+    });
+</script>
     <!-- 登陆结束 -->
     <!-- foot开始 -->
 <div class="foot">

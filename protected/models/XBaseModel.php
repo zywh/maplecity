@@ -33,7 +33,7 @@ class XBaseModel extends CActiveRecord
         if ($this->isNewRecord) {
             isset($this->create_time) && $this->create_time = time();
         } else {
-            isset($this->last_update_time) && $this->last_update_time = time();
+           //isset($this  ->last_update_time) && $this->last_update_time = time();
         }
         return true;
     }

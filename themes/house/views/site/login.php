@@ -58,9 +58,9 @@
                     'id'=>'login-wrap',
                     'enableAjaxValidation'=>true,
                 )); ?>
-                <div class="dl_jm_one"><?php echo $form->textField($model, 'username'); ?><label>用户名或邮箱</label></div>
+                <div class="dl_jm_one"><input name="User[username]" id="User_username" type="text" maxlength="50" value="用户名或邮箱" onblur="if(this.value=='')this.value='用户名或邮箱';" onfocus="if(this.value=='用户名或邮箱')this.value='';"/><label></label></div>
                 <?php echo $form->error($model,'username'); ?>
-                <div class="dl_jm_one"><?php echo $form->passwordField($model, 'password'); ?><label>密 码</label></div>
+                <div class="dl_jm_one"><input name="User[password]" id="User_password" type="password" maxlength="255" value="密 码" onblur="if(this.value=='')this.value='密 码';" onfocus="if(this.value=='密 码')this.value='';"/><label></label></div>
                 <?php echo $form->error($model,'password'); ?>
                 <div class="dl_jm_two">
                 <input name="houseid" type="hidden" value="<?php echo $_GET["houseid"];?>" />

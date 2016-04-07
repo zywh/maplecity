@@ -111,28 +111,52 @@ $zhinan=$housezhinan["image"];
                <div class="hot_con">
                
 <?php 
-$sqlhaozi = "select * from h_house where lp_dol<=3000000 and recommend=1 limit 0,4";
+$sqlhaozi = "
+	select h.id id,h.county county,h.ml_num ml_num,h.lp_dol/10000 price,h.municipality citye, h.addr addr ,m.municipality_cname city,p.name province
+	from h_house h,h_mname m,h_city p
+	where h.municipality = m.municipality
+	AND h.county = p.englishname
+	AND lp_dol>700000 and recommend=1 limit 0,4";
 $resultshazai = $db->createCommand($sqlhaozi)->query();
 foreach($resultshazai as $househaizai){
 ?>
 
                          <div class="hot_fl">
                                  <div class="fl_title">
-                                          <p><?php if($househaizai["area"]=="Toronto"){$cd1=1;echo "多伦多";}elseif($househaizai["area"]=="Durham"){echo "达勒姆";$cd1=2;}elseif($househaizai["area"]=="Peel"){echo "Peel";$cd1=3;}elseif($househaizai["area"]=="Halton"){echo "霍尔顿";$cd1=4;}elseif($househaizai["area"]=="York"){echo "约克";$cd1=5;} ?><span>/<?php echo $househaizai["area"]; ?></span></p>
+                                          <p><?php 
+										  echo $househaizai["city"]." ".$househaizai["province"];
+										  ?></span></p>
                                          <div class="hot_more">
-   <a href="index.php?r=house/index&cd1=3&cd2=<?php echo $cd1;?>&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0#001"><img src="/static/images/more.gif"/></a>
+   <a href="index.php?r=house/index&cd1=0&cd2=<?php echo $househaizai["citye"];?>&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0#001"><img src="/static/images/more.gif"/></a>
                                          </div>
                                  </div>
-                                 <div class="hot_img"> 
-                                  <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="307" height="197"></a>
-                                 <?php }else{?>
-                                        <a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$househaizai["id"])); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $househaizai["house_image"]; ?>" width="307" height="197"/></a>
-                                  <?php }?>
+                                 <div class="hot_img"> <?php 
+								 
+								$county = $househaizai["county"];
+								$county = preg_replace('/\s+/', '', $county);
+								$county = str_replace("&","",$county);
+								$dir="mlspic/crea/".$county."/Photo".$househaizai["ml_num"]."/";
+								$num_files = 0;
+								
+								if(is_dir($dir)){
+									$picfiles =  scandir($dir);
+									$num_files = count(scandir($dir))-2;
+								}
+
+
+								if ( $num_files < 1)    {
+						
+								   ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="307" height="197"></a><?php 
+								 
+								  }else{
+									  $filePath = $dir.$picfiles[2];
+									  ?><a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$househaizai["id"])); ?>" target="_blank"><img src="<?php echo $filePath; ?>" width="307" height="197"/></a><?php 
+								  }
+								  ?>
                                  </div>
                                  <div class="hot_loca">
-                                      <p><span>城市：</span><?php echo $househaizai["addr"]; ?><br />
-                                       <span>价格：</span><?php echo $househaizai["lp_dol"]/10000; ?>万加币</p>
+                                      <p><span>地址：</span><?php echo $househaizai["addr"]; ?><br />
+                                       <span>价格：</span><?php echo $househaizai["price"]; ?>万加币</p>
                                        <div class="hot_des">
                                             <p><a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$househaizai["id"])); ?>" style="text-decoration:none">[详细]</a></p>
                                        </div>
@@ -159,53 +183,82 @@ foreach($resultshazai as $househaizai){
         <div class="lm_twojs">
             <?php
  
-$sqlhaozi = "select * from h_house where lp_dol>3000000 limit 0,3";
-$resultshazai = $db->createCommand($sqlhaozi)->query();
-foreach($resultshazai as $key => $househaizai){
+$sqlhaozi = "select * from h_house where lp_dol>4000000 limit 0,3";
+$resultshaozai = $db->createCommand($sqlhaozi)->query();
+foreach($resultshaozai as $househaozai){
 
 			
-                if($key == 1){
-            ?>
-            <div class="lm_twojs_one lm_twojs_two">
-                <div class="lm_twojs_one_right">
-                        <div  class="lm_twojs_one_right_up">
-                                        <div class="lm_twojs_title"><span>地区：</span><?php echo $househaizai["addr"]; ?></div>
-                                        <div class="lm_twojs_info"><span>简介：</span><?php echo $househaizai["lp_dol"]/10000; ?>万加币/<?php echo $househaizai["ml_num"]; ?><br /></div>
-                       </div>
-                       <div class="lm_twojs_one_right_center">
-                                    <p><?php echo mb_substr($househaizai["extras"],0,226,'utf-8');?></p>
-                         </div>
-                         <div class="lm_twojs_one_right_xx">
-                         
-                               <a href="#"><img src="/static/images/info.gif"/></a>
-                          </div>
+	if($key == 1){
+            ?><div class="lm_twojs_one lm_twojs_two">
+				<div class="lm_twojs_one_right">
+					<div  class="lm_twojs_one_right_up">
+							<div class="lm_twojs_title"><span>地区：</span><?php echo $househaozai["addr"].$househaozai["county"].$househaozai["ml_num"]; ?></div>
+							<div class="lm_twojs_info"><span>简介：</span><?php echo $househaozai["lp_dol"]/10000; ?>万加币/<?php echo $househaizai["ml_num"]; ?><br /></div>
+				    </div>
+				    <div class="lm_twojs_one_right_center">
+						<p><?php echo mb_substr($househaozai["ad_text"],0,226,'utf-8');?></p>
+					 </div>
+					 <div class="lm_twojs_one_right_xx">
+					 
+					   <a href="#"><img src="/static/images/info.gif"/></a>
+					  </div>
                 </div>
                 <div class="lm_twojs_one_left">
-                                    <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="320" height="195"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="320" height="195"/></a>
+					<?php 
+													 
+					$county = $househaozai["county"];
+					$county = preg_replace('/\s+/', '', $county);
+					$county = str_replace("&","",$county);
+					$dir="mlspic/crea/".$county."/Photo".$househaozai["ml_num"]."/";
+					$num_files = 0;
+					if(is_dir($dir)){
+						$picfiles =  scandir($dir);
+						$num_files = count(scandir($dir))-2;
+					}
+
+
+					if ( $num_files < 1)    {
+								
+					 ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="320" height="195"/></a><?php 
+					}else{
+						$filePath = $dir.$picfiles[2];	
+					?> <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"  width="320" height="195"/></a>
                       <?php }?>
 
                 
                 </div>
                 <div class="cl"></div>
-            </div>
-            <?php }else{ ?>
-            <div class="lm_twojs_one">
-                <div class="lm_twojs_one_left">
-                
-                                    <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="320" height="195"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="320" height="195"/></a>
-                      <?php }?>
-                
-                </div>
+            </div><?php 
+			}else
+			{ 
+				?><div class="lm_twojs_one">
+                <div class="lm_twojs_one_left"> <?php 
+																		 
+					$county = $househaozai["county"];
+					$county = preg_replace('/\s+/', '', $county);
+					$county = str_replace("&","",$county);
+					$dir="mlspic/crea/".$county."/Photo".$househaozai["ml_num"]."/";
+					$num_files = 0;
+					if(is_dir($dir)){
+						$picfiles =  scandir($dir);
+						$num_files = count(scandir($dir))-2;
+					}
+
+
+					if ( $num_files < 1)    {
+					
+										?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="320" height="195"/></a>
+                      <?php 
+					  }
+					  else {
+						  $filePath = $dir.$picfiles[2];	
+						  ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"  width="320" height="195"/></a> <?php 
+					  }
+					  ?> </div>
                 <div class="lm_twojs_one_right">
                            <div  class="lm_twojs_one_right_up">
-                                        <div class="lm_twojs_title"><span>地区：</span><?php echo $househaizai["addr"]; ?></div>
-                                        <div class="lm_twojs_info"><span>简介：</span><?php echo $househaizai["lp_dol"]/10000; ?>万币/<?php echo $househaizai["ml_num"]; ?></div>
+                                        <div class="lm_twojs_title"><span>地区：</span><?php echo $househaozai["addr"]; ?></div>
+                                        <div class="lm_twojs_info"><span>简介：</span><?php echo $househaozai["lp_dol"]/10000; ?>万币/<?php echo $househaozai["ml_num"]; ?></div>
                          </div>
                          <div class="lm_twojs_one_right_center">
                                     <p><?php echo mb_substr($househaizai["extras"],0,226,'utf-8');?></p>
@@ -216,9 +269,9 @@ foreach($resultshazai as $key => $househaizai){
                           </div>
                 </div>
                 <div class="cl"></div>
-            </div>
-            <?php }} ?>
-        </div>
+            </div><?php 
+			}} 
+			?></div>
     </div>
 </div>
 <!-- 豪宅鉴赏结束 -->
@@ -291,19 +344,35 @@ AutoPlay_1();
         
         
 <?php 
-$sqlxuequ = "select * from h_house where lp_dol<=3000000 limit 0,9";
+$sqlxuequ = "select * from h_house where lp_dol<=2000000 and lp_dol >500000 limit 0,9 ";
 $resultxuequ = $db->createCommand($sqlxuequ)->query();
 foreach($resultxuequ as $housexuequ){
 ?>
         <a class="pl" href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housexuequ["id"])); ?>" target="_blank" >
-        <?php if($housexuequ["house_image"]==""){?>
-        <img src="/static/images/zanwu.jpg" width="213" height="296"/>
-        <?php }else{?>
-        <img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $housexuequ["house_image"]; ?>" width="213" height="296"/>
-        <?php }?>
-        <div class="biaotiya"><?php echo $housexuequ["addr"]; ?></div>
-        <div class="address"><strong>社区：</strong><?php echo $housexuequ["community"]; ?></div>
-        <div class="price"><strong>价格：</strong><?php echo $housexuequ["lp_dol"]/10000; ?>万加币万加币</div>
+        <?php 
+				 
+		$county = $housexuequ["county"];
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/".$county."/Photo".$housexuequ["ml_num"]."/";
+		$num_files = 0;
+		
+		if(is_dir($dir)){
+			$picfiles =  scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+
+
+		if ( $num_files < 1)    {
+			?><img src="/static/images/zanwu.jpg" width="260" height="250"/><?php 
+		}else{
+			$filePath = $dir.$picfiles[2];
+			?><img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $filePath; ?>" width="260" height="250"/><?php 
+		}
+		?>
+		<div class="biaotiya"><?php echo $housexuequ["addr"]; ?></div>
+        <div class="address"><strong>城市：</strong><?php echo $housexuequ["municipality"]; ?></div>
+        <div class="price"><strong>价格：</strong><?php echo $housexuequ["lp_dol"]/10000; ?>万加币</div>
         <div  class="xiangxi"><img src="/themes/house/images/xiangxi.jpg" /></div>
         </a> 
 <?php } ?>

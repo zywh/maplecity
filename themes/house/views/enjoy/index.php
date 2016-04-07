@@ -67,10 +67,13 @@ function showImg(i){
 <div class="js">
                  <div class="js_list">
                         <ul>
-<li><a href="index.php?r=enjoy/index&sheng=Ontario#001">安大略省</a></li>
-<li><a href="index.php?r=enjoy/index&sheng=BC#001">BC省</a></li>
-<li><a href="index.php?r=enjoy/index&sheng=Alberta#001">艾伯塔省</a></li>
-<li><a href="index.php?r=enjoy/index&sheng=Quebec#001">魁北克省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=3">安大略省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=4">BC省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=5">艾伯塔省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=7">新不伦瑞克省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=8">新斯科舍省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=9">爱德华王子岛省</a></li>
+<li><a href="index.php?r=enjoy/index&sheng=10">纽芬兰及拉布拉多</a></li>
                              
                              
                         </ul>
@@ -83,10 +86,10 @@ function showImg(i){
 <?php 
 $db = Yii::app()->db;
 $sheng=$_GET["sheng"];
-if($sheng=="Ontario" or $sheng==""){
-$sql = "select * from h_house where lp_dol>3000000 limit 0,6";
+if($sheng==""){
+$sql = "select * from h_house where lp_dol>3000000 and city_id=3 limit 0,6 ";
 }else{
-$sql = "select * from h_house where lp_dol>3000000 and area='".$sheng."' limit 0,6";
+$sql = "select * from h_house where lp_dol>3000000 and city_id ='".$sheng."' limit 0,6";
 }
 $results = $db->createCommand($sql)->query();
 if(count($results)==0){
@@ -98,27 +101,41 @@ foreach($results as $house){
 ?>
 
 
-                      <div class="con_list">
-                      <?php if($house["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="467" height="280"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="467" height="280"/></a>
-                      <?php }?>
-                                 <div class="con_des">
-                                           <div class="con_fl">
-                                                  <p><span>地址：</span><?php echo $house["addr"]; ?><br />
-                                                     <span>价格：</span><span class="red"><?php echo $house["lp_dol"] / 10000; ?>万加币</span><br />
-                                                     <span>社区：</span><?php echo $house["community"];?><br />
-                                                     <span> 户型：</span> <?php echo $house["br"]; ?>卧&nbsp;&nbsp;<?php echo $house["bath_tot"]; ?>卫&nbsp;&nbsp;<?php echo $house["num_kit"]; ?>厨
-                                                    
-                                                     
-                                                  </p>
-                                           </div>
-                                           <div  class="con_fr">
-                                                <p><a  target="_blank" href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>">点击查看详情>></a></p>
-                                           </div>
-                                 </div>
-                      </div>
+  <div class="con_list">
+  <?php 
+	$county = $house["county"];
+	$county = preg_replace('/\s+/', '', $county);
+	$county = str_replace("&","",$county);
+	$dir="mlspic/crea/".$county."/Photo".$house["ml_num"]."/";
+	$num_files = 0;
+	if(is_dir($dir)){
+		$picfiles =  scandir($dir);
+		$num_files = count(scandir($dir))-2;
+	}
+	
+    if ( $num_files < 1)    {
+	  ?> <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="467" height="280"/></a> <?php 
+	}else{
+	  $filePath = $dir.$picfiles[2];
+	  ?> <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php 
+	  echo $filePath; ?>" width="467" height="280"/></a>
+	<?php }?>
+  
+			 <div class="con_des">
+					   <div class="con_fl">
+							  <p><span>地址：</span><?php echo $house["addr"]; ?><br />
+								 <span>价格：</span><span class="red"><?php echo $house["lp_dol"] / 10000; ?>万加币</span><br />
+								 <span>城市：</span><?php echo $house["municipality"].",".$house["county"];?><br />
+								 <span> 户型：</span> <?php echo $house["br"]; ?>卧&nbsp;&nbsp;<?php echo $house["bath_tot"]; ?>卫&nbsp;&nbsp;<?php echo $house["num_kit"]; ?>厨
+								
+								 
+							  </p>
+					   </div>
+					   <div  class="con_fr">
+							<p><a  target="_blank" href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>">点击查看详情>></a></p>
+					   </div>
+			 </div>
+  </div>
 
 <?php }}?>   
          

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/layout.css" />
-        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery-1.12.2.min.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/fczx.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.jslides.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/koala.min.1.5.js"></script>
@@ -70,9 +70,9 @@
 				<div class="topnumber" style="float:right; width:auto; ">
 					<div class="nav-adv"  style=" margin-top:6px;">
 					<?php
-            				       $criteria = new CDbCriteria();
-					        $criteria->order = 'date DESC';
-						$criteria->select = 'subdate(date, 1) as date,(t_resi + t_condo) as t_resi,(u_resi + u_condo) as u_resi ,round(avg_price/10000,2) as avg_price ';
+            			$criteria = new CDbCriteria();
+					    $criteria->order = 'date DESC';
+						$criteria->select = 'subdate(date, 1) as date,t_house as t_resi,u_house as u_resi ,round(avg_house/10000,2) as avg_price ';
 						$stats = Stats::model()->find($criteria);
  
  
@@ -99,7 +99,10 @@
             </div>
             <!-- head结束 -->
             <?php
-            $city_list = City::model()->findAll();
+            $city_list = City::model()->findAll(array(
+			    'condition' => 'avail=1',
+                'order'     => 'id ASC',
+			));
             $subject_list = Subject::model()->findAll(array(
                 'condition' => 'recommend=1',
                 'order'     => 'id DESC',
@@ -126,36 +129,50 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'house' || Yii::app()->controller->id == 'map') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('house/index'); ?>">房源搜索</a>
+                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'sale') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房源搜索</a>
                             <div class="navtc">
                                 <div class="navtcbox" style="display:none;">
                                     <!--<?php foreach($city_list as $obj){ ?>
                                     <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $obj->id, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0)); ?>"><?php echo $obj->name; ?></a>
                                     <?php } ?>
 									-->
-									<a class="menuconditionsearch" href="<?php echo Yii::app()->createUrl('house/index') ?>">条件搜索</a>
-									<a class="menuconditionsearch" href="<?php echo Yii::app()->createUrl('map/index'); ?>">地图搜索</a>
+									<a class="menuconditionsearch" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
+									<a class="menuconditionsearch" href="/index.php?r=map/index&type=sale">地图搜索</a>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'rent') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房屋出租</a>
+                            <div class="navtc">
+                                <div class="navtcbox" style="display:none;">
+         
+									<a class="menuconditionsearch" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
+									<a class="menuconditionsearch" href="index.php?r=map/index&type=rent">地图搜索</a>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'enjoy') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('enjoy/index'); ?>">豪宅鉴赏</a>
                             <div class="navtc">
                                 <div class="navtcbox" style="display:none;">
-                                    <?php foreach($subject_list as $obj){ ?>
-                                        <a href="<?php echo Yii::app()->createUrl('enjoy/more', array('city' => $obj->city_id)); ?>"><?php echo $obj->city->name; ?></a>
+                                    <?php foreach($city_list as $obj){ ?>
+                                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('sheng' => $obj->id)); ?>"><?php echo $obj->name; ?></a>
                                     <?php } ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="navlist"><a class="nav_up <?php if (Yii::app()->controller->id == 'column') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('column/index'); ?>">学区专栏</a></div>
-                        <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'news') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('news/canadaNews'); ?>">新闻&nbsp;•&nbsp;资讯</a>
+                        
+						<div class="navlist"><a class="nav_up <?php if (Yii::app()->controller->id == 'column') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('column/index'); ?>">学区专栏</a></div>
+                        
+						<div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'news') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('news/canadaNews'); ?>">新闻&nbsp;资讯</a>
                             <div class="navtc">
                                 <div class="navtcbox" style="display:none;">
-                                    <a href="<?php echo Yii::app()->createUrl('news/canadaNews'); ?>">加拿大资讯</a>
-                                    <a href="<?php echo Yii::app()->createUrl('news/houseNews'); ?>">加拿大房产</a>
-																		<a href="<?php echo Yii::app()->createUrl('news/canadaNews2'); ?>">加拿大留学</a>
-																		<a href="<?php echo Yii::app()->createUrl('news/canadaNews3'); ?>">加拿大移民</a>
-																		<a href="<?php echo Yii::app()->createUrl('news/canadaNews4'); ?>">加拿大旅游</a>
+								<a href="<?php echo Yii::app()->createUrl('stats/current'); ?>">地产数据</a>
+								<a href="<?php echo Yii::app()->createUrl('news/canadaNews'); ?>">加拿大资讯</a>
+								<a href="<?php echo Yii::app()->createUrl('news/houseNews'); ?>">加拿大房产</a>
+								<a href="<?php echo Yii::app()->createUrl('news/canadaNews2'); ?>">加拿大留学</a>
+								<a href="<?php echo Yii::app()->createUrl('news/canadaNews3'); ?>">加拿大移民</a>
+								<a href="<?php echo Yii::app()->createUrl('news/canadaNews4'); ?>">加拿大旅游</a>
                                 </div>
                             </div>
                         </div>
@@ -186,15 +203,17 @@
                         <span class="nav_span">1</span>
                     </div>
                     <div class="search">
-                        <div class="searchleft"><input name="key" type="text" id="global_search" class="inputone" value="MLS号" onblur="if (this.value == '') {
+                        <div class="searchleft">
+                          <input name="key" type="text" id="global_search" class="inputone" value="MLS号" onblur="if (this.value == '') {
                                     this.style.color = '#999';
                                     this.value = 'MLS号';
                                 }" onfocus="if (this.value == 'MLS号') {
                                             this.value = '';
                                         } else {
                                             this.style.color = '#000';
-                                        }" style="color: rgb(153, 153, 153);"></div>
-                        <div class="searchright"><input name="" type="button" class="btnone" value="" id="global_search_btn"/>
+                                        }" style="color: rgb(153, 153, 153);" />
+                        </div>
+                      <div class="searchright"><input name="" type="submit" class="btnone" value="" id="global_search_btn"/>
                         </div>
                         <div class="cl"></div>
                     </div>

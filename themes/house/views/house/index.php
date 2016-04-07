@@ -1,10 +1,20 @@
 <!--新增页面样式-->
 <link rel="stylesheet" type="text/css" href="/new/css/style.css">
-<script type="text/javascript" src="/new/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/new/js/script.js"></script>
 <link href="/themes/house/css/xinjia.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="/themes/house/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/themes/house/js/jquery-1.12.2.min.js"></script>
+<script src="/static/js/jquery/jquery-ui.min.js"></script>
+
+
 <script>
+
+function statsurl (chart){
+	
+	var url = '<?php echo Yii::app()->createUrl('stats/current'); ?>' + '#' + chart;
+	console.log(url);
+	window.open(url);
+}
+
 $(document).ready(function(){
        //回到头部
       $(".fh").click(function(){
@@ -164,6 +174,11 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
   </style>
       <?php
     $db = Yii::app()->db;
+	function searchurl($arg, $reset = 1) {
+	
+		$url = Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); 
+		return $arg.$reset ;
+}
 	?> 
   <div class="ss1"></div>
   <!--banner 结束--> 
@@ -171,7 +186,10 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
   <!-- body开始 --> 
   <!-- 地址开始 -->
   <div class="cl"></div>
-  <div class="nytb_dz"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">房源搜索</span> </div>
+  <div class="nytb_dz"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">
+  <?php if($_GET["type"]=="sale"){echo "房源搜索";}else{echo "房源出租";}?>
+  
+  </span> </div>
   <!-- 地址结束 --> 
 <!-- 房源搜索开始 -->
 <div class="fyss" style="background-image:url('/themes/house/images/chanpinbg.jpg')">
@@ -184,329 +202,389 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
     
 
     
-   <div class="fyss_tjlist" id="cd1">
-            <div class="fyss_tjlistleft">省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+ <div class="fyss_tjlist" id="cd1">
+            <div class="fyss_tjlistleft" onclick="statsurl('provincechart');"><a class="tooltips" href="#">省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份:<span>点击查看省分布图</span></a>
+			</div>
+            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#fyss" class="fyss_tj_cur" data-index="0">不限</a></div>
             <div class="fyss_tjlistright fyss_tjlistone"  style="position:relative; overflow:hidden; height:28px;">
               
                <?php foreach ($city_list as $city) { ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $city['id'], 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="<?php echo $city['id']; ?>">
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $city['id'], 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="<?php echo $city['id']; ?>">
                         <?php echo $city['name']; ?>
                     </a>
                 <?php } ?>
                 
-             <div class="more_dd">更多</div>
-
-                
+ 
             </div>
             <div class="cl"></div>
         </div>
-        <div class="fyss_tjlist" id="cd2">
-            <div class="fyss_tjlistleft">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</div>
-            <div class="fyss_tjlistcenter"><a  class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a></div>
+ 
+<div class="fyss_tjlist" id="cd2">
+	
+	<div class="fyss_tjlistleft" onclick="statsurl('citychart');"><a class="tooltips" href="#">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市:<span>点击查看城市分布图</span></a>
+	</div>
 
-            <div class="fyss_tjlistright" style="position:relative; overflow:hidden; height:28px;">
-                <?php foreach ($district_list as $district) { ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $district['id'], 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="<?php echo $district['id']; ?>"><?php echo $district['name']; ?></a>
-                <?php } ?>
-             <div class="more_dd">更多</div>
-<script>
-$(document).ready(function() {
-    $(".more_dd").click(function(){
-		var gdheight=$(this).parent().height();
-		if(gdheight>32){
-           $(this).parent().stop(true).animate({height:"28px"});
-		   $(this).text("更多").removeClass("more_dd_active");
+	<div class="fyss_tjlistcenter">
+
+		<div class="fyss_tjjg">
+			<div class="fyss_tjjgcity">
+			<form>
+			<input name="cityname" type="text" required id="cityname" value="输入城市 中/英文" 
+			onblur="
+			
+			if (this.value == '') {
+				    this.style.backgroundColor = '#fff';
+					this.value = '输入城市 中/英文';
+					this.style.color = '#aaa';
+					var cd2 = '<?php echo $cd2;?>';
+					if ( cd2 != '0' ){
+					var url = '<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => $cd1, 'cd2' => 0,'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?> ' + '#001';
+					location.href = url; }
+		
+			}" 
+			onfocus="if (this.value != '') {
+							this.value = '';
+							this.style.backgroundColor = '#fff';
+							this.style.color = '#000';
+							//this.style.color = '#fff';
+							//var cd2 = '<?php echo $cd2;?>';
+							//if ( cd2 != '0' ){
+							//var url = '<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => $cd1, 'cd2' => 0,'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?> ' + '#001';
+							//location.href = url; }
+					}"
+				> 
+				<input type="reset" value="x">
+				</form>
+</div>
+		</div>
+	</div>
+	<script>
+	 
+  $(function() {
+	var cache = {};
+	
+
+	$( "#cityname" ).autocomplete({
+	  //source: "/index.php?r=house/getCityList",
+		source: function(request, response) {
+					var term = request.term; //cache result if term is typed in past
+					if ( term in cache ) {
+						response( cache[ term ] );
+						return;
+					}
+			
+					$.getJSON(
+					"/index.php?r=house/getCityList", 
+					{ term: term, cd1: '<?php echo $cd1;?>' },  //pass province for city search
+					//response
+					function( data, status, xhr ) {
+						cache[ term ] = data;
+						response( data );
+						}
+					);
+			
+		},
+		minLength: 1,
+		autoFocus: true,
+		select: function( event, ui ) {
+ 
+			var city = ui.item.id;
+			//var url = "index.php";
+			var url = '<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => $cd1, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)) ?> ' +'&cd2=' + city + '#001';
+		
+			if( city != '') {
+				location.href = url;
+		
+			}		
+		
+		  
 		}
-		else{
-		   $(this).parent().stop(true).animate({height:"56px"})
-		   $(this).text("收起").addClass("more_dd_active");
-			}	
-    });
-});
-</script> 
-             
-            </div>
-            <div class="cl"></div>
-        </div>
-
-        
-        <div class="fyss_tjlist" id="cd3">
-            <div class="fyss_tjlistleft">挂牌时间:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 0, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
-            <div class="fyss_tjlistright fyss_tjlistone">
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 1, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">最新</a>
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 2, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">一个月</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">三个月</a>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-
-        
-        <div class="fyss_tjlist" id="cd4">
-            <div class="fyss_tjlistleft">物业类型:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => 0, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
-            <div class="fyss_tjlistright fyss_tjlistone">
-                <?php foreach ($propertyType_list as $propertyType) { ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $propertyType['id'], 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="<?php echo $propertyType['id']; ?>"><?php echo $propertyType['name']; ?></a>
-                <?php } ?>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        <div class="fyss_tjlist" id="cd5">
-            <div class="fyss_tjlistleft">挂牌价格:</div>
-            <div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 0, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
-            <div class="fyss_tjlistright">
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 1, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1" data-value="0,30">30万以下</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 2, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2" data-value="30,50">30-50万</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 3, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3" data-value="50,100">50-100万</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 4, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4" data-value="100,150">100-150万</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5" data-value="150,300">150-300万</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 6, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6" data-value="300,0">300万以上</a>
-                <span class="syss_dw">加币</span>
-
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-                <div class="fyss_tjlist" id="cd5">
-            <div class="fyss_tjlistleft">价格区间:</div>
- 
-            <div class="fyss_tjlistright">
-
-                <div class="fyss_tjjg">
-                    <div class="fyss_tjjgone"><input name="num1" type="text" id="num1"/></div>
-                    <div class="fyss_tjjgtwo">-</div>
-                    <div class="fyss_tjjgone"><input name="num2" type="text" id="num2"/></div>
-                    <div class="fyss_tjjgthree">万加元</div>
-                    <div class="fyss_tjjgfour"><a href="javascript:void(0);" id="confirm">确认</a></div>
-                </div>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        <div class="fyss_tjlist" id="cd6">
-            <div class="fyss_tjlistleft">房屋面积:</div>
-            <div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 0, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
-            <div class="fyss_tjlistright">
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 1, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1" data-value="0,700">700以下</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 2, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2" data-value="700,1100">700-1100</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 3, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3" data-value="1100,1500">1100-1500</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 4, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4" data-value="1500,2000">1500-2000</a>
-                
-          <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 5, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5" data-value="2000,2500">2000-2500</a>
-          
-          <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6" data-value="2500,3000">2500-3000</a>
-         
-          <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 7, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="7" data-value="3000,3500">3000-3500</a>
-                  
-          <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 8, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="8" data-value="3500,4000">3500-4000</a>
-                  
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 9, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="9" data-value="4000,0">4000以上</a>
- 
-                <span class="syss_dw">平方英尺</span>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        <div class="fyss_tjlist" id="cd7">
-            <div class="fyss_tjlistleft">土地面积:</div>
-            <div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 0, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
-            <div class="fyss_tjlistright">
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 1, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1" data-value="0,1000">1000以下</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 2, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2" data-value="1000,2000">1000-2000</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 3, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3" data-value="2000,3000">2000-3000</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 4, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4" data-value="3000,4000">3000-4000</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 5, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5" data-value="4000,5000">4000-5000</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 6, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6" data-value="5000,6000">5000-6000</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="7" data-value="6000,0">6000以上</a>
-                <span class="syss_dw">平方英尺</span>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        <div class="fyss_tjlist" id="cd10">
-            <div class="fyss_tjlistleft">周边临水:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
-            <div class="fyss_tjlistright fyss_tjlistone">
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 1, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">临水</a>
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 2, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">临塘</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 3, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">临溪</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 4, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">临河</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 5, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">临湖(海)</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 6, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6">临游艇停靠去</a>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        
-        <div class="fyss_tjlist" id="cd11">
-            <div class="fyss_tjlistleft">周边临树:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd11, 'cd11' => 0, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
-            <div class="fyss_tjlistright fyss_tjlistone">
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 1, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">临树林</a>
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 2, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">临森林</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 3, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">临绿色保护带</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 4, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">临森林保护区</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 5, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">临谷</a>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-        
-        
-        <div class="fyss_tjlist" id="cd12">
-            <div class="fyss_tjlistleft">周边配套:</div>
-            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10 ,'cd11' => $cd11, 'cd12' => 0, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
-            <div class="fyss_tjlistright fyss_tjlistone">
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 1, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1"><input name='zhoubian[]' type='checkbox' value="1" />学校</a>
-
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 2, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2"><input name='zhoubian[]' type='checkbox' value="2" />医院</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 3, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3"><input name='zhoubian[]' type='checkbox' value="3" />公共交通</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 4, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4"><input name='zhoubian[]' type='checkbox' value="4" />高尔夫球场</a>
-                    
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5"><input name='zhoubian[]' type='checkbox' value="5" />图书馆</a>
-            </div>
-            <div class="cl"></div>
-        </div>
-        
-
-        <div class="fyss_tjlist">
-            <div class="fyss_tjlistleft">更多条件:</div>
-            <div class="fyss_tjlistmore" style="padding-left:0px;">
-                <div class="syss_xltj" id="cd8">
-                    <div class="syss_xltjup" id="cd8_selected" data-index="0">卧室数量</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 0, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 1, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="1">1室</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 2, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="2">2室</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 3, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="3">3室</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 4, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="4">4室</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 5, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="5">5室</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 6, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="6">5室以上</a>
-                    </div>
-                </div>
-                
-                <!--增加的 -->
-                <div class="syss_xltj" id="cd13">
-                    <div class="syss_xltjup" id="cd13_selected" data-value="0,0">卫生间数量</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 0 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 1 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="1">1个以上</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 2 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="2">2个以上</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 3 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="3">3个以上</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 4 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="4">4个以上</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 5 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="5">5个以上</a>
-
-                    </div>
-                </div>
-            </div>
-                            <div class="syss_xltj" id="cd14">
-                    <div class="syss_xltjup" id="cd14_selected" data-value="0,0">房屋层数</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => 0, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 1, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="1">平房</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 2, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="2">一层半</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 3, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="3">二层</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 4, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="4">二层半</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 5, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="5">三层</a>
-                    </div>
-                </div>
-                
-                            <div class="syss_xltj" id="cd15">
-                    <div class="syss_xltjup" id="cd15_selected" data-value="0,0">大门朝向</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => 0, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 1, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="1">北</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 2, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="2">南</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 3, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="3">东</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 4, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="4">西</a>
-
-                    </div>
-                </div>
-                
-                
-                            <div class="syss_xltj" id="cd16">
-                    <div class="syss_xltjup" id="cd16_selected" data-value="0,0">车位数量</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 0, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 1, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="1">>1</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 2, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="2">>2</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 3, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="3">>3</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 4, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="4">>4</a>
-
-                    </div>
-                </div>
-                
-                
-                <!--Remove Basement Search
-                            <div class="syss_xltj" id="cd17">
-                    <div class="syss_xltjup" id="cd17_selected" data-value="0,0">地下室</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 1, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 1, 'cd18' => $cd18)); ?>" data-index="1">1</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 2, 'cd18' => $cd18)); ?>" data-index="2">2</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 3, 'cd18' => $cd18)); ?>" data-index="3">3</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 4, 'cd18' => $cd18)); ?>" data-index="4">4</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 5, 'cd18' => $cd18)); ?>" data-index="5">5</a>
-                    </div>
-                </div>
-                
-                -->
-                            <div class="syss_xltj" id="cd18">
-                    <div class="syss_xltjup" id="cd18_selected" data-value="0,0">游泳池</div>
-                    <div class="syss_xltjdown">
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 0)); ?>" data-index="0">不限</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 1)); ?>" data-index="1">有</a>
-                        <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 2)); ?>" data-index="2">无</a>
-               
-                    </div>
-                </div>
-                
-                
-                
-                
-                
-            </div>
-            <div class="cl"></div>
-        </div>
+	});
+  });
   
+ 
+  
+	</script>
+			
+	
+	<div class="cl"></div>
+
+</div>
+
+
+ 
+	<div class="fyss_tjlist" id="cd3">
+            <div class="fyss_tjlistleft">挂牌时间:</div>
+            <div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 0, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+            <div class="fyss_tjlistright fyss_tjlistone">
+
+                   <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 1, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">昨日挂牌</a>
+			
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 2, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">一周</a>
+
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">一个月</a>
+                    
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 4, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">三个月</a>
+            </div>
+            <div class="cl"></div>
+        </div>
         
-        <div class="fyss_tjlist">
-            <div class="fyss_tjlistleft">搜索条件:</div>
+
+        
+	<div class="fyss_tjlist" id="cd4">
+		<div class="fyss_tjlistleft" onclick="statsurl('typechart');"><a class="tooltips" href="#">物业类型:<span>点击查看物业类型图</span></a>
+		</div>
+		<div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => 0, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+		<div class="fyss_tjlistright fyss_tjlistone">
+			<?php foreach ($propertyType_list as $propertyType) { ?>
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $propertyType['id'], 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="<?php echo $propertyType['id']; ?>"><?php echo $propertyType['name']; ?></a>
+			<?php } ?>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	<div class="fyss_tjlist" id="cd5">
+		<div class="fyss_tjlistleft" onclick="statsurl('pricechart');"><a class="tooltips" href="#">挂牌价格:<span>点击查看价格图表</span></a>
+		</div>
+		<div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 0, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
+		<div class="fyss_tjlistright">
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '0-30', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0-30" data-value="0,30">30万以下</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '30-50', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="30-50" data-value="30,50">30-50万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '50-100', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="50-100" data-value="50,100">50-100万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '100-150', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="100-150" data-value="100,150">100-150万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '150-300', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="150-300" data-value="150,300">150-300万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '300-450', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="300-450" data-value="300,450">300-450万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '450-600', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="450-600" data-value="450,600">450-600万</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => '600-0', 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="600-0" data-value="600,0">600万以上</a>
+				
+			<span class="syss_dw">加币</span>
+
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	<div class="fyss_tjlist" id="cd5">
+		<div class="fyss_tjlistleft">价格区间:</div>
+
+		<div class="fyss_tjlistright">
+
+			<div class="fyss_tjjg">
+				<div class="fyss_tjjgone"><input name="num1" type="text" id="num1"/></div>
+				<div class="fyss_tjjgtwo">-</div>
+				<div class="fyss_tjjgone"><input name="num2" type="text" id="num2"/></div>
+				<div class="fyss_tjjgthree">万加元</div>
+				<div class="fyss_tjjgfour"><a href="javascript:void(0);" id="confirm">确认</a></div>
+			</div>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	<div class="fyss_tjlist" id="cd6">
+		<div class="fyss_tjlistleft" onclick="statsurl('housechart');">
+		<a class="tooltips" href="#">房屋面积:<span>点击查看房屋面积图</span></a></div>
+		<div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 0, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
+		<div class="fyss_tjlistright">
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 1, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1" data-value="0,700">700以下</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 2, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2" data-value="700,1100">700-1100</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 3, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3" data-value="1100,1500">1100-1500</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 4, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4" data-value="1500,2000">1500-2000</a>
+			
+	  <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 5, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5" data-value="2000,2500">2000-2500</a>
+	  
+	  <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6" data-value="2500,3000">2500-3000</a>
+	 
+	  <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 7, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="7" data-value="3000,3500">3000-3500</a>
+			  
+	  <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 8, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="8" data-value="3500,4000">3500-4000</a>
+			  
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 9, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="9" data-value="4000,0">4000以上</a>
+
+			<span class="syss_dw">平方英尺</span>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	<div class="fyss_tjlist" id="cd7">
+		<div class="fyss_tjlistleft" onclick="statsurl('landchart');"><a class="tooltips" href="#">土地面积:<span>点击查看土地面积图表</span></a></div>
+		<div class="fyss_tjlistcenter"><a class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 0, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0" data-value="0,0">不限</a></div>
+		<div class="fyss_tjlistright">
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 1, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1" data-value="0,2000">2000以下</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 2, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2" data-value="2000,4000">2000-4000</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 3, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3" data-value="4000,6000">4000-6000</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 4, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4" data-value="6000,12000">6000-12000</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 5, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5" data-value="12000,20000">12000-20000</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 6, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6" data-value="20000,1acre">20000-1英亩</a>
+			<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="7" data-value="1,0">1 英亩以上</a>
+			<span class="syss_dw">平方英尺</span>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	<div class="fyss_tjlist" id="cd10">
+		<div class="fyss_tjlistleft">周边临水:</div>
+		<div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+		<div class="fyss_tjlistright fyss_tjlistone">
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 1, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">临水</a>
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 2, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">临塘</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 3, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">临溪</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 4, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">临河</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 5, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">临湖(海)</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 6, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6">临游艇停靠去</a>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+        
+        
+	<div class="fyss_tjlist" id="cd11">
+		<div class="fyss_tjlistleft">周边临树:</div>
+		<div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd11, 'cd11' => 0, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+		<div class="fyss_tjlistright fyss_tjlistone">
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 1, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">临树林</a>
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 2, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">临森林</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 3, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">临绿色保护带</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 4, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">临森林保护区</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 5, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">临谷</a>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+	
+	
+	<div class="fyss_tjlist" id="cd12">
+		<div class="fyss_tjlistleft">周边配套:</div>
+		<div class="fyss_tjlistcenter"><a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10 ,'cd11' => $cd11, 'cd12' => 0, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" class="fyss_tj_cur" data-index="0">不限</a></div>
+		<div class="fyss_tjlistright fyss_tjlistone">
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 1, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1"><input name='zhoubian[]' type='checkbox' value="1" />学校</a>
+
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 2, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2"><input name='zhoubian[]' type='checkbox' value="2" />医院</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 3, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3"><input name='zhoubian[]' type='checkbox' value="3" />公共交通</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 4, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4"><input name='zhoubian[]' type='checkbox' value="4" />高尔夫球场</a>
+				
+				<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' =>$cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11, 'cd12' => 5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5"><input name='zhoubian[]' type='checkbox' value="5" />图书馆</a>
+		</div>
+		<div class="cl"></div>
+	</div>
+	
+
+	<div class="fyss_tjlist">
+		<div class="fyss_tjlistleft">更多条件:</div>
+		<div class="fyss_tjlistmore" style="padding-left:0px;">
+			<div class="syss_xltj" id="cd8">
+				<div class="syss_xltjup" id="cd8_selected" data-index="0">卧室数量</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 0, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 1, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">1卧</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 2, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">2卧</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 3, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">3卧</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 4, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">4卧</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 5, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">5卧</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 6, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="6">5卧以上</a>
+				</div>
+			
+			
+			</div>
+			
+			<!--增加的 -->
+			<div class="syss_xltj" id="cd13">
+				<div class="syss_xltjup" id="cd13_selected" data-value="0,0">卫生间数量</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 0 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 1 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">1个以上</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 2 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">2个以上</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 3 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">3个以上</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 4 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">4个以上</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 5 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">5个以上</a>
+
+				</div>
+			</div>
+		
+			<div class="syss_xltj" id="cd14">
+				<div class="syss_xltjup" id="cd14_selected" data-value="0,0">房屋层数</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => 0, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 1, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">平房</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 2, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">一层半</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 3, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">二层</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 4, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">二层半</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 5, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="5">三层</a>
+				</div>
+			</div>
+			
+			<div class="syss_xltj" id="cd15">
+				<div class="syss_xltjup" id="cd15_selected" data-value="0,0">大门朝向</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => 0, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 1, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">朝北</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 2, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">朝南</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 3, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">朝东</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 4, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">朝西</a>
+
+				</div>
+			</div>
+			
+			
+		<div class="syss_xltj" id="cd16">
+				<div class="syss_xltjup" id="cd16_selected" data-value="0,0">车位数量</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 0, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 1, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="1">>1车位</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 2, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="2">>2车位</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 3, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="3">>3车位</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 4, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="4">>4车位</a>
+
+				</div>
+			</div>
+			
+
+		<div class="syss_xltj" id="cd18">
+				<div class="syss_xltjup" id="cd18_selected" data-value="0,0">游泳池</div>
+				<div class="syss_xltjdown">
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13, 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 0)); ?>#001" data-index="0">不限</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 1)); ?>#001" data-index="1">有游泳池</a>
+					<a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 2)); ?>#001" data-index="2">无游泳池</a>
+		   
+				</div>
+			</div>
+			
+		 </div>   
+			
+                
+                
+		</div>
+	<div class="cl"></div>
+	</div>
+  
+	<a name="002" id="002" ></a>        
+	<div class="fyss_tjlist">
+            <div class="fyss_tjlistleftnormal">搜索条件:</div>
             <div class="fyss_tjqr" style="padding-left:0px;" id="selected"></div>
-            <div class="fyss_tjsc" id="clear_selected"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0, 'cd11' => 0, 'cd12' => 0, 'cd13' => 0, 'cd14' => 0, 'cd15' => 0, 'cd16' => 0, 'cd17' => 0, 'cd18' => 0)); ?>">删除条件</a></div>
+            <div class="fyss_tjsc" id="clear_selected"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0, 'cd11' => 0, 'cd12' => 0, 'cd13' => 0, 'cd14' => 0, 'cd15' => 0, 'cd16' => 0, 'cd17' => 0, 'cd18' => 0)); ?>#001">删除条件</a></div>
             <div class="cl"></div>
         </div>
     </div>
 </div>
 
-<div class="syss_picone"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/b_4.jpg" width="1030" /></div>
+
 <!-- 房源搜索结束 -->
 
 <!-- 房源列表开始 --> 
@@ -519,29 +597,44 @@ $(document).ready(function() {
             if (!empty($time_sort)) {
                 if ($time_sort == 'DESC') {
                     ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'ASC')); ?>#topwz" class="pxfs1">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18,'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'ASC')); ?>#topwz" class="pxfs1">时间</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18,'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
     <?php } else { ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz" class="pxfs2">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18,'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz" class="pxfs2">时间</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18,'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
                 <?php } ?>
             <?php
             } elseif (!empty($price_sort)) {
                 if ($price_sort == 'DESC') {
                     ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'ASC')); ?>#topwz" class="pxfs1">总价</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'ASC')); ?>#topwz" class="pxfs1">总价</a>
                 <?php } else { ?>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz" class="pxfs2">总价</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
+                    <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz" class="pxfs2">总价</a>
     <?php } ?>
             <?php } else { ?>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
-                <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
+                <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 'DESC')); ?>#topwz">时间</a>
+                <a href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10,'cd11' => $cd11,'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18, 'time_sort' => 0, 'price_sort' => 'DESC')); ?>#topwz">总价</a>
 <?php } ?>
-    
+ 
       <div class="syss_pxtwo">第<span><?php if($_GET["page"]==""){echo "1";}else{echo $_GET["page"];}?></span>页&nbsp;&nbsp; 共<span><?php echo ceil($count/10); ?></span>页</div>
-      <div class="syss_pxthree">找到<font color="#ff4e00"><?php echo $count; ?></font>个符合条件的楼盘</div>
+      <div class="syss_pxthree">找到<font color="#ff4e00">
+	  <?php 
+	  	 echo $count;
+		 /*
+	 if ($_GET["cd1"]!="0" or $_GET["cd2"]!="0" or $_GET["cd3"]!="0" or $_GET["cd4"]!="0" or $_GET["cd5"]!="0" or $_GET["cd6"]!="0" or $_GET["cd7"]!="0" or $_GET["cd8"]!="0" or $_GET["cd9"]!="0" or $_GET["cd10"]!="0" or $_GET["cd11"]!="0" or $_GET["cd12"]!="0" or $_GET["cd13"]!="0" or $_GET["cd14"]!="0" or $_GET["cd15"]!="0" or $_GET["cd16"]!="0" or $_GET["cd17"]!="0" or $_GET["cd18"]!="0"){
+	 echo $count;
+	 }
+	 else{
+            			$criteria = new CDbCriteria();
+					    $criteria->order = 'date DESC';
+						$criteria->select = 'subdate(date, 1) as date,(t_resi + t_condo) as t_resi,(u_resi + u_condo) as u_resi ,round(avg_price/10000,2) as avg_price ';
+						$stats = Stats::model()->find($criteria);
+						echo $stats["t_resi"];
+	 }*/
+	  ?>
+      </font>个符合条件的楼盘</div>
       <div class="cl"></div>
     </div>
     
@@ -556,8 +649,8 @@ $(document).ready(function() {
       <div class="syss_fclist_right">
 
         <div class="syss_fcone"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank">MLS：<?php echo $house->ml_num; ?></a></div>
-        <div class="syss_fctwo"><a style="color:#000000; font-size:14px;">地址：<?php echo $house->addr; ?></a></div>
-        <div class="syss_fctwo"><a style="color:#000000; font-size:14px;">城市：<?php echo $house->mname->municipality_cname; ?></a></div>
+        <div class="syss_fctwo"><a style="color:#000000; font-size:14px;">地址：<?php echo $house->addr.",&nbsp".$house->municipality; ?></a></div>
+        <div class="syss_fctwo"><a style="color:#000000; font-size:14px;">城市：<?php echo $house->mname->municipality_cname."&nbsp".$house->city->name; ?></a></div>
         <div class="syss_fcfour">
           <div class="syss_fcfour_one" style="color:#000000">房屋面积：<?php echo $house->sqft; ?>平方英尺</div>
           <div class="syss_fcfour_one" style="color:#000000">物业类型：<?php echo $house->propertyType->name; ?></div>
@@ -565,11 +658,11 @@ $(document).ready(function() {
 		  <?php 
 		  
 		  if ( $house->s_r == "Sale") {
-			$str= $house->lp_dol/10000 . "万加币";
+			$str= $house->lp_dol/10000 . "  万加币";
 			echo $str;
 			} 
 			else {
-			$str = $house->lp_dol . "加元/月";
+			$str = $house->lp_dol . "  加元/月";
 			echo $str;  
 		  }
 		  
@@ -577,7 +670,7 @@ $(document).ready(function() {
           <div class="syss_fcfour_one" style="color:#000000">挂牌时间：<?php echo $house->pix_updt; ?></div>
         </div>
         <div class="syss_fcfive">
-          <div class="syss_fcfiveone" style="background-color:#FFFFFF"> <span class="syss_btn"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>">点击查看详情</a></span> </div>
+          <div class="syss_fcfiveone" style="background-color:#FFFFFF"> <span class="syss_btn"><a target="_blank" href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>&page=<?php echo $_GET["page"];?>">点击查看详情</a></span> </div>
           <div class="syss_fcfiveone" style="background-color:#FFFFFF"> <span class="syss_btn"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>#fydt" target="_blank">查看地图</a></span> </div>
           <div class="cl"></div>
         </div>
@@ -591,24 +684,38 @@ $(document).ready(function() {
         </div>
         <div class="syss_fcthree">
         
-        
-                        <?php
-						if($house->image_list==""){
-						echo " <img src='/static/images/zanwu.jpg' width='92' height='73'>";
-						}
-						else{
-						$array = explode(',',$house->image_list); 
-                        foreach ($array as $key => $value) {
-						 if($key<=2){
-                            ?>
-                        <div class="syss_fcthree_pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $value; ?>" width="92" height="73"></div>
-                        <?php }}}?>
 
-		   
-		    
-		   
-           
-           
+		<?php
+		
+		$county = $house->county;
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/".$county."/Photo".$house->ml_num."/";
+		$num_files = 0;
+		
+		if(is_dir($dir)){
+			$picfiles =  scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+
+
+		if ( $num_files > 1)    {
+
+			for ($x = 2; $x <= 4; $x++) {
+				$filePath = $dir.$picfiles[$x];
+
+			?>
+				<div class="syss_fcthree_pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"width="92" height="73"></div>
+			<?php
+			}
+		}
+
+		else{
+			echo "<img src='/static/images/zanwu.jpg' width='92' height='73'>";
+		}
+		?>
+
+     
            
           <div class="cl"></div>
         </div>
@@ -617,15 +724,26 @@ $(document).ready(function() {
     <?php if ($house->s_r == "Sale") {
         echo "<div id='apDiv1'><img src='/themes/house/images/sale.png' /></div> ";
     } else {
-        echo "<div id='apDiv1'><img src='/themes/house/images/sale.png' /></div>";
+        echo "<div id='apDiv1'><img src='/themes/house/images/rent.png' /></div>";
     } ?>
       
-      <?php if($house->house_image==""){?>
-      <a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank"><img src='/static/images/zanwu.jpg' width="416" height="312"></a>
-      <?php }else{?>
-      <a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house->house_image; ?>" width="416" height="312" /></a>
-      <?php }?>
-      </div>
+      <?php 
+	  //Start of First Image
+	  if($num_files < 1){
+		?>
+		<a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src='/static/images/zanwu.jpg' width="416" height="312"></a>
+      <?php 
+	  }
+	  else{
+		$pic1 = $dir.$picfiles[2];
+  		?>
+		<a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="416" height="312" /></a>
+      <?php 
+	  } //End of First Image
+	  ?>
+      
+	  
+	  </div>
       <div class="cl"></div>
     </div>
      <?php }?>
@@ -1046,10 +1164,10 @@ foreach($resultshazai as $househaizai){
         var compare = []; //对比
 
         var cd1 = <?php echo $cd1; ?>;
-        var cd2 = <?php echo $cd2; ?>;
+        var cd2 = '<?php echo $cd2; ?>'; //use this as city string
         var cd3 = <?php echo $cd3; ?>;
         var cd4 = <?php echo $cd4; ?>;
-        var cd5 = <?php echo $cd5; ?>;
+        var cd5 = '<?php echo $cd5; ?>';
         var cd6 = <?php echo $cd6; ?>;
         var cd7 = <?php echo $cd7; ?>;
         var cd8 = <?php echo $cd8; ?>;
@@ -1063,7 +1181,7 @@ foreach($resultshazai as $househaizai){
 		var cd16 = <?php echo $cd16; ?>;
 		var cd17 = <?php echo $cd17; ?>;
 		var cd18 = <?php echo $cd18; ?>;
-        var diy_price = <?php echo $diy_price; ?>;
+		var diy_price = <?php echo $diy_price; ?>;
 		
 		//$(".addsearchparms").attr("href", function(i, origValue){
 		$(".menuconditionsearch").attr("href", function(i, origValue){
@@ -1076,7 +1194,7 @@ foreach($resultshazai as $househaizai){
             $("#clear_selected").hide();
 
         var cd1_text = $("#cd1").find("[data-index=" + cd1 + "]").text();
-        var cd2_text = $("#cd2").find("[data-index=" + cd2 + "]").text();
+        //var cd2_text = $("#cd2").find("[data-index=" + cd2 + "]").text();
         var cd3_text = $("#cd3").find("[data-index=" + cd3 + "]").text();
         var cd4_text = $("#cd4").find("[data-index=" + cd4 + "]").text();
         var cd5_text = $("#cd5").find("[data-index=" + cd5 + "]").text();
@@ -1097,8 +1215,8 @@ foreach($resultshazai as $househaizai){
         $("#cd1").find("a").removeClass('fyss_tj_cur');
         $("#cd1").find("[data-index=" + cd1 + "]").addClass('fyss_tj_cur');
 
-        $("#cd2").find("a").removeClass('fyss_tj_cur');
-        $("#cd2").find("[data-index=" + cd2 + "]").addClass('fyss_tj_cur');
+        //$("#cd2").find("a").removeClass('fyss_tj_cur');
+        //$("#cd2").find("[data-index=" + cd2 + "]").addClass('fyss_tj_cur');
 
         $("#cd3").find("a").removeClass('fyss_tj_cur');
         $("#cd3").find("[data-index=" + cd3 + "]").addClass('fyss_tj_cur');
@@ -1123,24 +1241,9 @@ foreach($resultshazai as $househaizai){
 
         $("#cd12").find("a").removeClass('fyss_tj_cur');
         $("#cd12").find("[data-index=" + cd12 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd13").find("a").removeClass('fyss_tj_cur');
-        $("#cd13").find("[data-index=" + cd13 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd14").find("a").removeClass('fyss_tj_cur');
-        $("#cd14").find("[data-index=" + cd14 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd15").find("a").removeClass('fyss_tj_cur');
-        $("#cd15").find("[data-index=" + cd15 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd16").find("a").removeClass('fyss_tj_cur');
-        $("#cd16").find("[data-index=" + cd16 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd17").find("a").removeClass('fyss_tj_cur');
+	
+		$("#cd17").find("a").removeClass('fyss_tj_cur');
         $("#cd17").find("[data-index=" + cd17 + "]").addClass('fyss_tj_cur');
-		
-		        $("#cd18").find("a").removeClass('fyss_tj_cur');
-        $("#cd18").find("[data-index=" + cd18 + "]").addClass('fyss_tj_cur');
 
 		
         if (cd8)
@@ -1152,64 +1255,71 @@ foreach($resultshazai as $househaizai){
 			
 
         if (cd1)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd1_text + '</a>');
-        if (cd2)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd2_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd1_text + '</a>');
+        
+		
+		if (cd2 != '0') {
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd2 + '</a>');
+			
+			$('.fyss_tjjgcity input').val(cd2);
+			$('.fyss_tjjgcity input').css('background-color', '#ff4e00');
+			$('.fyss_tjjgcity input').css('color', '#fff');
+			
+		}
         if (cd3)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 0, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd3_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => 0, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd3_text + '</a>');
         if (cd4)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => 0, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd4_text + '</a>');
-        if (cd5)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 0, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd5_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => 0, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd4_text + '</a>');
+        if (cd5 != '0')
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => 0, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd5_text + '</a>');
         if (cd6)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 0, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd6_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => 0, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd6_text + '</a>');
         if (cd7)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 0, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd7_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => 0, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd7_text + '</a>');
         if (cd8)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 0, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd8_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => 0, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd8_text + '</a>');
         if (cd9)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd9_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => 0, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd9_text + '</a>');
 			
         if (cd10)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd10_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => 0, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd10_text + '</a>');
 	
         if (cd11)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 0, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd11_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => 0, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd11_text + '</a>');
 		
 		if (cd12)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => 0, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd12_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => 0, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd12_text + '</a>');
 			
 		if (cd13)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 0 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd13_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => 0 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd13_text + '</a>');
 			
 		if (cd14)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 0, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd14_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => 0, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd14_text + '</a>');
 			
 		if (cd15)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 0, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd15_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => 0, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd15_text + '</a>');
 
 		if (cd16)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 0, 'cd17' => $cd17, 'cd18' => $cd18)); ?>">' + cd16_text + '</a>')
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => 0, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001">' + cd16_text + '</a>')
 
 		if (cd17)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 0, 'cd18' => $cd18)); ?>">' + cd17_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => 0, 'cd18' => $cd18)); ?>#001">' + cd17_text + '</a>');
 
 		if (cd18)
-            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 0)); ?>">' + cd18_text + '</a>');
+            $("#selected").append('<a class="fyss_qrtj_list" href="<?php echo Yii::app()->createUrl('house/index', array('type' => $type, 'cd1' => $cd1, 'cd2' => $cd2, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13 , 'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => 0)); ?>#001">' + cd18_text + '</a>');
 			
 	
 			
         $("#confirm").click(function() {
             var num1 = $("#num1").val();
             var num2 = $("#num2").val();
-            var cd10 = undefined;
-            if (num1 || num2) {
-                cd5 = num1 + '-' + num2;
+            //var cd10 = undefined;
+			if (isNaN(num1) || isNaN(num2) ) {
+                 cd5 = 0;
             } else {
-                cd5 = 0;
+               cd5 = num1 + '-' + num2;
             }
-            window.location.href = "<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $cd1; ?>&cd2=<?php echo $cd2; ?>&cd3=<?php echo $cd3; ?>&cd4=<?php echo $cd4; ?>&cd5=0&cd6=<?php echo $cd6; ?>&cd7=<?php echo $cd7; ?>&cd8=<?php echo $cd8; ?>&cd9=<?php echo $cd9; ?>&cd10=<?php echo $cd10; ?>&cd11=<?php echo $cd11; ?>&cd12=<?php echo $cd12; ?>&cd13=<?php echo $cd13; ?>&cd14=<?php echo $cd14; ?>&cd15=<?php echo $cd15; ?>&cd16=<?php echo $cd16; ?>&cd17=<?php echo $cd17; ?>&cd18=<?php echo $cd18
-			; ?>";
+            window.location.href = "<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $cd1; ?>&cd2=<?php echo $cd2; ?>&cd3=<?php echo $cd3; ?>&cd4=<?php echo $cd4; ?>&cd5=" + cd5 + "&cd6=<?php echo $cd6; ?>&cd7=<?php echo $cd7; ?>&cd8=<?php echo $cd8; ?>&cd9=<?php echo $cd9; ?>&cd10=<?php echo $cd10; ?>&cd11=<?php echo $cd11; ?>&cd12=<?php echo $cd12; ?>&cd13=<?php echo $cd13; ?>&cd14=<?php echo $cd14; ?>&cd15=<?php echo $cd15; ?>&cd16=<?php echo $cd16; ?>&cd17=<?php echo $cd17; ?>&cd18=<?php echo $cd18; ?>";
 			
         });
 
@@ -1337,7 +1447,8 @@ foreach($resultshazai as $househaizai){
         //city_id
         var cd1 = $('#cd1 .fyss_tj_cur').attr('data-index');
         //distirct_id
-        var cd2 = $('#cd2 .fyss_tj_cur').attr('data-index');
+        //var cd2 = $('#cd2 .fyss_tj_cur').attr('data-index');
+		var cd2 = '<?php echo $cd2; ?>';
         //房屋类型
         var cd4 = $('#cd4 .fyss_tj_cur').attr('data-index');
         //总价
@@ -1350,6 +1461,7 @@ foreach($resultshazai as $househaizai){
         var cd7 = $('#cd7 .fyss_tj_cur').attr('data-value');
         //卧室数量
         var cd8 = <?php echo $cd8; ?>;
+		var type = "<?php echo $type; ?>";
         //建造年份
         var cd9 = <?php echo $cd9; ?>;
         if(cd9 == 0){
@@ -1369,7 +1481,7 @@ foreach($resultshazai as $househaizai){
         }else if(cd9 == 7){
             cd9 = '2011,0';
         }
-        var url = '<?php echo Yii::app()->createUrl("map/index"); ?>&cd1='+cd1+'&cd2='+cd2+'&cd4='+cd4+'&cd5='+cd5+'&cd7='+cd7+'&cd8='+cd8+'&cd9='+cd9;
+        var url = '<?php echo Yii::app()->createUrl("map/index"); ?>&cd1='+cd1+'&cd2='+cd2+'&cd4='+cd4+'&cd5='+cd5+'&cd7='+cd7+'&cd8='+cd8+'&cd9='+cd9 + '&type='+type;
         window.open(url);
     }
 </script>

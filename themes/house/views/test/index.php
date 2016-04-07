@@ -2,8 +2,19 @@
 <link rel="stylesheet" type="text/css" href="/new/css/style.css">
 <script type="text/javascript" src="/new/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/new/js/script.js"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.core.js" type="text/javascript" charset="utf-8"></script>
+
 <link href="/themes/house/css/xinjia.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/themes/house/js/jquery-1.9.1.js"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.core.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.tags.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.suggestions.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.filter.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.focus.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.prompt.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.ajax.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-textext-master/src/js/textext.plugin.arrow.js" type="text/javascript" charset="utf-8"></script>
 <script>
 $(document).ready(function(){
        //回到头部
@@ -202,6 +213,33 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
             </div>
             <div class="cl"></div>
         </div>
+ <!-- City Search Start -->		
+	   <div class="fyss_tjlist" id="city">
+            <div class="fyss_tjlistleft">城市:</div>
+ 
+            <div class="fyss_tjlistright">
+
+                <div class="fyss_tjjg">
+                 <textarea id="citysearch" class="fyss_tjjgone" rows="1"></textarea>
+                </div>
+            </div>
+            <div class="cl"></div>
+        </div>
+<script type="text/javascript">
+    $('#citysearch')
+        .textext({
+            plugins : 'autocomplete filter tags ajax',
+            ajax : {
+                url : '/manual/examples/data.json',
+                dataType : 'json',
+                cacheResults : true
+            }
+        })
+    ;
+</script>		
+        		
+ <!-- City Search End -->		
+ 
         <div class="fyss_tjlist" id="cd2">
             <div class="fyss_tjlistleft">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</div>
             <div class="fyss_tjlistcenter"><a  class="fyss_tj_cur" href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $cd1, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); ?>#001" data-index="0">不限</a></div>

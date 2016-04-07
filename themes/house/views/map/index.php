@@ -1,22 +1,17 @@
 <link href="<?php echo $this->_baseUrl ?>/static/map/css/map.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/themes/house/js/jquery-1.12.2.min.js"></script>
+<script src="/static/js/jquery/jquery-ui.min.js"></script>
+
 <div class="cl" style="height:15px"></div>
 <div class="main">
     <!-- map开始 -->
-	 <input name="key" type="text" id="pac-input" class="mapcontrols" placeholder="城市/地址搜索">
+	<input name="key" type="text" id="pac-input" class="mapcontrols" placeholder="城市/地址搜索">
     <div class="mapobx">
         <div class="mapleft">
-            <div class="mapleftup">
-                <div class="dizhi" style="position:relative;">
-                    <div class="dizhileft">
-                        <input style="line-height:27px;color:#ccc" name="key" type="text" id="city" class="textbox" value="州名/市名(中英)"/></div>
-                    <div class="dizhiright"><input name="" type="button" id="search-button"/></div>
-                    <div class="map_keyword_search_list" style="max-height:270px;overflow-y:auto">
-                        <table id="search_table"></table>
-                    </div>
-                    <div class="cl"></div>
-                </div>
-            </div>
-            <div class="search_lp">
+  
+            
+			
+			<div class="search_lp">
 			
                 <div class="search_lpleft">共有<span class="Houses_count">0</span>个楼盘</div>
                 <div class="search_lpright">
@@ -48,7 +43,9 @@
         </div>
         <div class="mapright">
             <div class="maprightup">
-                <div class="mapone">
+
+			
+			<div class="mapone">
                     <div class="map_lm">房屋类型：<span id="housetype_choose">不限</span></div>
                     <div class="map_downone" id="type_list" style="display:none;">
                         <a class="cur searchCondition" data-type="housetype" data-value='0' href="#">不限</a> 
@@ -210,9 +207,13 @@
 		//console.log(gd + ":" + flashgdtop);
 		var clickcount = 0;
 		$(".fsbutton").click(function(){
-					
+			
+			//$(".mapleft").css('display','none');			
 			$(".head").slideToggle();
 			$(".topdl").slideToggle();
+			$(".mapleft").slideToggle();
+			
+
 			
 			$(".nav").slideToggle("slow", function(){
 			var kd = $(window).width();
@@ -225,8 +226,9 @@
 			$(".fsbutton").css({top: p.top + 15});
 			
 			$(".map_flash").css({height: flashgd - 39});
-			$(".mapleftdown").css({height: flashgd - 42});
-			
+			//$(".mapleftdown").css({height: flashgd - 42});
+			//$(".maprightdown").toggleClass('fullscreen'); 	
+			changeMap();
 			if ( clickcount%2 == 0) {
 				$(".fsbutton").text('恢复');
 			}
@@ -238,6 +240,7 @@
 			
 			
 			});
+			
 			
 		});
 		
@@ -309,11 +312,13 @@
     });
 
     //google map
-    var map;
+	//var cd1 = '<?php echo $_GET["cd1"]; ?>';
+	//var cd2 = '<?php echo $_GET["cd2"]; ?>';
+	var map;
     var mapInfo = null;
     var mapMark = null;
     var mapCenter;
-    var mapZoom = 11;
+    var mapZoom = null;
     var infowindow = [];
     var markerArray = [];
     var markers = [];
@@ -329,7 +334,7 @@
     var map_Ground = "";
     var map_Baths = "";
     var orderby = 0;
-    var country = "";
+    var province = "";
     var city = '';
     var district = '';
     var local_type;
@@ -338,25 +343,73 @@
 	var markerClusterer = null;
     mapOptions = {
         center: new google.maps.LatLng(43.6686333, -79.4450250),
-        zoom: 17,
+        zoom: 5, //keep zoom and minZoom differen to trigger initial map search
         zoomControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        minZoom: 6,
+        minZoom: 4,
         overviewMapControl: true,
         overviewMapControlOptions: {opened: true}
     };
     map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
-	
-	//Add Full screen button
 	mapCenter = map.getCenter();
+    mapZoom = map.getZoom();
+	
+	//START CITYZOOM
+	var cd1 = '<?php echo $_GET["cd1"]; ?>';
+	var cd2 = '<?php echo $_GET["cd2"]; ?>';
+	if ( cd1 != 0 || cd2 != 0 ){
+			
+		var provinceZoom = 6;
+		var cityZoom = 11;
+		if ( cd2 != 0 ) { //Search City LAT/LON
+			$.ajax({
+			url: '<?php echo Yii::app()->createUrl('map/getCityLocation'); ?>',
+			type: 'POST', dataType: 'json', data: { city: cd2},
+			success: function(result) {
+				var lat = result.Lat;
+				var lng = result.Lng;
+				//googleMap.setMapView(lat,lng,cityZoom);
+				 map.setCenter(new google.maps.LatLng(parseFloat(lat), parseFloat(lng)));
+				 map.setZoom(parseInt(cityZoom));
+
+		}
+		});
+				
+		
+			
+		} else { //search Province LAT/LON
+			$.ajax({
+			url: '<?php echo Yii::app()->createUrl('map/getProvinceLocation'); ?>',
+			type: 'POST', dataType: 'json', data: { province: cd1},
+			success: function(result) {
+				var lat = result.Lat;
+				var lng = result.Lng;
+				//googleMap.setMapView(lat,lng,provinceZoom);
+				map.setCenter(new google.maps.LatLng(parseFloat(lat), parseFloat(lng)));
+				map.setZoom(parseInt(provinceZoom));
+
+			
+			}
+			});
+		//JSON Call GET CITY or Province LON/Lat
+			
+		}
+		
+	
+	
+	
+	
+	}
+	
+	//END OF CITYZOOM
+	
 	//Add google search box with autocomplete
 	var input = document.getElementById('pac-input');
 	var searchBox = new google.maps.places.SearchBox(input);
 	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-    
-	map.addListener('bounds_changed', function() {
-		searchBox.setBounds(map.getBounds());
-	});
+    //map.addListener('bounds_changed', function() {
+	//	searchBox.setBounds(map.getBounds());
+	//});
 	
 	var smarkers = [];
 	// [START region_getplaces]
@@ -364,6 +417,7 @@
 	// more details for that place.
 	searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
+	
 	changeMap();
 
     if (places.length == 0) {
@@ -371,7 +425,7 @@
     }
 
     // Clear out the old markers.
-    markers.forEach(function(marker) {
+    smarkers.forEach(function(marker) {
       marker.setMap(null);
     });
     smarkers = [];
@@ -402,33 +456,33 @@
     });
     map.fitBounds(bounds);
   });
-  // [END region_getplaces]
-	//End of google search box autocomplet	
-    
-    mapZoom = map.getZoom();
+ 	//End of google search box autocomplete
 
+	
+	
+    google.maps.event.addListener(map, "bounds_changed", function() {
+        if (mapZoom != map.getZoom()) {
+            changeMap();
+        }
+    });
     google.maps.event.addListener(map, 'dragend', function() {
         changeMap();
     });
-	google.maps.event.addListener(map, 'zoom_changed', function() {
-   
-            if (this.getZoom() > 17) {
-                // Change max/min zoom here
-                this.setZoom(17);
-              
-            };
-			changeMap();
-			//not sure
-			$("#leftsead").hide();
-
-   
-	});		
+	
+	
+	/*
+	google.maps.event.addListener(map, 'idle', function() {
+		
+		//console.log("Idle: Start");
+		changeMap();
+	}); */
 
     //汇率
     var getRate = function(code) {
         return '加元';
     }
-    var googleMap = {
+	    
+	var googleMap = {
         //向地图添加信息内容
         setContent: function(lat, lng, content, html, isShow, index) {
             var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
@@ -446,10 +500,12 @@
                 pixelOffset: new google.maps.Size(0, -24)
             });
             infowindow.push(info);
+			
+
             google.maps.event.addListener(marker, 'click', function(e) {
-                for (i = 0; i < infowindow.length; i++) {
-                    infowindow[i].close();
-                }
+                //for (i = 0; i < infowindow.length; i++) {
+                //    infowindow[i].close();
+                //}
                 info.open(map, marker);
                 googleMap.setMapView(parseFloat(lat), parseFloat(lng), mapZoom);
                 if (mapZoom > 8)
@@ -458,13 +514,13 @@
                     $(".fclistbox").html(HouseArray[index] + $(".fclistbox").html());
                 }
             });
-            if (isShow) {
+           if (isShow) {
                 for (i = 0; i < infowindow.length; i++) {
                     infowindow[i].close();
-                }
+               }
                 info.open(map, marker);
                 googleMap.setMapView(parseFloat(lat), parseFloat(lng), mapZoom);
-            }
+           }
             //marker z-index
           // google.maps.event.addListener(marker, 'mouseover', function() {
           //     this.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
@@ -477,13 +533,7 @@
 			var content = "<i class='common_bg icon_map_mark'><span>" + totalCount + "</span></i>";
 			var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
 			//console.log(lat + ":" + lng +":" + totalCount +":" + city);
-            
-			//var marker = new google.maps.Marker({
-			//		position: point,
-			//		label: city,
-			//		map: map
-			//	 
-			//});
+ 
 
 			var marker = new RichMarker({
                 position: point,
@@ -515,14 +565,9 @@
 				map.setZoom(12);
             });
 
-            ////marker z-index
-            //google.maps.event.addListener(marker, 'mouseover', function() {
-            //    this.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-            //});
-            //google.maps.event.addListener(marker, 'mouseout', function() {
-            //    this.setZIndex(google.maps.Marker.MAX_ZINDEX - 2);
-            //});
+
         }, ///本地信息
+		
         createMarker: function(place) {
             var placeLoc = place.geometry.location;
             var html;
@@ -551,13 +596,7 @@
             } else {
                 html = "<i class='common_bg icon_map_mark'></i>";
             }
-            //var marker = new RichMarker({
-            //    position: place.geometry.location,
-            //    map: map,
-            //    draggable: false,
-            //    flat: true,
-            //    content: html
-            //});
+
 			var infowindow = new google.maps.InfoWindow();
 			var currentMark;
 			var marker = new google.maps.Marker({
@@ -608,9 +647,11 @@
             }
         }, ///设置地图位置大小
         setMapView: function(lat, lng, zoom) {
-//            map.setCenter(new google.maps.LatLng(parseFloat(lat), parseFloat(lng)));
+            map.setCenter(new google.maps.LatLng(parseFloat(lat), parseFloat(lng)));
             map.setZoom(parseInt(zoom));
         },
+		
+
         localSearh: function(searchName) {
             request = {
                 location: mapCenter,
@@ -636,12 +677,17 @@
 
     var changeMap = function() {
         googleMap.clearAll(map);
+		    //google map
+
+		$("#leftsead").hide();
+		 //Resize after left panel is toggled
+		google.maps.event.addListenerOnce(map, 'idle', function() {
+				google.maps.event.trigger(map, 'resize');
+		});
 		
-		//var newcd1 = <?php echo $cd1; ?>;
-			
+		//console.log("MapZoom:" + mapZoom);	
         mapCenter = map.getCenter();
-		//console.log("Start changeMap");
-        mapZoom = map.getZoom();
+		mapZoom = map.getZoom();
         var _sw = map.getBounds().getSouthWest();
         var _ne = map.getBounds().getNorthEast();
         var centerlat = (_ne.lat() + _sw.lat()) / 2;
@@ -669,8 +715,10 @@
 		map_room = getUrlParam('cd8') ? getUrlParam('cd8') : map_room;
 		map_year = getUrlParam('cd9') ? getUrlParam('cd9') : map_year;
 		map_Ground = getUrlParam('cd7') ? getUrlParam('cd7') : map_Ground;
-		country = getUrlParam('cd1') ? getUrlParam('cd1') : country;
+		province = getUrlParam('cd1') ? getUrlParam('cd1') : province;
 		district = getUrlParam('cd2') ? getUrlParam('cd2') : district;
+		type = getUrlParam('type') ? getUrlParam('type') : "sale";
+		
 		$.ajax({
 			url: '<?php echo Yii::app()->createUrl('map/getMapHouse'); ?>',
 			type: 'POST',
@@ -685,9 +733,10 @@
 				houseground: map_Ground,
 				housebaths: map_Baths,
 				orderby: orderby,
-				country: country,
+				province: province,
 				city: city,
-				district: district
+				district: district,
+				type: type
 			},
 			beforeSend: function() {
 				$(".loadhouse").show();
@@ -699,46 +748,24 @@
 				forIndex++;
 				if (!data.IsError) {
 					
+
 					var maxMarkers = 2000;
 					var houseCount = data.Data.Total;
-					//console.log("ZoomLevel:" + mapZoom + ":" + houseCount);
-					
-					//Start Mark City House Count if maxMarkers is exceeded
-					if ( houseCount  >= maxMarkers) {
 
+					if ( houseCount  >= maxMarkers ) {
 						for (var p in data.Data.AreaHouseCount) {
-							var html = "";
-                         	var areaHouse = data.Data.AreaHouseCount[p];
-
-							html = "<span class='maplist icon_map_house5' title='" + areaHouse['Count'].NameCn + "'>" + areaHouse['Count'].HouseCount + "套</span>";
-
-							//弹出的房屋列表
-							var houseList = '';
-							$.each(areaHouse['List'], function() {
-								var imgurl = "/" + this.CoverImg;
-								var BuildYear = "";
-								if (this.BuildYear != null && this.BuildYear > 100) {
-									BuildYear = (new Date()).getFullYear() - this.BuildYear + "年";
-								} else {
-									BuildYear = "不详";
-								}
-								
-								houseList += "<div style='width:330px;' class='fclist' index='" + Arrayindex + "' type='" + (this.Beds > 0 ? this.Beds + "卧" : "") + (this.Baths > 0 ? this.Baths + "卫 " : "") + (this.Kitchen > 0 ? this.Kitchen + "厨" : "") + "' lat='" + this.GeocodeLat + "' lng='" + this.GeocodeLng + "' Address='" + this.Address + "' imgurl='" + imgurl + "' Price='" + this.Price + "' HouseType='" + this.HouseType + "' Id='" + this.Id + "' Country=" + this.Country + " Money=" + this.Money + " ><a style='width:300px;display:block;' href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + this.Id + "' target='_blank'><div class='fclistleft' style='width:130px;padding-left:5px'><div class='house_pic'><img src='<?php echo Yii::app()->request->baseUrl; ?>" + imgurl + "' style='width:121px;height:86px' alt='" + this.MunicipalityName + "房产_" + this.Area2Name + "房产_" + this.MunicipalityName + this.Area2Name + this.HouseType + "房产' /><p class='house_no1 fc_title' style='margin-bottom:0px'><span>" + this.Price + "万" + getRate(this.Money) + "</span></p></div></div><div class='fclistright' style='width:150px;'><div class='house_con2'><p>类型：" + this.HouseType + "</p><p>城市：" + this.MunicipalityName + "</p><p>地址：" + this.Address + "</p><p>户型：" + (this.Beds > 0 ? this.Beds + "卧" : "") + (this.Baths > 0 ? this.Baths + "卫 " : "") + (this.Kitchen > 0 ? this.Kitchen + "厨" : "") + "</p></div></div><div class='cl'></div></a></div>";
-							})
-							//googleMap.setContentCount(data.Data.AreaHouseCount[p].Count.GeocodeLat, data.Data.AreaHouseCount[p].Count.GeocodeLng, html, 0, houseList, areaHouse['Count'].HouseCount);
-							//Create marker for city with count
+							var areaHouse = data.Data.AreaHouseCount[p];
 							googleMap.setContentCount(areaHouse['Count'].GeocodeLat, areaHouse['Count'].GeocodeLng, areaHouse['Count'].HouseCount,areaHouse['Count'].NameCn );
 							
-//                                }
 						}
 					}
 					
 					//End of City Markers
 					
 					
-					//Mark House if house count is in limit
-					if ( houseCount < maxMarkers) {
-					
+					//House Marker if house count is in limit
+					//if ( houseCount < maxMarkers && mapZoom >= provZoom) {
+					if ( houseCount < maxMarkers ) {
 						$(data.Data.MapHouseList).each(function(index) {
 		
 						var imgurl = "/" + this.CoverImg;
@@ -748,8 +775,32 @@
 						} else {
 							BuildYear = "";
 						}
-
-						var li = "<div class='fclist' onmouseover='openInfo(" + index + ", this)' index='" + Arrayindex + "' type='" + (this.Beds > 0 ? this.Beds + "卧" : "") + (this.Baths > 0 ? this.Baths + "卫 " : "") + (this.Kitchen > 0 ? this.Kitchen + "厨" : "") + "' Jd='" + this.Id + "'  lat='" + this.GeocodeLat + "' lng='" + this.GeocodeLng + "' Address='" + this.Address + "' imgurl='" + imgurl + "' Price='" + this.Price + "' HouseType='" + this.HouseType + "' Id='" + this.Id + "' Country=" + this.Country + " Money=" + this.Money + " ><a href='javascript:;'><div class='fclistleft'><div class='house_pic'><img src='<?php echo Yii::app()->request->baseUrl; ?>" + imgurl + "' style='width:151px;height:116px' alt='" + this.MunicipalityName + "房产_" + this.Area2Name + "房产_" + this.MunicipalityName + this.Area2Name + this.HouseType + "房产' /></div></div><div class='fclistright'><div class='house_con2'><p class='house_no1 fc_title'><i>" + (Arrayindex + 1) + "</i><span>" + this.Price + "万" + getRate(this.Money) + "</span></p><p>类型：" + this.HouseType + "</p><p>城市：" + this.MunicipalityName + "</p><p>地址：" + this.Address + "</p><p>户型：" + (this.Beds > 0 ? this.Beds + "卧" : "") + (this.Baths > 0 ? this.Baths + "卫 " : "") + (this.Kitchen > 0 ? this.Kitchen + "厨" : "") + "</p></div></div><div class='cl'></div></a></div>";
+						
+						var hprice = ( type == 'rent' )? this.Price*10000 +'  加元/月' : Math.round(this.Price) +'  万加元';
+						//console.log(hprice);
+						var li = "<div class='fclist' onmouseover='openInfo(" 	
+						+ index + ", this)' " 
+						+ "onclick = window.open('<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + this.Id + "')"
+	   
+						+ " index='" + Arrayindex + "' type='" + (this.Beds > 0 ? this.Beds + "卧" : "") 
+						+ (this.Baths > 0 ? this.Baths + "卫 " : "") 
+						+ (this.Kitchen > 0 ? this.Kitchen + "厨" : "") 
+						+ "' Jd='" + this.Id 
+						+ "'  lat='" + this.GeocodeLat 
+						+ "' lng='" + this.GeocodeLng 
+						+ "' Address='" + this.Address 
+						+ "' imgurl='" + imgurl 
+						+ "' Price='" + hprice 
+						+ "' HouseType='" + this.HouseType 
+						+ "' Id='" + this.Id 
+						+ "' Country=" + this.Country 
+						+ " Zip=" + this.Zip 
+						+ " CountryName=" + this.CountryName 
+						+ " ProvinceEname=" + this.ProvinceEname 
+						+ " MunicipalityName=" + this.MunicipalityName 
+						+ " ProvinceCname=" + this.ProvinceCname 
+						+ " Money=" + this.Money 
+						+ " ><a href='javascript:;'><div class='fclistleft'><div class='house_pic'><img src='<?php echo Yii::app()->request->baseUrl; ?>" + imgurl + "' style='width:151px;height:116px' alt='" + this.MunicipalityName + "房产_" + this.Area2Name + "房产_" + this.MunicipalityName + this.Area2Name + this.HouseType + "房产' /></div></div><div class='fclistright'><div class='house_con2'><p class='house_no1 fc_title'><i>" + (Arrayindex + 1) + "</i><span>" + hprice + "</span></p><p>类型：" + this.HouseType + "</p><p>城市：" + this.MunicipalityName + "</p><p>地址：" + this.Address + "</p><p>户型：" + (this.Beds > 0 ? this.Beds + "卧" : "") + (this.Baths > 0 ? this.Baths + "卫 " : "") + (this.Kitchen > 0 ? this.Kitchen + "厨" : "") + "</p></div></div><div class='cl'></div></a></div>";
 
 						HouseArray[Arrayindex] = li;
 
@@ -757,15 +808,31 @@
 						tlng = parseFloat(this.GeocodeLng);
 						var content = "<i class='common_bg icon_map_mark'><span>" + (Arrayindex + 1) + "</span></i>";
 						//var content = "<i class='common_bg icon_map_mark'></i>";
-						var html = "<div class='map_info_title'>" + this.Address + "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" + imgurl + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span><strong class='orange strong_width'>" + this.Price + "</strong><strong class='orange'>万" + getRate(this.Money) + "</strong><br /></p><p><a href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + this.Id + "' target='_blank'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>地 址：" + this.Address + "</p><p class='map_info_phone'><i class='common_bg'></i>类型：" + this.HouseType + "</p><p class='map_info_type'><i class='common_bg'></i>户 型：" + this.Beds + "卧 " + this.Baths + "卫 " + this.Kitchen + "厨</p></div><div class='clear'></div></div>";
+
+						
+						var html = "<div class='map_info_title'>" 
+						+ this.Address + ", " + this.CountryName + ", " + this.ProvinceEname
+						+ "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" 
+						+ imgurl + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span> "
+						+ hprice + "</p> <p><a href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" 
+						+ this.Id + "' target='_blank'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>地 址：" 
+						+ this.MunicipalityName + " " 
+						+ this.ProvinceCname + "</p><p class='map_info_phone'><i class='common_bg'></i>类型：" 
+						+ this.HouseType + "</p><p class='map_info_type'><i class='common_bg'></i>户 型：" 
+						+ this.Beds + "卧 " 
+						+ this.Baths + "卫 " 
+						+ this.Kitchen + "厨</p></div><div class='clear'></div></div>";
 						googleMap.setContent(tlat, tlng, content, html, false, Arrayindex);
 						Arrayindex++;
 
 					});
 					
 					//END of LOOP
-						markerClusterer = new MarkerClusterer(map, markerArray); //David
+						if ( houseCount > 100 ){
+						markerClusterer = new MarkerClusterer(map, markerArray); 
+						}
 					}
+					//End of House Marker
 				}
 				if (lenght == forIndex) {
 					//console.log("Build Left list");
@@ -804,8 +871,17 @@
     var openInfo = function(num, obj) {
         num = num + 1;
         var info = $(obj);
-        var html = "<div class='map_info_title'>" + $(info).attr("Address") + "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" + $(info).attr("imgurl") + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span><strong class='orange strong_width'>" + $(info).attr("Price") + "</strong><strong class='orange'>万" + getRate($(info).attr("Money")) + "</strong><br /></p><p><a class='preferential common_bg' target='blank'  href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + $(info).attr("Id") + "'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>地 址：" + $(info).attr("Address") + "</p><p class='map_info_phone'><i class='common_bg'></i>类型：" + $(info).attr("HouseType") + "</p><p class='map_info_type'><i class='common_bg'></i>户 型：" + $(info).attr("type") + "</p></div><div class='clear'></div></div>";         //打开房产信息
+        var html = "<div class='map_info_title'>" 
+		+ $(info).attr("Address") + ", " + $(info).attr("CountryName") + ", " + $(info).attr("ProvinceEname") + " " + $(info).attr("Zip")
+		+ "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" 
+		+ $(info).attr("imgurl") + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span>" 
+		+ $(info).attr("Price") + "<br /></p><p><a class='preferential common_bg' target='blank'  href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + 
+		$(info).attr("Id") + "'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>城 市：" 
+		+ $(info).attr("MunicipalityName") + " " + $(info).attr("ProvinceCname")  + "</p><p class='map_info_phone'><i class='common_bg'></i>类 型：" 
+		+ $(info).attr("HouseType") + "</p><p class='map_info_type'><i class='common_bg'></i>户 型：" 
+		+ $(info).attr("type") + "</p></div><div class='clear'></div></div>";         //打开房产信息
         googleMap.setContent($(info).attr("lat"), parseFloat($(info).attr("lng")), "<i class='common_bg icon_map_mark'><span>" + num + "</span></i>", html, true, $(info).attr("index"));
+
     }
 
     $(function() {
@@ -922,7 +998,7 @@
                                 if (zoom == 1) {
                                     zoom = 4;
                                 }
-                                country = $(this).attr("Country");
+                                province = $(this).attr("Country");
                                 var text = $(this).text();
                                 googleMap.setMapView(lat, lng, zoom);
                                 $("#city").val(text);

@@ -74,15 +74,14 @@ a.out{ line-height:29px; text-decoration:none; color:#333333; padding-left:19px;
 
 /*map*/
 .mapleft{ float:left; width:398px;}
-.mapright{  margin-left:398px; }
+/*.mapright{  margin-left:398px; }*/
 .mapleftup{ height:28px; border-bottom:1px solid #ff4e00;}
 .cl{ clear:both;}
 .dizhi{ height:28px; border:1px solid #CCCCCC; border-bottom:0; line-height:28px; padding-left:5px; background:url(../images/map5.jpg) 255px center no-repeat; color:#000000; margin-left:10px; width:270px;}
-.search_lp{ padding-top:10px;}
 .search_lpleft{ float:left; width:160px; line-height:32px; padding-left:10px;}
 .search_lpleft span{ padding:0 5px; color:#ff4d00; font-weight:bold;}
 .search_lpright{ float:left;}
-.searchbox{ background:url(../images/input_common.png) no-repeat; width:182px; height:32px; line-height:32px; padding-left:10px; margin-left:8px; position:relative;}
+.searchbox{ background:url(../images/input_common.png) no-repeat; width:182px; height:30px; line-height:32px; padding-left:10px; margin-left:8px;margin-top: -2px; position:relative;}
 .searchbox_two{background:url(../images/input_common.png) left -34px no-repeat;}
 .searchboxdown{ position:absolute; width:192px; margin-left:8px;}
 .searchboxdown span{ display:block; height:30px; line-height:30px; padding-left:20px;border: solid 1px #e3e3e3; cursor:pointer; background-color:#F7F7F7; margin-top:-1px;}
@@ -92,6 +91,7 @@ a.out{ line-height:29px; text-decoration:none; color:#333333; padding-left:19px;
 .dizhiright{ float:left;}
 .dizhiright input{ width:28px; height:27px;  background:url(../images/search1.png) left center no-repeat; border:none; cursor:pointer;}
 .mapleftdown{overflow:auto; }
+.maprightdown.fullscreen{ z-index: 9999; width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .fclistleft{ width:160px; float:left;}
 
 .fclistleft img{ border:3px solid #CCCCCC;}
@@ -343,4 +343,91 @@ a.cur{ background-color:#FF3300; color:#FFFFFF;}
 
 }
 
+
+/*.mapcitysearch form{ position: relative; display: inline-block; }*/
+.mapcitysearch form{ position: relative; display: none; }
+/* input box text grey padding 5px */
+.mapcitysearch input[type="text"] { 
+  color:#aaa; width:200px; text-align:left; padding-right: 45px; 
+  line-height: 25px;
+  border: 1px solid #ff4e00;
+  padding-left: 30px;
+}
+
+/* x at the end of box */
+.mapcitysearch input[type="reset"] {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAAGFBMVEUAAAC/v7+/v7+/v7+/v7+/v7+/v7+/v7+hAPa4AAAAB3RSTlMAQNCwkKDgPaU3lgAAAEZJREFUeNplj9EKACAIA2dm+/8/bkj4sI6wDsIpRCRFBprNxx4bD12LrwRSDxRZkCcoCqVDIW1v+9Q+W6sOOhNkY9iQtsIFhO0DtcbsWN0AAAAASUVORK5CYII=') no-repeat;
+        width: 14px;
+        height: 14px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        border: 0;
+        text-indent: -999px;
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        cursor: pointer;
+}
+.mapcitysearch input[type="text"]:invalid {
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAIVBMVEW/v7+/v78AAAC/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v79QUkolAAAAC3RSTlOLYAAJeoMjRhpOcbsbtd4AAABJSURBVHjaVc1JDsAgDATB9uAF8v8Hx0QcSN9KssZI5eClDj18PRsFlmlQDcfUGd6A3EgYP1xncQ+sa5qYOk9jRQt1Y0izhU5bL2o2AW3ZQKeJAAAAAElFTkSuQmCC) 7px 5px no-repeat;
+}
+.mapcitysearch input[type="text"]:invalid + input[type="reset"] {
+        visibility:hidden;
+}
+
+/* Jquery autocomplete CSS*/
+html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: #fff;
+  background-clip: padding-box;
+}
+/* Move over to selet item */
+.ui-widget-content .ui-state-hover, .ui-widget-content .ui-state-focus {
+    *border: 1px solid #ffece6;
+    background-color: #ffece6;
+    color: #ff4e00;
+    font-weight: bold;
+}
+
+
+/* input focus to glow*/
+.ui-autocomplete-input:focus {
+  *margin-left: 30px;
+  -webkit-box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+  -moz-box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+  box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+}
+/*adjust LI space*/
+.ui-menu {
+   list-style:none;
+   line-height: 21px;
+   color: #000;
+   display:block;
+  /*box-shadow: 0 0 1px #ff4e00;*/
+  float: left;
+  outline: none;
+  border: solid #ffece6;;
+  border-width: 0 1px 1px 1px;
+  margin: 0;
+  padding: 0;
+  -webkit-box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+  -moz-box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+  box-shadow: 3px 3px 10px 0px rgba(255,78,0,0.66);
+
+}
+.ui-menu-item {
+  padding: 3px 0px 3px 25px; /*match input box margin 25px*/
+  margin: 5px 1px 3px 0px;
+  background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAIVBMVEW/v7+/v78AAAC/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v79QUkolAAAAC3RSTlOLYAAJeoMjRhpOcbsbtd4AAABJSURBVHjaVc1JDsAgDATB9uAF8v8Hx0QcSN9KssZI5eClDj18PRsFlmlQDcfUGd6A3EgYP1xncQ+sa5qYOk9jRQt1Y0izhU5bL2o2AW3ZQKeJAAAAAElFTkSuQmCC) 7px 7px no-repeat;
+
+}
 

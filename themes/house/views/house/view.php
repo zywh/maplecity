@@ -209,14 +209,14 @@ $slng=$_GET["lng"];
 <div class="ss1"></div>
 <div class="cl"></div>
 <div class="nytb_dz">
-    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
+    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>&page=<?php echo $_GET["page"];?>#001">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
 </div>
 <!-- 地址结束 -->
 <!-- 房源详情页面开始 -->
 <div class="fyxq" style="margin-top:5px;">
     <div class="cl"></div>
     <div class="fyxqup">
-        <div class="fyxqupleft">
+        <div class="fyxqupleft" style="width: 633px;">
             <div class="fyxq_tab">
                 <a class="fyxq_tab_tp fyxq_tab_cur" href="#">图片</a>
 				
@@ -229,11 +229,29 @@ $slng=$_GET["lng"];
 
                 <a href="#fydt" onclick="streetmap(1);">街景</a>
                 <a href="#fydt" onclick="daolumap();">地图</a>
-                <div class="cl"></div>
+                
+                <?php
+//上一套房源
+$sqlshaid = "select id from h_house where id > ".(int)$_GET['id']." and s_r='".$house->s_r."' order by pix_updt desc limit 0,1";
+$resultshangid = $db->createCommand($sqlshaid)->query();
+foreach($resultshangid as $houseshangi){
+$idshang=$houseshangi["id"];
+}
+
+//下一套房源
+$sqlxiaid = "select id from h_house where id < ".(int)$_GET['id']." and s_r='".$house->s_r."'  order by pix_updt desc limit 0,1";
+$resultxiaid = $db->createCommand($sqlxiaid)->query();
+foreach($resultxiaid as $housexiai){
+$idxia=$housexiai["id"];
+}
+				?>
+                <a href="index.php?r=house/view&id=<?php echo $idshang;?>" style="margin-left:45px;">上一套房源</a>
+                <a href="index.php?r=house/view&id=<?php echo $idxia;?>">下一套房源</a>
+              <div class="cl"></div>
             </div>
             
             
-            <div>
+          <div>
 <!--效果开始-->
 
 
@@ -245,23 +263,27 @@ $slng=$_GET["lng"];
 <?php
 //打开 images 目录
 
-$dir="mlspic/resi/picture/Photo".$house->ml_num."/";
-// Count number of files and store them to variable..
-   $num_files = 0;
-   if(is_dir($dir)){
-   $num_files = count(scandir($dir))-2;
-   }
+$county = $house->county;
+$county = preg_replace('/\s+/', '', $county);
+$county = str_replace("&","",$county);
+$dir="mlspic/crea/".$county."/Photo".$house->ml_num."/";
+$num_files = 0;
+if(is_dir($dir)){
+	$picfiles = scandir($dir);
+	$num_files = count(scandir($dir))-2;
+}
 
-    if ( $num_files > 0)	{
-		
-		for ($x = 1; $x <= $num_files; $x++) {
-          $filePath = $dir."Photo".$house->ml_num."-".$x.".jpeg";
-		  ?>
-		  <li><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"width="465" height="308" /></a></li>
-         <?php
-   
-		}
+if ( $num_files > 0)	{
+	
+	for ($x = 2; $x <= $num_files + 2; $x++) {
+	  //$filePath = $dir."Photo".$house->ml_num."-".$x.".jpeg";
+	  $filePath = $dir.$picfiles[$x];
+	  ?>
+	  <li><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"width="465" height="308" /></a></li>
+	 <?php
+
 	}
+}
 	
 else{
 echo "<img src='/static/images/zanwu.jpg' width='465' height='308'>";
@@ -300,23 +322,17 @@ echo "<img src='/static/images/zanwu.jpg' width='465' height='308'>";
 //打开 images 目录
 
 
-	$dir="mlspic/resi/picture/Photo".$house->ml_num."/";
-	$num_files = 0;
-   if(is_dir($dir) ) {
-   $num_files = count(scandir($dir))-2;
-   }
-
-    if ( $num_files > 0)	{
-		
-		for ($x = 1; $x <= $num_files; $x++) {
-          $filePath = $dir."Photo".$house->ml_num."-".$x.".jpeg";
-		  ?>
-          <li class="current"><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" width="128" height="88" /></a></li>
-          <?php
-         
-		}
-			
+if ( $num_files > 0)	{
+	
+	for ($x = 2; $x <= $num_files + 1; $x++) {
+	  $filePath = $dir.$picfiles[$x];
+	  ?>
+	  <li class="current"><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" width="128" height="88" /></a></li>
+	  <?php
+	 
 	}
+		
+}
 else{
 echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
 }
@@ -358,11 +374,11 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                     <div class="fyxq_ptssright">
 					<?php 
 					if ( $house->s_r == "Sale") {
-					$str= $house->lp_dol/10000 . "万加币";
+					$str= $house->lp_dol/10000 . "&nbsp&nbsp万加币";
 						echo $str;
 					} 
 					else {
-						$str = $house->lp_dol . "加元/月";
+						$str = $house->lp_dol . "&nbsp&nbsp加元/月";
 					echo $str;  
 					}
 					?>
@@ -372,7 +388,7 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                 </div>
                 <div class="fyxq_ptss">
                     <div class="fyxq_ptssleft">地址：</div>
-                    <div class="fyxq_ptssright"><?php echo $house->addr; ?>,<?php echo $house->area; ?></div>
+                    <div class="fyxq_ptssright"><?php echo $house->addr.",&nbsp".$house->municipality.", &nbsp".$house->county."&nbsp"; ?></div>
                     <div class="cl"></div>
                 </div>
                 <div class="fyxq_ptss">
@@ -381,7 +397,7 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
 } else {
     echo '城市';
 } ?>：</div>
-                    <div class="fyxq_ptssright"><?php echo $house->mname->municipality_cname; ?></div>
+                    <div class="fyxq_ptssright"><?php echo $house->mname->municipality_cname."&nbsp&nbsp".$house->city->name; ?></div>
                     <div class="cl"></div>
                 </div>
                 <div class="fyxq_ptss">
@@ -393,7 +409,8 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                     <div class="fyxq_ptssleft">配套：</div>
                     <div class="fyxq_ptssright fyxq_ptpd">
                     
-                               <?php if($house->a_c="Central Air"){?>
+                               <?php 
+							   if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">中央空调</font></span>
                                 <?php }else{?>
@@ -434,15 +451,14 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                                <span><s></s>地下室</span>
                                <?php }?>
 
-                               <?php if($house->pool!="None"){?>
-                                <!--有 -->            
-                                <span><b></b><font color="#FF3300">游泳池</font></span>
-                                <?php }else{?>
-                                <!--无 -->
-                               <span><s></s>游泳池</span>
-                               <?php }?>  
+                               <?php 
+							   if(strpos($house->pool, 'pool') !== false){
+									?><!--有 --> <span><b></b><font color="#FF3300">游泳池</font></span><?php 
+								}else{
+									?><!--无 --><span><s></s>游泳池</span> <?php 
+								}?>  
                                
-                               <?php if($house->pool="Y"){?>
+                               <?php if($house->fpl_num == "Y"){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">壁炉</font></span>
                                 <?php }else{?>
@@ -470,6 +486,7 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                  <?php }?>
                 
                  <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes">在线咨询</a></div>
+                  <div class="kf" style="background-image:url('/themes/house/images/kfxxk.jpg')"><a href="javascript:window.close()">退回房源列表</a></div>
 
 <div id="popDiv" class="mydiv" style="display:none;">
 <div class="guanbi"><a href="javascript:closeDiv()">关闭</a></div>
@@ -618,11 +635,11 @@ $(function(){
         if($(this).hasClass("dlh_active"))
 		{
 			$(".s1").text(a1);
-			$(".s2").text(a2);
-			$(".s3").text(a3);
+			//$(".s2").text(a2);
+			//$(".s3").text(a3);
 			$(".c1").html("平方英尺")
-			$(".c2").html("平方英尺")
-			$(".c3").html("英尺")
+			//$(".c2").html("平方英尺")
+			//$(".c3").html("英尺")
 		   $(this).text("英尺 > 米");
            $(this).removeClass("dlh_active");
 	   } 
@@ -631,11 +648,11 @@ $(function(){
 			var b2=decimal(a2*0.09290304,2);
 			var b3=decimal(a3*0.3048,2);
 			$(".s1").text(b1);
-			$(".s2").text(b2);
-			$(".s3").text(b3);
+			//$(".s2").text(b2);
+			//$(".s3").text(b3);
 			$(".c1").html("平方米")
-			$(".c2").html("平方米")
-			$(".c3").html("米")
+			//$(".c2").html("平方米")
+			//$(".c3").html("米")
 		   $(this).addClass("dlh_active");
 		   $(this).text("米 > 英制");
       }
@@ -651,17 +668,17 @@ $(function(){
                     </div>
                     <div class="xqlb_list">
                         <div class="xqlb_list_left">房 屋 层 数：<?php echo $house->style; ?></div>
-                        <div class="xqlb_list_right">土 地 面 积：<span class="s1"><?php echo $house->depth*$house->front_ft; ?></span><span class="c1">平方英尺</span></div>
+                        <div class="xqlb_list_right">土 地 面 积：<span class="s1"><?php echo $house->land_area; ?></span><span class="c1">平方英尺</span></div>
                         <div class="cl"></div>
                     </div>
                     <div class="xqlb_list">
                         <div class="xqlb_list_left">房 屋 面 积：<span class="s2"><?php echo $house->sqft; ?></span><span class="c2">平方英尺</span></div>
-                        <div class="xqlb_list_right">土 地 尺 寸：<span class="s3"></span><span class="c3">英尺</span></div>
+                        <div class="xqlb_list_right">土 地 描述：<span class="s3"></span><span class="c3"><?php echo $house->acres; ?></span></div>
                         <div class="cl"></div>
                     </div>
                     <div class="xqlb_list">
                         <div class="xqlb_list_left">房 屋 数 量：<?php echo (int)$house->rms+(int)$house->rooms_plus; ?></div>
-                        <div class="xqlb_list_right">地税 / 年份：<?php echo $house->taxes; ?>/<?php echo $house->yr; ?></div>
+                        <div class="xqlb_list_right">地税 / 年份：<?php echo '$ '.$house->taxes; ?>/<?php echo $house->yr." 年"; ?></div>
                         <div class="cl"></div>
                     </div>
                     <div class="xqlb_list">
@@ -714,9 +731,9 @@ $(function(){
                         <div class="cl"></div>
                     </div>
                     
-                    <div class="xqlb_list">
-                        <div class="xqlb_list_left">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
-                        <div class="xqlb_list_left">出售/出租：
+				    <div class="xqlb_list">
+						<div class="xqlb_list_left">游泳池：<?php echo $house->pool; ?></div>
+					    <div class="xqlb_list_right">出售/出租：
 						<?php 
 						if($house->s_r=="Sale"){
 						echo "出售";
@@ -726,6 +743,11 @@ $(function(){
 						}
 						
 						?></div>
+					</div>
+					
+                    <div class="xqlb_list">
+                        <div class="xqlb_list_left">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
+ 
                         
 						<div class="cl"></div>
                     </div>
@@ -810,7 +832,7 @@ $(function(){
     <td width="12%" style="border-bottom: 1px solid #CCCCCC;">房间</td>
     <td width="10%" style="border-bottom: 1px solid #CCCCCC;">长(M)</td>
     <td width="12%" style="border-bottom: 1px solid #CCCCCC;">宽(M)</td>
-    <td width="17%" style="border-bottom: 1px solid #CCCCCC;">面积(㎡)</td>
+    <td width="17%" style="border-bottom: 1px solid #CCCCCC;">面积(M2)</td>
     <td width="37%" style="border-bottom: 1px solid #CCCCCC;">说明</td>
   </tr>
   <?php if($house->level1!="" || $house->rm1_out!=""){?>
@@ -819,7 +841,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_len*$house->rm1_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm1_len*$house->rm1_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_dc1_out; ?><?php if($house->rm1_dc2_out!=""){echo ",";}?><?php echo $house->rm1_dc2_out; ?><?php if($house->rm1_dc3_out!=""){echo ",";}?><?php echo $house->rm1_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -829,7 +851,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len*$house->rm2_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm12_len*$house->rm2_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_dc1_out; ?><?php if($house->rm2_dc2_out!=""){echo ",";}?><?php echo $house->rm2_dc2_out; ?><?php if($house->rm2_dc3_out!=""){echo ",";}?><?php echo $house->rm2_dc3_out; ?></td>
   </tr>
    <?php }?>
@@ -839,7 +861,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_len*$house->rm3_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm3_len*$house->rm3_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_dc1_out; ?><?php if($house->rm3_dc2_out!=""){echo ",";}?><?php echo $house->rm3_dc2_out; ?><?php if($house->rm3_dc3_out!=""){echo ",";}?><?php echo $house->rm3_dc3_out; ?></td>
   </tr>
    <?php }?>
@@ -849,7 +871,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_len*$house->rm4_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm4_len*$house->rm4_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_dc1_out; ?><?php if($house->rm4_dc2_out!=""){echo ",";}?><?php echo $house->rm4_dc2_out; ?><?php if($house->rm4_dc3_out!=""){echo ",";}?><?php echo $house->rm4_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -859,7 +881,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_len*$house->rm5_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm5_len*$house->rm5_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_dc1_out; ?><?php if($house->rm5_dc2_out!=""){echo ",";}?><?php echo $house->rm5_dc2_out; ?><?php if($house->rm5_dc3_out!=""){echo ",";}?><?php echo $house->rm5_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -869,7 +891,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_len*$house->rm6_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm6_len*$house->rm6_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_dc1_out; ?><?php if($house->rm6_dc2_out!=""){echo ",";}?><?php echo $house->rm6_dc2_out; ?><?php if($house->rm6_dc3_out!=""){echo ",";}?><?php echo $house->rm6_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -879,7 +901,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_len*$house->rm7_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm7_len*$house->rm7_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_dc1_out; ?><?php if($house->rm7_dc2_out!=""){echo ",";}?><?php echo $house->rm7_dc2_out; ?><?php if($house->rm7_dc3_out!=""){echo ",";}?><?php echo $house->rm7_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -889,7 +911,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_len*$house->rm8_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm8_len*$house->rm8_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_dc1_out; ?><?php if($house->rm8_dc2_out!=""){echo ",";}?><?php echo $house->rm8_dc2_out; ?><?php if($house->rm8_dc3_out!=""){echo ",";}?><?php echo $house->rm8_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -899,7 +921,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_len*$house->rm9_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm9_len*$house->rm9_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_dc1_out; ?><?php if($house->rm9_dc2_out!=""){echo ",";}?><?php echo $house->rm9_dc2_out; ?><?php if($house->rm9_dc3_out!=""){echo ",";}?><?php echo $house->rm9_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -909,7 +931,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_len*$house->rm10_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm10_len*$house->rm10_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_dc1_out; ?><?php if($house->rm10_dc2_out!=""){echo ",";}?><?php echo $house->rm10_dc2_out; ?><?php if($house->rm10_dc3_out!=""){echo ",";}?><?php echo $house->rm10_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -920,7 +942,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_len*$house->rm11_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm11_len*$house->rm11_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_dc1_out; ?><?php if($house->rm11_dc2_out!=""){echo ",";}?><?php echo $house->rm11_dc2_out; ?><?php if($house->rm11_dc3_out!=""){echo ",";}?><?php echo $house->rm11_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -932,7 +954,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len*$house->rm12_wth; ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm12_len*$house->rm12_wth,1); ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_dc1_out; ?><?php if($house->rm12_dc2_out!=""){echo ",";}?><?php echo $house->rm12_dc2_out; ?><?php if($house->rm12_dc3_out!=""){echo ",";}?><?php echo $house->rm12_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -976,24 +998,22 @@ $(function(){
                 
 <?php
 
-	if (is_dir($dir)){
-		if ($dh = opendir($dir)){
 
-			while (($file = readdir($dh))!= false){
-				//文件名的全路径 包含文件名
 	
-				$filePath = $dir.$file;
+	if ( $num_files > 0)	{
+	
+		for ($x = 2; $x <= $num_files + 1; $x++) {
+				$filePath = $dir.$picfiles[$x];
+				
 				?>     
-          <div style="margin-top:8px;"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" /></div>
+          <div style="margin-top:8px;"><img width="600" height="450" src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" /></div>
           <?php
 
-			}
-		closedir($dh);
 		}
+		
+	} else{
+		echo "<img src='/static/images/zanwu.jpg'  width='742' height='489'>";
 	}
-else{
-echo "<img src='/static/images/zanwu.jpg'  width='742' height='489'>";
-}
 ?>
                        
                 
@@ -1300,7 +1320,9 @@ $zhinan=$housezhinan["image"];
                            
                      </div>
 			   </div>
-
+<?php
+if($house->s_r=="Sale"){
+?>
           <div class="ajjsq">
                 <div class="ajjsq_title">按揭计算器</div>
                 <div class="ajjsq_cont">
@@ -1308,16 +1330,33 @@ $zhinan=$housezhinan["image"];
                     <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">房屋价格：</div>
                         <div class="ajjsq_left_two"><img src="new/images/jh.png"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
+                        <div class="ajjsq_left_three"><input name="jiage" style="text-align:center" type="text"></div>
                         <div class="ajjsq_left_four"><img src="new/images/jh2.png"></div>
                         <div class="ajjsq_left_five">$</div>
                         <div class="cl"></div>
                     </div>
+                 <script>
+                        $(document).ready(function () {
+                            $(".spxq_qgAddsf").click(function () {
+                                var num = $("#jq_numsf").val();
+                                if (num < 80) {
+                                    num++;
+                                }
+                                $("#jq_numsf").val(num);
+                            });
+                            $(".spxq_qgRedusf").click(function () {
+                                var num = $("#jq_numsf").val();
+                                if (num > 10) {
+                                    num--;
+                                }
+                                $("#jq_numsf").val(num);
+                            });
+                        });</script>
                     <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;付：</div>
-                        <div class="ajjsq_left_two"><img src="new/images/jh.png"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
-                        <div class="ajjsq_left_four"><img src="new/images/jh2.png"></div>
+                        <div class="ajjsq_left_two"><img src="new/images/jh.png" class="spxq_qgAddsf"></div>
+                        <div class="ajjsq_left_three"><input style="text-align:center" value="30" name="shoufu" id="jq_numsf" type="text"></div>
+                        <div class="ajjsq_left_four"><img src="new/images/jh2.png" class="spxq_qgRedusf"></div>
                         <div class="ajjsq_left_five">%</div>
                         <div class="cl"></div>
                     </div>
@@ -1329,52 +1368,107 @@ $zhinan=$housezhinan["image"];
                         <div class="ajjsq_left_five">$</div>
                         <div class="cl"></div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            $(".spxq_qgAddnx").click(function () {
+                                var num = $("#jq_numnx").val();
+                                if (num < 99) {
+                                    num++;
+                                }
+                                $("#jq_numnx").val(num);
+                            });
+                            $(".spxq_qgRedunx").click(function () {
+                                var num = $("#jq_numnx").val();
+                                if (num > 1) {
+                                    num--;
+                                }
+                                $("#jq_numnx").val(num);
+                            });
+                        });</script>
                     <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">还款年限：</div>
-                        <div class="ajjsq_left_two"><img src="new/images/jh.png"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
-                        <div class="ajjsq_left_four"><img src="new/images/jh2.png"></div>
+                        <div class="ajjsq_left_two"><img src="new/images/jh.png"  class="spxq_qgAddnx"></div>
+                        <div class="ajjsq_left_three"><input style="text-align:center" value="1" name="num" id="jq_numnx" type="text"></div>
+                        <div class="ajjsq_left_four"><img class="spxq_qgRedunx" src="new/images/jh2.png" /></div>
                         <div class="ajjsq_left_five">年</div>
                         <div class="cl"></div>
                     </div>
+                     <script>
+                        $(document).ready(function () {
+                            $(".spxq_qgAdd").click(function () {
+                                var num = $("#jq_num").val();
+                                if (num < 80) {
+                                    num++;
+                                }
+                                $("#jq_num").val(num);
+                            });
+                            $(".spxq_qgRedu").click(function () {
+                                var num = $("#jq_num").val();
+                                if (num > 10) {
+                                    num--;
+                                }
+                                $("#jq_num").val(num);
+                            });
+                        });</script>
+
                     <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">利&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率：</div>
-                        <div class="ajjsq_left_two"><img src="new/images/jh.png"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
-                        <div class="ajjsq_left_four"><img src="new/images/jh2.png"></div>
+                        <div class="ajjsq_left_two"><a style="cursor:hand"><img src="new/images/jh.png" class="spxq_qgAdd"/></a></div>
+                        <div class="ajjsq_left_three"><input value="10" style="text-align:center" name="num" id="jq_num" type="text"></div>
+                        <div class="ajjsq_left_four"><a style="cursor:hand"><img class="spxq_qgRedu" src="new/images/jh2.png" /></a></div>
                         <div class="ajjsq_left_five">%</div>
                         <div class="cl"></div>
                     </div>
                     <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">还款周期：</div>
-                        <div class="ajjsq_left_two"><img src="new/images/jh.png"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
-                        <div class="ajjsq_left_four"><img src="new/images/jh2.png"></div>
-                        <div class="ajjsq_left_five">$</div>
+                        <div class="ajjsq_left_two"></div>
+                        <div class="ajjsq_left_three"> 
+                        <select class="ajjsq_select" name="huankuan" style="width:75px; color:#333333">
+                        <option value="月付">月付</option>
+                        <option value="半月付">半月付</option>
+                        <option value="周付">周付</option>
+                        </select>
+                        </div>
+                        <div class="ajjsq_left_four"></div>
+                        <div class="ajjsq_left_five"></div>
                         <div class="cl"></div>
                     </div>
                     <div class="ajjsq_list" style="margin: 5px 0;">
-                        <div class="ajjsq_left_one">安省交易税：</div>
+                        <div class="ajjsq_left_one">省份选择：</div>
                         <div class="ajjsq_left_two"></div>
                         <div class="ajjsq_left_three">
-                            <select class="ajjsq_select" name=""></select><br>
-                            <input name="" type="text">
+                            <select class="ajjsq_select" name="provice" style="width:93px; color:#333333">
+                            <option value="安大略省">安大略省</option>
+                            <option value="维多利亚省">维多利亚省</option>
+                            <option value="阿尔伯塔省">阿尔伯塔省</option>
+                            <option value="魁北克省">魁北克省</option>
+                            <option value="蒙特利尔市">蒙特利尔市</option>
+                            </select>
+               
                         </div>
     
                         <div class="cl"></div>
                     </div>
                     <div class="ajjsq_list" style="margin: 5px 0;">
+                        <div class="ajjsq_left_one">交易印花税：</div>
+                        <div class="ajjsq_left_two"></div>
+                        <div class="ajjsq_left_three"><input name="yinhuasui" type="text"></div>
+                        <div class="ajjsq_left_four"></div>
+                        <div class="ajjsq_left_five">$</div>
+                        <div class="cl"></div>
+                    </div>
+                      <div class="ajjsq_list" style="margin: 5px 0;">
                         <div class="ajjsq_left_one">多伦多交易税：</div>
                         <div class="ajjsq_left_two"></div>
-                        <div class="ajjsq_left_three"><input name="" type="text"></div>
+                        <div class="ajjsq_left_three"><input name="yinhuasui" type="text"></div>
                         <div class="ajjsq_left_four"></div>
-                        <div class="ajjsq_left_five"></div>
+                        <div class="ajjsq_left_five">$</div>
                         <div class="cl"></div>
                     </div>
                     	 <div class="grtztj" style="padding-top:0px;margin-left: 35px;"><a href="#">提交评估申请</a></div>
                 </div>
             </div>
-   
+<?php }?>   
            
            <div class="grtz">
       <div class="grtz_title"><span>热点推荐</span></div>
@@ -1389,9 +1483,9 @@ foreach($resultshazai as $househaizai){
             <dl>
               <dt>
                                     <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
                       <?php }?>
               </dt>
               <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
@@ -1423,9 +1517,9 @@ foreach($resultshazai as $househaizai){
             <dl>
               <dt>
                                     <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
                       <?php }?>
               </dt>
               <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
@@ -1471,9 +1565,9 @@ foreach($resultsfujian as $housefujin){
 				<div class="playerdetail">
 					<div class="detailimg">
                       <?php if($housefujin["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $housefujin["house_image"]; ?>" width="237" height="193"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $housefujin["house_image"]; ?>" width="237" height="193"/></a>
                       <?php }?>
                     
                     </div>
@@ -1620,9 +1714,9 @@ foreach($results as $house){
 				<div class="playerdetail">
 					<div class="detailimg">
                       <?php if($house["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="237" height="193"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="237" height="193"/></a>
                       <?php }?>
                     
                     </div>
