@@ -232,14 +232,14 @@ $slng=$_GET["lng"];
                 
                 <?php
 //上一套房源
-$sqlshaid = "select id from h_house where id > ".(int)$_GET['id']." and s_r='".$house->s_r."' order by pix_updt desc limit 0,1";
+$sqlshaid = "select id from h_house where id > ".(int)$_GET['id']." and s_r='".$house->s_r."' order by pix_updt asc,city_id asc,lp_dol desc limit 0,1";
 $resultshangid = $db->createCommand($sqlshaid)->query();
 foreach($resultshangid as $houseshangi){
 $idshang=$houseshangi["id"];
 }
 
 //下一套房源
-$sqlxiaid = "select id from h_house where id < ".(int)$_GET['id']." and s_r='".$house->s_r."'  order by pix_updt desc limit 0,1";
+$sqlxiaid = "select id from h_house where id < ".(int)$_GET['id']." and s_r='".$house->s_r."'  order by pix_updt asc,city_id asc,lp_dol desc limit 0,1";
 $resultxiaid = $db->createCommand($sqlxiaid)->query();
 foreach($resultxiaid as $housexiai){
 $idxia=$housexiai["id"];
