@@ -1705,28 +1705,43 @@ setTimeout('CompScrxxk()',Speedxxk);
        <div id="List1">
         <!-- 图片列表 begin -->
 <?php 
-
-$sql = "select * from h_house where lp_dol<=3000000 and id!=".$house->id." limit 0,6";
-$results = $db->createCommand($sql)->query();
-foreach($results as $house){
+$array=explode(',',$_COOKIE["fzd_houselist"]);
+foreach($array as $key=> $house){
+if($house!=""){
 ?>
         <div class="pic">
 				<div class="playerdetail">
 					<div class="detailimg">
-                      <?php if($house["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="237" height="193"/></a>
-                      <?php }?>
+<?php
+//根据房源编号查询房源信息
+
+$sqlfy = "select * from h_house where ml_num = '".$house."'";
+$resultsqlfy = $db->createCommand($sqlfy)->query();
+foreach($resultsqlfy as $housefy){
+$idhousefy=$housefy["id"];
+$house_image=$housefy["house_image"];
+$addr=$housefy["addr"];
+$community=$housefy["community"];
+$lp_dol=$housefy["lp_dol"];
+}
+?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>" >
+                                 <?php if($house_image!=""){?>
+                                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house_image; ?>" width="237" height="193"/>
+                                 <?php }else{?>
+                                 <img src='/static/images/zanwu.jpg' width="237" height="193"/>
+                                 <?php }?>
+                                 </a>
+ 
                     
                     </div>
-					<div class="teanames"><?php echo $house["ml_num"];?></div>
-					<div class="teadetail" style="width:210px;">地址：<?php echo $house["addr"]; ?><br />城市：<?php echo $house["community"];?><br/>价格：<span><font color="#FF3300"><?php echo $house["lp_dol"]/10000; ?></font>万加元</span></div>
+					<div class="teanames"><?php echo $house;?></div>
+					<div class="teadetail" style="width:210px;">地址：<?php echo mb_substr($addr,0,18,'utf-8'); ?><br />城市：<?php echo mb_substr($community,0,18,'utf-8');?><br/>价格：<span><font color="#FF3300"><?php echo $lp_dol/10000; ?></font>万加元</span></div>
                    
 					
 				</div>
          </div>
-<?php }?> 
+<?php }}?> 
         <!-- 图片列表 end -->
        </div>
        <div id="List2"></div>

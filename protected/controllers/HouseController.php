@@ -370,7 +370,23 @@ if(!empty($prop_featx_out3)){
         $pager->pageSize = 10;
         $pager->applyLimit($criteria);
         $house_list = House::model()->findAll($criteria);
-
+		
+		//generate cookie list for previous and next page
+		
+		foreach ($house_list as $val) {
+			//generate ml_num for cookielist
+			$ml_list = $ml_list.",".$val->ml_num;
+			
+		}
+		
+		$listcookie = "fzd_houselist";
+		if(!isset($_COOKIE[$listcookie])){
+            setcookie($listcookie, "", time() - 3600);
+		   
+        }
+		setcookie($listcookie, $ml_list, time() + (86400 * 30), "/");
+		//end of adding cookie
+		
         $collection_list = array();
         if($this->_account['userId']){
             $collect_model = Collect::model()->find('user_id=:user_id', array(':user_id'=>$this->_account['userId']));
@@ -426,29 +442,32 @@ if(!empty($prop_featx_out3)){
         Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/flowplayer-3.2.11.min.js');
 
         $cookies = Yii::app()->request->getCookies();
-        if(!empty($cookies['fzd_house'])){
-            $house_ids = explode(',', $cookies['fzd_house']->value);
-            array_push($house_ids, $id);
-            $house_ids = array_unique($house_ids);
-            $cookie_str = implode(',', $house_ids);
-            $cookie = new CHttpCookie('fzd_house',$cookie_str);
-            $cookie->expire = time() + 60 * 60 * 24 * 30;  //有限期30天
-            Yii::app()->request->cookies['fzd_house'] = $cookie;
-        }else{
-            $cookie = new CHttpCookie('fzd_house',$id);
-            $cookie->expire = time() + 60 * 60 * 24 * 30;  //有限期30天
-            Yii::app()->request->cookies['fzd_house'] = $cookie;
-        }
+ 
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('t.id="'.$id.'"');
 		$criteria->with = array('mname','propertyType');
 		
         //$house = House::model()->find('id=:id',array(':id'=>$id));
 		$house = House::model()->find($criteria);
- 		error_log($house->pool);
+ 		//error_log($house->pool);
 
         $layouts = Layout::model()->findAll('house_id=:house_id',array(':house_id'=>$id));
         $matches = Match::model()->findAll();
+		
+		//Generate cookie for viewed house
+	    if(!empty($cookies['fzd_house'])){
+            $house_ids = explode(',', $cookies['fzd_house']->value);
+            array_push($house_ids, $house->ml_num);
+            $house_ids = array_unique($house_ids);
+            $cookie_str = implode(',', $house_ids);
+            $cookie = new CHttpCookie('fzd_house',$cookie_str);
+            $cookie->expire = time() + 60 * 60 * 24 * 30;  //有限期30天
+            Yii::app()->request->cookies['fzd_house'] = $cookie;
+        }else{
+            $cookie = new CHttpCookie('fzd_house',$house->ml_num);
+            $cookie->expire = time() + 60 * 60 * 24 * 30;  //有限期30天
+            Yii::app()->request->cookies['fzd_house'] = $cookie;
+        }
 
         $collection_list = array();
         if($this->_account['userId']){
