@@ -459,7 +459,9 @@ if(!empty($prop_featx_out3)){
             $house_ids = explode(',', $cookies['fzd_house']->value);
             array_push($house_ids, $house->ml_num);
             $house_ids = array_unique($house_ids);
-            $cookie_str = implode(',', $house_ids);
+			$arr = array_slice($house_ids, -10); //chop to last 10 items
+            $cookie_str = implode(',', $arr);
+			
             $cookie = new CHttpCookie('fzd_house',$cookie_str);
             $cookie->expire = time() + 60 * 60 * 24 * 30;  //有限期30天
             Yii::app()->request->cookies['fzd_house'] = $cookie;

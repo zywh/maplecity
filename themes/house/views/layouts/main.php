@@ -2,20 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="msvalidate.01" content="A5B31B1941BF1C9CAC63F55B4F4F4794" />
+		<meta name="keywords" content="加拿大房产置业平台,加拿大房产,加拿大买房,加拿大房价,枫之都,加拿大买房移民,加拿大房产网,加拿大别墅,加拿大房产中介,加拿大房地产网,加拿大房地产,加拿大豪宅,加拿大买房网站,加拿大地产,加拿大二手房,加拿大二手房中介,加拿大买房子,加拿大房产投资" />
+ 
         <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/layout.css" />
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery-1.12.2.min.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/fczx.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.jslides.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/koala.min.1.5.js"></script>
         <title><?php 
-		if(Yii::app()->controller->id=="site"){echo "加拿大房产置业平台";}
-		elseif(Yii::app()->controller->id=="hotrecommend"){echo "热点推荐 - 加拿大房产置业平台";}
-		elseif(Yii::app()->controller->id=="house"){echo "房源搜索 - 加拿大房产置业平台";}
-		elseif(Yii::app()->controller->id=="enjoy"){echo "豪宅鉴赏 - 加拿大房产置业平台";}
-		elseif(Yii::app()->controller->id=="column"){echo "学区专栏 - 加拿大房产置业平台";}
-		elseif(Yii::app()->controller->id=="news"){echo "新闻资讯 - 加拿大房产置业平台";}
+		if(Yii::app()->controller->id=="site"){echo "加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
+		elseif(Yii::app()->controller->id=="hotrecommend"){echo "热点推荐 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
+		elseif(Yii::app()->controller->id=="house"){echo "房源搜索 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
+		elseif(Yii::app()->controller->id=="enjoy"){echo "豪宅鉴赏 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
+		elseif(Yii::app()->controller->id=="column"){echo "学区专栏 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
+		elseif(Yii::app()->controller->id=="news"){echo "新闻资讯 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
 		else{
-		echo "加拿大房产置业平台";
+		echo "加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";
 		}
 		?></title>
         <?php if( Yii::app()->controller->id == 'map' || Yii::app()->controller->id == 'house'){?>
@@ -92,7 +95,7 @@
             <div class="head">
                 <div class="headleft"><a href="<?php echo Yii::app()->createUrl('site/index'); ?>"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/layout/logo.jpg" border="0" /></a></div>
                 <div class="headright">
-                    <span class="headrightone">加拿大房产置业平台</span>
+                    <span class="headrightone">加拿大房产 置业平台</span>
                     <span class="headrighttwo">400-870-1029</span>
                 </div>
                 <div class="cl"></div>
