@@ -14,7 +14,7 @@
 <div class="fyss">
 
 
-<div id="tabs" class="chartcontainer" >
+<div id="tabs" class="chartcontainer_current" >	
   <ul>
     <li><a href="#citychart">城市分布图</a></li>
 	<li><a href="#provincechart">省分布图</a></li>
@@ -44,6 +44,7 @@
 		<p class="chartboxtitle1">全国房源 - 房价分布图 </p>
 		<p class="chartboxtitle2"> ( <font color="#ff4e00"><?php echo date("Y-m-d", time() - 60 * 60 * 24); ?>  </font> 实时统计 )</p>
 		<p id="chart_price"> </p>
+
 	</div>
 	
 	<div class="chartbox" id="typechart" > 
@@ -58,6 +59,7 @@
 		<p class="chartboxtitle1">全国房源 - 房屋面积分布图 </p>
 		<p class="chartboxtitle2"> ( <font color="#ff4e00"><?php echo date("Y-m-d", time() - 60 * 60 * 24); ?>  </font> 实时统计 )</p>
 		<p id="chart_house"> </p>	
+		<p class="chart_current_area" id="chart_city"> </p>
 	</div>
 	
 	<div class="chartbox" id="landchart" >  

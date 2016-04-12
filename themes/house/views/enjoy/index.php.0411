@@ -15,11 +15,54 @@
      <img src="/themes/house/enjoy/images_index/ban.jpg"/>
 </div>
  <div class="nytb_dz" style="width: 1002px; padding-bottom:0px;"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">豪宅鉴赏</span> </div>
-
-
-
+<div class="nav_bottom">
+<!-- 代码部分begin -->
+<div id="img_scroll">
+    <div id="img_small">
+        <a href="#1"><img src="/themes/house/images/PhotoC3185934-1.jpg" width="230" height="150" /></a>
+        <a href="#2"><img src="/themes/house/images/PhotoC3185934-20.jpg" width="230" height="150" /></a>
+        <a href="#3"><img src="/themes/house/images/PhotoC3194983-1.jpg" width="230" height="150" /></a>
+        <a class="curr" href="#1"></a>
+    </div>
+    <div id="img_big"> 
+   		<a style="display:block;" href="#"><img src="/themes/house/images/PhotoC3185934-1.jpg" width="700" height="465"></a> 
+        <a href="#"><img src="/themes/house/images/PhotoC3185934-20.jpg" width="700" height="465"></a> 
+        <a href="#"><img src="/themes/house/images/PhotoC3194983-1.jpg" width="700" height="465"></a> 
+    </div>
+</div>
 <script src="/themes/house/js/jquery.min.js"></script>
-
+<script type="text/javascript">   
+$(function($){
+	var showtime = 0;
+	$("#img_small a:lt(3)").mouseover(function(){
+		var showtime = $("#img_small a:lt(3)").index(this);
+		showImg(showtime)	
+	});
+	$("#img_scroll").hover(function(){
+		if(settime)clearInterval(settime);
+		},function(){
+		settime = setInterval(function(){
+			showImg(showtime)
+			showtime++;
+			if(showtime==3){showtime=0;}
+		} , 3000);
+	});
+	var settime = setInterval(function(){
+		showImg(showtime)
+		showtime++;
+		if(showtime==3){showtime=0;}
+	} , 3000);
+})
+function showImg(i){
+	var Link = $("#img_small").eq(i).find("a").attr("href");
+	$("#img_small .curr").attr("href",Link);
+	$("#img_big a").eq(i).fadeIn(800).siblings("a").fadeOut(600);
+	$("#img_small .curr").animate( { top: (i*155) } , 300);
+}
+</script> 
+<!-- 代码部分end -->
+      
+</div>
 <a name="001" id="001"></a>
 <div class="js">
                  <div class="js_list">

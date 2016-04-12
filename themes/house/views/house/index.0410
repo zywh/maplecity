@@ -174,21 +174,17 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
   </style>
       <?php
     $db = Yii::app()->db;
-    ini_set("log_errors", 1);
-	ini_set("error_log", "/tmp/php-error.log");
-
 	function get_firstimage($county,$ml_num){
 		
 		$county = preg_replace('/\s+/', '', $county);
 		$county = str_replace("&","",$county);
 		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
-		#$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
 		$num_files = 0;
 		if(is_dir($dir)){
 			$picfiles = scandir($dir);
 			$num_files = count(scandir($dir))-2;
 		}
-		if ( $num_files >= 1)    {
+		if ( $num_files > 1)    {
 			return $dir.$picfiles[2];
 
 		}else { return 'static/images/zanwu.jpg';}
@@ -204,7 +200,7 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 			$picfiles = scandir($dir);
 			$num_files = count(scandir($dir))-2;
 		}
-		if ( $num_files >= 1)    {
+		if ( $num_files > 1)    {
 			
 			$s = implode(",",array_slice($picfiles,2,3)); //return 3 comma seperated list with offset 2 which is subdir . and ..
 			$s = str_replace("Photo",$dir."Photo",$s); // Insert DIR in front
@@ -748,7 +744,6 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
       <?php 
 		
 		$pic1 = get_firstimage($county,$ml_num);
-		
   		?>
 		<a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="416" height="312" /></a>
      

@@ -2,7 +2,7 @@
 <script type="text/javascript" src="new/js/tFocus2.js"></script>
 <style>
 .mydiv {
-background-image:url(/themes/house/images/yuyuebf.png);
+*background-image:url(/themes/house/images/yuyuebf.png);
 text-align: center;
 line-height: 40px;
 font-size: 12px;
@@ -63,7 +63,7 @@ document.getElementById('bg').style.display='none';
 }
 
 </script>
-<script type="text/javascript" src="/themes/house/js/jquery-1.9.1.js"></script>
+
 <script>
 $(document).ready(function(){
        //回到头部
@@ -204,7 +204,39 @@ $sid=$_GET["sid"];
 $slat=$_GET["lat"];
 $slng=$_GET["lng"];
 
+	function get_firstimage($county,$ml_num){
+		
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		$num_files = 0;
+		if(is_dir($dir)){
+			$picfiles = scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+		if ( $num_files >= 1)    {
+			return $dir.$picfiles[2];
 
+		}else { return 'static/images/zanwu.jpg';}
+	}
+	
+	function get_tn_image($county,$ml_num){
+		
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/creatn/".$county."/Photo".$ml_num."/";
+		$num_files = 0;
+		if(is_dir($dir)){
+			$picfiles = scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+		if ( $num_files >= 1)    {
+			
+			$s = implode(",",array_slice($picfiles,2,3)); //return 3 comma seperated list with offset 2 which is subdir . and ..
+			$s = str_replace("Photo",$dir."Photo",$s); // Insert DIR in front
+			return $s;
+		} else { return 'static/images/zanwu.jpg';}
+	}
 
 ?>    
 <!-- 地址开始 -->
@@ -377,6 +409,8 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
             <div class="fyxqupright_btn">
 <div style="float:left; margin-left:10px;"><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div>
+
+
 
  <?php if (empty($this->_account['userId'])) { ?>
                 <a style="float:right; padding-top:5px;" class="syss_fc_sc <?php if (in_array($house->id, $collection_list)) {echo 'collected';} ?> " data-id="<?php echo $house->id; ?>" href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">加入收藏</a>
@@ -1587,11 +1621,12 @@ foreach($resultsfujian as $housefujin){
         <div class="pic">
 				<div class="playerdetail">
 					<div class="detailimg">
-                      <?php if($housefujin["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $housefujin["house_image"]; ?>" width="237" height="193"/></a>
-                      <?php }?>
+                      <?php
+					  $county=$housefujin["county"];
+					  $ml_num=$housefujin["ml_num"];
+					  $pic = get_firstimage($county,$ml_num);
+					  ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/></a>
+                    
                     
                     </div>
 					<div class="teanames"><?php echo $housefujin["ml_num"];?></div>
@@ -1744,31 +1779,15 @@ foreach($resultsqlfy as $housefy){
 $idhousefy= $housefy["id"];
 //$house_image = $housefy["image"];
 $county = $housefy["county"];
-$county = preg_replace('/\s+/', '', $county);
-$county = str_replace("&","",$county);
-$dir="mlspic/crea/".$county."/Photo".$housefy["ml_num"]."/";
-$num_files = 0;
-if(is_dir($dir)){
-	$picfiles = scandir($dir);
-	$num_files = count(scandir($dir))-2;
-}
-
-
-if ( $num_files > 0)	{
-	$house_image=$dir.$picfiles[2];
-} else {$house_image="";}
-
+$ml_num = $housefy["ml_num"];
+$pic = get_firstimage($county,$ml_num);
 $addr=$housefy["addr"];
 $community=$housefy["community"];
 $lp_dol=$housefy["lp_dol"];
 }
 ?>
 					 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>" >
-					 <?php if($house_image!=""){?>
-					 <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house_image; ?>" width="237" height="193"/>
-					 <?php }else{?>
-					 <img src='/static/images/zanwu.jpg' width="237" height="193"/>
-					 <?php }?>
+					 <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/>
 					 </a>
 
                     

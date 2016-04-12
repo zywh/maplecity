@@ -9,7 +9,7 @@
 <div class="cl"></div>
 <div class="fyss">
 
-<div id="tabs" class="chartcontainer">
+<div id="tabs" class="chartcontainer_treb">
 
  <ul>
     <li><a href="#pricechart">价格走势图</a></li>
