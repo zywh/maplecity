@@ -1,4 +1,4 @@
-<link href="/themes/house/css/xinjia.css" type="text/css" rel="stylesheet" />
+<link href="/themes/house/css/xinjia.css?<?php echo rand();?>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="new/js/tFocus2.js"></script>
 <style>
 .mydiv {
@@ -245,7 +245,7 @@ $slng=$_GET["lng"];
 <div class="cl"></div>
 <a name="004" id="004"></a>
 <div class="nytb_dz">
-    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>&page=<?php echo $_GET["page"];?>#001">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
+    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd12_2=<?php echo $_GET["cd12_2"];?>&cd12_3=<?php echo $_GET["cd12_3"];?>&cd12_4=<?php echo $_GET["cd12_4"];?>&cd12_5=<?php echo $_GET["cd12_5"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>&page=<?php echo $_GET["page"];?>#001">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
 </div>
 <!-- 地址结束 -->
 <!-- 房源详情页面开始 -->

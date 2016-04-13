@@ -1,4 +1,4 @@
-<link href="/themes/house/css/xinjia.css" type="text/css" rel="stylesheet" />
+<link href="/themes/house/css/xinjia.css?<?php echo rand();?>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/themes/house/js/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function(){

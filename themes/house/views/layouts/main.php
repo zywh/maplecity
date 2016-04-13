@@ -132,24 +132,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'sale') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房源搜索</a>
+                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'sale') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房源搜索</a>
                             <div class="navtc">
                                 <div class="navtcbox" style="display:none;">
                                     <!--<?php foreach($city_list as $obj){ ?>
                                     <a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => $obj->id, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0)); ?>"><?php echo $obj->name; ?></a>
                                     <?php } ?>
 									-->
-									<a class="menuconditionsearch" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
+									<a class="menuconditionsearch" href="/index.php?r=house/index&type=sale&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
 									<a class="menuconditionsearch" href="/index.php?r=map/index&type=sale">地图搜索</a>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'rent') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房屋出租</a>
+                        <div class="navlist nav-wrap"><a class="nav_up <?php if ($_GET["type"] == 'rent') echo 'nav_active'; ?>" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">房屋出租</a>
                             <div class="navtc">
                                 <div class="navtcbox" style="display:none;">
          
-									<a class="menuconditionsearch" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
+									<a class="menuconditionsearch" href="/index.php?r=house/index&type=rent&cd1=0&cd2=0&cd3=0&cd4=0&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0">条件搜索</a>
 									<a class="menuconditionsearch" href="index.php?r=map/index&type=rent">地图搜索</a>
                                 </div>
                             </div>
@@ -207,14 +207,14 @@
                     </div>
                     <div class="search">
                         <div class="searchleft">
-                          <input name="key" type="text" id="global_search" class="inputone" value="MLS号" onblur="if (this.value == '') {
+                          <input name="key" type="text" id="global_search" style="font-size:14px; color:#999 " class="inputone" value="MLS号" onblur="if (this.value == '') {
                                     this.style.color = '#999';
                                     this.value = 'MLS号';
                                 }" onfocus="if (this.value == 'MLS号') {
                                             this.value = '';
                                         } else {
                                             this.style.color = '#000';
-                                        }" style="color: rgb(153, 153, 153);" />
+                                        }"/>
                         </div>
                       <div class="searchright"><input name="" type="submit" class="btnone" value="" id="global_search_btn"/>
                         </div>

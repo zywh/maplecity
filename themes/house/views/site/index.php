@@ -7,6 +7,7 @@
 .lm_five_right_title a{ color:#666666}
 .lm_five_right_title a:hover{ color:#FF6600}
 .lmlist a:hover{ color:#FF6600}
+.zczltwo span a:hover{ text-decoration:underline}
 </style>
 <?php
 	$db = Yii::app()->db;
