@@ -8,8 +8,8 @@
 .lm_five_right_title a:hover{ color:#FF6600}
 .lmlist a:hover{ color:#FF6600}
 </style>
-<?php
-	$db = Yii::app()->db;
+    <?php
+    $db = Yii::app()->db;
 	function get_firstimage($county,$ml_num){
 		
 		$county = preg_replace('/\s+/', '', $county);
@@ -26,7 +26,7 @@
 
 		}else { return 'static/images/zanwu.jpg';}
 	}
-
+	
 	function get_tn_image($county,$ml_num){
 		
 		$county = preg_replace('/\s+/', '', $county);
@@ -44,7 +44,7 @@
 			return $s;
 		} else { return 'static/images/zanwu.jpg';}
 	}	
-?> 
+	?> 
 <!-- banner开始 -->
 <div class="banner">
     <div id="full-screen-slider">
@@ -63,12 +63,12 @@
 
 <div class="nycont_mls">
 <div class="nycont_sgkjj"><p id="socialicons3">
-	 <a style="margin-left:0px;" class="sgkjj1" target="_blank" href="index.php?r=about2/about2&id=32"><IMg src="/themes/house/images/index/btn1.jpg" border="0"/></a>
-	 <a class="sgkjj2" target="_blank" href="index.php?r=about2/about2&id=33"><IMg src="/themes/house/images/index/btn2.jpg" border="0"/></a>
-	 <a class="sgkjj3" target="_blank" href="index.php?r=about2/about2&id=34"><IMg src="/themes/house/images/index/btn3.jpg" border="0"/></a>
-	 <a style="margin-right:0px;" class="sgkjj4" target="_blank" href="index.php?r=about2/about2&id=36"><IMg src="/themes/house/images/index/btn4.jpg" border="0"/></a>
-	 </p>
-	 <div class="cl"></div>
+                     <a style="margin-left:0px;" class="sgkjj1" target="_blank" href="index.php?r=about2/about2&id=32"><IMg src="/themes/house/images/index/btn1.jpg" border="0"/></a>
+                     <a class="sgkjj2" target="_blank" href="index.php?r=about2/about2&id=33"><IMg src="/themes/house/images/index/btn2.jpg" border="0"/></a>
+                     <a class="sgkjj3" target="_blank" href="index.php?r=about2/about2&id=34"><IMg src="/themes/house/images/index/btn3.jpg" border="0"/></a>
+                     <a style="margin-right:0px;" class="sgkjj4" target="_blank" href="index.php?r=about2/about2&id=36"><IMg src="/themes/house/images/index/btn4.jpg" border="0"/></a>
+                     </p>
+                     <div class="cl"></div>
 </div>
 </div>
 
@@ -194,10 +194,81 @@ foreach($resultshazai as $househaizai){
 <!-- 热点推荐结束 -->
 
 
+<!-- 豪宅鉴赏开始 -->
+<div class="lm_two">
+    <div class="lm_twoup"><a href="index.php?r=enjoy/index"><img src="/static/images/luxury.jpg" /></a></div>
+    <div class="lm_twodown" style="margin-top:-40px;">
+        <!--<div class="lm_twobanner"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/b_2.jpg" /></div>-->
+        <div class="lm_twojs">
+            <?php
+ 
+$sqlhaozi = "select * from h_house where lp_dol>4000000 limit 0,3";
+$resultshaozai = $db->createCommand($sqlhaozi)->query();
+foreach($resultshaozai as $househaozai){
+
+			
+	if($key == 1){
+            ?><div class="lm_twojs_one lm_twojs_two">
+				<div class="lm_twojs_one_right">
+					<div  class="lm_twojs_one_right_up">
+							<div class="lm_twojs_title"><span>地区：</span><?php echo $househaozai["addr"].$househaozai["county"].$househaozai["ml_num"]; ?></div>
+							<div class="lm_twojs_info"><span>简介：</span><?php echo $househaozai["lp_dol"]/10000; ?>万加币/<?php echo $househaizai["ml_num"]; ?><br /></div>
+				    </div>
+				    <div class="lm_twojs_one_right_center">
+						<p><?php echo mb_substr($househaozai["ad_text"],0,226,'utf-8');?></p>
+					 </div>
+					 <div class="lm_twojs_one_right_xx">
+					 
+					   <a href="#"><img src="/static/images/info.gif"/></a>
+					  </div>
+                </div>
+                <div class="lm_twojs_one_left">
+					<?php 
+					 
+					$county = $househaozai["county"];
+					$ml_num = $househaozai["ml_num"];
+					$picfile = get_firstimage($county,$ml_num);										 
+
+					?> 
+					<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $picfile; ?>"  width="320" height="195"/></a>
+                  
+                </div>
+                <div class="cl"></div>
+            </div><?php 
+			}
+			else{ 
+				?><div class="lm_twojs_one">
+                <div class="lm_twojs_one_left"> <?php 
+					$county = $househaozai["county"];
+					$ml_num = $househaozai["ml_num"];
+					$picfile = get_firstimage($county,$ml_num);
+					  ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaozai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $picfile; ?>"  width="320" height="195"/></a> 
+	
+                <div class="lm_twojs_one_right">
+                           <div  class="lm_twojs_one_right_up">
+                                        <div class="lm_twojs_title"><span>地区：</span><?php echo $househaozai["addr"]; ?></div>
+                                        <div class="lm_twojs_info"><span>简介：</span><?php echo $househaozai["lp_dol"]/10000; ?>万币/<?php echo $househaozai["ml_num"]; ?></div>
+                         </div>
+                         <div class="lm_twojs_one_right_center">
+                                    <p><?php echo mb_substr($househaizai["extras"],0,226,'utf-8');?></p>
+                         </div>
+                         <div class="lm_twojs_one_right_xx">
+                         
+                               <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"><img src="/static/images/info.gif"/></a>
+                          </div>
+                </div>
+                <div class="cl"></div>
+            </div><?php 
+			}} 
+			?></div>
+    </div>
+</div>
+<!-- 豪宅鉴赏结束 -->
+
 <!-- 学区专栏开始 -->
 <div class="lm_three">
     <div class="lm_threeup"><a><img src="/static/images/xuequ.jpg" width="980" height="39" /></a></div>
-<div>
+    <div>
 <!--开始 -->
 
 <style type="text/css">
@@ -301,7 +372,6 @@ foreach($resultxuequ as $housexuequ){
 </div>
 <div style="height:20px; clear:both"></div>
 <!-- 学区专栏结束 -->
-
 
 <!-- 加国资讯开始 -->
 <div class="lm_four">
@@ -480,6 +550,122 @@ foreach($resultxuequ as $housexuequ){
 </div>
 <!-- 加国资讯结束 -->
 
+<!-- 房产资讯开始 -->
+<div class="lm_five">
+    <div class="lm_five_up"><a href=""><img src="/static/images/fangchan.jpg" /></a></div>
+    <div class="lm_five_down">
+        <div class="lm_five_down_pic">
+            <?php foreach($exhibition as $obj){ ?>
+                <a href="<?php echo Yii::app()->createUrl('news/houseNewsView', array('id'=>$obj->id)); ?>" target="_blank">
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $obj->image; ?>" width="192" height="250"/>
+                    <span class="exhibition_title" title="<?php echo $obj->title; ?>"><?php echo $obj->title; ?></span>
+                </a>
+            <?php } ?>
+            <div class="cl"></div>
+        </div>
+        <div class="lm_five_down_news">
+            <div class="lm_five_left">
+                <div class="lm_five_left_label">
+                    <div class="lm_four_news_up_left"><a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>11)); ?>" class="moretwo" target="_blank"><?php echo $this->getCatalogName(11); ?></a></div>
+                    <a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>11)); ?>" class="moretwo" target="_blank">更多>></a>
+                    <div class="cl"></div>
+                </div>
+                <div class="lm_five_left_pic">
+                    <div id="hdp">
+                        <div class="slides">
+                            <ul class="slide-pic">
+                                <?php foreach($school_distrcit_house as $k => $obj){
+                                    if($k == 0){
+                                        ?>
+                                        <li class="cur"><a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$obj->id)); ?>" target="_blank" title="<?php echo $obj->name; ?>"><img width="290" height="218" src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $obj->house_image; ?>" /></a></li>
+                                    <?php }else{ ?>
+                                        <li><a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$obj->id)); ?>" target="_blank" title="<?php echo $obj->name; ?>"><img width="290" height="218"  src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $obj->house_image; ?>" /></a></li>
+                                    <?php }} ?>
+                            </ul>
+                            <ul class="slide-li op">
+                                <li class="cur"></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ul class="slide-li slide-txt">
+                                <li class="cur"><a href="javascript:void(0);"></a></li>
+                                <li><a href="javascript:void(0);"></a></li>
+                                <li><a href="javascript:void(0);"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lm_five_left_news">
+                    <div class="lm_five_left_news_up">
+                        <div class="lm_five_left_news_title"><a href="<?php echo Yii::app()->createUrl('house/index',array('cd1'=>0,'cd2'=>0,'cd3'=>1,'cd4'=>0,'cd5'=>0,'cd6'=>0,'cd7'=>0,'cd8'=>0,'cd9'=>0,'cd10'=>0)); ?>" target="_blank">最新学区房介绍</a></div>
+                    </div>
+                    <div class="lm_five_left_news_down">
+                        <?php foreach($school_distrcit_house_news as $obj){ ?>
+                            <a href="<?php echo Yii::app()->createUrl('news/houseNewsView', array('id'=>$obj->id)); ?>" target="_blank" title="<?php echo $obj->title; ?>">· <?php echo $obj->title; ?></a>
+                        <?php } ?>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="lm_five_center">
+                <div class="lm_five_left_label">
+                    <div class="lm_four_news_up_left"><a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>12)); ?>" class="moretwo"><?php echo $this->getCatalogName(12); ?></a></div>
+                    <a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>12)); ?>" class="moretwo">更多>></a>
+                    <div class="cl"></div>
+                </div>
+                <div class="lm_five_center_info">
+                    <?php foreach($house_hotspots as $obj){ ?>
+                        <div class="lm_five_center_list house_hotspots_line">
+                            <a href="<?php echo Yii::app()->createUrl('news/houseNewsView', array('id'=>$obj->id)); ?>" target="_blank" title="<?php echo $obj->title; ?>" class="house_hotspots">· <?php echo $obj->title; ?></a> <span><?php 
+					if($obj->last_update_time==0){
+					echo "[".date('Y-m-d', $obj->create_time)."]"; 
+					}else{
+					echo "[".date('Y-m-d', $obj->last_update_time)."]"; 
+					}
+					?></span>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="lm_five_center_pic"><a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>12)); ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $this->getCatalogImage(12); ?>" width="317" height="151" border="0" /></a></div>
+            </div>
+            <div class="lm_five_right">
+                <div class="lm_five_left_label">
+                    <div class="lm_four_news_up_left"> <a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>13)); ?>" class="moretwo"><?php echo $this->getCatalogName(13); ?></a></div>
+                    <a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>13)); ?>" class="moretwo">更多>></a>
+                    <div class="cl"></div>
+                </div>
+                <div class="lm_five_right_up">
+                    <div class="lm_five_right_up_left"><a href="<?php echo Yii::app()->createUrl('news/houseNews', array('catalog_id'=>13)); ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $this->getCatalogImage(13); ?>" border="0" width="108" height="108"/></a></div>
+                    <div class="lm_five_right_up_right">
+                        <div class="lm_five_right_title"><a href="<?php echo Yii::app()->createUrl('news/houseNewsView',array('id'=>$house_property_special_news->id)); ?>" title="<?php echo $house_property_special_news->title; ?>" target="_blank"><?php echo $house_property_special_news->title; ?></a></div>
+                        <div class="lm_five_right_info">
+                            <div class="house_property_special_news_summary"><?php echo $house_property_special_news->summary; ?></div>
+                            <a href="<?php echo Yii::app()->createUrl('news/houseNewsView',array('id'=>$house_property_special_news->id)); ?>" target="_blank">[详情]</a>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="lm_five_right_down">
+                    <?php foreach($house_property as $obj){ ?>
+                        <div class="lm_five_center_list house_hotspots_line">
+                            <a href="<?php echo Yii::app()->createUrl('news/houseNewsView', array('id'=>$obj->id)); ?>" target="_blank" title="<?php echo $obj->title; ?>" class="house_hotspots">· <?php echo $obj->title; ?></a> <span>[<?php 
+					if($obj->last_update_time==0){
+					echo date('Y-m-d', $obj->create_time); 
+					}else{
+					echo date('Y-m-d', $obj->last_update_time); 
+					}
+					?>]</span>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+           
+            <div class="cl"></div>
+             <div class="lm_four_banner" style="margin-top:30px"><a href="index.php?r=about/about1&id=49"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/tl_4.jpg" /></a></div>
+        </div>
+    </div>
+</div>
+<!-- 房产资讯结束-->
 
 
 <!-- 加拿大留学开始 -->

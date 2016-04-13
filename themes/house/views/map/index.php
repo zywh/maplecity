@@ -342,7 +342,8 @@
     var pageIndex = 1;
 	var markerClusterer = null;
     mapOptions = {
-        center: new google.maps.LatLng(43.6686333, -79.4450250),
+        //center: new google.maps.LatLng(43.6686333, -79.4450250),
+		center: new google.maps.LatLng(54.649739, -93.045726),
         zoom: 5, //keep zoom and minZoom differen to trigger initial map search
         zoomControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,

@@ -2,7 +2,7 @@
 <script type="text/javascript" src="new/js/tFocus2.js"></script>
 <style>
 .mydiv {
-*background-image:url(/themes/house/images/yuyuebf.png);
+background-image:url(/themes/house/images/yuyuebf.png);
 text-align: center;
 line-height: 40px;
 font-size: 12px;
@@ -63,7 +63,7 @@ document.getElementById('bg').style.display='none';
 }
 
 </script>
-
+<script type="text/javascript" src="/themes/house/js/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function(){
        //回到头部
@@ -203,57 +203,20 @@ $weidu=$house->longitude;
 $sid=$_GET["sid"];
 $slat=$_GET["lat"];
 $slng=$_GET["lng"];
-
-	function get_firstimage($county,$ml_num){
-		
-		$county = preg_replace('/\s+/', '', $county);
-		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
-		$num_files = 0;
-		if(is_dir($dir)){
-			$picfiles = scandir($dir);
-			$num_files = count(scandir($dir))-2;
-		}
-		if ( $num_files >= 1)    {
-			return $dir.$picfiles[2];
-
-		}else { return 'static/images/zanwu.jpg';}
-	}
-	
-	function get_tn_image($county,$ml_num){
-		
-		$county = preg_replace('/\s+/', '', $county);
-		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/creatn/".$county."/Photo".$ml_num."/";
-		$num_files = 0;
-		if(is_dir($dir)){
-			$picfiles = scandir($dir);
-			$num_files = count(scandir($dir))-2;
-		}
-		if ( $num_files >= 1)    {
-			
-			$s = implode(",",array_slice($picfiles,2,3)); //return 3 comma seperated list with offset 2 which is subdir . and ..
-			$s = str_replace("Photo",$dir."Photo",$s); // Insert DIR in front
-			return $s;
-		} else { return 'static/images/zanwu.jpg';}
-	}
-
 ?>    
 <!-- 地址开始 -->
 <script type="text/javascript" src="new/js/tFocus2.js"></script>
-<!--<div class="ss1"></div> -->
+<div class="ss1"></div>
 <div class="cl"></div>
-<a name="004" id="004"></a>
 <div class="nytb_dz">
-    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>&page=<?php echo $_GET["page"];?>#001">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
+    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <a href="<?php echo Yii::app()->createUrl('house/index'); ?>">房源搜索</a> &gt; <span style="font-size:14px;">详情页面</span>
 </div>
 <!-- 地址结束 -->
 <!-- 房源详情页面开始 -->
-
 <div class="fyxq" style="margin-top:5px;">
     <div class="cl"></div>
     <div class="fyxqup">
-        <div class="fyxqupleft" style="width: 633px;">
+        <div class="fyxqupleft">
             <div class="fyxq_tab">
                 <a class="fyxq_tab_tp fyxq_tab_cur" href="#">图片</a>
 				
@@ -262,51 +225,15 @@ $slng=$_GET["lng"];
 					echo "<a class='fyxq_tab_sp'" ;
 					echo "href='",$house->tour_url,"' target='_blank'>视频 </a>";
 				}
-				else{
-				echo "<a>视频</a>";
-				}
 				?>
 
                 <a href="#fydt" onclick="streetmap(1);">街景</a>
                 <a href="#fydt" onclick="daolumap();">地图</a>
-                
-                <?php
-		//echo $_COOKIE["fzd_houselist"]."</br>";		
-$array=explode(',',$_COOKIE["fzd_houselist"]);
-$offset=array_search($house->ml_num,$array);
-//echo $offset."</br>";
-$shangshang=$array[$offset-1];
-$xiiaxia = $array[$offset+1];
-//echo $array[$offset-1]."</br>";//下一个
-//echo $array[$offset+1]."</br>"; //上一个
-				 
-//上一套房源
-$sqlshaid = "select id from h_house where ml_num='".$shangshang."'";
-//echo $sqlshaid."</br>";
-$resultshangid = $db->createCommand($sqlshaid)->query();
-foreach($resultshangid as $houseshangi){
-$idshang=$houseshangi["id"];
-}
-
-//下一套房源
-$sqlxiaid = "select id from h_house where ml_num='".$xiiaxia."'";
-//echo $sqlxiaid;
-$resultxiaid = $db->createCommand($sqlxiaid)->query();
-foreach($resultxiaid as $housexiai){
-$idxia=$housexiai["id"];
-}
-				?>
-                <?php if($idshang!=""){?>
-                <a href="index.php?r=house/view&id=<?php echo $idshang;?>#004" <?php if($idxia==""){?>style="margin-left:140px;"<?php }else{?>style="margin-left:45px;"<?php }?>>上一套房源</a>
-                <?php }?>
-                <?php if($idxia!=""){?>
-                <a href="index.php?r=house/view&id=<?php echo $idxia;?>#004" <?php if($idshang==""){?>style="margin-left:140px;"<?php }?>>下一套房源</a>
-                <?php }?>
-              <div class="cl"></div>
+                <div class="cl"></div>
             </div>
             
             
-          <div>
+            <div>
 <!--效果开始-->
 
 
@@ -330,7 +257,7 @@ if(is_dir($dir)){
 
 if ( $num_files > 0)	{
 	
-	for ($x = 2; $x <= $num_files + 1; $x++) {
+	for ($x = 2; $x <= $num_files + 2; $x++) {
 	  //$filePath = $dir."Photo".$house->ml_num."-".$x.".jpeg";
 	  $filePath = $dir.$picfiles[$x];
 	  ?>
@@ -410,8 +337,6 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
 <div style="float:left; margin-left:10px;"><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div>
 
-
-
  <?php if (empty($this->_account['userId'])) { ?>
                 <a style="float:right; padding-top:5px;" class="syss_fc_sc <?php if (in_array($house->id, $collection_list)) {echo 'collected';} ?> " data-id="<?php echo $house->id; ?>" href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">加入收藏</a>
 <?php }else{?>
@@ -466,8 +391,7 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                     <div class="fyxq_ptssleft">配套：</div>
                     <div class="fyxq_ptssright fyxq_ptpd">
                     
-                               <?php 
-							   if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false){?>
+                               <?php if($house->a_c="Central Air"){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">中央空调</font></span>
                                 <?php }else{?>
@@ -508,14 +432,15 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                                <span><s></s>地下室</span>
                                <?php }?>
 
-                               <?php 
-							   if(strpos($house->pool, 'pool') !== false){
-									?><!--有 --> <span><b></b><font color="#FF3300">游泳池</font></span><?php 
-								}else{
-									?><!--无 --><span><s></s>游泳池</span> <?php 
-								}?>  
+                               <?php if($house->pool!="None"){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">游泳池</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>游泳池</span>
+                               <?php }?>  
                                
-                               <?php if($house->fpl_num == "Y"){?>
+                               <?php if($house->pool="Y"){?>
                                 <!--有 -->            
                                 <span><b></b><font color="#FF3300">壁炉</font></span>
                                 <?php }else{?>
@@ -543,7 +468,6 @@ echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
                  <?php }?>
                 
                  <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes">在线咨询</a></div>
-                  <div class="kf" style="background-image:url('/themes/house/images/kfxxk.jpg')"><a href="javascript:window.close()">退回房源列表</a></div>
 
 <div id="popDiv" class="mydiv" style="display:none;">
 <div class="guanbi"><a href="javascript:closeDiv()">关闭</a></div>
@@ -693,7 +617,7 @@ $(function(){
 		{
 			$(".s1").text(a1);
 			//$(".s2").text(a2);
-			//$(".s3").text(a3);
+			$(".s3").text(a3);
 			$(".c1").html("平方英尺")
 			//$(".c2").html("平方英尺")
 			//$(".c3").html("英尺")
@@ -706,7 +630,7 @@ $(function(){
 			var b3=decimal(a3*0.3048,2);
 			$(".s1").text(b1);
 			//$(".s2").text(b2);
-			//$(".s3").text(b3);
+			$(".s3").text(b3);
 			$(".c1").html("平方米")
 			//$(".c2").html("平方米")
 			//$(".c3").html("米")
@@ -788,9 +712,9 @@ $(function(){
                         <div class="cl"></div>
                     </div>
                     
-				    <div class="xqlb_list">
-						<div class="xqlb_list_left">游泳池：<?php echo $house->pool; ?></div>
-					    <div class="xqlb_list_right">出售/出租：
+                    <div class="xqlb_list">
+                        <div class="xqlb_list_left">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
+                        <div class="xqlb_list_left">出售/出租：
 						<?php 
 						if($house->s_r=="Sale"){
 						echo "出售";
@@ -800,11 +724,6 @@ $(function(){
 						}
 						
 						?></div>
-					</div>
-					
-                    <div class="xqlb_list">
-                        <div class="xqlb_list_left">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
- 
                         
 						<div class="cl"></div>
                     </div>
@@ -887,9 +806,9 @@ $(function(){
   <tr>
     <td width="12%" style="border-bottom: 1px solid #CCCCCC;">楼层</td>
     <td width="12%" style="border-bottom: 1px solid #CCCCCC;">房间</td>
-    <td width="10%" style="border-bottom: 1px solid #CCCCCC;">长(M)</td>
-    <td width="12%" style="border-bottom: 1px solid #CCCCCC;">宽(M)</td>
-    <td width="17%" style="border-bottom: 1px solid #CCCCCC;">面积(M2)</td>
+    <td width="10%" style="border-bottom: 1px solid #CCCCCC;">长(FT)</td>
+    <td width="12%" style="border-bottom: 1px solid #CCCCCC;">宽(FT)</td>
+    <td width="17%" style="border-bottom: 1px solid #CCCCCC;">面积(SQFT)</td>
     <td width="37%" style="border-bottom: 1px solid #CCCCCC;">说明</td>
   </tr>
   <?php if($house->level1!="" || $house->rm1_out!=""){?>
@@ -898,7 +817,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm1_len*$house->rm1_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_len*$house->rm1_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm1_dc1_out; ?><?php if($house->rm1_dc2_out!=""){echo ",";}?><?php echo $house->rm1_dc2_out; ?><?php if($house->rm1_dc3_out!=""){echo ",";}?><?php echo $house->rm1_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -908,7 +827,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm12_len*$house->rm2_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len*$house->rm2_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm2_dc1_out; ?><?php if($house->rm2_dc2_out!=""){echo ",";}?><?php echo $house->rm2_dc2_out; ?><?php if($house->rm2_dc3_out!=""){echo ",";}?><?php echo $house->rm2_dc3_out; ?></td>
   </tr>
    <?php }?>
@@ -918,7 +837,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm3_len*$house->rm3_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_len*$house->rm3_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm3_dc1_out; ?><?php if($house->rm3_dc2_out!=""){echo ",";}?><?php echo $house->rm3_dc2_out; ?><?php if($house->rm3_dc3_out!=""){echo ",";}?><?php echo $house->rm3_dc3_out; ?></td>
   </tr>
    <?php }?>
@@ -928,7 +847,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm4_len*$house->rm4_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_len*$house->rm4_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm4_dc1_out; ?><?php if($house->rm4_dc2_out!=""){echo ",";}?><?php echo $house->rm4_dc2_out; ?><?php if($house->rm4_dc3_out!=""){echo ",";}?><?php echo $house->rm4_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -938,7 +857,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm5_len*$house->rm5_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_len*$house->rm5_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm5_dc1_out; ?><?php if($house->rm5_dc2_out!=""){echo ",";}?><?php echo $house->rm5_dc2_out; ?><?php if($house->rm5_dc3_out!=""){echo ",";}?><?php echo $house->rm5_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -948,7 +867,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm6_len*$house->rm6_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_len*$house->rm6_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm6_dc1_out; ?><?php if($house->rm6_dc2_out!=""){echo ",";}?><?php echo $house->rm6_dc2_out; ?><?php if($house->rm6_dc3_out!=""){echo ",";}?><?php echo $house->rm6_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -958,7 +877,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm7_len*$house->rm7_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_len*$house->rm7_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm7_dc1_out; ?><?php if($house->rm7_dc2_out!=""){echo ",";}?><?php echo $house->rm7_dc2_out; ?><?php if($house->rm7_dc3_out!=""){echo ",";}?><?php echo $house->rm7_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -968,7 +887,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm8_len*$house->rm8_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_len*$house->rm8_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm8_dc1_out; ?><?php if($house->rm8_dc2_out!=""){echo ",";}?><?php echo $house->rm8_dc2_out; ?><?php if($house->rm8_dc3_out!=""){echo ",";}?><?php echo $house->rm8_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -978,7 +897,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm9_len*$house->rm9_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_len*$house->rm9_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm9_dc1_out; ?><?php if($house->rm9_dc2_out!=""){echo ",";}?><?php echo $house->rm9_dc2_out; ?><?php if($house->rm9_dc3_out!=""){echo ",";}?><?php echo $house->rm9_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -988,7 +907,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm10_len*$house->rm10_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_len*$house->rm10_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm10_dc1_out; ?><?php if($house->rm10_dc2_out!=""){echo ",";}?><?php echo $house->rm10_dc2_out; ?><?php if($house->rm10_dc3_out!=""){echo ",";}?><?php echo $house->rm10_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -999,7 +918,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm11_len*$house->rm11_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_len*$house->rm11_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm11_dc1_out; ?><?php if($house->rm11_dc2_out!=""){echo ",";}?><?php echo $house->rm11_dc2_out; ?><?php if($house->rm11_dc3_out!=""){echo ",";}?><?php echo $house->rm11_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -1011,7 +930,7 @@ $(function(){
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_out; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_wth; ?></td>
-    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo round($house->rm12_len*$house->rm12_wth,1); ?></td>
+    <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_len*$house->rm12_wth; ?></td>
     <td style="border-bottom: 1px solid #CCCCCC;"><?php echo $house->rm12_dc1_out; ?><?php if($house->rm12_dc2_out!=""){echo ",";}?><?php echo $house->rm12_dc2_out; ?><?php if($house->rm12_dc3_out!=""){echo ",";}?><?php echo $house->rm12_dc3_out; ?></td>
   </tr>
   <?php }?>
@@ -1540,9 +1459,9 @@ foreach($resultshazai as $househaizai){
             <dl>
               <dt>
                                     <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
                       <?php }?>
               </dt>
               <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
@@ -1574,9 +1493,9 @@ foreach($resultshazai as $househaizai){
             <dl>
               <dt>
                                     <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
                       <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
                       <?php }?>
               </dt>
               <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
@@ -1621,12 +1540,11 @@ foreach($resultsfujian as $housefujin){
         <div class="pic">
 				<div class="playerdetail">
 					<div class="detailimg">
-                      <?php
-					  $county=$housefujin["county"];
-					  $ml_num=$housefujin["ml_num"];
-					  $pic = get_firstimage($county,$ml_num);
-					  ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/></a>
-                    
+                      <?php if($housefujin["house_image"]==""){?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
+                      <?php }else{?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $housefujin["house_image"]; ?>" width="237" height="193"/></a>
+                      <?php }?>
                     
                     </div>
 					<div class="teanames"><?php echo $housefujin["ml_num"];?></div>
@@ -1763,44 +1681,28 @@ setTimeout('CompScrxxk()',Speedxxk);
        <div id="List1">
         <!-- 图片列表 begin -->
 <?php 
-$array=explode(',',$_COOKIE["fzd_house"]);
-foreach($array as $key=> $house){
-	if($house!=""){
-		?> <div class="pic">
-					<div class="playerdetail">
-			<div class="detailimg">
-		<?php
-		//根据房源编号查询房源信息
 
-		$sqlfy = "select * from h_house where ml_num = '".$house."'";
-		$resultsqlfy = $db->createCommand($sqlfy)->query();
-		foreach($resultsqlfy as $housefy){
-			$idhousefy= $housefy["id"];
-			//$house_image = $housefy["image"];
-			$county = $housefy["county"];
-			$ml_num = $housefy["ml_num"];
-			$pic = get_firstimage($county,$ml_num);
-			$addr=$housefy["addr"];
-			$community=$housefy["community"];
-			$lp_dol=$housefy["lp_dol"];
-		}
-			?>
-			 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>" >
-			 <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/>
-			 </a>
-
-			</div>
-			<div class="teanames"><?php echo $house;?></div>
-			<div class="teadetail" style="width:210px;">地址：<?php echo mb_substr($addr,0,18,'utf-8'); ?><br />城市：<?php echo mb_substr($community,0,18,'utf-8');?><br/>价格：<span><font color="#FF3300"><?php echo $lp_dol/10000; ?></font>万加元</span></div>
-		   
+$sql = "select * from h_house where lp_dol<=3000000 and id!=".$house->id." limit 0,6";
+$results = $db->createCommand($sql)->query();
+foreach($results as $house){
+?>
+        <div class="pic">
+				<div class="playerdetail">
+					<div class="detailimg">
+                      <?php if($house["house_image"]==""){?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="237" height="193"/></a>
+                      <?php }else{?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="237" height="193"/></a>
+                      <?php }?>
+                    
+                    </div>
+					<div class="teanames"><?php echo $house["ml_num"];?></div>
+					<div class="teadetail" style="width:210px;">地址：<?php echo $house["addr"]; ?><br />城市：<?php echo $house["community"];?><br/>价格：<span><font color="#FF3300"><?php echo $house["lp_dol"]/10000; ?></font>万加元</span></div>
+                   
 					
 				</div>
          </div>
-	<?php
-	}
-}
-
-?> 
+<?php }?> 
         <!-- 图片列表 end -->
        </div>
        <div id="List2"></div>
@@ -1814,8 +1716,8 @@ foreach($array as $key=> $house){
   <script language="javascript" type="text/javascript">
 <!--//--><![CDATA[//><!--
 //图片滚动列表 mengjia 070816
-var Speed = 1000; //速度(毫秒)
-var Space = 10; //每次移动(px)
+var Speed = 500; //速度(毫秒)
+var Space = 100; //每次移动(px)
 var PageWidth = 1035; //翻页宽度
 var fill = 0; //整体移位
 var MoveLock = false;
