@@ -623,7 +623,7 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 	<div class="fyss_tjlist">
             <div class="fyss_tjlistleftnormal">搜索条件:</div>
             <div class="fyss_tjqr" style="padding-left:0px;" id="selected"></div>
-            <div class="fyss_tjsc" id="clear_selected"><a href="<?php echo Yii::app()->createUrl('house/index', array('cd1' => 0, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0, 'cd11' => 0, 'cd12' => 0,'cd12_2' => 0,'cd12_3' => 0,'cd12_4' => 0,'cd12_5' => 0, 'cd13' => 0, 'cd14' => 0, 'cd15' => 0, 'cd16' => 0, 'cd17' => 0, 'cd18' => 0)); ?>#001">删除条件</a></div>
+            <div class="fyss_tjsc" id="clear_selected"><a href="<?php echo Yii::app()->createUrl('house/index&type='.$_GET["type"], array('cd1' => 0, 'cd2' => 0, 'cd3' => 0, 'cd4' => 0, 'cd5' => 0, 'cd6' => 0, 'cd7' => 0, 'cd8' => 0, 'cd9' => 0, 'cd10' => 0, 'cd11' => 0, 'cd12' => 0,'cd12_2' => 0,'cd12_3' => 0,'cd12_4' => 0,'cd12_5' => 0, 'cd13' => 0, 'cd14' => 0, 'cd15' => 0, 'cd16' => 0, 'cd17' => 0, 'cd18' => 0)); ?>#001">删除条件</a></div>
             <div class="cl"></div>
         </div>
     </div>
