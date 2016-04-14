@@ -68,6 +68,10 @@ class HouseController extends XFrontBase
         $prop_featx_out    = Yii::app()->request->getQuery('cd10', 0);
 		$prop_featx_out2   = Yii::app()->request->getQuery('cd11', 0);
 		$prop_featx_out3   = Yii::app()->request->getQuery('cd12', 0);
+		$prop_featx_out_2   = Yii::app()->request->getQuery('cd12_2', 0);
+		$prop_featx_out_3   = Yii::app()->request->getQuery('cd12_3', 0);
+		$prop_featx_out_4   = Yii::app()->request->getQuery('cd12_4', 0);
+		$prop_featx_out_5   = Yii::app()->request->getQuery('cd12_5', 0);
 		$type 			   = Yii::app()->request->getQuery('type', 'sale');
 		$bath_tot   = Yii::app()->request->getQuery('cd13', 0);
 		$style   = Yii::app()->request->getQuery('cd14', 0);
@@ -180,27 +184,25 @@ if(!empty($prop_featx_out2)){
 	}
 	
 }		
-//
+//$prop_featx_out3==>学校 1  prop_feat1_out like "%School%" or prop_feat2_out like "%School%" or prop_feat3_out like "%School%" or prop_feat4_out like "%School%" or prop_feat5_out like "%School%" or prop_feat6_out like "%School%" 
+//$prop_featx_out_2==>医院 1 prop_feat1_out like "%Hospital%" or prop_feat2_out like "%Hospital%" or prop_feat3_out like "%Hospital%" or prop_feat4_out like "%Hospital%" or prop_feat5_out like "%Hospital%" or prop_feat6_out like "%Hospital%"
+//$prop_featx_out_3==>公共交通 1 prop_feat1_out like "%Public Transit%" or prop_feat2_out like "%Public Transit%" or prop_feat3_out like "%Public Transit%" or prop_feat4_out like "%Public Transit%" or prop_feat5_out like "%Public Transit%" or prop_feat6_out like "%Public Transit%"
+//$prop_featx_out_4==>高尔夫球场 1 prop_feat1_out like "%Golf%" or prop_feat2_out like "%Golf%" or prop_feat3_out like "%Golf%" or prop_feat4_out like "%Golf%" or prop_feat5_out like "%Golf%" or prop_feat6_out like "%Golf%" 
+//$prop_featx_out_5==>图书馆 1 prop_feat1_out like "%Library%" or prop_feat2_out like "%Library%" or prop_feat3_out like "%Library%" or prop_feat4_out like "%Library%" or prop_feat5_out like "%Library%" or prop_feat6_out like "%Library%"
 if(!empty($prop_featx_out3)){
-		
-	if($prop_featx_out3==1){
-    $criteria->addCondition('prop_feat1_out like "%School%" or prop_feat2_out like "%School%" or prop_feat3_out like "%School%" or prop_feat4_out like "%School%" or prop_feat5_out like "%School%" or prop_feat6_out like "%School%" ');
-	}
-	elseif($prop_featx_out3==2){
-    $criteria->addCondition('prop_feat1_out like "%Hospital%" or prop_feat2_out like "%Hospital%" or prop_feat3_out like "%Hospital%" or prop_feat4_out like "%Hospital%" or prop_feat5_out like "%Hospital%" or prop_feat6_out like "%Hospital%" ');
-	}
-	elseif($prop_featx_out3==3){
-    $criteria->addCondition('prop_feat1_out like "%Public Transit%" or prop_feat2_out like "%Public Transit%" or prop_feat3_out like "%Public Transit%" or prop_feat4_out like "%Public Transit%" or prop_feat5_out like "%Public Transit%" or prop_feat6_out like "%Public Transit%" ');
-	}
-	elseif($prop_featx_out3==4){
-    $criteria->addCondition('prop_feat1_out like "%Park%" or prop_feat2_out like "%Park%" or prop_feat3_out like "%Park%" or prop_feat4_out like "%Park%" or prop_feat5_out like "%Park%" or prop_feat6_out like "%Park%" ');
-	}
-	elseif($prop_featx_out3==5){
-    $criteria->addCondition('prop_feat1_out like "%Golf%" or prop_feat2_out like "%Golf%" or prop_feat3_out like "%Golf%" or prop_feat4_out like "%Golf%" or prop_feat5_out like "%Golf%" or prop_feat6_out like "%Golf%" ');
-	}
-	elseif($prop_featx_out3==6){
-    $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like "%Library%" or prop_feat3_out like "%Library%" or prop_feat4_out like "%Library%" or prop_feat5_out like "%Library%" or prop_feat6_out like "%Library%" ');
-	}		
+$criteria->addCondition('prop_feat1_out like "%School%" or prop_feat2_out like "%School%" or prop_feat3_out like "%School%" or prop_feat4_out like "%School%" or prop_feat5_out like "%School%" or prop_feat6_out like "%School%" ');
+}
+if(!empty($prop_featx_out_2)){
+$criteria->addCondition('prop_feat1_out like "%Hospital%" or prop_feat2_out like "%Hospital%" or prop_feat3_out like "%Hospital%" or prop_feat4_out like "%Hospital%" or prop_feat5_out like "%Hospital%" or prop_feat6_out like "%Hospital%"');
+}
+if(!empty($prop_featx_out_3)){
+$criteria->addCondition('prop_feat1_out like "%Public Transit%" or prop_feat2_out like "%Public Transit%" or prop_feat3_out like "%Public Transit%" or prop_feat4_out like "%Public Transit%" or prop_feat5_out like "%Public Transit%" or prop_feat6_out like "%Public Transit%"');
+}
+if(!empty($prop_featx_out_4)){
+$criteria->addCondition('prop_feat1_out like "%Golf%" or prop_feat2_out like "%Golf%" or prop_feat3_out like "%Golf%" or prop_feat4_out like "%Golf%" or prop_feat5_out like "%Golf%" or prop_feat6_out like "%Golf%"');
+}
+if(!empty($prop_featx_out_5)){
+$criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like "%Library%" or prop_feat3_out like "%Library%" or prop_feat4_out like "%Library%" or prop_feat5_out like "%Library%" or prop_feat6_out like "%Library%"');
 }
 
 //物业类型
@@ -408,6 +410,10 @@ if(!empty($prop_featx_out3)){
             'cd10'              => $prop_featx_out,
             'cd11'              => $prop_featx_out2,
             'cd12'              => $prop_featx_out3,
+			'cd12_2'              => $prop_featx_out_2,
+			'cd12_3'              => $prop_featx_out_3,
+			'cd12_4'              => $prop_featx_out_4,
+			'cd12_5'              => $prop_featx_out_5,
             'cd13'              => $bath_tot,
             'cd14'              => $style,
             'cd15'              => $comp_pts,
