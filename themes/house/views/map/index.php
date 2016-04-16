@@ -777,7 +777,7 @@
 							BuildYear = "";
 						}
 						
-						var hprice = ( type == 'rent' )? this.Price*10000 +'  加元/月' : Math.round(this.Price) +'  万加元';
+						var hprice = ( type == 'rent' )? Math.round(this.Price*10000) +'  加元/月' : Math.round(this.Price) +'  万加元';
 						//console.log(hprice);
 						var li = "<div class='fclist' onmouseover='openInfo(" 	
 						+ index + ", this)' " 
