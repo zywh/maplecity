@@ -438,17 +438,17 @@ class SiteController extends XFrontBase
 		}
         $user = User::model()->find('email = :email', array(':email' => $email));
         if(!empty($user)){
-            Yii::app()->mailer->Host = 'smtp.exmail.qq.com';                                           // 邮箱服务地址
+            Yii::app()->mailer->Host = 'smtp.163.com';                                           // 邮箱服务地址
             Yii::app()->mailer->port = 465;                                                            // 端口
             Yii::app()->mailer->IsSMTP();                                                              // 使用 SMTP
             Yii::app()->mailer->SMTPAuth = true;                                                       // SMTP 验证
             Yii::app()->mailer->SMTPDebug = false;                                                     // 显示 Debug 信息
-            Yii::app()->mailer->Username = '1969378190@qq.com';                                         // 邮箱帐号
-            Yii::app()->mailer->Password = 'breadtalk2015';                                             // 邮箱密码
-            Yii::app()->mailer->From = '1969378190@qq.com';                                             // 发件人邮箱
+            Yii::app()->mailer->Username = '15366617321@163.com';                                         // 邮箱帐号
+            Yii::app()->mailer->Password = 'fengzhidu123asds';                                // 邮箱密码  登陆密码：fengzhidu123asd
+            Yii::app()->mailer->From = '15366617321@163.com';                                             // 发件人邮箱
             Yii::app()->mailer->FromName = '枫之都房产置业平台';                                       // 发件人姓名
-            Yii::app()->mailer->AddReplyTo('1969378190@qq.com');                                        // 回复邮箱
-            Yii::app()->mailer->AddAddress("2831463902@qq.com");                                                    // 收件人邮箱
+            Yii::app()->mailer->AddReplyTo('15366617321@163.com');                                        // 回复邮箱
+            Yii::app()->mailer->AddAddress($email);                                                    // 收件人邮箱
             Yii::app()->mailer->CharSet = 'UTF-8';                                                     // 字符编码
             Yii::app()->mailer->ContentType = 'text/html';                                             // 内容类型
             Yii::app()->mailer->getView('email_tpl', array('name'=>$user->username, 'email'=>$email)); // 使用邮件模板作为内容
