@@ -582,101 +582,114 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 		$chinese = preg_match("/\p{Han}+/u", $term);
 		$limit = 10;
 		//
-		
-		//Generate Count by municipality
-		if ( $city_id == '0' ) {
-			
-			if ($chinese) { //if province = 0 and chinese search
-			
-				$sql = "
-				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
-				FROM h_mname m, h_city c 
-				WHERE  m.province = c.englishname 
-				AND  m.municipality_cname like '".$term."%' 
-				AND  m.count > 10 order by count desc limit " .$limit;
-							
-			
-			} else { //if province = 0  and english search
-			
-				$sql = "
-				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
-				FROM h_mname m, h_city c 
-				WHERE  m.province = c.englishname 
-				AND  municipality like '".$term."%' 
-				AND  m.count > 10 order by count desc limit ". $limit;
-				
-			}
-			
-		} else{  //if province is NOT 0
-			
-			if ($chinese) { //if province = 0 and chinese search			
-			
-				$sql = "
-				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
-				FROM h_mname m, h_city c 
-				WHERE m.province = c.englishname 
-				AND  c.id=".$city_id." 
-				AND m.municipality_cname like '".$term."%'  
-				AND  m.count > 10 order by count desc limit ". $limit;
-				
-			} else {
-				
-				$sql = "
-				SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
-				FROM h_mname m, h_city c 
-				WHERE m.province = c.englishname 
-				AND  c.id=".$city_id." 
-				AND m.municipality like '".$term."%' 
-				AND  m.count > 10 order by count desc ". $limit;
-				
-			}
-			
-			
-						
-		}
-			
-		
-		$resultsql = $db->createCommand($sql)->query();
-		
-		$citycount = count($resultsql);
-		
-		foreach($resultsql as $row){
-
-			$result['id'] = $row["citye"]; 
-			if ( $chinese ) {
-			  	
-				$result['value'] = $row["cityc"].", ".$row["provincec"]; 
-				$results[] = $result;
-				
-			} else {
-				$result['value'] = $row["citye"].", ". $row["provincee"]; 
-				$results[] = $result;
-			}
-	
-	
-		}
-		
-		
-		if ($citycount < 10){
-			//start address selection
-			$limit = $limit - $citycount;
+		if ( is_numeric(substr($term)) || preg_match("/^[a-zA-Z]\d+/",$term) ) {
+			//MLS search
 			$sql = "
-			SELECT addr,county FROM h_house  
-			WHERE  addr like '%".$term."%' 
+			SELECT id,ml_num FROM h_house 
+			WHERE  ml_num like '".$term."%' 
 			limit " .$limit;
 			$resultsql = $db->createCommand($sql)->query();
+			foreach($resultsql as $row){
+
+				$result['id'] = $row["id"]; 
+				$result['value'] = $row["ml_num"]; 
+				$results[] = $result;
+			}
+			
+		} else{
+		//Generate Count by municipality
+			if ( $city_id == '0' ) {
+				
+				if ($chinese) { //if province = 0 and chinese search
+				
+					$sql = "
+					SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+					FROM h_mname m, h_city c 
+					WHERE  m.province = c.englishname 
+					AND  m.municipality_cname like '".$term."%' 
+					AND  m.count > 10 order by count desc limit " .$limit;
+								
+				
+				} else { //if province = 0  and english search
+				
+					$sql = "
+					SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+					FROM h_mname m, h_city c 
+					WHERE  m.province = c.englishname 
+					AND  municipality like '".$term."%' 
+					AND  m.count > 10 order by count desc limit ". $limit;
+					
+				}
+				
+			} else{  //if province is NOT 0
+				
+				if ($chinese) { //if province = 0 and chinese search			
+				
+					$sql = "
+					SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+					FROM h_mname m, h_city c 
+					WHERE m.province = c.englishname 
+					AND  c.id=".$city_id." 
+					AND m.municipality_cname like '".$term."%'  
+					AND  m.count > 10 order by count desc limit ". $limit;
+					
+				} else {
+					
+					$sql = "
+					SELECT m.municipality citye,m.municipality_cname cityc,m.province provincee,c.name provincec 
+					FROM h_mname m, h_city c 
+					WHERE m.province = c.englishname 
+					AND  c.id=".$city_id." 
+					AND m.municipality like '".$term."%' 
+					AND  m.count > 10 order by count desc ". $limit;
+					
+				}
+				
+				
+							
+			}
+				
+			
+			$resultsql = $db->createCommand($sql)->query();
+			$citycount = count($resultsql);
 			
 			foreach($resultsql as $row){
 
-				$result['id'] = $row["addr"]; 
-				$result['value'] = $row["addr"].", ".$row["county"]; 
-				$results[] = $result;
+				$result['id'] = $row["citye"]; 
+				if ( $chinese ) {
+					
+					$result['value'] = $row["cityc"].", ".$row["provincec"]; 
+					$results[] = $result;
+					
+				} else {
+					$result['value'] = $row["citye"].", ". $row["provincee"]; 
+					$results[] = $result;
+				}
+		
+		
+			}
+			
+			
+			if ($citycount < $limit){
+				//start address selection
+				$limit = $limit - $citycount;
+				$sql = "
+				SELECT addr,county FROM h_house  
+				WHERE  addr like '%".$term."%' 
+				limit " .$limit;
+				$resultsql = $db->createCommand($sql)->query();
+				
+				foreach($resultsql as $row){
+
+					$result['id'] = $row["addr"]; 
+					$result['value'] = $row["addr"].", ".$row["county"]; 
+					$results[] = $result;
+				}
 			}
 		}
-
-		 echo json_encode($results);
-    
-	//Function END  
+		
+		echo json_encode($results);
+    	//Function END  
     }
 	
 }
