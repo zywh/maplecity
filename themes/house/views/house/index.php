@@ -260,7 +260,7 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
  
 <div class="fyss_tjlist" id="cd2">
 	
-	<div class="fyss_tjlistleft" onclick="statsurl('citychart');"><a class="tooltips" href="#">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市:<span>点击查看城市分布图</span></a>
+	<div class="fyss_tjlistleft" onclick="statsurl('citychart');"><a class="tooltips" href="#">搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索:<span>点击查看城市分布图</span></a>
 	</div>
 
 	<div class="fyss_tjlistcenter">
@@ -268,12 +268,12 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 		<div class="fyss_tjjg">
 			<div class="fyss_tjjgcity">
 			<form>
-			<input name="cityname" type="text" required id="cityname" value="输入城市 中/英文" 
+			<input name="cityname" type="text" required id="cityname" value="输入城市/地址/MLS#" 
 			onblur="
 			
 			if (this.value == '') {
 				    this.style.backgroundColor = '#fff';
-					this.value = '输入城市 中/英文';
+					this.value = '输入城市/地址/MLS#';
 					this.style.color = '#aaa';
 					var cd2 = '<?php echo $cd2;?>';
 					if ( cd2 != '0' ){
@@ -331,15 +331,18 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 			var matches = city.match(/\d+/g);
 			if ( matches != null) {
 				console.log("MLS# is found:" + city);
-			}
-			var url = '<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => $cd1, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12,'cd12_2' => $cd12_2,'cd12_3' => $cd12_3,'cd12_4' => $cd12_4,'cd12_5' => $cd12_5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)) ?> ' +'&cd2=' + city + '#001';
-		
-			if( city != '') {
+				var url = 'index.php?r=house/view&id=' + city;
 				location.href = url;
+				
+			} else {
+				var url = '<?php echo Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => $cd1, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12,'cd12_2' => $cd12_2,'cd12_3' => $cd12_3,'cd12_4' => $cd12_4,'cd12_5' => $cd12_5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)) ?> ' +'&cd2=' + city + '#001';
+			
+				if( city != '') {
+					location.href = url;
+			
+				}		
 		
-			}		
-		
-		  
+			}
 		}
 	});
   });

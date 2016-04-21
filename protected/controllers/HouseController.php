@@ -587,6 +587,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 			$sql = "
 			SELECT id,ml_num FROM h_house 
 			WHERE  ml_num like '".$term."%' 
+			ORDER by city_id
 			limit " .$limit;
 			$resultsql = $db->createCommand($sql)->query();
 			foreach($resultsql as $row){
@@ -675,7 +676,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				$limit = $limit - $citycount;
 				$sql = "
 				SELECT id,addr,county FROM h_house  
-				WHERE  addr like '%".$term."%' 
+				WHERE  addr like '%".$term."%' order by city_id
 				limit " .$limit;
 				$resultsql = $db->createCommand($sql)->query();
 				

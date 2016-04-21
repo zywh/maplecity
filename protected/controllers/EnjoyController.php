@@ -10,7 +10,7 @@ class EnjoyController extends XFrontBase
 
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/enjoy.css');
         $city_id = Yii::app()->request->getQuery('city', 0);
-        $time_sort = Yii::app()->request->getQuery('time_sort', 'DESC');
+        $time_sort = Yii::app()->request->getQuery('pix_updt', 'DESC');
         $price_sort = Yii::app()->request->getQuery('lp_dol');
 
         $criteria = new CDbCriteria();
@@ -19,7 +19,7 @@ class EnjoyController extends XFrontBase
             $criteria->addCondition('city_id='.$city_id);
         }
         if(!empty($time_sort)){
-            $criteria->order = 'accessDate '.$time_sort;
+            $criteria->order = 'pix_updt '.$time_sort;
         }
         if(!empty($price_sort)){
             $criteria->order = 'lp_dol '.$price_sort;
@@ -32,7 +32,7 @@ class EnjoyController extends XFrontBase
         $house_list = House::model()->findAll($criteria);
 
         $subject_list = Subject::model()->findAll(array(
-            'order'     => 'id DESC',
+            'order'     => 'pix_updt DESC',
         ));
 
         $cur_city = City::model()->findByPk($city_id);
