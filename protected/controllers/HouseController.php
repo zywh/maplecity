@@ -580,6 +580,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 		$term = trim($_GET['term']);
 		$city_id = trim($_GET['cd1']);
 		$chinese = preg_match("/\p{Han}+/u", $term);
+		$limit = 10;
 		//
 		
 		//Generate Count by municipality
@@ -592,8 +593,8 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				FROM h_mname m, h_city c 
 				WHERE  m.province = c.englishname 
 				AND  m.municipality_cname like '".$term."%' 
-				AND  m.count > 10 order by count desc limit 10;
-				";			
+				AND  m.count > 10 order by count desc limit " .$limit;
+							
 			
 			} else { //if province = 0  and english search
 			
@@ -602,8 +603,8 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				FROM h_mname m, h_city c 
 				WHERE  m.province = c.englishname 
 				AND  municipality like '".$term."%' 
-				AND  m.count > 10 order by count desc limit 10;
-				";
+				AND  m.count > 10 order by count desc limit ". $limit;
+				
 			}
 			
 		} else{  //if province is NOT 0
@@ -616,8 +617,8 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				WHERE m.province = c.englishname 
 				AND  c.id=".$city_id." 
 				AND m.municipality_cname like '".$term."%'  
-				AND  m.count > 10 order by count desc limit 10;
-				";		
+				AND  m.count > 10 order by count desc limit ". $limit;
+				
 			} else {
 				
 				$sql = "
@@ -626,15 +627,18 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				WHERE m.province = c.englishname 
 				AND  c.id=".$city_id." 
 				AND m.municipality like '".$term."%' 
-				AND  m.count > 10 order by count desc limit 10;
-				";		
+				AND  m.count > 10 order by count desc ". $limit;
+				
 			}
 			
-		
-		
+			
+						
 		}
 			
+		
 		$resultsql = $db->createCommand($sql)->query();
+		
+		$citycount = count($resultsql);
 		
 		foreach($resultsql as $row){
 
@@ -652,6 +656,23 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 	
 		}
 		
+		
+		if ($citycount < 10){
+			//start address selection
+			$limit = $limit - $citycount;
+			$sql = "
+			SELECT addr,county FROM h_house  
+			WHERE  addr like '%".$term."%' 
+			limit " .$limit;
+			$resultsql = $db->createCommand($sql)->query();
+			
+			foreach($resultsql as $row){
+
+				$result['id'] = $row["addr"]; 
+				$result['value'] = $row["addr"].", ".$row["county"]; 
+				$results[] = $result;
+			}
+		}
 
 		 echo json_encode($results);
     
