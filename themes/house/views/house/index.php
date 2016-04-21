@@ -268,12 +268,12 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 		<div class="fyss_tjjg">
 			<div class="fyss_tjjgcity">
 			<form>
-			<input name="cityname" type="text" required id="cityname" value="输入城市/地址/MLS#" 
+			<input name="cityname" type="text" required id="cityname" value="输入城市( 中文/英文 ) /地址/MLS#" 
 			onblur="
 			
 			if (this.value == '') {
 				    this.style.backgroundColor = '#fff';
-					this.value = '输入城市/地址/MLS#';
+					this.value = '输入城市( 中文/英文 ) /地址 /MLS#';
 					this.style.color = '#aaa';
 					var cd2 = '<?php echo $cd2;?>';
 					if ( cd2 != '0' ){

@@ -675,7 +675,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				//start address selection
 				$limit = $limit - $citycount;
 				$sql = "
-				SELECT id,addr,county FROM h_house  
+				SELECT id,addr,municipality,county FROM h_house  
 				WHERE  addr like '%".$term."%' order by city_id
 				limit " .$limit;
 				$resultsql = $db->createCommand($sql)->query();
@@ -683,7 +683,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				foreach($resultsql as $row){
 
 					$result['id'] = $row["id"]; 
-					$result['value'] = $row["addr"].", ".$row["county"]; 
+					$result['value'] = $row["addr"].", ".$row["municipality"].", ".$row["county"]; 
 					$results[] = $result;
 				}
 			}

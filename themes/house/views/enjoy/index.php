@@ -79,91 +79,36 @@ function showImg(i){
 
 
 <div class="js_content">
-            <div class="enjoydownlabel_right" style="float:left">
-                <span>排序方式</span>
-                <?php if(!empty($time_sort)){
-                    if($time_sort == 'DESC'){
-                        ?>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort'=>'ASC')); ?>" class="pxfs1">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                    <?php }else{ ?>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>" class="pxfs2">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                    <?php } ?>
-                <?php }elseif(!empty($price_sort)){
-                    if($price_sort == 'DESC'){
-                        ?>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'ASC')); ?>" class="pxfs1">总价</a>
-                    <?php }else{ ?>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>" class="pxfs2">总价</a>
-                    <?php } ?>
-                <?php }else{ ?>
-                    <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                <?php } ?>
-            </div>
-            <div style="clear:both; height:15px;"></div>
+
 <?php 
-ini_set("log_errors", 1);
-	ini_set("error_log", "/tmp/php-error.log");
-
-	function get_firstimage($county,$ml_num){
-		
-		$county = preg_replace('/\s+/', '', $county);
-		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
-		#$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
-		$num_files = 0;
-		if(is_dir($dir)){
-			$picfiles = scandir($dir);
-			$num_files = count(scandir($dir))-2;
-		}
-		if ( $num_files >= 1)    {
-			return $dir.$picfiles[2];
-
-		}else { return 'static/images/zanwu.jpg';}
-	}
-	
-	function get_tn_image($county,$ml_num){
-		
-		$county = preg_replace('/\s+/', '', $county);
-		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/creatn/".$county."/Photo".$ml_num."/";
-		$num_files = 0;
-		if(is_dir($dir)){
-			$picfiles = scandir($dir);
-			$num_files = count(scandir($dir))-2;
-		}
-		if ( $num_files >= 1)    {
-			
-			$s = implode(",",array_slice($picfiles,2,3)); //return 3 comma seperated list with offset 2 which is subdir . and ..
-			$s = str_replace("Photo",$dir."Photo",$s); // Insert DIR in front
-			return $s;
-		} else { return 'static/images/zanwu.jpg';}
-	}	
-	
-	function searchurl($arg, $reset = 1) {
-	
-		$url = Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12,'cd12_2' => $cd12_2,'cd12_3' => $cd12_3,'cd12_4' => $cd12_4,'cd12_5' => $cd12_5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); 
-		return $arg.$reset ;
+$db = Yii::app()->db;
+$sheng=$_GET["sheng"];
+if($sheng=="Ontario" or $sheng==""){
+$sql = "select * from h_house where lp_dol>3000000 limit 0,6";
+}else{
+$sql = "select * from h_house where lp_dol>3000000 and area='".$sheng."' limit 0,6";
 }
-foreach($house_list as $house){
+$results = $db->createCommand($sql)->query();
+if(count($results)==0){
+echo "<span style='font-size:16px;'>抱歉！".$sheng."省暂无房源</span>";
+}
+else{
 
-		$county = $house->county;
-		$ml_num = $house->ml_num;
-		$pic1 = get_firstimage($county,$ml_num);
+foreach($results as $house){
 ?>
 
 
                       <div class="con_list">
-                       <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="467" height="280"/></a>
+                      <?php if($house["house_image"]==""){?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src='/static/images/zanwu.jpg' width="467" height="280"/></a>
+                      <?php }else{?>
+                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house["id"])); ?>"  target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house["house_image"]; ?>" width="467" height="280"/></a>
+                      <?php }?>
                                  <div class="con_des">
                                            <div class="con_fl">
                                                   <p><span>地址：</span><?php echo $house["addr"]; ?><br />
                                                      <span>价格：</span><span class="red"><?php echo $house["lp_dol"] / 10000; ?>万加币</span><br />
-                                                     <span>挂牌时间：</span><?php echo $house["pix_updt"];?><br />
+                                                     <span>社区：</span><?php echo $house["community"];?><br />
                                                      <span> 户型：</span> <?php echo $house["br"]; ?>卧&nbsp;&nbsp;<?php echo $house["bath_tot"]; ?>卫&nbsp;&nbsp;<?php echo $house["num_kit"]; ?>厨
                                                     
                                                      
@@ -175,24 +120,9 @@ foreach($house_list as $house){
                                  </div>
                       </div>
 
-<?php }?>   
+<?php }}?>   
          
  </div>
- 		   <div class="cl"></div>
-		   <div class="page">
-                    <?php
-                    $this->widget('CLinkPager',array(
-                        'header'         =>'',
-                        'firstPageLabel' => '',
-                        'lastPageLabel'  => '',
-                        'prevPageLabel'  => '<<',
-                        'nextPageLabel'  => '>>',
-                        'pages'          => $pages,
-                        'maxButtonCount' => 6,
-                        'cssFile'        => 'themes/house/css/pager.css'
-                    ));
-                    ?>
-        	</div>
 <!-- 豪宅鉴赏结束 -->
 <script type="text/javascript">
     //豪宅列表

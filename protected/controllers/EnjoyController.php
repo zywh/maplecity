@@ -32,7 +32,7 @@ class EnjoyController extends XFrontBase
         $house_list = House::model()->findAll($criteria);
 
         $subject_list = Subject::model()->findAll(array(
-            'order'     => 'pix_updt DESC',
+            'order'     => 'id DESC',
         ));
 
         $cur_city = City::model()->findByPk($city_id);
