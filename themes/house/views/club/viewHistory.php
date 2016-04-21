@@ -1,3 +1,11 @@
+<script>
+function statsurl (chart){
+	
+	var url = '<?php echo Yii::app()->createUrl('stats/current'); ?>' + '#' + chart;
+	console.log(url);
+	window.open(url);
+}
+</script>
 <!-- 地址开始 -->
      <div class="cl"></div>
 	 <div class="nytb_dz">
@@ -25,6 +33,54 @@
 					   </div>
 				 </div>
 		   </div>
+           <?php
+    $db = Yii::app()->db;
+    ini_set("log_errors", 1);
+	ini_set("error_log", "/tmp/php-error.log");
+
+	function get_firstimage($county,$ml_num){
+		
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
+		#$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		$num_files = 0;
+		if(is_dir($dir)){
+			$picfiles = scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+		if ( $num_files >= 1)    {
+			return $dir.$picfiles[2];
+
+		}else { return 'static/images/zanwu.jpg';}
+	}
+	
+	function get_tn_image($county,$ml_num){
+		
+		$county = preg_replace('/\s+/', '', $county);
+		$county = str_replace("&","",$county);
+		$dir="mlspic/crea/creatn/".$county."/Photo".$ml_num."/";
+		$num_files = 0;
+		if(is_dir($dir)){
+			$picfiles = scandir($dir);
+			$num_files = count(scandir($dir))-2;
+		}
+		if ( $num_files >= 1)    {
+			
+			$s = implode(",",array_slice($picfiles,2,3)); //return 3 comma seperated list with offset 2 which is subdir . and ..
+			$s = str_replace("Photo",$dir."Photo",$s); // Insert DIR in front
+			return $s;
+		} else { return 'static/images/zanwu.jpg';}
+	}	
+	
+	function searchurl($arg, $reset = 1) {
+	
+		$url = Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12,'cd12_2' => $cd12_2,'cd12_3' => $cd12_3,'cd12_4' => $cd12_4,'cd12_5' => $cd12_5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); 
+		return $arg.$reset ;
+}
+
+
+	?>
 		   <div class="hyzx_right">
 		         <div class="hyzx_right_one">有喜欢的房源赶快收藏起来！以列表形式清晰显示，您可以轻松对比、快捷查询。 </div>
 			     <div class="hyzx_lm_label">我浏览的房源</div>
@@ -36,43 +92,65 @@
 							<div class="hyzx_fy_left_four"><a href="javascript:;" id="del_all">删除</a></div>
 							<div class="cl"></div>
 					  </div>
-					  <div class="hyzx_fy_right">共<?php echo $count; ?>条记录</div>
+					  <div class="hyzx_fy_right"></div>
 					  <div class="cl"></div>
 				 </div>
 				 <div class="hyzx_right_cont">
-				 	<?php foreach ($house_list as $house): ?>
+				 	<?php 
+					$array=explode(',',$_COOKIE["fzd_house"]);
+					foreach ($array as $house): ?>
 	            <div class="syss_fclist">
-	                <div class="syss_fclist_left"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house->house_image; ?>" width="261" height="307" /></div>
+                <?php 		
+		$sqlfy = "select * from h_house where ml_num = '".$house."'";
+		$resultsqlfy = $db->createCommand($sqlfy)->query();
+		foreach($resultsqlfy as $housefy){
+			$idhousefy= $housefy["id"];
+			//$house_image = $housefy["image"];
+			$county = $housefy["county"];
+			$is_sell = $housefy["is_sell"];
+			$ml_num = $housefy["ml_num"];
+			$pic = get_firstimage($county,$ml_num);
+			$addr=$housefy["addr"];
+			$community=$housefy["community"];
+			$pix_updt=$housefy["pix_updt"];
+			$lp_dol=$housefy["lp_dol"];
+			$br=$housefy["br"];
+			$bath_tot=$housefy["bath_tot"];
+			$sqft=$housefy["sqft"];
+		}
+		?>
+	                <div class="syss_fclist_left"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="261" height="307" /></a></div>
 	                <div class="syss_fclist_right">
-                    <div class="syss_zt"><?php if ($house->is_sell == 1) {
+                    <div class="syss_zt"><?php if ($is_sell == 1) {
         echo '在售';
     } else {
-        echo '停售';
+        echo '出租';
     } ?></div>
-                    <div class="syss_fcone">MSL：<?php echo $house->mls_code; ?></div>
-                    <div class="syss_fctwo"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank"><?php echo $house->name; ?></a></div>
+                    <div class="syss_fcone">MSL：<?php echo $$ml_num; ?></div>
+                    <div class="syss_fctwo"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>" target="_blank"><?php echo $house; ?></a></div>
                     <div class="syss_fcthree">
                         <?php
-                        $image_list = unserialize($house->image_list);
-                        $image_num = count($image_list) > 3 ? 3 : count($image_list);
-                        for ($i = 0; $i < $image_num; $i++) {
+		$imglist = explode(',',get_tn_image($county,$ml_num));
+		foreach ($imglist as $value) {
                             ?>
-                            <div class="syss_fcthree_pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $image_list[$i]['file']; ?>" width="92" height="73" /></div>
+                            <div class="syss_fcthree_pic"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php 
+			echo $value; 
+			?>" width="92" height="73" /></div>
     <?php } ?>
                         <div class="cl"></div>
                     </div>
                     <div class="syss_fcfour">
-                        <div class="syss_fcfour_one">房屋面积：<?php echo $house->house_area; ?>平方英尺</div>
-                        <div class="syss_fcfour_one">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：<?php echo $house->propertyType->name; ?>&nbsp;/&nbsp;<?php echo $house->investType->name; ?></div>
-                        <div class="syss_fcfour_one">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<?php echo $house->district->name; ?></div>
-                        <div class="syss_fcfour_one">总&nbsp;金&nbsp;额：<span><?php echo $house->total_price; ?>万加币</span></div>
+                        <div class="syss_fcfour_one">房屋面积：<?php echo $hsqft; ?>平方英尺</div>
+                        <div class="syss_fcfour_one">物业类型：<?php echo $addr; ?></div>
+                        <div class="syss_fcfour_one">挂牌时间：<?php echo $pix_updt; ?></div>
+                        <div class="syss_fcfour_one">挂牌价格：<span><?php echo $lp_dol/10000; ?>万加元</span></div>
                     </div>
                     <div class="syss_fcfive">
                         <div class="syss_fcfiveone">
-                            <span  class="syss_fc_fj"><?php echo $house->bedroom_num; ?></span>
-                            <span  class="syss_fc_cs"><?php echo $house->toilet_num; ?></span>
+                            <span  class="syss_fc_fj"><?php echo $br; ?></span>
+                            <span  class="syss_fc_cs"><?php echo $bath_tot; ?></span>
                         </div>
-                        <div class="syss_fcfivethree"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>#fydt" target="_blank">查看地图</a></div>
+                        <div class="syss_fcfivethree"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>#fydt" target="_blank">查看地图</a></div>
                     </div>
                 </div>
                 <div class="cl"></div>
