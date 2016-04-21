@@ -582,7 +582,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 		$chinese = preg_match("/\p{Han}+/u", $term);
 		$limit = 10;
 		//
-		if ( is_numeric(substr($term)) || preg_match("/^[a-zA-Z]\d+/",$term) ) {
+		if ( is_numeric($term) || preg_match("/^[a-zA-Z]\d+/",$term) ) {
 			//MLS search
 			$sql = "
 			SELECT id,ml_num FROM h_house 
@@ -674,14 +674,14 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 				//start address selection
 				$limit = $limit - $citycount;
 				$sql = "
-				SELECT addr,county FROM h_house  
+				SELECT id,addr,county FROM h_house  
 				WHERE  addr like '%".$term."%' 
 				limit " .$limit;
 				$resultsql = $db->createCommand($sql)->query();
 				
 				foreach($resultsql as $row){
 
-					$result['id'] = $row["addr"]; 
+					$result['id'] = $row["id"]; 
 					$result['value'] = $row["addr"].", ".$row["county"]; 
 					$results[] = $result;
 				}

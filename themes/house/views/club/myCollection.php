@@ -1,3 +1,12 @@
+<script>
+function statsurl (chart){
+	
+	var url = '<?php echo Yii::app()->createUrl('stats/current'); ?>' + '#' + chart;
+	console.log(url);
+	window.open(url);
+}
+</script>
+
 <!-- 地址开始 -->
      <div class="cl"></div>
 	 <div class="nytb_dz">
@@ -70,7 +79,8 @@
 		$url = Yii::app()->createUrl('house/index', array('type' => $type,'cd1' => 0, 'cd2' => 0, 'cd3' => $cd3, 'cd4' => $cd4, 'cd5' => $cd5, 'cd6' => $cd6, 'cd7' => $cd7, 'cd8' => $cd8, 'cd9' => $cd9, 'cd10' => $cd10, 'cd11' => $cd11, 'cd12' => $cd12,'cd12_2' => $cd12_2,'cd12_3' => $cd12_3,'cd12_4' => $cd12_4,'cd12_5' => $cd12_5, 'cd13' => $cd13,'cd14' => $cd14, 'cd15' => $cd15, 'cd16' => $cd16, 'cd17' => $cd17, 'cd18' => $cd18)); 
 		return $arg.$reset ;
 }
-$pic1 = get_firstimage($county,$ml_num);
+
+
 	?>
            
 		   <div class="hyzx_right">
@@ -88,9 +98,15 @@ $pic1 = get_firstimage($county,$ml_num);
 					  <div class="cl"></div>
 				 </div>
 				 <div class="hyzx_right_cont">
-				 	<?php foreach ($house_list as $house): ?>
+				 	<?php 
+					foreach ($house_list as $house): ?>
 	            <div class="syss_fclist">
-	                <div class="syss_fclist_left"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd12_2=<?php echo $_GET["cd12_2"];?>&cd12_3=<?php echo $_GET["cd12_3"];?>&cd12_4=<?php echo $_GET["cd12_4"];?>&cd12_5=<?php echo $_GET["cd12_5"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="261" height="280" /></a></div>
+                <?php 		
+		$county = $house->county;
+		$ml_num = $house->ml_num;
+		$pic1 = get_firstimage($county,$ml_num);
+		?>
+	                <div class="syss_fclist_left"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="261" height="280" /></a></div>
 	                <div class="syss_fclist_right" style="height:auto">
                     <div class="syss_zt"><?php if ($house->s_r == "Sale") {
         echo '出售';
@@ -101,8 +117,7 @@ $pic1 = get_firstimage($county,$ml_num);
                     <div class="syss_fctwo"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>" target="_blank"><?php echo $house->name; ?></a></div>
                     <div class="syss_fcthree">
                         <?php
-		$county = $house->county;
-		$ml_num = $house->ml_num;
+
 		$imglist = explode(',',get_tn_image($county,$ml_num));
 		foreach ($imglist as $value) {
                             ?>
