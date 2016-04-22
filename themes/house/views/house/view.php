@@ -801,9 +801,9 @@ $(function(){
 						
 						?></div>
 					</div>
-					
-                    <div class="xqlb_list">
-                        <div class="xqlb_list_left">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
+					<div style="clear:both"></div>
+                    <div class="xqlb_list" style="height:auto">
+                        <div class="xqlb_list_left" style="width:auto">周边环境和配套：<?php echo $house->prop_feat1_out; ?><?php if($house->prop_feat2_out!=""){echo " , ";}?><?php echo $house->prop_feat2_out; ?><?php if($house->prop_feat3_out!=""){echo " , ";}?><?php echo $house->prop_feat3_out; ?><?php if($house->prop_feat4_out!=""){echo " , ";}?><?php echo $house->prop_feat4_out; ?><?php if($house->prop_feat5_out!=""){echo " , ";}?><?php echo $house->prop_feat5_out; ?><?php if($house->prop_feat6_out!=""){echo " , ";}?><?php echo $house->prop_feat6_out; ?></div>
  
                         
 						<div class="cl"></div>
@@ -1128,6 +1128,16 @@ $zhinan=$housezhinan["image"];
     </div>
     <div class="zczlfour"><input name="" type="submit" value="立即注册"></div>
     </form></div>
+    
+    
+<?php
+if($house->s_r=="Sale"){
+?>
+          <div class="ajjsq">
+<iframe runat="server" src="http://www.maplecity.com.cn/jisuanqi/?price=<?php echo $house->lp_dol;?>" width="247" height="397" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+            </div>
+<?php }?>  
+    
 <div class="sylj">
 			         <div class="syljtitle">实用链接</div>
 			         <div class="syljcont">
@@ -1377,13 +1387,7 @@ $zhinan=$housezhinan["image"];
                            
                      </div>
 			   </div>
-<?php
-if($house->s_r=="Sale"){
-?>
-          <div class="ajjsq">
-<iframe runat="server" src="http://origin.maplecity.com.cn/jisuanqi/?price=<?php echo $house->lp_dol;?>" width="247" height="397" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
-            </div>
-<?php }?>   
+ 
            
            <div class="grtz">
       <div class="grtz_title"><span>热点推荐</span></div>
