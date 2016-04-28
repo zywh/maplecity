@@ -466,7 +466,6 @@
             changeMap();
         }
     });
-	
     google.maps.event.addListener(map, 'dragend', function() {
         changeMap();
     });
@@ -486,30 +485,6 @@
 	    
 	var googleMap = {
         //向地图添加信息内容
-		initMap: function(mapId,lat,lng,zoomLevel) {
-			markerArray = []; //make it global
-			
-			var initCenter = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-			var mapOptions = {
-				center: initCenter,
-				zoom: zoomLevel, //keep zoom and minZoom different to trigger initial map search
-				zoomControl: true,
-				mapTypeId: google.maps.MapTypeId.ROADMAP,
-				minZoom: 4,
-				overviewMapControl: true,
-				overviewMapControlOptions: {
-					opened: true
-				}
-			};
-			map = new google.maps.Map(document.getElementById(mapId), mapOptions); //make it global
-			
-			
-			//google.maps.event.addListener(map, "bounds_changed", function() {
-			google.maps.event.addListener(map, "idle", function() {
-				
-				changeMap(map,mapId);		
-			});
-		},	  
         setContent: function(lat, lng, content, html, isShow, index) {
             var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
             var marker = new RichMarker({
@@ -555,7 +530,7 @@
           //     this.setZIndex(google.maps.Marker.MAX_ZINDEX - 2);
           // });
         }, //在地图添加房源数量信息
-        setContentCount: function(map,lat, lng, totalCount,city) {
+        setContentCount: function(lat, lng, totalCount,city) {
 			var content = "<i class='common_bg icon_map_mark'><span>" + totalCount + "</span></i>";
 			var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
 			//console.log(lat + ":" + lng +":" + totalCount +":" + city);
@@ -734,13 +709,6 @@
         var forIndex = 0;
         var Arrayindex = 0;
         var city = $.trim($('#city').val());
-		var gridSize = 50;	//50px
-		//get element size to calcute number of grid
-		var mapHeight = $("#google_map").height();
-		var mapWidth = $("#google_map").width();
-		var gridx = Math.ceil(mapWidth/gridSize);
-		var gridy = Math.ceil(mapHeight/gridSize);
-		console.log("H:" + mapHeight + "W:" + mapWidth + "Grid-" + gridx +":" + gridy);
 	
 		_bounds = _sw.lat() + "," + _sw.lng() + "," + _ne.lat() + "," + _ne.lng();
 		map_type = getUrlParam('cd4') ? getUrlParam('cd4') : map_type;
@@ -769,8 +737,6 @@
 				province: province,
 				city: city,
 				district: district,
-				gridx : gridx,
-				gridy : gridy,
 				type: type
 			},
 			beforeSend: function() {
@@ -783,31 +749,24 @@
 				forIndex++;
 				if (!data.IsError) {
 					
-					var houseCount =  data.Data.Total;
-					
-					var markerType = data.Data.Type;
-					
-					//Start City Markers
-					if ((markerType == 'city') || (markerType == 'grid')) {
+
+					var maxMarkers = 2000;
+					var houseCount = data.Data.Total;
+
+					if ( houseCount  >= maxMarkers ) {
 						for (var p in data.Data.AreaHouseCount) {
-						   
 							var areaHouse = data.Data.AreaHouseCount[p];
-							if (areaHouse.HouseCount > 0){
-							//	console.log( "Name:" + areaHouse.NameCn + "Lat:" + areaHouse.GeocodeLat + "Count:"+ areaHouse.HouseCount );
-							googleMap.setContentCount(map,areaHouse.GeocodeLat, areaHouse.GeocodeLng, areaHouse.HouseCount.toString(), areaHouse.NameCn);
+							googleMap.setContentCount(areaHouse['Count'].GeocodeLat, areaHouse['Count'].GeocodeLng, areaHouse['Count'].HouseCount,areaHouse['Count'].NameCn );
 							
-							}
 						}
 					}
-					//End of City Markers
-
 					
+					//End of City Markers
 					
 					
 					//House Marker if house count is in limit
 					//if ( houseCount < maxMarkers && mapZoom >= provZoom) {
-					if ( markerType == 'house'  ) {
-						
+					if ( houseCount < maxMarkers ) {
 						$(data.Data.MapHouseList).each(function(index) {
 		
 						var imgurl = "/" + this.CoverImg;
@@ -876,7 +835,6 @@
 					}
 					//End of House Marker
 				}
-				
 				if (lenght == forIndex) {
 					//console.log("Build Left list");
 					//$(".Houses_count").text(HouseArray.length % 100 == 0 ? HouseArray.length + "+" : HouseArray.length);
