@@ -29,9 +29,9 @@ class MapController extends XFrontBase {
 		ini_set("error_log", "/tmp/php-error.log");
 		
 		
-		$maxmarkers = 2000;  //City count if count(house) is over
-		$maxhouse = 200; //Grid count if count(house) is over
-		$maxcitymarkers = 100;
+		$maxmarkers = 3000;  //City count if count(house) is over
+		$maxhouse = 300; //Grid count if count(house) is over
+		$maxcitymarkers = 30;
         $result = array();
 		$result['Data']['AreaHouseCount'] = array();
 		$result['Data']['MapHouseList'] = array();
@@ -235,17 +235,17 @@ class MapController extends XFrontBase {
 				$result['Message'] = '成功';
 				//$tilex = (($maxLat - $minLat ) / $gridx) * 100000;
 				//$tiley = (($maxLon - $minLon ) / $gridy) * 100000;
-				$tilex = (($maxLat - $minLat ) / $gridx) ;
-				$tiley = (($maxLon - $minLon ) / $gridy) ;
-				error_log("TileX:".$gridx."x".$gridy);
+				$tiley = (($maxLat - $minLat ) / $gridy) ;
+				$tilex = (($maxLon - $minLon ) / $gridx) ;
+				//error_log("TileX:".$gridx."x".$gridy);
 				//Generate grid center Lat/Lng
 				for ( $x=1; $x <= $gridx ; $x++){
 					for ( $y=1; $y <= $gridy ; $y++){
-						$gridCenterlat = $minLat + ($tilex/2) + ($x -1)*$tilex ;
-						$gridCenterlng = $minLon + ($tiley/2) + ($y -1)*$tiley ;
+						$gridCenterlat = $minLat + ($tiley/2) + ($y -1)*$tiley ;
+						$gridCenterlng = $minLon + ($tilex/2) + ($x -1)*$tilex ;
 						$result['Data']['AreaHouseCount']["G".$x.$y]['GeocodeLat'] = $gridCenterlat;
 						$result['Data']['AreaHouseCount']["G".$x.$y]['GeocodeLng'] = $gridCenterlng;
-						error_log($x.$y);
+						//error_log($x.$y);
 						
 					}
 				}

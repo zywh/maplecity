@@ -588,7 +588,8 @@
                                                 
              google.maps.event.addListener(marker, 'click', function() {
 				map.setCenter(this.position);
-				map.setZoom(12);
+				var currentzoom = map.getZoom();
+				map.setZoom(currentzoom + 2);
             });
 
 
