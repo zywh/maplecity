@@ -37,19 +37,17 @@ class ProjectsController extends XFrontBase
     public function actionIndex(){
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/enjoy.css');
 		$city_id = Yii::app()->request->getQuery('city', 0);
-        $time_sort = Yii::app()->request->getQuery('time_sort', 'DESC');
-        $price_sort = Yii::app()->request->getQuery('price_sort');
+        //$time_sort = Yii::app()->request->getQuery('time_sort', 'DESC');
+        
 		$criteria = new CDbCriteria();
         $criteria->order = 'id DESC';
         if(!empty($city_id)){
             $criteria->addCondition('city_id='.$city_id);
         }
         if(!empty($time_sort)){
-            $criteria->order = 'accessDate '.$time_sort;
+            $criteria->order = 'date '.$time_sort;
         }
-        if(!empty($price_sort)){
-            $criteria->order = 'total_price '.$price_sort;
-        }
+ 
         $criteria->addCondition('recommend=1');
         $count = Subject::model()->count($criteria);
         $pager = new CPagination($count);

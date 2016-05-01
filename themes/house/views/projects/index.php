@@ -1,83 +1,45 @@
 <!-- 地址开始 -->
 <div class="cl"></div>
 <div class="nytb_dz">
-    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> > <a href="<?php echo Yii::app()->createUrl('hotrecommend/index'); ?>">热点推荐</a> > <span>更多-<?php echo $cur_city->name; ?></span>
+    <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> > <a href="<?php echo Yii::app()->createUrl('projects/index'); ?>">项目推荐</a> 
 </div>
 <!-- 地址结束 -->
-<!-- 豪宅鉴赏开始 -->
+<!-- Projects List 开始 -->
 <div class="enjoy">
-    <div class="enjoyup">
-        <div class="enjoyup_tab">
-            <div class="enjoyup_tabup">
-                <?php $num = count($subject_list);
-                foreach($subject_list as $k => $obj){
-                    if($k == 0){
-                        ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$obj->city_id)); ?>" data-index="<?php echo $obj->city_id; ?>"><?php echo $obj->city->name; ?></a>|
-                    <?php }elseif(($k + 1) == $num){ ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$obj->city_id)); ?>" data-index="<?php echo $obj->city_id; ?>"><?php echo $obj->city->name; ?></a>
-                    <?php }else{ ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$obj->city_id)); ?>" data-index="<?php echo $obj->city_id; ?>"><?php echo $obj->city->name; ?></a>|
-                    <?php }} ?>
-            </div>
-            <div class="enjoyup_tabdown">
-                <div class="enjoy_tabcont"><?php echo $cur_city->describe; ?></div>
-                <div class="cl"></div>
-            </div>
-        </div>
-    </div>
+
     <div class="enjoydown">
         <div class="enjoydownlabel">
-            <div class="enjoydownlabel_left">热点推荐<span> Hot Recommend</span></div>
+            <div class="enjoydownlabel_left">项目推荐<span> Recommended Projects</span></div>
             <div class="enjoydownlabel_right">
-                <span>排序方式</span>
-                <?php if(!empty($time_sort)){
-                        if($time_sort == 'DESC'){
-                    ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort'=>'ASC')); ?>" class="pxfs1">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                    <?php }else{ ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>" class="pxfs2">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                    <?php } ?>
-                <?php }elseif(!empty($price_sort)){
-                    if($price_sort == 'DESC'){
-                        ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'ASC')); ?>" class="pxfs1">总价</a>
-                    <?php }else{ ?>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                        <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>" class="pxfs2">总价</a>
-                    <?php } ?>
-                <?php }else{ ?>
-                    <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort'=>'DESC')); ?>">时间</a>
-                    <a href="<?php echo Yii::app()->createUrl('hotrecommend/more', array('city'=>$cur_city->id, 'time_sort' => 0, 'price_sort'=>'DESC')); ?>">总价</a>
-                <?php } ?>
+                <span>共有<?php echo $count; ?>项目</span>
+  
             </div>
         </div>
+		
         <div class="enjoydowncont">
-            <div class="enjoydown_one">共有<?php echo $count; ?>套房产</div>
+          
             <div class="enjoydown_two">
-                <?php foreach($house_list as $house){ ?>
+                <?php foreach($subject_list as $project){ ?>
                 <div class="enjoydown_list">
                     <div class="enjoydown_list_pic">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $house->house_image; ?>" width="485" height="355"/>
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $project->room_type_image; ?>" width="485" height="355"/>
                     </div>
                     <div class="enjoydown_list_info" style="display:block;">
-                        <span class="enjoy_dz">地址：<?php echo $house->location; ?></span>
-                        <span class="enjoy_zj">总价：<i><?php echo $house->total_price; ?></i>万加币</span>
+                        <span class="enjoy_dz">项目名称：<?php echo $project->name; ?></span>
+                        <span class="enjoy_zj"> 开发商：<i><?php echo $project->developer_intro; ?></i></span>
+						  <span class="enjoy_zj"> 城市：<i><?php echo $project->cityname; ?></i></span>
                     </div>
                     <div class="enjoydown_list_xx" style="display:none;">
-                        <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$house->id)); ?>" target="_blank">
-                            <span class="titlespan">MSL:<?php echo $house->mls_code; ?></span>
+                        <a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>" >
+                            <span class="titlespan">项目名称:<?php echo $project->name; ?></span>
                             <span style="height: 120px; overflow: hidden;">
-                                简介<br /><?php echo strip_tags($house->introduction); ?>
+                                项目概况：<br /><?php echo strip_tags($project->summary); ?>
                             </span>
                             <span>
-                                 地址<br /><?php echo $house->location; ?>
+                                 项目重点：<br /><?php echo $project->point; ?>
                             </span>
                             <span>
-                                 总价<br /><i><?php echo $house->total_price; ?></i>万加币
+                                 开发商<br /><i><?php echo $project->developer_intro; ?></i>
                             </span>
                         </a>
                     </div>
