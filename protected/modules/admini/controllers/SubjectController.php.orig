@@ -66,9 +66,7 @@ class SubjectController extends XAdminiBase
         parent::_acl('subject_update');
         $model = parent::_dataLoad( new Subject(), $id );
         $imageList = $this->_gets->getParam( 'imageList' );
-		$layoutList = $this->_gets->getParam( 'layoutList' );
         $imageListSerialize = XUtils::imageListSerialize($imageList);
-		$layoutListSerialize = XUtils::imageListSerialize($layoutList);
         if ( isset( $_POST['Subject'] ) ) {
             $model->attributes = $_POST['Subject'];
             $model->date = strtotime($_POST['Subject']['date']);
@@ -78,7 +76,6 @@ class SubjectController extends XAdminiBase
                 @unlink( $_POST['oAttach'] );
             }
             $model->image_list = $imageListSerialize['dataSerialize'];
-			$model->layout_list = $layoutListSerialize['dataSerialize'];
             if ( $model->save() ) {
                 AdminLogger::_create( array ( 'catalog' => 'update' , 'intro' => '编辑项目,ID:' . $id ) );
                 $this->redirect( array ( 'index' ) );
@@ -89,13 +86,6 @@ class SubjectController extends XAdminiBase
         }
         elseif($model->image_list) {
             $imageList = unserialize($model->image_list);
-        }
-		
-	   if ( $layoutList ) {
-            $layoutList = $layoutListSerialize['data'];
-        }
-        elseif($model->layout_list) {
-            $layoutList = unserialize($model->layout_list);
         }
         $this->city_list = parent::_groupList('city');
         $this->render( 'update', array ( 'model' => $model, 'imageList'=>$imageList ) );

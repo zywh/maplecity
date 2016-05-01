@@ -65,24 +65,12 @@
   <tr >
     <td><?php echo $form->textArea($model,'summary',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
-  
-  
   <tr>
     <td class="tb_title">项目重点：(<span style="color: #ff0000;">每条重点之间用"|"分割</span>)</td>
   </tr>
   <tr >
     <td><?php echo $form->textArea($model,'point',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
-  
-   <tr>
-    <td class="tb_title">CityName：(<span style="color: #ff0000;">Input Cityname like Toronto</span>)</td>
-  </tr>
-  <tr >
-    <td><?php echo $form->textArea($model,'cityname',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
-  </tr>
-  
-  
-  
   <tr>
     <td class="tb_title">项目组图：(<span style="color: #ff0000;">最好上传，否则页面无图片显示。如果插件无法运行，请检查flash插件是否安装，或使用火狐浏览器。</span>)</td>
   </tr>
@@ -104,32 +92,6 @@
       </div>
     </td>
   </tr>
-  
-  
-  <tr>
-    <td class="tb_title">布局组图：(<span style="color: #ff0000;">最好上传，否则页面无图片显示。如果插件无法运行，请检查flash插件是否安装，或使用火狐浏览器。</span>)</td>
-  </tr>
-  <tr>
-    <td>
-      <div>
-        <p><a href="javascript:uploadifyAction('fileListWarp')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
-        <ul id="fileListWarp">
-          <?php foreach((array)$layoutList as $key=>$row):?>
-            <?php if($row):?>
-              <li id="image_<?php echo $row['fileId']?>"><a href="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" target="_blank"><img src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" width="40" height="40" align="absmiddle"></a>&nbsp;<br>
-                <a href='javascript:uploadifyRemove("<?php echo $row['fileId']?>", "image_")'>删除</a>
-                <input name="layoutList[fileId][]" type="hidden" value="<?php echo $row['fileId']?>">
-                <input name="layoutList[file][]" type="hidden" value="<?php echo $row['file']?>">
-              </li>
-            <?php endif?>
-          <?php endforeach?>
-        </ul>
-      </div>
-    </td>
-  </tr>
-  
-    
-  
   <tr>
     <td class="tb_title">开发商介绍：</td>
   </tr>
