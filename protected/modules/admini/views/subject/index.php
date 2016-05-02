@@ -16,8 +16,8 @@
           <th width="25%">项目名称</th>
           <th width="15%">省份</th>
 		  <th width="15%">城市</th>
-          <th width="10%">项目时间</th>
-          <th width="10%">热点推荐</th>
+          <th width="15%">项目时间</th>
+          <th width="5%">热点推荐</th>
           <th width="20%">操作</th>
       </tr>
     </thead>
@@ -27,7 +27,7 @@
         <?php echo $row->id; ?></td>
         <td><?php echo $row->name; ?></td>
         <td><?php echo $row->city->name; ?></td>
-		<td><?php echo $row->cityname; ?></td>
+		  <td><?php echo $row->cityname; ?></td>
         <td><?php echo date('Y年m月d日', $row->date); ?></td>
         <td>
             <?php if($row->recommend == 1){ ?>

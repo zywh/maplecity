@@ -38,7 +38,10 @@ $(function() {
         'onUploadSuccess': function(file, data, response) {
             var json = $.parseJSON(data);
             if (json.state == 'success') {
-                $("#fileListWarp").append('<li id="image_' + json.fileId + '"><a href="<?php echo $this->_baseUrl?>/' + json.file + '" target="_blank"><img src="<?php echo $this->_baseUrl?>/'+json.file+'" width="40" height="40"  align="absmiddle"/></a>&nbsp;<br /><a href="javascript:uploadifyRemove(&quot;' + json.fileId + '&quot;,&quot;image_&quot;)">删除</a></a><input name="imageList[fileId][]" type="hidden" value="'+json.fileId+'" /><input name="imageList[file][]" type="hidden" value="'+json.file+'"/></li>');
+		var inputName = '<?php echo $_GET['inputname'];?>';
+		console.log(inputName);
+                //$("#fileListWarp").append('<li id="image_' + json.fileId + '"><a href="<?php echo $this->_baseUrl?>/' + json.file + '" target="_blank"><img src="<?php echo $this->_baseUrl?>/'+json.file+'" width="40" height="40"  align="absmiddle"/></a>&nbsp;<br /><a href="javascript:uploadifyRemove(&quot;' + json.fileId + '&quot;,&quot;image_&quot;)">删除</a></a><input name="imageList[fileId][]" type="hidden" value="'+json.fileId+'" /><input name="imageList[file][]" type="hidden" value="'+json.file+'"/></li>');
+                $("#fileListWarp").append('<li id="image_' + json.fileId + '"><a href="<?php echo $this->_baseUrl?>/' + json.file + '" target="_blank"><img src="<?php echo $this->_baseUrl?>/'+json.file+'" width="40" height="40"  align="absmiddle"/></a>&nbsp;<br /><a href="javascript:uploadifyRemove(&quot;' + json.fileId + '&quot;,&quot;image_&quot;)">删除</a></a><input name="' + inputName + '[fileId][]" type="hidden" value="'+json.fileId+'" /><input name="' + inputName +'[file][]" type="hidden" value="'+json.file+'"/></li>');
             } else {
                 alert(json.message);
             }

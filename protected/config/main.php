@@ -36,7 +36,17 @@ return array(
 		     'class'=>'application.modules.account.AccountModule',
 		)
 	),
-	'components'=>array(
+        'components'=>array(
+                'log'=>array(
+            'class'=>'CLogRouter',
+            'routes'=>array(
+                array(
+                    'class'=>'CFileLogRoute',
+                    'levels'=>'error, warning',
+                ),
+            ),
+        ),
+
         'cache'=>array(
            'class'=>'CFileCache',
         ),

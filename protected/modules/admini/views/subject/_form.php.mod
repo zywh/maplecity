@@ -89,7 +89,7 @@
   <tr>
     <td>
       <div>
-        <p><a href="javascript:uploadifyAction('fileListWarp','imageList')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
+        <p><a href="javascript:uploadifyAction('fileListWarp')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
         <ul id="fileListWarp">
           <?php foreach((array)$imageList as $key=>$row):?>
             <?php if($row):?>
@@ -112,7 +112,7 @@
   <tr>
     <td>
       <div>
-        <p><a href="javascript:uploadifyAction('LayoutFiles','layoutList')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
+        <p><a href="javascript:uploadifyAction('LayoutFiles')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
         <ul id="LayoutFiles">
 		
           <?php foreach((array)$layoutList as $key=>$row):?>

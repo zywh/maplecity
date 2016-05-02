@@ -57,6 +57,7 @@ class SubjectController extends XAdminiBase
         $this->render( 'create', array ( 'model' => $model, 'imageList'=>$imageListSerialize['data'] ) );
     }
 
+	
     /**
      * 更新
      *
