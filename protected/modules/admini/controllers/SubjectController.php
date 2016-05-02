@@ -126,6 +126,27 @@ class SubjectController extends XAdminiBase
         }
     }
 
+	
+    public function actionHomepage() {
+        if(parent::_ajax_acl('subject_update')){
+            $id = Yii::app()->request->getPost('id');
+            $model = parent::_dataLoad( new Subject(), $id );
+            if($model->homepage == 0){
+                $model->homepage = 1;
+            }else{
+                $model->homepage = 0;
+            }
+            if($model->save()){
+                AdminLogger::_create( array ( 'catalog' => 'update' , 'intro' => '更新项目推荐状态,ID:' . $id ) );
+                echo CJSON::encode(array('status'=>'success'));
+            }else{
+                echo CJSON::encode(array('status'=>'failed'));
+            }
+        }else{
+            echo CJSON::encode(array('status'=>'forbid'));
+        }
+    }
+
     /**
      * 批量操作
      *

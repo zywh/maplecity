@@ -35,13 +35,13 @@ class Subject extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, date, summary, point, image_list, developer_intro, room_type_image, cityname, layout_list', 'required'),
+			array('name, date, summary, point, image_list, developer_intro, room_type_image, amenities,cityname', 'required'),
 			array('city_id, date, recommend', 'numerical', 'integerOnly'=>true),
 			array('name, room_type_image', 'length', 'max'=>255),
 			array('cityname', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, city_id, date, summary, point, image_list, developer_intro, room_type_image, recommend, cityname, layout_list', 'safe', 'on'=>'search'),
+			array('id, name, city_id, date, developer_intro,  recommend, cityname', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +65,7 @@ class Subject extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => '项目名称',
-			'city_id' => '城市',
+			'city_id' => '省份',
 			'date' => '项目时间',
 			'summary' => '项目概况',
 			'point' => '项目重点',
@@ -73,8 +73,11 @@ class Subject extends CActiveRecord
 			'developer_intro' => '开发商介绍',
 			'room_type_image' => '房型图',
 			'recommend' => '热点推荐',
-			'cityname' => 'Cityname',
+			'cityname' => '城市',
 			'layout_list' => '布局图片',
+			'homepage' => '主页显示',
+			'price' => '价格',
+			'amenities' => '配套设施',
 		);
 	}
 
@@ -100,14 +103,9 @@ class Subject extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('city_id',$this->city_id);
 		$criteria->compare('date',$this->date);
-		$criteria->compare('summary',$this->summary,true);
-		$criteria->compare('point',$this->point,true);
-		$criteria->compare('image_list',$this->image_list,true);
 		$criteria->compare('developer_intro',$this->developer_intro,true);
-		$criteria->compare('room_type_image',$this->room_type_image,true);
 		$criteria->compare('recommend',$this->recommend);
 		$criteria->compare('cityname',$this->cityname,true);
-		$criteria->compare('layout_list',$this->layout_list,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

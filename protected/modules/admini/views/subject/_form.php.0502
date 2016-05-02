@@ -22,7 +22,7 @@
     <td ><?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255, 'class'=>'validate[required]')); ?></td>
   </tr>
     <tr>
-        <td class="tb_title">省份：</td>
+        <td class="tb_title">城市：</td>
     </tr>
     <tr >
         <td >
@@ -65,12 +65,6 @@
   <tr >
     <td><?php echo $form->textArea($model,'summary',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
-  <tr>
-    <td class="tb_title">配套设施：</td>
-  </tr>
-  <tr >
-    <td><?php echo $form->textArea($model,'amenities',array('rows'=>5, 'cols'=>90,'class'=>'validate[required]')); ?></td>
-  </tr>
   
   
   <tr>
@@ -84,7 +78,7 @@
     <td class="tb_title">城市：(<span style="color: #ff0000;">输入城市名字</span>)</td>
   </tr>
   <tr >
-    <td><?php echo $form->textArea($model,'cityname',array('rows'=>1, 'cols'=>30, 'class'=>'validate[required]')); ?></td>
+    <td><?php echo $form->textArea($model,'cityname',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
   
   
@@ -118,7 +112,7 @@
   <tr>
     <td>
       <div>
-        <p><a href="javascript:uploadifyAction('LayoutFiles','layoutList')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加布局图片</a></p>
+        <p><a href="javascript:uploadifyAction('LayoutFiles','layoutList')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
         <ul id="LayoutFiles">
 		
           <?php foreach((array)$layoutList as $key=>$row):?>
@@ -142,7 +136,7 @@
     <td class="tb_title">开发商介绍：</td>
   </tr>
   <tr >
-    <td><?php echo $form->textArea($model,'developer_intro',array('rows'=>5, 'cols'=>90)); ?></td>
+    <td><?php echo $form->textArea($model,'developer_intro',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
   <tr>
     <td class="tb_title">房型图：(<span style="color: #ff0000;">一张大图，包含所有房间设计图</span>)</td>

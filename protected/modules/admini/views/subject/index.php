@@ -40,6 +40,7 @@
             <a href="<?php echo  $this->createUrl('update',array('id'=>$row->id))?>"><img src="<?php echo $this->_baseUrl?>/static/admin/images/update.png" align="absmiddle" /></a>&nbsp;&nbsp;
             <a href="<?php echo  $this->createUrl('batch',array('command'=>'delete','id'=>$row->id))?>" class="confirmSubmit"><img src="<?php echo $this->_baseUrl?>/static/admin/images/delete.png" align="absmiddle" /></a>&nbsp;&nbsp;
             <a href="javascript:void(0);" class="recommend" data-id="<?php echo $row->id; ?>"><?php echo $row->recommend == 1 ? '取消推荐' : '热点推荐'; ?></a>
+			<a href="javascript:void(0);" class="homepage" data-id="<?php echo $row->id; ?>"><?php echo $row->homepage == 1 ? '取消主页' : '主页显示'; ?></a>
         </td>
     </tr>
     <?php endforeach;?>
@@ -66,6 +67,21 @@
             var self = $(this);
             var id = self.attr('data-id');
             $.post('<?php echo $this->createUrl('recommend'); ?>',{id:id},function(json){
+                if(json.status == 'success'){
+                    window.location.reload();
+                }else if(json.status == 'failed'){
+                    alert('操作失败，请联系管理员');
+                    return false;
+                }else if(json.status == 'forbid'){
+                    alert('当前角色组无权限进行此操作，请联系管理员授权');
+                    return false;
+                }
+            },'json');
+        });
+	   $('.homepage').click(function(){
+            var self = $(this);
+            var id = self.attr('data-id');
+            $.post('<?php echo $this->createUrl('homepage'); ?>',{id:id},function(json){
                 if(json.status == 'success'){
                     window.location.reload();
                 }else if(json.status == 'failed'){
