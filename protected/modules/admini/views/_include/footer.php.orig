@@ -18,11 +18,11 @@ function keywordGet(keywordId,keywordIdSet){
 	},'json')
 }
 
-function uploadifyAction(fileField,inputName) {
+function uploadifyAction(fileField,frameId) {
     $.Zebra_Dialog('', {
         source: {
             'iframe': {
-                'src': '<?php echo $this->createUrl('uploadify/basic&inputname=')?>' + inputName,
+                'src': '<?php echo $this->createUrl('uploadify/basic')?>',
                 'height': 300,
                 'name': 'bagecms_com',
                 'id': 'bagecms_com'

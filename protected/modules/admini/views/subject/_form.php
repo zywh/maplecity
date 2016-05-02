@@ -112,14 +112,16 @@
   <tr>
     <td>
       <div>
-        <p><a href="javascript:uploadifyAction('layoutListWarp')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
-        <ul id="layoutListWarp">
+        <p><a href="javascript:uploadifyAction('LayoutFiles')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
+        <ul id="LayoutFiles">
+		
           <?php foreach((array)$layoutList as $key=>$row):?>
             <?php if($row):?>
               <li id="image_<?php echo $row['fileId']?>"><a href="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" target="_blank"><img src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" width="40" height="40" align="absmiddle"></a>&nbsp;<br>
                 <a href='javascript:uploadifyRemove("<?php echo $row['fileId']?>", "image_")'>删除</a>
                 <input name="layoutList[fileId][]" type="hidden" value="<?php echo $row['fileId']?>">
                 <input name="layoutList[file][]" type="hidden" value="<?php echo $row['file']?>">
+				
               </li>
             <?php endif?>
           <?php endforeach?>
