@@ -1,4 +1,8 @@
 <link href="/themes/house/redian/images_redian/redian.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.x.x/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.x.x/js/swiper.min.js"></script>
+
 <style>
 .dtck_box{ margin-top:20px;}
 .map_cp{ height:39px; background-color:#ff4e00; overflow: hidden; }
@@ -53,11 +57,36 @@
 		<div class="intro_title"> <img src="/themes/house/redian/images_redian/intro.jpg"/>	</div>
 		<div class="intro_top">
 <!-- Swiper Start -->
-		<div id="img_scroll">
-		<?php echo $subject['name'];?> 
-			<?php echo $subject['summary'];?> 
-				<?php echo $subject['cityname'];?> 
-		</div>
+
+<div class="project_images" >
+        <div class="swiper-container" >
+                <div class="swiper-wrapper">
+         	<?php 
+		$imageList = unserialize($subject['image_list']);
+		foreach((array)$imageList as $key=>$row):
+            		if($row):?>
+                            <div class="swiper-slide" >
+                             <img style=" width: 100%;height: auto;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
+                             </div>
+
+            		<?php endif?>
+          	<?php endforeach?>
+
+                </div>
+                <div class="swiper-pagination"></div>
+
+        </div>
+<script>
+        var swiper = new Swiper(".swiper-container", {
+                pagination: ".swiper-pagination",
+                paginationClickable: true,
+                autoplay: 3000,
+                speed: 1000,
+                autoplayDisableOnInteraction: true
+        });
+</script>
+</div>
+
 
 <!-- Swiper End -->
 

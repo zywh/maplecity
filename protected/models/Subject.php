@@ -35,10 +35,11 @@ class Subject extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, date, summary, point, image_list, developer_intro, room_type_image, amenities,cityname', 'required'),
+			array('name, date, summary, point, price,image_list, developer_intro, room_type_image, amenities,cityname', 'required'),
 			array('city_id, date, recommend', 'numerical', 'integerOnly'=>true),
 			array('name, room_type_image', 'length', 'max'=>255),
 			array('cityname', 'length', 'max'=>100),
+			array('summary', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, city_id, date, developer_intro,  recommend, cityname', 'safe', 'on'=>'search'),

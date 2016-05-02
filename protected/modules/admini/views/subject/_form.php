@@ -60,21 +60,26 @@
     </td>
   </tr>
   <tr>
-    <td class="tb_title">项目概况：</td>
+    <td class="tb_title">项目概况：(<span style="color: #ff0000;">用于列表显示，不要超过100个字符</span>)</td>
   </tr>
   <tr >
     <td><?php echo $form->textArea($model,'summary',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
   </tr>
   <tr>
-    <td class="tb_title">配套设施：</td>
+    <td class="tb_title">配套设施：(<span style="color: #ff0000;">周边及配套设施，如果没有暂时输入“NA”</span>)</td>
   </tr>
   <tr >
     <td><?php echo $form->textArea($model,'amenities',array('rows'=>5, 'cols'=>90,'class'=>'validate[required]')); ?></td>
   </tr>
-  
+    <tr>
+    <td class="tb_title">价格范围：(<span style="color: #ff0000;">输入价格描述或表格，如果没有暂时输入“NA”</span>)</td>
+  </tr>
+  <tr >
+    <td><?php echo $form->textArea($model,'price',array('rows'=>5, 'cols'=>90,'class'=>'validate[required]')); ?></td>
+  </tr>
   
   <tr>
-    <td class="tb_title">项目重点：(<span style="color: #ff0000;">每条重点之间用"|"分割</span>)</td>
+    <td class="tb_title">项目详情：(<span style="color: #ff0000;">项目详细描述，如果没有暂时输入“NA”</span>)</td>
   </tr>
   <tr >
     <td><?php echo $form->textArea($model,'point',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
