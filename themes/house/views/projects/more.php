@@ -1,7 +1,7 @@
 <link href="/themes/house/redian/images_redian/redian.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="http://www.idangero.us/swiper/dist/css/swiper.min.css" media="all" />
+<script src="http://www.idangero.us/swiper/dist/js/swiper.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.x.x/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.x.x/js/swiper.min.js"></script>
 
 <style>
 .dtck_box{ margin-top:20px;}
@@ -59,14 +59,14 @@
 <!-- Swiper Start -->
 
 <div class="project_images" >
-        <div class="swiper-container" >
+        <div class="swiper-container s1" >
                 <div class="swiper-wrapper">
          	<?php 
 		$imageList = unserialize($subject['image_list']);
 		foreach((array)$imageList as $key=>$row):
             		if($row):?>
                             <div class="swiper-slide" >
-                             <img style=" width: 100%;height: auto;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
+                             <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
                              </div>
 
             		<?php endif?>
@@ -77,13 +77,17 @@
 
         </div>
 <script>
-        var swiper = new Swiper(".swiper-container", {
-                pagination: ".swiper-pagination",
-                paginationClickable: true,
-                autoplay: 3000,
-                speed: 1000,
-                autoplayDisableOnInteraction: true
-        });
+	var s1 = new Swiper('.s1', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 3,
+        paginationClickable: true,
+        spaceBetween: 30,
+	loop: true,
+        autoplay: 3000,
+        speed: 1000,
+        autoplayDisableOnInteraction: true
+
+    });
 </script>
 </div>
 
@@ -111,10 +115,43 @@
                  <div class="apart_title">
                     <img src="/themes/house/redian/images_redian/apart.jpg"/>
                 </div>
-                                <div class="liyou_con">
-                    <img src="/themes/house/redian/images_redian/huxing.jpg"/>
                 
+<div class="layout_images" >
+        <div class="swiper-container s2" >
+                <div class="swiper-wrapper">
+                <?php
+                $layoutList = unserialize($subject['layout_list']);
+                foreach((array)$layoutList as $key=>$row):
+                        if($row):?>
+                            <div class="swiper-slide" >
+                             <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
+                             </div>
+
+                        <?php endif?>
+                <?php endforeach?>
+
                 </div>
+                <div class="swiper-pagination"></div>
+
+        </div>
+<script>
+         var s2 = new Swiper('.s2', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 3,
+        paginationClickable: true,
+        spaceBetween: 30,
+        autoplay: 3000,
+        speed: 1000,
+	loop: true,
+	nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        autoplayDisableOnInteraction: true
+
+    });
+</script>
+
+</div>
+
      </div>
      
      <a id="004" name="004"></a>
