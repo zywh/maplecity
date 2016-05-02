@@ -16,12 +16,15 @@
 .nytb_dz a{ font-size:14px; font-family:"微软雅黑";}
 .nytb_dz a:hover{ color:#FF6600;}
 </style>
-<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?libraries=places&sensor=false&language=zh-cn"></script>
-        <script type="text/javascript" src="/static/map/js/richmarker-compiled.js"></script>
+<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?libraries=places&language=zh-cn"></script>
+<script type="text/javascript" src="/static/map/js/richmarker-compiled.js"></script>
+
 <div align="center"><img src="/themes/house/images/tuijian121.jpg" /></div>
 
-  <div class="nytb_dz" style="width: 1022px;"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">热点推荐</span> </div>
+<div class="nytb_dz" style="width: 1022px;"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">项目推荐</span> </div>
+
 <div class="wrap">
+
      <div class="botton_nav">
                 <div class="nav_wrap" style="width: 1022px;">
                                   <div class="nav_fl">
@@ -42,212 +45,39 @@
                   </div>
      </div>
      <div class="liucheng">
-            <img src="/themes/house/redian/images_redian/liucheng.jpg"/>
+	     <img src="/themes/house/redian/images_redian/liucheng.jpg"/>
      </div>
+	 
+	 
      <div class="project">
-                <div class="project_intro">
-                          <div class="intro_title">
-                               <img src="/themes/house/redian/images_redian/intro.jpg"/>
-                          </div>
-                          <div class="intro_top">
-<!-- 代码部分begin -->
-<div id="img_scroll">
-    <div id="img_small">
-        <a href="#1"><img src="/themes/house/images/PhotoC3185934-1.jpg" width="230" height="150" /></a>
-        <a href="#2"><img src="/themes/house/images/PhotoC3185934-20.jpg" width="230" height="150" /></a>
-        <a href="#3"><img src="/themes/house/images/PhotoC3194983-1.jpg" width="230" height="150" /></a>
-        <a class="curr" href="#1"></a>    </div>
-    <div id="img_big"> 
-   		<a style="display:block;" href="#"><img src="/themes/house/images/PhotoC3185934-1.jpg" width="700" height="465"></a> 
-        <a href="#"><img src="/themes/house/images/PhotoC3185934-20.jpg" width="700" height="465"></a> 
-        <a href="#"><img src="/themes/house/images/PhotoC3194983-1.jpg" width="700" height="465"></a>    </div>
-</div>
+		<div class="intro_title"> <img src="/themes/house/redian/images_redian/intro.jpg"/>	</div>
+		<div class="intro_top">
+<!-- Swiper Start -->
+		<div id="img_scroll">
+		<?php echo $subject['name'];?> 
+			<?php echo $subject['summary'];?> 
+				<?php echo $subject['cityname'];?> 
+		</div>
 
-<script type="text/javascript">   
-$(function($){
-	var showtime = 0;
-	$("#img_small a:lt(3)").mouseover(function(){
-		var showtime = $("#img_small a:lt(3)").index(this);
-		showImg(showtime)	
-	});
-	$("#img_scroll").hover(function(){
-		if(settime)clearInterval(settime);
-		},function(){
-		settime = setInterval(function(){
-			showImg(showtime)
-			showtime++;
-			if(showtime==3){showtime=0;}
-		} , 3000);
-	});
-	var settime = setInterval(function(){
-		showImg(showtime)
-		showtime++;
-		if(showtime==3){showtime=0;}
-	} , 3000);
-})
-function showImg(i){
-	var Link = $("#img_small").eq(i).find("a").attr("href");
-	$("#img_small .curr").attr("href",Link);
-	$("#img_big a").eq(i).fadeIn(800).siblings("a").fadeOut(600);
-	$("#img_small .curr").animate( { top: (i*155) } , 300);
-}
-</script> 
-<!-- 代码部分end -->
+<!-- Swiper End -->
 
-                          </div>
-                          <div class="intro_info">
-                                          <div class="info_fl">
-                                                      <div class="info_01">
-                                                                     <div class="img_01">
-                                                                            <img src="/themes/house/redian/images_redian/01.gif"/>
-                                                                     </div>
-                                                                     <div class="txt_01">
-                                                                     
-                                                                          <h3>国际化开性放城市</h3>
-                                                                          <p>温哥华是融合原生态自然环境的国际化开放性城市，通常位居世界上最有吸引力和最宜居城市等排名的前列。<br />
-                                                                           <span>   温哥华依山傍水，四季宜人，水质和空气全球最佳，外加其稳定的经济，文化活力，以及高层次的公共设施，备受推崇的画廊，剧院，学校和大学等，温哥华始终在Mercer杂志和Economist经济人杂志等名列前茅，提供给其居民非凡的生活品质， 令世人向往。</span></p>
-                                                                     </div>
-                                                        </div>
-                                                        <div class="info_02">
-                                                                        <div class="img_02"> 
-                                                                             <img src="/themes/house/redian/images_redian/02.gif"/>
-                                                                        </div>
-                                                                        <div class="txt_02">
-                                                                            <h3>满足您一切在温哥华的需求</h3>
-                                                                              <p>这里是温哥华名校聚集地，可进名列前茅的小学和中学，位处温哥华西区，最高档的富贵洋人社区，最高最大的社区建筑群。</p>
-                                                                        </div>
-                                                        </div>
-                                                         
-                                          </div>
-                                          <div class="info_fr">
-                                             <embed src="http://player.youku.com/player.php/sid/XMjM2NzA0NjI4/v.swf" allowFullScreen="true" quality="high" width="440" height="377" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
-                                          </div>
-                          
-                          
-                          
-                          </div>
-                </div>
-                
-                <a id="001" name="001"></a>
-                <div class="project_adv">
-                           <div class="adv_title">
-                               <img src="/themes/house/redian/images_redian/adv.jpg"/>
-                          </div>
-                          <div class="adv_show">
-                                           <div class="show_fl">
-                                                 <img src="/themes/house/redian/images_redian/show_fl.jpg"/>
-                                           </div>
-                                           <div class="show_fr">
-                                                <ul>
-                                                    <li><img src="/themes/house/redian/images_redian/fr01.jpg"/> </li>
-                                                    <li style="margin-left:15px;"><img src="/themes/house/redian/images_redian/fr02.jpg"/> </li>
-                                                    <li style="margin-top:15px;"><img src="/themes/house/redian/images_redian/fr03.jpg"/> </li>
-                                                    <li style="margin-top:15px;margin-left:15px; "><img src="/themes/house/redian/images_redian/fr04.jpg"/> </li>
-                                                   
-                                                </ul>
-                                           
-                                           </div>
-                          </div>
-                          <div  class="adv_list">
-                                           <div class="list_top">
-                                                	       <div class="list_01">
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu01.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>项目亮点</h3>
-                                                                                      <p>位于温哥华西区，绿树成荫，风景如画，并且房价升值最具潜力的学区住宅（富贵洋人区）</p>
-                                                                          </div>
-                                                              </div>
-                                                               <div class="list_01" >
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu02.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>唯一性</h3>
-                                                                                      <p>温哥华西区唯一的永久产权高档公寓小区。周边多为价值300万-1000万加币的私家别墅，寸土寸金，升值空间大。</p>
-                                                                          </div>
-                                                               </div>
-                                                               <div class="list_01" >
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu03.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>山景房</h3>
-                                                                                      <p>可将美丽的海湾和覆盖冰川的雪山景色一览无余。</p>
-                                                                          </div>
-                                                               </div>
-                                                               <div class="list_01" >
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu04.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>回报高</h3>
-                                                                                      <p>性价比高，此区的租房空置率仅为1%。</p>
-                                                                          </div>
-                                                               </div>
-                                                               <div class="list_01" >
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu05.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>学区房</h3>
-                                                                                      <p>位于温哥华西区，绿树成荫，风景如画，并且房价升值最具潜力的学区住宅（富贵洋人区）</p>
-                                                                          </div>
-                                                               </div>
-                                                               <div class="list_01" >
-                                                                          <div class="adv_img">
-                                                                              <img src="/themes/house/redian/images_redian/tu06.gif"/>
-                                                                          </div>
-                                                                          <div  class="adv_txt">
-                                                                                    <h3>奢华型</h3>
-                                                                                      <p>全套精装修，赠送顶级德国MIELE美诺原装进口厨电以及德国原装进口实木Nobilia橱柜。</p>
-                                                                          </div>
-                                                               </div>
-                                           </div>
-                                           <div class="list_bot">
-                                                          <div class="list_07">
-                                                                          <div class="img_07">
-                                                                              <img src="/themes/house/redian/images_redian/tu07.gif"/>
-                                                                          </div>
-                                                                          <div  class="txt_07">
-                                                                                    <h3>地段好</h3>
-                                                                                      <p>新移民在温哥华首选入住区，交通十分方便，门口公车站可到任何地方，幽静的洋人生活社区，步行2分钟即可到达任何生活所需场所。中西餐厅饭店、咖啡店、银行、珠宝店、诊所、宠物店、超市、图书馆等。驱车15分钟即可到达任何温哥华景点。办公市中心、UBC大学，高尔夫球场，大型购物中心，列治文——中国城等。</p>
-                                                                          </div>
-                                                           </div>
-                                                            <div class="list_07">
-                                                                          <div class="img_07">
-                                                                              <img src="/themes/house/redian/images_redian/tu08.gif"/>
-                                                                          </div>
-                                                                          <div  class="txt_07">
-                                                                                    <h3>完善售后</h3>
-                                                                                      <p>赠送2年，5年，10年的建筑以及内部保险，赠送1年免费美诺厨电以及5年免费橱柜售后保修，免费提供租房服务。</p>
-                                                                          </div>
-                                                           </div>
-                                                          
-                                           </div>
-                                            
-                          </div>
-                          <div class="adv_pic">
-                                           <div class="pic_fl">
-                                                   <img src="/themes/house/redian/images_redian/pic_fl.jpg"/>
-                                           </div>
-                          
-                           </div>
-                          
-                </div>
+	</div>
      </div>
-     <a id="002" name="002"></a>
-     <div class="surrounding">
+	
+
+	<a id="002" name="002"></a>
+	 <div class="surrounding">
                 <div class="sur_title">
                     <img src="/themes/house/redian/images_redian/surround.jpg"/>
                 </div>
-                                    <div class="liyou_con">
-                    <img src="/themes/house/redian/images_redian/zhoubian.jpg"/>
+				<div class="liyou_con">
+                 <?php echo $subject['point'];?>
                 
                 </div>
      </div>
-     <a id="003" name="003"></a>
+     
+	 
+	 <a id="003" name="003"></a>
      <div class="apartment">
                  <div class="apart_title">
                     <img src="/themes/house/redian/images_redian/apart.jpg"/>
@@ -260,49 +90,31 @@ function showImg(i){
      
      <a id="004" name="004"></a>
      
-      <div class="developer">
-                 <div class="deve_title">
-                    <img src="/themes/house/redian/images_redian/developers.jpg" width="1072" height="66"/>
-                </div>
-     </div>
-     <div style="width:1072px; margin:0 auto;">
-
-
-
-    <div class="enjoy_hzjs_up">
-        <div id="tour" class="zebra">
-            <div class="wrap">
-                <div class="switcher-wrap slider">
-                    <a class="prev jQ_sliderPrev" href=""></a>
-                    <a class="next jQ_sliderNext" href=""></a>
-                    <ul id="img-slider" style="height:508px;">
-                        <?php foreach($hot_house as $obj){ ?>
-                            <li class="img"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $obj->id)); ?>" target="_blank" title="<?php echo $obj->name; ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $obj->house_image; ?>"/></a></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-     </div>
+	<div class="developer">
+		<div class="deve_title">
+			<img src="/themes/house/redian/images_redian/developers.jpg" width="1072" height="66"/>
+		</div>
+		<div class="developer_intro">
+		  <?php echo $subject['developer_intro'];?>
+		</div>
+	</div>
+ 
      
-     <a id="005" name="005"></a>
-     
-      <div class="maps">
-                 <div class="map_title">
-                    <img src="/themes/house/redian/images_redian/maps.jpg"/>
-                </div>
-                
-                <div class="liyou_con" style="margin-top:-20px;">
-                <script>
-window.onload=function()//用window的onload事件，窗体加载完毕的时候
-{
-daolumap();
-}
-</script>
-        <a href="javascript:;" name="fydt" style="text-indent:-99999em; display:block;margin-bottom:25px;zoom: 1;">1</a>
+	<a id="005" name="005"></a>
+
+	<div class="maps">
+		<div class="map_title">
+			<img src="/themes/house/redian/images_redian/maps.jpg"/>
+		</div>
+
+		<div class="liyou_con" style="margin-top:-20px;">
+			<script>
+			window.onload=function()//用window的onload事件，窗体加载完毕的时候
+			{
+			daolumap();
+			}
+			</script>
+			<a href="javascript:;" name="fydt" style="text-indent:-99999em; display:block;margin-bottom:25px;zoom: 1;">1</a>
         <div class="dtck_box hsdts_box5">
             <div class="fyxqdown_left_title">
                 <a class="fyxqdown_left_cur" href="javascript:daolumap()">地图</a>
@@ -356,24 +168,27 @@ daolumap();
             </div>
         </div>
 
-                </div>
-     </div>
+		</div>
+    
+	</div>
      
      
      
      <a id="006" name="006"></a>
      <div class="liyou">
-                 <div class="liyou_title">
-                    <img src="/themes/house/redian/images_redian/liyou.jpg"/>
-                </div>
-                <div class="liyou_con">
-                    <img src="/themes/house/redian/images_redian/reason.jpg"/>
-                
-                </div>
+		<div class="liyou_title">
+			<img src="/themes/house/redian/images_redian/liyou.jpg"/>
+		</div>
+		<div class="liyou_con">
+			<img src="/themes/house/redian/images_redian/reason.jpg"/>
+		</div>
      </div>
 
 
 </div>
+
+
+
 <script type="text/javascript">
     flowplayer("video_wrap", "/themes/house/js/flowplayer-3.2.12.swf", {
         clip: {

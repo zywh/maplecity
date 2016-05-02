@@ -7,29 +7,17 @@
  */
 class ProjectsController extends XFrontBase
 {
-    public function actionMore(){
-	/*
-        Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/enjoy.css');
-        Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/lanrenzhijia.css');
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/jquery.roundabout.js');
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/lanrenzhijia.js');
-	*/
+    public function actionMore($id){
+	
 
-        $hot_house = House::model()->findAll(array(
-            'select'    => 'id, name, house_image',
-            'condition' => 'recommend=1 AND house_image<>""',
-            'order'     => 'id DESC',
-            'limit'     => 5
-        ));
-
-        $subject_list = Subject::model()->findAll(array(
-            'condition' => 'recommend=1',
-            'order'     => 'id DESC',
-        ));
-
+		//$id = Yii::app()->request->getQuery('id', 10);
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('id="'.$id.'"');
+		$criteria->addCondition('recommend=1');
+		$subject = Subject::model()->find($criteria);
+		
         $data = array(
-            'hot_house'    => $hot_house,
-            'subject_list' => $subject_list
+			'subject' => $subject
         );
         $this->render('more', $data);
     }
