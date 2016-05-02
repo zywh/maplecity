@@ -39,7 +39,9 @@ class SubjectController extends XAdminiBase
         parent::_acl('subject_create');
         $model = new Subject();
         $imageList = $this->_gets->getPost( 'imageList' );
+		$layoutList = $this->_gets->getPost( 'layoutList' );
         $imageListSerialize = XUtils::imageListSerialize($imageList);
+		$layoutListSerialize = XUtils::imageListSerialize($layoutList);
         if ( isset( $_POST['Subject'] ) ) {
             $file = XUpload::upload( $_FILES['attach'] );
             $model->attributes = $_POST['Subject'];
@@ -48,13 +50,14 @@ class SubjectController extends XAdminiBase
                 $model->room_type_image = $file['pathname'];
             }
             $model->image_list = $imageListSerialize['dataSerialize'];
+			$model->layout_list = $layoutListSerialize['dataSerialize'];
             if ($model->save() ) {
                 AdminLogger::_create( array ( 'catalog' => 'create' , 'intro' => '录入项目,ID:' . $model->id ) );
                 $this->redirect( array ( 'index' ) );
             }
         }
         $this->city_list = parent::_groupList('city');
-        $this->render( 'create', array ( 'model' => $model, 'imageList'=>$imageListSerialize['data'] ) );
+        $this->render( 'create', array ( 'model' => $model, 'imageList'=>$imageListSerialize['data'],'layoutList'=>$layoutListSerialize['data'] ) );
     }
 
 	
