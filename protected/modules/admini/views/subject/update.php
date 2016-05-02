@@ -8,5 +8,5 @@
     <div class="search right"> </div>
   </div>
 </div>
-<?php $this->renderPartial('_form',array('model'=>$model, 'imageList'=>$imageList))?>
+<?php $this->renderPartial('_form',array('model'=>$model, 'imageList'=>$imageList,'layoutList'=>$layoutList))?>
 <?php $this->renderPartial('/_include/footer');?>

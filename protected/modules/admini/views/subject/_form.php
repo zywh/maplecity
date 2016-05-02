@@ -75,7 +75,7 @@
   </tr>
   
    <tr>
-    <td class="tb_title">CityName：(<span style="color: #ff0000;">Input Cityname like Toronto</span>)</td>
+    <td class="tb_title">城市：(<span style="color: #ff0000;">输入城市名字</span>)</td>
   </tr>
   <tr >
     <td><?php echo $form->textArea($model,'cityname',array('rows'=>5, 'cols'=>90, 'class'=>'validate[required]')); ?></td>
@@ -112,8 +112,8 @@
   <tr>
     <td>
       <div>
-        <p><a href="javascript:uploadifyAction('fileListWarp')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
-        <ul id="fileListWarp">
+        <p><a href="javascript:uploadifyAction('layoutListWarp')" ><img src="<?php echo $this->_baseUrl?>/static/admin/images/create.gif" align="absmiddle">添加图片</a></p>
+        <ul id="layoutListWarp">
           <?php foreach((array)$layoutList as $key=>$row):?>
             <?php if($row):?>
               <li id="image_<?php echo $row['fileId']?>"><a href="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" target="_blank"><img src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" width="40" height="40" align="absmiddle"></a>&nbsp;<br>

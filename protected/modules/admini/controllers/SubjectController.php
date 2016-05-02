@@ -98,7 +98,7 @@ class SubjectController extends XAdminiBase
             $layoutList = unserialize($model->layout_list);
         }
         $this->city_list = parent::_groupList('city');
-        $this->render( 'update', array ( 'model' => $model, 'imageList'=>$imageList ) );
+        $this->render( 'update', array ( 'model' => $model, 'imageList'=>$imageList ,'layoutList'=>$layoutList) );
 
     }
 
