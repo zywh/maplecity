@@ -117,17 +117,17 @@
                 <div class="navbox">
                     <div class="navleft">
                         <div class="navlist"><a class="nav_up <?php if (Yii::app()->controller->id == 'site') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a></div>
-                        <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'hotrecommend') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('hotrecommend/index'); ?>">热点推荐</a>
+                        <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'projects') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('projects/index'); ?>">热点推荐</a>
                         
                             <div class="navtc">
-                                <div class="navtcbox" style="display:none;">
+                                <div class="navtcbox projects" style="display:none;">
                           <?php
              
 				  $sqlredian = "select * from h_subject where recommend=1 limit 0,5";
 				  $resultrd = $db->createCommand($sqlredian)->query();
 				  foreach($resultrd as $houserd){
 				  ?>
-                                    <a href=""><?php echo $houserd["name"]; ?></a>
+                                    <a href="<?php echo Yii::app()->createUrl('projects/more',array('id' => $houserd["id"])); ?>"><?php echo $houserd["name"]; ?></a>
                                     <?php } ?>
                                 </div>
                             </div>

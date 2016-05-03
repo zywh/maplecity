@@ -8,7 +8,12 @@
 <script type="text/javascript" src="/static/map/js/richmarker-compiled.js"></script>
 <style>
 
-.swiper-slide img { width: 330px; height: 330px;}
+.swiper-container { background-color:#888787;}
+.swiper-slide img { 
+	width: 330px; height: 330px;  
+	padding:4px;
+    border:1px solid #888787;
+    background-color:#fff;}
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
 .swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
 
@@ -25,9 +30,9 @@
 			<ul>
 				<li style="width:96px;"><img src="/themes/house/redian/images_redian/shouye.gif" align="absmiddle"/><a href="/">首页</a><span>|</span></li>
 				<li><a href="#000">项目介绍</a><span>|</span></li>
-				<li><a href="#001">项目优势</a><span>|</span></li>
-				<li><a href="#002">周边介绍</a><span>|</span></li>
+				<li><a href="#002">设施介绍</a><span>|</span></li>
 				<li><a href="#003">户型介绍</a><span>|</span></li>
+				<li><a href="#001">价格</a><span>|</span></li>
 				<li style="width:112px;"><a href="#004">开发商介绍</a><span>|</span></li>
 				<li style="width:56px;"><a href="#005">地图</a><span>|</span></li>
 				<li style="width:140px;"><a href="#006">为何选择枫之都</a></li>
@@ -73,8 +78,8 @@
 			paginationClickable: true,
 			spaceBetween: 22,
 			loop: true,
-			autoplay: 3000,
-			speed: 3000,
+			autoplay: 5000,
+			speed: 2000,
 			//scrollbar: '.swiper-scrollbar',
 			//scrollbarHide: true,
 			grabCursor: true,
@@ -86,12 +91,17 @@
 	<!-- Swiper End -->
 	 
 	 <!-- Project Summary Start -->
+	 <a id="000" name="000"></a>
 	<div class="project">
 		<div class="intro_title"> <img src="/themes/house/redian/images_redian/intro.jpg"/>	
 		</div>
 		<div class="intro_top">
+			<?php echo $subject['summary'];?>
+		</div>
+		<div class="intro_top">
 			<?php echo $subject['point'];?>
 		</div>
+		
      </div>
 	<!-- Project Summary End -->
 	
@@ -102,7 +112,7 @@
 			<img src="/themes/house/redian/images_redian/surround.jpg"/>
 		</div>
 		<div class="surrounding_top">
-			<?php echo $subject['point'];?>
+			<?php echo $subject['amenities'];?>
 		</div>
 	</div>
      <!-- Project Point End -->
@@ -113,7 +123,7 @@
 			<img src="/themes/house/redian/images_redian/apart.jpg"/>
 		</div>
                 
-	<div class="layout_images" >
+		<div class="layout_images" >
 		<div class="swiper-container s2" >
 			<div class="swiper-wrapper">
 			<?php
@@ -130,8 +140,8 @@
 
 			</div>
 		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next "></div>
-		<div class="swiper-button-prev "></div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
 
 
 		</div>
@@ -145,7 +155,7 @@
 			spaceBetween: 22,
 			loop: true,
 			autoplay: 5000,
-			speed: 1000,
+			speed: 2000,
 			//scrollbar: '.swiper-scrollbar',
 			//scrollbarHide: true,
 			grabCursor: true,
@@ -155,6 +165,11 @@
 
 	</div>
 
+		<a id="001" name="001"></a>
+		<div class="intro_top">
+			<?php echo $subject['price'];?>
+		</div>
+	
      </div>
      <!-- Project Point End -->
 	 <!-- Project Developer  Start -->
