@@ -82,7 +82,7 @@
 			speed: 2000,
 			//scrollbar: '.swiper-scrollbar',
 			//scrollbarHide: true,
-			grabCursor: true,
+			//grabCursor: true,
 			autoplayDisableOnInteraction: true
 
 		});

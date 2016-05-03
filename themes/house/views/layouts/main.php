@@ -349,7 +349,9 @@ $(document).ready(function() {
 	$(".nav-wrap").mouseover(function() {
 		$(this).find(".nav_up").addClass("on_a");
 		var navwidth=$(this).find(".nav_up").width();
-		$(this).find(".navtcbox").width(navwidth)
+		$(this).find(".navtcbox").width(navwidth);
+		$(this).find(".navtcbox.projects").width('300px');
+		
 		$(this).find(".navtcbox").stop(true).delay(400).slideDown();
 	});
 	$(".nav-wrap").mouseout(function() {
