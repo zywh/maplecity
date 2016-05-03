@@ -6,7 +6,14 @@
 
 <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?libraries=places&language=zh-cn"></script>
 <script type="text/javascript" src="/static/map/js/richmarker-compiled.js"></script>
+<style>
 
+.swiper-slide img { width: 330px; height: 330px;}
+.swiper-pagination-bullet { opacity: 1; background: #fff; }
+.swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
+
+
+</style>
 <div align="center"><img src="/themes/house/images/tuijian121.jpg" /></div>
 
 <div class="nytb_dz" style="width: 1022px;"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">项目推荐</span> </div>
@@ -43,26 +50,34 @@
 			$imageList = unserialize($subject['image_list']);
 			foreach((array)$imageList as $key=>$row):
 						if($row):?>
-								<div class="swiper-slide" >
-								 <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
-								 </div>
+							<div class="swiper-slide" >
+							 <img data-src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" class="swiper-lazy">
+							  <div class="swiper-lazy-preloader "></div>
+							 </div>
 
 						<?php endif?>
 				<?php endforeach?>
 
 					</div>
 					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next swiper-button-white"></div>
+					<div class="swiper-button-prev swiper-button-white"></div>
 
 			</div>
 	<script>
 		var s1 = new Swiper('.s1', {
 			pagination: '.swiper-pagination',
 			slidesPerView: 3,
+			preloadImages: false,
+			lazyLoading: true,
 			paginationClickable: true,
-			spaceBetween: 30,
-		loop: true,
+			spaceBetween: 22,
+			loop: true,
 			autoplay: 3000,
-			speed: 1000,
+			speed: 3000,
+			//scrollbar: '.swiper-scrollbar',
+			//scrollbarHide: true,
+			grabCursor: true,
 			autoplayDisableOnInteraction: true
 
 		});
@@ -106,7 +121,8 @@
 			foreach((array)$layoutList as $key=>$row):
 				if($row):?>
 					<div class="swiper-slide" >
-					 <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
+						<img data-src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" class="swiper-lazy">
+						<div class="swiper-lazy-preloader "></div>
 					 </div>
 
 				<?php endif?>
@@ -114,20 +130,26 @@
 
 			</div>
 		<div class="swiper-pagination"></div>
+		<div class="swiper-button-next "></div>
+		<div class="swiper-button-prev "></div>
+
 
 		</div>
 		<script>
 			var s2 = new Swiper('.s2', {
-				pagination: '.swiper-pagination',
-				slidesPerView: 3,
-				paginationClickable: true,
-				spaceBetween: 30,
-				autoplay: 3000,
-				speed: 1000,
-				loop: true,
-				nextButton: '.swiper-button-next',
-				prevButton: '.swiper-button-prev',
-				autoplayDisableOnInteraction: true
+			pagination: '.swiper-pagination',
+			slidesPerView: 3,
+			preloadImages: false,
+			lazyLoading: true,
+			paginationClickable: true,
+			spaceBetween: 22,
+			loop: true,
+			autoplay: 5000,
+			speed: 1000,
+			//scrollbar: '.swiper-scrollbar',
+			//scrollbarHide: true,
+			grabCursor: true,
+			autoplayDisableOnInteraction: true
 			});
 		</script>
 
@@ -139,7 +161,7 @@
     <a id="004" name="004"></a>
      
 	<div class="developer">
-		<div class="deve_title">
+		<div class="dev_title">
 			<img src="/themes/house/redian/images_redian/developers.jpg" width="1072" height="66"/>
 		</div>
 		<div class="developer_intro">
