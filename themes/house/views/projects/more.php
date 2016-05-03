@@ -13,30 +13,29 @@
 
 <div class="wrap">
 
-     <div class="botton_nav">
-                <div class="nav_wrap" style="width: 1022px;">
-                                  <div class="nav_fl">
-                                               <ul>
-                                                    <li style="width:96px;"><img src="/themes/house/redian/images_redian/shouye.gif" align="absmiddle"/><a href="/">首页</a><span>|</span></li>
-                                                     <li><a href="#000">项目介绍</a><span>|</span></li>
-                                                      <li><a href="#001">项目优势</a><span>|</span></li>
-                                                       <li><a href="#002">周边介绍</a><span>|</span></li>
-                                                        <li><a href="#003">户型介绍</a><span>|</span></li>
-                                                         <li style="width:112px;"><a href="#004">开发商介绍</a><span>|</span></li>
-                                                          <li style="width:56px;"><a href="#005">地图</a><span>|</span></li>
-                                                           <li style="width:140px;"><a href="#006">为何选择枫之都</a></li>
-                                               </ul>
-                                  </div>
-                                  <div class="nav_fr">
-                                      <p> <img src="/themes/house/redian/images_redian/zixun.gif" align="absmiddle"/><a href="#">在线咨询</a></p>
-                                  </div>
-                  </div>
-     </div>
-     <div class="liucheng">
-	     <img src="/themes/house/redian/images_redian/liucheng.jpg"/>
-     </div>
-	 <!-- Swiper Start -->
-	
+	<div class="nav_wrap" style="width: 1022px;">
+		<div class="nav_fl">
+			<ul>
+				<li style="width:96px;"><img src="/themes/house/redian/images_redian/shouye.gif" align="absmiddle"/><a href="/">首页</a><span>|</span></li>
+				<li><a href="#000">项目介绍</a><span>|</span></li>
+				<li><a href="#001">项目优势</a><span>|</span></li>
+				<li><a href="#002">周边介绍</a><span>|</span></li>
+				<li><a href="#003">户型介绍</a><span>|</span></li>
+				<li style="width:112px;"><a href="#004">开发商介绍</a><span>|</span></li>
+				<li style="width:56px;"><a href="#005">地图</a><span>|</span></li>
+				<li style="width:140px;"><a href="#006">为何选择枫之都</a></li>
+			</ul>
+		</div>
+		<div class="nav_fr">
+		  <p> <img src="/themes/house/redian/images_redian/zixun.gif" align="absmiddle"/><a href="#">在线咨询</a></p>
+		</div>
+	</div>
+     
+     
+	<div class="liucheng">
+		<img src="/themes/house/redian/images_redian/liucheng.jpg"/>
+	</div>
+	<!-- Swiper Start -->
 	<div class="project" >
 			<div class="swiper-container s1" >
 					<div class="swiper-wrapper">
@@ -69,87 +68,86 @@
 		});
 	</script>
 	</div>
-
-
 	<!-- Swiper End -->
 	 
-     <div class="project">
-		<div class="intro_title"> <img src="/themes/house/redian/images_redian/intro.jpg"/>	</div>
+	 <!-- Project Summary Start -->
+	<div class="project">
+		<div class="intro_title"> <img src="/themes/house/redian/images_redian/intro.jpg"/>	
+		</div>
 		<div class="intro_top">
-		  <?php echo $subject['point'];?>
-
-	</div>
+			<?php echo $subject['point'];?>
+		</div>
      </div>
+	<!-- Project Summary End -->
 	
-
+	<!-- Project Point Start -->
 	<a id="002" name="002"></a>
-	 <div class="surrounding">
-                <div class="sur_title">
-                    <img src="/themes/house/redian/images_redian/surround.jpg"/>
-                </div>
-				<div class="surrounding_top">
-                 <?php echo $subject['point'];?>
-                
-                </div>
-     </div>
-     
-	 
+	<div class="surrounding">
+		<div class="sur_title">
+			<img src="/themes/house/redian/images_redian/surround.jpg"/>
+		</div>
+		<div class="surrounding_top">
+			<?php echo $subject['point'];?>
+		</div>
+	</div>
+     <!-- Project Point End -->
+	 <!-- Project layout Start -->
 	 <a id="003" name="003"></a>
-     <div class="apartment">
-                 <div class="apart_title">
-                    <img src="/themes/house/redian/images_redian/apart.jpg"/>
-                </div>
+    <div class="apartment">
+		<div class="apart_title">
+			<img src="/themes/house/redian/images_redian/apart.jpg"/>
+		</div>
                 
 	<div class="layout_images" >
-        <div class="swiper-container s2" >
-                <div class="swiper-wrapper">
-                <?php
-                $layoutList = unserialize($subject['layout_list']);
-                foreach((array)$layoutList as $key=>$row):
-                        if($row):?>
-                            <div class="swiper-slide" >
-                             <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
-                             </div>
+		<div class="swiper-container s2" >
+			<div class="swiper-wrapper">
+			<?php
+			$layoutList = unserialize($subject['layout_list']);
+			foreach((array)$layoutList as $key=>$row):
+				if($row):?>
+					<div class="swiper-slide" >
+					 <img style=" height: 300px;"   src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>">
+					 </div>
 
-                        <?php endif?>
-                <?php endforeach?>
+				<?php endif?>
+			<?php endforeach?>
 
-                </div>
-                <div class="swiper-pagination"></div>
+			</div>
+		<div class="swiper-pagination"></div>
 
-        </div>
-<script>
-         var s2 = new Swiper('.s2', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 3,
-        paginationClickable: true,
-        spaceBetween: 30,
-        autoplay: 3000,
-        speed: 1000,
-	loop: true,
-	nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        autoplayDisableOnInteraction: true
+		</div>
+		<script>
+			var s2 = new Swiper('.s2', {
+				pagination: '.swiper-pagination',
+				slidesPerView: 3,
+				paginationClickable: true,
+				spaceBetween: 30,
+				autoplay: 3000,
+				speed: 1000,
+				loop: true,
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				autoplayDisableOnInteraction: true
+			});
+		</script>
 
-    });
-</script>
-
-</div>
+	</div>
 
      </div>
-     
-     <a id="004" name="004"></a>
+     <!-- Project Point End -->
+	 <!-- Project Developer  Start -->
+    <a id="004" name="004"></a>
      
 	<div class="developer">
 		<div class="deve_title">
 			<img src="/themes/house/redian/images_redian/developers.jpg" width="1072" height="66"/>
 		</div>
 		<div class="developer_intro">
-		  <?php echo $subject['developer_intro'];?>
+			<?php echo $subject['developer_intro'];?>
 		</div>
 	</div>
- 
-     
+  <!-- Project Developer  End -->
+      <!-- Project Map  Start -->
 	<a id="005" name="005"></a>
 
 	<div class="maps">
@@ -161,26 +159,24 @@
 			<script>
 			window.onload=function()//用window的onload事件，窗体加载完毕的时候
 			{
-			daolumap();
+				daolumap();
 			}
-			</script>
-		
+			</script>		
 		</div>
     
 	</div>
+      <!-- Project Map  End -->
      
-     
-     
-     <a id="006" name="006"></a>
-     <div class="liyou">
+       <!-- Project Advantage  Start -->
+    <a id="006" name="006"></a>
+    <div class="liyou">
 		<div class="liyou_title">
 			<img src="/themes/house/redian/images_redian/liyou.jpg"/>
 		</div>
 		<div class="liyou_con">
 			<img src="/themes/house/redian/images_redian/reason.jpg"/>
 		</div>
-     </div>
-
+    </div>
+  <!-- Project A  End -->
 
 </div>
-
