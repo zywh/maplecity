@@ -36,7 +36,7 @@
 		<img src="/themes/house/redian/images_redian/liucheng.jpg"/>
 	</div>
 	<!-- Swiper Start -->
-	<div class="project" >
+	<div class="project_images" >
 			<div class="swiper-container s1" >
 					<div class="swiper-wrapper">
 				<?php 
