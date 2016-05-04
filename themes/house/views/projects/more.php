@@ -74,6 +74,8 @@
 	<script>
 		var s1 = new Swiper('.s1', {
 			pagination: '.swiper-pagination',
+			 nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
 			slidesPerView: 3,
 			preloadImages: false,
 			lazyLoading: true,
@@ -154,6 +156,8 @@
 			pagination: '.swiper-pagination',
 			slidesPerView: 3,
 			preloadImages: false,
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
 			lazyLoading: true,
 			paginationClickable: true,
 			spaceBetween: 22,
