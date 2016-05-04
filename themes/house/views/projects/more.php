@@ -56,7 +56,9 @@
 			foreach((array)$imageList as $key=>$row):
 						if($row):?>
 							<div class="swiper-slide" >
-							 <img data-src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" class="swiper-lazy">
+							 <img data-src="<?php 
+							 $s = str_replace("uploads","tn_uploads",$row['file']);
+							 echo $this->_baseUrl;?>/<?php echo $s; ?>" class="swiper-lazy">
 							  <div class="swiper-lazy-preloader "></div>
 							 </div>
 
@@ -131,7 +133,9 @@
 			foreach((array)$layoutList as $key=>$row):
 				if($row):?>
 					<div class="swiper-slide" >
-						<img data-src="<?php echo $this->_baseUrl?>/<?php echo $row['file']?>" class="swiper-lazy">
+						<img data-src="<?php 
+						$s = str_replace("uploads","tn_uploads",$row['file']);
+						echo $this->_baseUrl?>/<?php echo $s;?>" class="swiper-lazy">
 						<div class="swiper-lazy-preloader "></div>
 					 </div>
 
