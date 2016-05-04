@@ -62,6 +62,17 @@ class SiteController extends XFrontBase
                 }
             }
         }
+		
+		$criteria = new CDbCriteria();
+        $criteria->order = 'id DESC';
+        $criteria->order = 'date DESC';
+        $criteria->addCondition('homepage=1');
+        $count = Subject::model()->count($criteria);
+        $pager = new CPagination($count);
+        $pager->pageSize = 6;
+        $pager->applyLimit($criteria);
+      	$subject_list = Subject::model()->findAll($criteria);
+		
         //豪宅鉴赏
         $criteria = new CDbCriteria();
         $criteria->select = 'id, name, prepay, house_image, introduction';
@@ -308,6 +319,7 @@ class SiteController extends XFrontBase
 
         $data = array(
             'banner'                      => $banner,
+			'subject_list' => $subject_list ,
             'home_video'                  => $home_video,
             'video'                       => $video,
             'hot'                         => $hot,

@@ -1,3 +1,5 @@
+<link type="text/css" rel="stylesheet" href="http://www.idangero.us/swiper/dist/css/swiper.min.css" media="all" />
+<script src="http://www.idangero.us/swiper/dist/js/swiper.min.js"></script>
 <style>
 .fl_title{ font-family:"宋体";}
 .hot_loca{font-family:"宋体";}
@@ -8,6 +10,16 @@
 .lm_five_right_title a:hover{ color:#FF6600}
 .lmlist a:hover{ color:#FF6600}
 .zczltwo span a:hover{ text-decoration:underline}
+
+
+.swiper-container { background-color:#888787;}
+.swiper-slide img { 
+	width: 330px; height: 330px;  
+	padding:4px;
+    border:1px solid #888787;
+    background-color:#fff;}
+.swiper-pagination-bullet { opacity: 1; background: #fff; }
+.swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
 </style>
 <?php
 	$db = Yii::app()->db;
@@ -46,20 +58,52 @@
 		} else { return 'static/images/zanwu.jpg';}
 	}	
 ?> 
+
+
 <!-- banner开始 -->
-<div class="banner">
-    <div id="full-screen-slider">
-        <ul id="slides">
-            <?php foreach($banner as $k => $obj){ ?>
-            <li style="background:<?php switch($k){
-                case 0: echo '#560762';break;
-                case 1: echo '#467809';break;
-                default: echo '#34F';break;
-            } ?> url('<?php echo Yii::app()->request->baseUrl;?>/<?php echo $obj->image; ?>') no-repeat center top"><a href="<?php echo $obj->url; ?>"></a></li>
-            <?php } ?>
-        </ul>
-    </div>
+<div class="nycont_mls">
+
+	<div class="swiper-container" >
+		<div class="swiper-wrapper">
+				
+				 <?php foreach($subject_list as $project){ ?>
+					<div class="swiper-slide" >
+					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>"><img style="width: 100%;height: 250px;"	src="<?php 
+					echo Yii::app()->request->baseUrl;?>/<?php echo $project->room_type_image; ?>"></a>
+					
+				
+					</div>
+				<?php }?> 
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+
+	
+	</div>
+<script>
+	var swiper = new Swiper(".swiper-container", {
+			pagination: '.swiper-pagination',
+			 nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			slidesPerView: 3,
+			preloadImages: false,
+			lazyLoading: true,
+			paginationClickable: true,
+			spaceBetween: 22,
+			loop: true,
+			autoplay: 5000,
+			speed: 2000,
+			//scrollbar: '.swiper-scrollbar',
+			//scrollbarHide: true,
+			//grabCursor: true,
+			autoplayDisableOnInteraction: true
+
+	});
+</script>
 </div>
+
+<!-- banner结束 -->
 <!-- banner结束 -->
 
 <div class="nycont_mls">
