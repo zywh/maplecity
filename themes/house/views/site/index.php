@@ -61,19 +61,33 @@
 
 
 <!-- banner开始 -->
-<div class="nycont_mls">
+<div class="swiper-homepage">
 
 	<div class="swiper-container" >
 		<div class="swiper-wrapper">
 				
 				 <?php foreach($subject_list as $project){ ?>
 					<div class="swiper-slide" >
-					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>"><img style="width: 100%;height: 250px;"	src="<?php 
-					echo Yii::app()->request->baseUrl;?>/<?php echo $project->room_type_image; ?>"></a>
+					<img style="width: 100%;height: 250px;"	src="<?php 
+					echo Yii::app()->request->baseUrl;?>/<?php echo $project->room_type_image; ?>">
 					
 				
 					</div>
 				<?php }?> 
+				
+				<div class="enjoydown_list_xx" style="display:none;">
+				<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>" >
+					<span class="titlespan">项目名称:<?php echo $project->name; ?></span>
+					<span style="height: 120px; overflow: hidden;">
+						项目概况：<br /><?php echo strip_tags($project->summary); ?>
+					</span>
+					
+					<span>
+						 开发商<br /><i><?php echo $project->developer_intro; ?></i>
+					</span>
+				</a>
+			</div>
+
 		</div>
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-next swiper-button-white"></div>
@@ -102,6 +116,22 @@
 	});
 </script>
 </div>
+<script type="text/javascript">
+    //豪宅列表
+    $(document).ready(function(){
+       
+        
+        $(".enjoydown_list").mouseover(function(){
+            $(this).find('.enjoydown_list_info').hide();
+            $(this).find('.enjoydown_list_xx').show();
+        });
+        $(".enjoydown_list").mouseout(function(){
+            $(this).find('.enjoydown_list_info').show();
+            $(this).find('.enjoydown_list_xx').hide();
+        });
+
+    });
+</script>
 
 <!-- banner结束 -->
 <!-- banner结束 -->
