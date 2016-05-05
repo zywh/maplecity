@@ -266,9 +266,7 @@ foreach($resultshazai as $househaizai){
 </div>
 
 <!-- HotEnd -->
-<div class='homepage-title-bar'> 
-	<div class='homepage-title-text'>HOT热点推荐</div>
-</div>
+
 
 <!-- 加国资讯开始 -->
 <div class="lm_four">
