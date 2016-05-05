@@ -18,7 +18,7 @@
 
 
 </style>
-
+<div align="center"><img src="/themes/house/images/tuijian121.jpg" /></div>
 
 <div class="nytb_dz" style="width: 1022px;"> <a href="<?php echo Yii::app()->createUrl('site/index'); ?>">首页</a> &gt; <span style="font-size:14px;">项目推荐</span> </div>
 
@@ -55,11 +55,10 @@
 			foreach((array)$imageList as $key=>$row):
 						if($row):?>
 							<div class="swiper-slide" >
-							<a target="_blank" href="<?php 
-							echo $this->_baseUrl;?>/<?php echo $row['file']; ?>">
-							<img data-src="<?php 
+							 <img data-src="<?php 
 							 $s = str_replace("uploads","tn_uploads",$row['file']);
-							 echo $this->_baseUrl;?>/<?php echo $s; ?>" class="swiper-lazy" ></a>
+							 echo $this->_baseUrl;?>/<?php echo $s; ?>" class="swiper-lazy" onclick='this.src="<?php 
+							 echo $this->_baseUrl;?>/<?php echo $row['file']; ?>"' />
 							  <div class="swiper-lazy-preloader "></div>
 							 </div>
 
@@ -137,11 +136,9 @@
 			foreach((array)$layoutList as $key=>$row):
 				if($row):?>
 					<div class="swiper-slide" >
-						<a target="_blank" href="<?php 
-						echo $this->_baseUrl;?>/<?php echo $row['file']; ?>">
 						<img data-src="<?php 
 						$s = str_replace("uploads","tn_uploads",$row['file']);
-						echo $this->_baseUrl?>/<?php echo $s;?>" class="swiper-lazy"></a>
+						echo $this->_baseUrl?>/<?php echo $s;?>" class="swiper-lazy">
 						<div class="swiper-lazy-preloader "></div>
 					 </div>
 
