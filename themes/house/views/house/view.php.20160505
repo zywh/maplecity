@@ -1,7 +1,5 @@
 <link href="/themes/house/css/xinjia.css?<?php echo rand();?>" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="new/js/tFocus2.js"></script>
-<link rel="stylesheet" href="static/js/Swiper/css/swiper.min.css" >
-<script src="static/js/Swiper/js/swiper.min.js"></script>
 <style>
 .mydiv {
 *background-image:url(/themes/house/images/yuyuebf.png);
@@ -52,14 +50,6 @@ _top:       expression(eval(document.compatMode &&
 .dlh_btn a{ color:#FF6600}
 .dlh_btn:hover{ text-decoration:underline}
 .nytb_dz a:hover{ color:#FF6600}
-
-
-.s1 .swiper-slide img { 
-	width: 100%; height: 463px;  
-}
-.swiper-pagination-bullet { opacity: 1; background: #fff; }
-.swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
-
 </style>
 <script type="text/javascript">
 function showDiv(){
@@ -247,30 +237,6 @@ $slng=$_GET["lng"];
 			return $s;
 		} else { return 'static/images/zanwu.jpg';}
 	}
-	
-	function get_imagelist($county,$ml_num){
-		
-		$imageList =array();
-		$county = preg_replace('/\s+/', '', $county);
-		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
-		$num_files = 0;
-		if(is_dir($dir)){
-			$picfiles = scandir($dir);
-			$num_files = count(scandir($dir)); //there are two DIR returned
-		}
-		if ( $num_files > 2)    {
-			for ($x = 2; $x < $num_files ; $x++) {
-				$filePath = $dir.$picfiles[$x];
-				array_push($imageList, $filePath);
-			}
-			
-		} else { 
-			array_push($imageList,'static/images/zanwu.jpg');
-		}
-		
-		return $imageList;
-	}
 
 ?>    
 <!-- 地址开始 -->
@@ -285,8 +251,8 @@ $slng=$_GET["lng"];
 <!-- 房源详情页面开始 -->
 
 <div class="fyxq" style="margin-top:5px;">
-	<div class="cl"></div>
-	<div class="fyxqup">
+    <div class="cl"></div>
+    <div class="fyxqup">
         <div class="fyxqupleft" style="width: 633px;">
             <div class="fyxq_tab">
                 <a class="fyxq_tab_tp fyxq_tab_cur" href="#">图片</a>
@@ -306,29 +272,29 @@ $slng=$_GET["lng"];
                 
                 <?php
 		//echo $_COOKIE["fzd_houselist"]."</br>";		
-		$array=explode(',',$_COOKIE["fzd_houselist"]);
-		$offset=array_search($house->ml_num,$array);
-		//echo $offset."</br>";
-		$shangshang=$array[$offset-1];
-		$xiiaxia = $array[$offset+1];
-		//echo $array[$offset-1]."</br>";//下一个
-		//echo $array[$offset+1]."</br>"; //上一个
-						 
-		//上一套房源
-		$sqlshaid = "select id from h_house where ml_num='".$shangshang."'";
-		//echo $sqlshaid."</br>";
-		$resultshangid = $db->createCommand($sqlshaid)->query();
-			foreach($resultshangid as $houseshangi){
-			$idshang=$houseshangi["id"];
-		}
+$array=explode(',',$_COOKIE["fzd_houselist"]);
+$offset=array_search($house->ml_num,$array);
+//echo $offset."</br>";
+$shangshang=$array[$offset-1];
+$xiiaxia = $array[$offset+1];
+//echo $array[$offset-1]."</br>";//下一个
+//echo $array[$offset+1]."</br>"; //上一个
+				 
+//上一套房源
+$sqlshaid = "select id from h_house where ml_num='".$shangshang."'";
+//echo $sqlshaid."</br>";
+$resultshangid = $db->createCommand($sqlshaid)->query();
+foreach($resultshangid as $houseshangi){
+$idshang=$houseshangi["id"];
+}
 
-		//下一套房源
-		$sqlxiaid = "select id from h_house where ml_num='".$xiiaxia."'";
-		//echo $sqlxiaid;
-		$resultxiaid = $db->createCommand($sqlxiaid)->query();
-			foreach($resultxiaid as $housexiai){
-			$idxia=$housexiai["id"];
-		}
+//下一套房源
+$sqlxiaid = "select id from h_house where ml_num='".$xiiaxia."'";
+//echo $sqlxiaid;
+$resultxiaid = $db->createCommand($sqlxiaid)->query();
+foreach($resultxiaid as $housexiai){
+$idxia=$housexiai["id"];
+}
 				?>
                 <?php if($idshang!=""){?>
                 <a href="index.php?r=house/view&id=<?php echo $idshang;?>#004" <?php if($idxia==""){?>style="margin-left:140px;"<?php }else{?>style="margin-left:45px;"<?php }?>>上一套房源</a>
@@ -340,248 +306,294 @@ $slng=$_GET["lng"];
             </div>
             
             
+          <div>
+<!--效果开始-->
 
-<!--Swiper效果开始-->
 
 <div class="ink_phoBok">
+ <div id="ifocus">
+    <div id="ifocus_pic" class="pics">
+      <div id="ifocus_piclist">
+        <ul>
+<?php
+//打开 images 目录
 
+$county = $house->county;
+$county = preg_replace('/\s+/', '', $county);
+$county = str_replace("&","",$county);
+$dir="mlspic/crea/".$county."/Photo".$house->ml_num."/";
+$num_files = 0;
+if(is_dir($dir)){
+	$picfiles = scandir($dir);
+	$num_files = count(scandir($dir))-2;
+}
 
-	<div class="swiper-container s1" >
-		<div class="swiper-wrapper">
-			
-				<?php 
-				$imageList = get_imagelist($house->county,$house->ml_num);
-				foreach($imageList as $i){ ?>
-					<div class="swiper-slide" >
-						<img src="<?php echo $i; ?>">
-					</div>
-				<?php }?> 
-			
-		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next swiper-button-white"></div>
-		<div class="swiper-button-prev swiper-button-white"></div>
-
+if ( $num_files > 0)	{
 	
-	</div>
+	for ($x = 2; $x <= $num_files + 1; $x++) {
+	  //$filePath = $dir."Photo".$house->ml_num."-".$x.".jpeg";
+	  $filePath = $dir.$picfiles[$x];
+	  ?>
+	  <li><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>"width="465" height="308" /></a></li>
+	 <?php
+
+	}
+}
 	
-	<script>
-			//Swiper Start
-		var swiper1 = new Swiper(".s1", {
-			pagination: '.swiper-pagination',
-			nextButton: '.swiper-button-next',
-			prevButton: '.swiper-button-prev',
-			effect: 'fade',
-			preloadImages: false,
-			lazyLoading: true,
-			paginationClickable: true,
-			loop: true,
-			autoplay: 5000,
-			speed: 2000,
-			autoplayDisableOnInteraction: false
+else{
+echo "<img src='/static/images/zanwu.jpg' width='465' height='308'>";
+}
+?> 
+    
+        </ul>
+      </div>
+      <div id="ifocus_opdiv"></div>
+      <div id="ifocus_tx" class="tFocusText">
+        <ul>
+          <li class="current">
+
+          </li>
+          <li class="normal">
+          </li>
+          <li class="normal">
+          </li>
+          <li class="normal">
+         
+          </li>
+          <li class="normal">
+         
+          </li>
+          <li class="normal">
+           
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="tFocusBtn">      
+      <span class="tFocus-nextBtn"></span>
+      <div id="ifocus_btn">
+        <ul class="btns">
+<?php
+//打开 images 目录
+
+
+if ( $num_files > 0)	{
+	
+	for ($x = 2; $x <= $num_files + 1; $x++) {
+	  $filePath = $dir.$picfiles[$x];
+	  ?>
+	  <li class="current"><a target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" width="128" height="88" /></a></li>
+	  <?php
+	 
+	}
 		
-
-		});
-		//Start End
-	</script>
-
+}
+else{
+echo "<img src='/static/images/zanwu.jpg' width='128' height='88'>";
+}
+?> 
+        </ul>
+      </div>
+    <span class="tFocus-prevBtn"></span>
+   </div>
+  </div>
+  <script type="text/javascript">new tFocus('ifocus',{changeStyle:'opac',timer:3000});</script>
 </div>
-<!--Swiper End-->
-
+<!--End-->
+</div>
             
-		
-</div>
-
-<div class="fyxqupright">
-		<div class="fyxqupright_titile">MLS：<?php echo $house->ml_num; ?></div>
-		<div class="fyxqupright_btn">
+            
+        </div>
+        <div class="fyxqupright">
+            <div class="fyxqupright_titile">MLS：<?php echo $house->ml_num; ?></div>
+            <div class="fyxqupright_btn">
 <div style="float:left; margin-left:10px;"><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div>
 
 
 
-<?php if (empty($this->_account['userId'])) { ?>
-			<a style="float:right; padding-top:5px;" class="syss_fc_sc <?php if (in_array($house->id, $collection_list)) {echo 'collected';} ?> " data-id="<?php echo $house->id; ?>" href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">加入收藏</a>
+ <?php if (empty($this->_account['userId'])) { ?>
+                <a style="float:right; padding-top:5px;" class="syss_fc_sc <?php if (in_array($house->id, $collection_list)) {echo 'collected';} ?> " data-id="<?php echo $house->id; ?>" href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">加入收藏</a>
 <?php }else{?>
 
-		<div class="fyxqupright_btn" style="float:right; padding-top:5px;">
-			<a href="javascript:;" class="syss_fc_sc collection <?php if (in_array($house->id, $collection_list)) {
-echo 'collected';
+            <div class="fyxqupright_btn" style="float:right; padding-top:5px;">
+                <a href="javascript:;" class="syss_fc_sc collection <?php if (in_array($house->id, $collection_list)) {
+    echo 'collected';
 } ?>" data-id="<?php echo $house->id; ?>">加入收藏</a>
-		</div>
+            </div>
 
 <?php }?>
-		</div>
-		<div class="cl"></div>
-		<div class="fyxqupright_cont">
-			<div class="fyxq_ptss">
-				<div class="fyxq_ptssleft">价格：</div>
-				<div class="fyxq_ptssright">
-				<?php 
-				if ( $house->s_r == "Sale") {
-				$str= $house->lp_dol/10000 . "&nbsp&nbsp万加币";
-					echo $str;
-				} 
-				else {
-					$str = $house->lp_dol . "&nbsp&nbsp加元/月";
-				echo $str;  
-				}
-				?>
-				<?php if (!empty($exchangeRate)) { ?>&nbsp;<span>(约<i>
-				<?php echo number_format($house->lp_dol * floatval($exchangeRate)/10000, 2); ?></i>万人民币）</span><?php } ?></div>
-				<div class="cl"></div>
-			</div>
-			<div class="fyxq_ptss">
-				<div class="fyxq_ptssleft">地址：</div>
-				<div class="fyxq_ptssright"><?php echo $house->addr.",&nbsp".$house->municipality.", &nbsp".$house->county."&nbsp"; ?></div>
-				<div class="cl"></div>
-			</div>
-			<div class="fyxq_ptss">
-				<div class="fyxq_ptssleft"><?php if ($house->investType_id == 1) {
-echo '学区';
+            </div>
+            <div class="cl"></div>
+            <div class="fyxqupright_cont">
+                <div class="fyxq_ptss">
+                    <div class="fyxq_ptssleft">价格：</div>
+                    <div class="fyxq_ptssright">
+					<?php 
+					if ( $house->s_r == "Sale") {
+					$str= $house->lp_dol/10000 . "&nbsp&nbsp万加币";
+						echo $str;
+					} 
+					else {
+						$str = $house->lp_dol . "&nbsp&nbsp加元/月";
+					echo $str;  
+					}
+					?>
+					<?php if (!empty($exchangeRate)) { ?>&nbsp;<span>(约<i>
+					<?php echo number_format($house->lp_dol * floatval($exchangeRate)/10000, 2); ?></i>万人民币）</span><?php } ?></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="fyxq_ptss">
+                    <div class="fyxq_ptssleft">地址：</div>
+                    <div class="fyxq_ptssright"><?php echo $house->addr.",&nbsp".$house->municipality.", &nbsp".$house->county."&nbsp"; ?></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="fyxq_ptss">
+                    <div class="fyxq_ptssleft"><?php if ($house->investType_id == 1) {
+    echo '学区';
 } else {
-echo '城市';
+    echo '城市';
 } ?>：</div>
-				<div class="fyxq_ptssright"><?php echo $house->mname->municipality_cname."&nbsp&nbsp".$house->city->name; ?></div>
-				<div class="cl"></div>
-			</div>
-			<div class="fyxq_ptss">
-				<div class="fyxq_ptssleft">户型：</div>
-				<div class="fyxq_ptssright"><img src="new/images/1s.jpg"  />&nbsp;&nbsp;<?php echo $house->br; ?>&nbsp;&nbsp;<img src="new/images/1t.jpg" />&nbsp;&nbsp;<?php echo $house->bath_tot; ?></div>
-				<div class="cl"></div>
-			</div>
-			<div class="fyxq_ptss">
-				<div class="fyxq_ptssleft">配套：</div>
-				<div class="fyxq_ptssright fyxq_ptpd">
-				
-						   <?php 
-						   if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">中央空调</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>中央空调</span>
-						   <?php }?>
-				
-				
-						   <?php if($house->central_vac=="Y"){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">中央吸尘</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>中央吸尘</span>
-						   <?php }?>
+                    <div class="fyxq_ptssright"><?php echo $house->mname->municipality_cname."&nbsp&nbsp".$house->city->name; ?></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="fyxq_ptss">
+                    <div class="fyxq_ptssleft">户型：</div>
+                    <div class="fyxq_ptssright"><img src="new/images/1s.jpg"  />&nbsp;&nbsp;<?php echo $house->br; ?>&nbsp;&nbsp;<img src="new/images/1t.jpg" />&nbsp;&nbsp;<?php echo $house->bath_tot; ?></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="fyxq_ptss">
+                    <div class="fyxq_ptssleft">配套：</div>
+                    <div class="fyxq_ptssright fyxq_ptpd">
+                    
+                               <?php 
+							   if(strpos($house->a_c, 'Air') !== false || strpos($house->a_c, 'air') !== false){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">中央空调</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>中央空调</span>
+                               <?php }?>
+                    
+                    
+                               <?php if($house->central_vac=="Y"){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">中央吸尘</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>中央吸尘</span>
+                               <?php }?>
 
-						   <?php if($house->furnished==1){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">配套家具</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>配套家具</span>
-						   <?php }?>
+                               <?php if($house->furnished==1){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">配套家具</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>配套家具</span>
+                               <?php }?>
 
-						   <?php if($house->elevator=="Y"){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">电梯</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>电梯</span>
-						   <?php }?>
-						   
-						   <?php if($house->bsmt1_out !="None" or $house->bsmt2_out !=""){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">地下室</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>地下室</span>
-						   <?php }?>
+                               <?php if($house->elevator=="Y"){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">电梯</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>电梯</span>
+                               <?php }?>
+                               
+                               <?php if($house->bsmt1_out !="None" or $house->bsmt2_out !=""){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">地下室</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>地下室</span>
+                               <?php }?>
 
-						   <?php 
-						   if(strpos($house->pool, 'pool') !== false){
-								?><!--有 --> <span><b></b><font color="#FF3300">游泳池</font></span><?php 
-							}else{
-								?><!--无 --><span><s></s>游泳池</span> <?php 
-							}?>  
-						   
-						   <?php if($house->fpl_num == "Y"){?>
-							<!--有 -->            
-							<span><b></b><font color="#FF3300">壁炉</font></span>
-							<?php }else{?>
-							<!--无 -->
-						   <span><s></s>壁炉</span>
-						   <?php }?> 
-					</div>
-				<div class="cl"></div>
-			</div>
-			
-			<div class="fyxq_ptss">
-			<div class="fyxq_phone"><img src="new/images/phone.jpg" width="78" height="78" /></div>
-			<div class="fyxq_rx">服务热线：<br/>
-			  <img src="new/images/plat.jpg" width="23" height="15" /><span>400-870-1029</span>
-			</div>
-			 <div class="cl"></div>
-			</div>
-		   
-		   
-			 <div class="fyxq_ptss">
-			 <?php if (empty($this->_account['userId'])) { ?>
-			 <div class="kf" style="background-image:url('/themes/house/images/zix.jpg')"><a href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">　预约看房</a></div>
-			 <?php }else{?>
-			 <div class="kf" style="background-image:url('/themes/house/images/zix.jpg')"><a href="javascript:showDiv()">　预约看房</a></div>
-			 <?php }?>
-			
-			 <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes">在线咨询</a></div>
-			  <div class="kf" style="background-image:url('/themes/house/images/kfxxk.jpg')"><a href="javascript:window.close()">退回房源列表</a></div>
+                               <?php 
+							   if(strpos($house->pool, 'pool') !== false){
+									?><!--有 --> <span><b></b><font color="#FF3300">游泳池</font></span><?php 
+								}else{
+									?><!--无 --><span><s></s>游泳池</span> <?php 
+								}?>  
+                               
+                               <?php if($house->fpl_num == "Y"){?>
+                                <!--有 -->            
+                                <span><b></b><font color="#FF3300">壁炉</font></span>
+                                <?php }else{?>
+                                <!--无 -->
+                               <span><s></s>壁炉</span>
+                               <?php }?> 
+                        </div>
+                    <div class="cl"></div>
+                </div>
+                
+                <div class="fyxq_ptss">
+                <div class="fyxq_phone"><img src="new/images/phone.jpg" width="78" height="78" /></div>
+                <div class="fyxq_rx">服务热线：<br/>
+                  <img src="new/images/plat.jpg" width="23" height="15" /><span>400-870-1029</span>
+                </div>
+                 <div class="cl"></div>
+                </div>
+               
+               
+                 <div class="fyxq_ptss">
+                 <?php if (empty($this->_account['userId'])) { ?>
+                 <div class="kf" style="background-image:url('/themes/house/images/zix.jpg')"><a href="index.php?r=site/login&houseid=<?php echo $house->id;?>" target="_blank">　预约看房</a></div>
+                 <?php }else{?>
+                 <div class="kf" style="background-image:url('/themes/house/images/zix.jpg')"><a href="javascript:showDiv()">　预约看房</a></div>
+                 <?php }?>
+                
+                 <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes">在线咨询</a></div>
+                  <div class="kf" style="background-image:url('/themes/house/images/kfxxk.jpg')"><a href="javascript:window.close()">退回房源列表</a></div>
 
 <div id="popDiv" class="mydiv" style="display:none;">
 <div class="guanbi"><a href="javascript:closeDiv()">关闭</a></div>
 <div style="height:100px;"></div>
 <script type="text/javascript">
-function check (form)
-{
-	var reg = /^\s*|\s*$/g;
-	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
-	if(!myreg.test(form.tel.value.replace(reg,''))) 
-	{ 
-	alert('请输入有效的手机号码！'); 
-	form.tel.focus ();
-	return false; 
-	} 
-	else if (form.uname.value.replace(reg,'') == "")
-	{
-		alert ("请输入您的姓名");
-		form.uname.focus ();
-		return false;
-	}
-	else if (form.address.value.replace(reg,'') == "")
-	{
-		alert ("请输入现居地址");
-		form.address.focus ();
-		return false;
-	}
-	else if (form.tel.value.replace(reg,'') == "")
-	{
-		alert ("请输入联系电话");
+    function check (form)
+    {
+        var reg = /^\s*|\s*$/g;
+		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+        if(!myreg.test(form.tel.value.replace(reg,''))) 
+        { 
+        alert('请输入有效的手机号码！'); 
 		form.tel.focus ();
-		return false;
-	}
-	else if (form.touzi.value.replace(reg,'') == "")
-	{
-		alert ("是否已经填写投资评估报告？");
-		form.touzi.focus ();
-		return false;
-	}
-	else if (form.yuyuedate.value.replace(reg,'') == "")
-	{
-		alert ("请输入预约日期");
-		form.yuyuedate.focus ();
-		return false;
-	}
-	else 
-	{
-		return true;
-	}
-}
+        return false; 
+        } 
+        else if (form.uname.value.replace(reg,'') == "")
+        {
+            alert ("请输入您的姓名");
+            form.uname.focus ();
+            return false;
+        }
+        else if (form.address.value.replace(reg,'') == "")
+        {
+            alert ("请输入现居地址");
+            form.address.focus ();
+            return false;
+        }
+        else if (form.tel.value.replace(reg,'') == "")
+        {
+            alert ("请输入联系电话");
+            form.tel.focus ();
+            return false;
+        }
+        else if (form.touzi.value.replace(reg,'') == "")
+        {
+            alert ("是否已经填写投资评估报告？");
+            form.touzi.focus ();
+            return false;
+        }
+        else if (form.yuyuedate.value.replace(reg,'') == "")
+        {
+            alert ("请输入预约日期");
+            form.yuyuedate.focus ();
+            return false;
+        }
+        else 
+        {
+            return true;
+        }
+    }
 </script>
 <?php
 
@@ -597,56 +609,56 @@ echo "<script>alert('预约成功，我们会尽快联系您');location.href='in
 ?>
 <form action="index.php?r=house/view&id=<?php echo $house->id;?>&action=add" method="post" name="form1" id="form1">
 <table width="62%" border="0" cellspacing="0" cellpadding="0" style=" font-weight:lighter; font-family:'宋体'; margin:0 auto">
-<tr>
-<td width="30%">您的姓名：</td>
-<td width="50%"><input name="uname" type="text" id="uname"  placeholder="请输入您的姓名！"/></td>
-</tr>
-<tr>
-<td>现居地址：</td>
-<td><input name="address" type="text"  placeholder="请填写尽量详细"/></td>
-</tr>
-<tr>
-<td colspan="2" style="text-align:left">是否已经填写投资评估报告 <input name="touzi" type="radio" value="是" />是 <input name="touzi" type="radio" value="否" />否</td>
-</tr>
-<tr>
-<td>手机号码：</td>
-<td><input name="tel" type="text" id="#phone"  placeholder="请填写您的联系电话"/></td>
-</tr>
-<tr>
-<td>预约日期：</td>
-<td>
-<select name="yuyuedate" style="width:172px">
-<option value="<?php echo date("Y-m-d",strtotime("+1 day"));?>"><?php echo date("Y-m-d",strtotime("+1 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+2 day"));?>"><?php echo date("Y-m-d",strtotime("+2 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+3 day"));?>"><?php echo date("Y-m-d",strtotime("+3 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+4 day"));?>"><?php echo date("Y-m-d",strtotime("+4 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+5 day"));?>"><?php echo date("Y-m-d",strtotime("+5 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+6 day"));?>"><?php echo date("Y-m-d",strtotime("+6 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+7 day"));?>"><?php echo date("Y-m-d",strtotime("+7 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+8 day"));?>"><?php echo date("Y-m-d",strtotime("+8 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+9 day"));?>"><?php echo date("Y-m-d",strtotime("+9 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+10 day"));?>"><?php echo date("Y-m-d",strtotime("+10 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+11 day"));?>"><?php echo date("Y-m-d",strtotime("+11 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+12 day"));?>"><?php echo date("Y-m-d",strtotime("+12 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+13 day"));?>"><?php echo date("Y-m-d",strtotime("+13 day"));?></option>
-<option value="<?php echo date("Y-m-d",strtotime("+14 day"));?>"><?php echo date("Y-m-d",strtotime("+14 day"));?></option>
-</select>
-
-</td>
-</tr>
+  <tr>
+    <td width="30%">您的姓名：</td>
+    <td width="50%"><input name="uname" type="text" id="uname"  placeholder="请输入您的姓名！"/></td>
+  </tr>
+  <tr>
+    <td>现居地址：</td>
+    <td><input name="address" type="text"  placeholder="请填写尽量详细"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:left">是否已经填写投资评估报告 <input name="touzi" type="radio" value="是" />是 <input name="touzi" type="radio" value="否" />否</td>
+    </tr>
+  <tr>
+    <td>手机号码：</td>
+    <td><input name="tel" type="text" id="#phone"  placeholder="请填写您的联系电话"/></td>
+  </tr>
+  <tr>
+    <td>预约日期：</td>
+    <td>
+    <select name="yuyuedate" style="width:172px">
+    <option value="<?php echo date("Y-m-d",strtotime("+1 day"));?>"><?php echo date("Y-m-d",strtotime("+1 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+2 day"));?>"><?php echo date("Y-m-d",strtotime("+2 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+3 day"));?>"><?php echo date("Y-m-d",strtotime("+3 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+4 day"));?>"><?php echo date("Y-m-d",strtotime("+4 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+5 day"));?>"><?php echo date("Y-m-d",strtotime("+5 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+6 day"));?>"><?php echo date("Y-m-d",strtotime("+6 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+7 day"));?>"><?php echo date("Y-m-d",strtotime("+7 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+8 day"));?>"><?php echo date("Y-m-d",strtotime("+8 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+9 day"));?>"><?php echo date("Y-m-d",strtotime("+9 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+10 day"));?>"><?php echo date("Y-m-d",strtotime("+10 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+11 day"));?>"><?php echo date("Y-m-d",strtotime("+11 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+12 day"));?>"><?php echo date("Y-m-d",strtotime("+12 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+13 day"));?>"><?php echo date("Y-m-d",strtotime("+13 day"));?></option>
+    <option value="<?php echo date("Y-m-d",strtotime("+14 day"));?>"><?php echo date("Y-m-d",strtotime("+14 day"));?></option>
+    </select>
+    
+ </td>
+  </tr>
 </table>
 <div align="center"><input name="" type="submit" value=""  onclick="return check(this.form);" style="width:123px; height:29px;BACKGROUND-COLOR: Transparent; border:0px;cursor:pointer" /></div>
 </form>
 </div>
 <div id="bg" class="bgbgbg" style="display:none;"></div>
- 
-			 <div class="cl"></div>
-			</div> 
-		</div>
-   
-	</div>
-	<div class="cl"></div>
-</div>
+     
+                 <div class="cl"></div>
+                </div> 
+            </div>
+       
+        </div>
+        <div class="cl"></div>
+    </div>
     
     
     <div class="fyxqdown">
