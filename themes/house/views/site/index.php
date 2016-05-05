@@ -14,7 +14,7 @@
 
 .swiper-container .s2 { background-color:#888787;}
 .s1 .swiper-slide img { 
-	width: 100%; height: 463px;  
+	width: 100%; height: auto;  
 }
 	
 .s2 .swiper-slide img { 
