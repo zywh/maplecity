@@ -228,14 +228,13 @@ foreach($resultshazai as $househaizai){
 <!-- 热点推荐结束 -->
 
 <!-- Hot开始 -->
- 
+<div class="lm_four"> 
 <div class="swiper-hotproject">
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>HOT.热点推荐</div>
 	</div>
-   <div class="hotproject"><img src="/static/images/hot_title.jpg"/>
-   </div>
-	<div class="swiper-container s2" >
+  
+   <div class="swiper-container s2" >
 		<div class="swiper-wrapper">
 				
 				 <?php foreach($subject_list as $project){ ?>
@@ -266,7 +265,7 @@ foreach($resultshazai as $househaizai){
 	</script>
 
 </div>
-
+</div>
 <!-- HotEnd -->
 
 
@@ -275,7 +274,7 @@ foreach($resultshazai as $househaizai){
 	
      <div class="lm_four_banner"><a href="index.php?r=about2/about2&id=33"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/tl_3.jpg" /></a></div>
 	 <div class="lm_fourup">
-		 <a href="index.php?r=news/canadaNews">
+		 <a style='text-decoration:none;' href="index.php?r=news/canadaNews">
 		 <div class='homepage-title-bar'> 
 			<div class='homepage-title-text'>NEWS.加国咨询</div>
 		</div>
@@ -458,10 +457,11 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大留学开始 -->
 <div class="lm_five" >
+
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>EDUCATION.留学资讯</div>
 	</div>
-    <div class="lm_five_up"><a href=""><img src="/static/images/liuxue.jpg" /></a></div>
+  
     <div class="lm_five_down">
 <!--			<div class="lm_four_banner"><a href="<?php echo Yii::app()->createUrl('news/canadaNews2', array('catalog_id'=>17)); ?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/b_3.jpg" /></a></div>-->
 			
@@ -561,7 +561,7 @@ foreach($resultshazai as $househaizai){
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>IMMIGRATION.移民资讯</div>
 	</div>
-    <div class="lm_five_up"><a href=""><img src="/static/images/yimin.jpg" /></a></div>
+   
     <div class="lm_five_down" >
 			
         <div class="lm_five_down_news">
@@ -761,10 +761,13 @@ foreach($resultshazai as $househaizai){
 
 <!-- 合作伙伴开始 -->
 <div class="lm_eight">
-	<div class='homepage-title-bar'> 
-		<div class='homepage-title-text'>PARTNER.合作伙伴</div>
-	</div>
-    <div class="lm_eight_up"><a href="index.php?r=about/partner"><img src="/static/images/partner.jpg" /></a></div>
+
+	<a style='text-decoration:none;' href="index.php?r=about/partner">
+		<div class='homepage-title-bar'> 
+			<div class='homepage-title-text'>PARTNER.合作伙伴</div>
+		</div>
+	</a>
+  
     <div class="lm_eight_down">
         <span><a href="http://www.maplecity.com.cn/index.php?r=about/tridel" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/h_1.jpg" /></a></span>
         <span><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/h_2.jpg" /></span>
