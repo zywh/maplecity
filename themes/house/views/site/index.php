@@ -807,6 +807,14 @@ foreach($resultshazai as $househaizai){
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
 			//lazyLoading: true,
+			  effect: 'coverflow',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        },
 			paginationClickable: true,
 			spaceBetween: 22,
 			loop: true,
