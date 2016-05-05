@@ -14,7 +14,7 @@
 
 .swiper-container { background-color:#888787;}
 .swiper-slide img { 
-	width: 100%; height: 430px;  
+	width: 100%; height: 530px;  
 	}
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
 .swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
