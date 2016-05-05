@@ -106,47 +106,6 @@ background-color:#fff;
 </div>
 
 
-<!-- Hot开始 -->
-
-         
-             
-<div class="swiper-hotproject">
-
-   <div class="hotproject"><img src="/static/images/hot_title.jpg"/>
-   </div>
-	<div class="swiper-container s2" >
-		<div class="swiper-wrapper">
-				
-				 <?php foreach($subject_list as $project){ ?>
-					<div class="swiper-slide" >
-					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
-					<img src="<?php 
-					echo Yii::app()->request->baseUrl;?>/<?php 
-					$s = str_replace("uploads","tn_uploads",$project->room_type_image);
-					//echo $project->room_type_image; 
-					echo $s;
-					?>" >
-					</a>
-					
-					</div>
-				<?php }?> 
-			
-
-		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next swiper-button-white"></div>
-		<div class="swiper-button-prev swiper-button-white"></div>
-
-	
-	</div>
-	<script>
-
-	
-	</script>
-
-</div>
-
-<!-- HotEnd -->
 
 <!-- 热点推荐开始 -->
 <div class="lm_one">
@@ -268,6 +227,48 @@ foreach($resultshazai as $househaizai){
 </div>
 <!-- 热点推荐结束 -->
 
+<!-- Hot开始 -->
+ 
+<div class="swiper-hotproject">
+
+   <div class="hotproject"><img src="/static/images/hot_title.jpg"/>
+   </div>
+	<div class="swiper-container s2" >
+		<div class="swiper-wrapper">
+				
+				 <?php foreach($subject_list as $project){ ?>
+					<div class="swiper-slide" >
+					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
+					<img src="<?php 
+					echo Yii::app()->request->baseUrl;?>/<?php 
+					$s = str_replace("uploads","tn_uploads",$project->room_type_image);
+					//echo $project->room_type_image; 
+					echo $s;
+					?>" >
+					</a>
+					
+					</div>
+				<?php }?> 
+			
+
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+
+	
+	</div>
+	<script>
+
+	
+	</script>
+
+</div>
+
+<!-- HotEnd -->
+<div class='homepage-title-bar'> 
+	<div class='homepage-title-text'>HOT热点推荐</div>
+</div>
 
 <!-- 加国资讯开始 -->
 <div class="lm_four">
