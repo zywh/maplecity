@@ -107,8 +107,13 @@ background-color:#fff;
 
 
 <!-- Hot开始 -->
+
+         
+             
 <div class="swiper-hotproject">
 
+   <div class="hotproject"><img src="/static/images/hot_title.jpg"/>
+   </div>
 	<div class="swiper-container s2" >
 		<div class="swiper-wrapper">
 				
@@ -135,24 +140,6 @@ background-color:#fff;
 	
 	</div>
 	<script>
-	var swiper2 = new Swiper(".s2", {
-		pagination: '.swiper-pagination',
-		slidesPerView: 3,
-		//preloadImages: false,
-		nextButton: '.swiper-button-next',
-		prevButton: '.swiper-button-prev',
-		//lazyLoading: true,
-		paginationClickable: true,
-		spaceBetween: 22,
-		loop: true,
-		autoplay: 5000,
-		speed: 2000,
-		//scrollbar: '.swiper-scrollbar',
-		//scrollbarHide: true,
-		//grabCursor: true,
-		autoplayDisableOnInteraction: false
-	});
-		
 
 	
 	</script>
@@ -813,6 +800,22 @@ foreach($resultshazai as $househaizai){
 		});
 		//Start End
 		
+		var swiper2 = new Swiper(".s2", {
+			pagination: '.swiper-pagination',
+			slidesPerView: 3,
+			//preloadImages: false,
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			//lazyLoading: true,
+			paginationClickable: true,
+			spaceBetween: 22,
+			loop: true,
+			autoplay: 5000,
+			speed: 3000,
+			//grabCursor: true,
+			autoplayDisableOnInteraction: false
+		});
+			
 
 		
         //热点推荐
