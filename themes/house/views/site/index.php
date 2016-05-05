@@ -101,6 +101,16 @@
 			 nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
 			slidesPerView: 3,
+			effect: 'coverflow',
+			centeredSlides: true,
+			//slidesPerView: 'auto',
+			coverflow: {
+				rotate: 50,
+				stretch: 0,
+				depth: 100,
+				modifier: 1,
+				//slideShadows : true
+			},
 			preloadImages: false,
 			lazyLoading: true,
 			paginationClickable: true,
