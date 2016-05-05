@@ -230,7 +230,9 @@ foreach($resultshazai as $househaizai){
 <!-- Hot开始 -->
  
 <div class="swiper-hotproject">
-
+	<div class='homepage-title-bar'> 
+		<div class='homepage-title-text'>HOT.热点推荐</div>
+	</div>
    <div class="hotproject"><img src="/static/images/hot_title.jpg"/>
    </div>
 	<div class="swiper-container s2" >
@@ -270,8 +272,15 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加国资讯开始 -->
 <div class="lm_four">
+	
      <div class="lm_four_banner"><a href="index.php?r=about2/about2&id=33"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/tl_3.jpg" /></a></div>
-    <div class="lm_fourup"><a href="index.php?r=news/canadaNews"><img src="/static/images/news.jpg" /></a></div>
+	 <div class="lm_fourup">
+		 <a href="index.php?r=news/canadaNews">
+		 <div class='homepage-title-bar'> 
+			<div class='homepage-title-text'>NEWS.加国咨询</div>
+		</div>
+		</a>
+    </div>
     <div class="lm_fourdown">
        
         <div class="lm_four_news">
@@ -449,6 +458,9 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大留学开始 -->
 <div class="lm_five" >
+	<div class='homepage-title-bar'> 
+		<div class='homepage-title-text'>EDUCATION.留学资讯</div>
+	</div>
     <div class="lm_five_up"><a href=""><img src="/static/images/liuxue.jpg" /></a></div>
     <div class="lm_five_down">
 <!--			<div class="lm_four_banner"><a href="<?php echo Yii::app()->createUrl('news/canadaNews2', array('catalog_id'=>17)); ?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/b_3.jpg" /></a></div>-->
@@ -546,6 +558,9 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大移民开始 -->
 <div class="lm_five">
+	<div class='homepage-title-bar'> 
+		<div class='homepage-title-text'>IMMIGRATION.移民资讯</div>
+	</div>
     <div class="lm_five_up"><a href=""><img src="/static/images/yimin.jpg" /></a></div>
     <div class="lm_five_down" >
 			
@@ -643,6 +658,9 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大旅游开始 -->
 <div class="lm_five">
+	<div class='homepage-title-bar'> 
+		<div class='homepage-title-text'>TRAVEL.旅游资讯</div>
+	</div>
     <div class="lm_five_up"><a href=""><img src="/static/images/lvyou.jpg" /></a></div>
     <div class="lm_five_down">
 			
@@ -743,6 +761,9 @@ foreach($resultshazai as $househaizai){
 
 <!-- 合作伙伴开始 -->
 <div class="lm_eight">
+	<div class='homepage-title-bar'> 
+		<div class='homepage-title-text'>PARTNER.合作伙伴</div>
+	</div>
     <div class="lm_eight_up"><a href="index.php?r=about/partner"><img src="/static/images/partner.jpg" /></a></div>
     <div class="lm_eight_down">
         <span><a href="http://www.maplecity.com.cn/index.php?r=about/tridel" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/h_1.jpg" /></a></span>
