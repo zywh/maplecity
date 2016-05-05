@@ -54,9 +54,33 @@ _top:       expression(eval(document.compatMode &&
 .nytb_dz a:hover{ color:#FF6600}
 
 
-.s1 .swiper-slide img { 
+.ssss1 .swiper-slide img { 
 	width: 100%; height: 463px;  
 }
+
+.house-image-slide {
+	background-size: cover;
+	background-position: center;
+}
+
+.gallery-top {
+	height: 80%;
+	width: 100%;
+}
+.gallery-thumbs {
+	height: 20%;
+	box-sizing: border-box;
+	padding: 10px 0;
+}
+.gallery-thumbs .swiper-slide {
+	width: 25%;
+	height: 100%;
+	opacity: 0.7;
+}
+.gallery-thumbs .swiper-slide-active {
+	opacity: 1;
+}
+
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
 .swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
 
@@ -289,8 +313,7 @@ $slng=$_GET["lng"];
 	<div class="fyxqup">
         <div class="fyxqupleft" style="width: 633px;">
             <div class="fyxq_tab">
-                <a class="fyxq_tab_tp fyxq_tab_cur" href="#">图片</a>
-				
+               
 				<?php 
 				if($house->tour_url!=""){
 					echo "<a class='fyxq_tab_sp'" ;
@@ -346,16 +369,15 @@ $slng=$_GET["lng"];
 <div class="ink_phoBok">
 
 
-	<div class="swiper-container s1" >
-		<div class="swiper-wrapper">
-			
-				<?php 
-				$imageList = get_imagelist($house->county,$house->ml_num);
-				foreach($imageList as $i){ ?>
-					<div class="swiper-slide" >
-						<img src="<?php echo $i; ?>">
-					</div>
-				<?php }?> 
+	<div class="swiper-container gallery-top" >
+		<div class="swiper-wrapper" >
+			<?php 
+			$imageList = get_imagelist($house->county,$house->ml_num);
+			foreach($imageList as $i){ ?>
+			<div class="swiper-slide house-image-slide" 
+			 style="background-image:url(<?php echo $i; ?>)">
+			</div>
+			<?php }?> 
 			
 		</div>
 		<div class="swiper-pagination"></div>
@@ -364,25 +386,44 @@ $slng=$_GET["lng"];
 
 	
 	</div>
+	<div class="swiper-container gallery-thumbs">
+        <div class="swiper-wrapper">
+			<?php 
+			//$imageList = get_imagelist($house->county,$house->ml_num);
+			foreach($imageList as $i){ ?>
+			<div class="swiper-slide house-image-slide" 
+			 style="background-image:url(<?php echo $i; ?>)">
+			</div>
+			<?php }?>  
+        </div>
+    </div>
 	
-	<script>
-			//Swiper Start
-		var swiper1 = new Swiper(".s1", {
-			pagination: '.swiper-pagination',
-			nextButton: '.swiper-button-next',
-			prevButton: '.swiper-button-prev',
-			effect: 'fade',
-			preloadImages: false,
-			lazyLoading: true,
-			paginationClickable: true,
-			loop: true,
-			autoplay: 5000,
-			speed: 2000,
-			autoplayDisableOnInteraction: false
-		
+<script>
+	
 
-		});
-		//Start End
+var galleryTop = new Swiper('.gallery-top', {
+	nextButton: '.swiper-button-next',
+	pagination: '.swiper-pagination',
+	prevButton: '.swiper-button-prev',
+	loop: true,
+	autoplay: 4000,
+	speed: 1000,
+	autoplayDisableOnInteraction: false,
+	//spaceBetween: ,
+});
+var galleryThumbs = new Swiper('.gallery-thumbs', {
+	spaceBetween: 10,
+	centeredSlides: true,
+	slidesPerView: 'auto',
+	touchRatio: 0.2,
+	slideToClickedSlide: true
+});
+
+galleryTop.params.control = galleryThumbs;
+galleryThumbs.params.control = galleryTop;
+
+
+	
 	</script>
 
 </div>
@@ -656,7 +697,6 @@ echo "<script>alert('预约成功，我们会尽快联系您');location.href='in
                     <a class="fyxqdown_left_cur" href="javascript:void(0);">详情列表</a>
                     <a href="#buju">房屋布局</a>
                     <a href="#mshu">房源描述</a>
-                    <a href="#tup">房源图片</a>
                     <a href="#fjin">附近房源</a>
                     <a href="#liulan">最近浏览</a>
                     <a href="#fydt" onclick="daolumap();">房源地图</a>
@@ -1035,37 +1075,10 @@ $(function(){
                 </div>
             </div>
             <a href="javascript:;" name="fytp" style="text-indent:-99999em; display:block;margin-bottom: -5px;zoom: 1;">1</a>
-            <div class="fwbj_box">
-                <div class="fyxqdown_left_title">
-                    <a class="fyxqdown_left_cur" id="tup" href="javascript:;">房屋图片</a><div class="cl"></div>
-                </div>
-                <div class="fwms_cont">
-                
-<?php
-
-
-	
-	if ( $num_files > 0)	{
-	
-		for ($x = 2; $x <= $num_files + 1; $x++) {
-				$filePath = $dir.$picfiles[$x];
-				
-				?>     
-          <div style="margin-top:8px;"><img width="600" height="450" src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $filePath; ?>" /></div>
-          <?php
-
-		}
-		
-	} else{
-		echo "<img src='/static/images/zanwu.jpg'  width='742' height='489'>";
-	}
-?>
-                       
-                
-
-                </div>
-            </div>
+ 
         </div>
+		
+		
         <div class="fyxqdown_right">
 <div class="zczl">
     <div class="zczlone">立即注册获得以下资料</div>
