@@ -12,10 +12,17 @@
 .zczltwo span a:hover{ text-decoration:underline}
 
 
-.swiper-container { background-color:#888787;}
-.swiper-slide img { 
-	width: 100%; height: 530px;  
-	}
+.swiper-container .s2 { background-color:#888787;}
+.s1 .swiper-slide img { 
+	width: 100%; height: 463px;  
+}
+	
+.s2 .swiper-slide img { 
+width: 330px; height: 253px;  
+padding:4px;
+border:1px solid #888787;
+background-color:#fff;
+}
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
 .swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
 </style>
@@ -59,34 +66,22 @@
 
 
 <!-- banner开始 -->
+
+
 <div class="swiper-homepage">
 
-	<div class="swiper-container" >
+	<div class="swiper-container s1" >
 		<div class="swiper-wrapper">
 				
-				 <?php foreach($subject_list as $project){ ?>
+				  <?php foreach($banner as $k => $obj){ ?>
 					<div class="swiper-slide" >
-					<a data-ajax="false" href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
-					<img src="<?php 
-					echo Yii::app()->request->baseUrl;?>/<?php echo $project->room_type_image; ?>">
+					<a href="<?php echo $obj->url; ?>">
+					<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $obj->image; ?>">
 					</a>
 				
 					</div>
 				<?php }?> 
-				
-				<div class="enjoydown_list_xx" style="display:none;">
-				<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>" >
-					<span class="titlespan">项目名称:<?php echo $project->name; ?></span>
-					<span style="height: 120px; overflow: hidden;">
-						项目概况：<br /><?php echo strip_tags($project->summary); ?>
-					</span>
-					
-					<span>
-						 开发商<br /><i><?php echo $project->developer_intro; ?></i>
-					</span>
-				</a>
-			</div>
-
+			
 		</div>
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-next swiper-button-white"></div>
@@ -96,23 +91,6 @@
 	</div>
 
 </div>
-<script type="text/javascript">
-    //豪宅列表
-    $(document).ready(function(){
-       
-        
-        $(".enjoydown_list").mouseover(function(){
-            $(this).find('.enjoydown_list_info').hide();
-            $(this).find('.enjoydown_list_xx').show();
-        });
-        $(".enjoydown_list").mouseout(function(){
-            $(this).find('.enjoydown_list_info').show();
-            $(this).find('.enjoydown_list_xx').hide();
-        });
-
-    });
-</script>
-
 <!-- banner结束 -->
 
 
@@ -127,6 +105,61 @@
 </div>
 </div>
 
+
+<!-- Hot开始 -->
+<div class="swiper-hotproject">
+
+	<div class="swiper-container s2" >
+		<div class="swiper-wrapper">
+				
+				 <?php foreach($subject_list as $project){ ?>
+					<div class="swiper-slide" >
+					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
+					<img src="<?php 
+					echo Yii::app()->request->baseUrl;?>/<?php 
+					$s = str_replace("uploads","tn_uploads",$project->room_type_image);
+					//echo $project->room_type_image; 
+					echo $s;
+					?>" >
+					</a>
+					
+					</div>
+				<?php }?> 
+			
+
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+
+	
+	</div>
+	<script>
+	var swiper2 = new Swiper(".s2", {
+		pagination: '.swiper-pagination',
+		slidesPerView: 3,
+		//preloadImages: false,
+		nextButton: '.swiper-button-next',
+		prevButton: '.swiper-button-prev',
+		//lazyLoading: true,
+		paginationClickable: true,
+		spaceBetween: 22,
+		loop: true,
+		autoplay: 5000,
+		speed: 2000,
+		//scrollbar: '.swiper-scrollbar',
+		//scrollbarHide: true,
+		//grabCursor: true,
+		autoplayDisableOnInteraction: false
+	});
+		
+
+	
+	</script>
+
+</div>
+
+<!-- HotEnd -->
 
 <!-- 热点推荐开始 -->
 <div class="lm_one">
@@ -763,16 +796,14 @@ foreach($resultshazai as $househaizai){
     $(document).ready(function(){
 		
 		//Swiper Start
-		var swiper = new Swiper(".swiper-container", {
+		var swiper1 = new Swiper(".s1", {
 			pagination: '.swiper-pagination',
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
 			effect: 'fade',
-			//slidesPerView: 1,
 			preloadImages: false,
 			lazyLoading: true,
 			paginationClickable: true,
-			//spaceBetween: 22,
 			loop: true,
 			autoplay: 5000,
 			speed: 2000,
@@ -781,6 +812,8 @@ foreach($resultshazai as $househaizai){
 
 		});
 		//Start End
+		
+
 		
         //热点推荐
         $(".lm_jddown").mouseover(function(){
