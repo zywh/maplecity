@@ -58,6 +58,10 @@ _top:       expression(eval(document.compatMode &&
 	width: 100%; height: 263px;  
 }
 
+.fjfy_swiper .swiper-slide img { 
+	width: 100%; height: 263px;  
+}
+
 .house-image-slide {
 	background-size: cover;
 	background-position: center;
@@ -81,17 +85,10 @@ _top:       expression(eval(document.compatMode &&
 	opacity: 1;
 }
 .swiper-pagination-bullet {
-	/*width: 20px;
-	height: 20px;
-	text-align: center;
-	line-height: 20px;
-	font-size: 12px;
-	color:#ff4103;*/
 	opacity: 0.8;
 	background: #fff;
 }
 .swiper-pagination-bullet-active {
-	/*color:#fff;*/
 	background: #ff4103;
 	opacity: 0.8;
 }
@@ -256,8 +253,8 @@ $slng=$_GET["lng"];
 		
 		$county = preg_replace('/\s+/', '', $county);
 		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
-		//$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
+		//$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
 		$num_files = 0;
 		if(is_dir($dir)){
 			$picfiles = scandir($dir);
@@ -1461,55 +1458,50 @@ if($house->s_r=="Sale"){
         
         
         
-        <a name="fjin" id="fjin"></a>
-        <div class="cl"></div>
-        <a href="javascript:;" name="fjfy" style="text-indent:-99999em; display:block;margin-bottom:25px;zoom: 1;">1</a>
-        <div class="fjfy_box">
-            <div class="fyxqdown_left_title">
-                <a class="fyxqdown_left_cur" id="rdian" href="javascript:;">附近房源</a><div class="cl"></div>
-            </div>
+<a name="fjin" id="fjin"></a>
+<div class="cl"></div>
+
+<div class="fjfy_box">
+	<div class="fyxqdown_left_title">
+		<a class="fyxqdown_left_cur" id="rdian" href="javascript:;">附近房源</a><div class="cl"></div>
+	</div>
             
+	 <!--Swiper begin -->
+	<div class="swiper-container fjfy_swiper" >
+		<div class="swiper-wrapper">
+		
+		<?php 
+		$sqlfujian = "select * from h_house where zip='".$house->zip."' or community ='".$house->community."' and id!=".$house->id." limit 0,6";
+		$resultsfujian = $db->createCommand($sqlfujian)->query();
+		foreach($resultsfujian as $housefujin){
 
-      <div class="rollBox">
-<a href="javascript:;" onmousedown="ISL_GoDownxxk()" onmouseup="ISL_StopDownxxk()" onmouseout="ISL_StopDownxxk()" class="img1" hidefocus="true"></a>
-     <div class="Cont" id="ISL_Contxxk">
-      <div class="ScrCont">
-       <div id="List1xxk">
-        <!-- 图片列表 begin -->
-<?php 
+			$county=$housefujin["county"];
+			$ml_num=$housefujin["ml_num"];
+			$pic = get_firstimage($county,$ml_num);
+			?>
 
-$sqlfujian = "select * from h_house where zip='".$house->zip."' or community ='".$house->community."' and id!=".$house->id." limit 0,6";
-
-$resultsfujian = $db->createCommand($sqlfujian)->query();
-foreach($resultsfujian as $housefujin){
-?>
-        <div class="pic">
-				<div class="playerdetail">
-					<div class="detailimg">
-                      <?php
-					  $county=$housefujin["county"];
-					  $ml_num=$housefujin["ml_num"];
-					  $pic = get_firstimage($county,$ml_num);
-					  ?><a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/></a>
-                    
-                    
-                    </div>
-					<div class="teanames"><?php echo $housefujin["ml_num"];?></div>
-					<div class="teadetail" style="width:210px;">地址：<?php echo $housefujin["addr"]; ?><br />社区：<?php echo $housefujin["community"];?><br/>价格：<span><font color="#FF3300"><?php echo $housefujin["lp_dol"]/10000; ?></font>万加元</span></div>
-                   
-					
+			<div class="swiper-slide" >
+				<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>">
+					<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
+				</a>
+				<div class='fjfy-titlebox'>
+					<div class='fjfy-titletext'>
+						<span>地址：<?php echo $housefujin["addr"];  ?> </span>
+						<span>价格：<?php echo $housefujin["lp_dol"]/10000; ?>万加元</span>
+					</div>
 				</div>
-         </div>
-<?php }?> 
-        <!-- 图片列表 end -->
-       </div>
-       <div id="List2xxk"></div>
-      </div>
-     </div>
-<a href="javascript:;"  onmousedown="ISL_GoUpxxk()" onmouseup="ISL_StopUpxxk()" onmouseout="ISL_StopUpxxk()" class="img2" hidefocus="true"></a>
-    </div>
-
- </div>
+		
+			</div>
+		
+		<?php }?>
+		
+		
+		</div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+	</div>
+	 <!-- Swiper end -->
+</div>
  
  
  
@@ -1965,26 +1957,65 @@ daolumap();
 <script type="text/javascript">
 
 
+	
+	var swiper_grtz = new Swiper(".grtz_swiper", {
+		//pagination: '.swiper-pagination',
+		//slidesPerView: 2,
+		//preloadImages: false,
+		//nextButton: '.swiper-button-next',
+		//prevButton: '.swiper-button-prev',
+		//lazyLoading: true,
+		//effect: 'coverflow',
+		effect: 'cube',
+		//direction: 'vertical',
+		paginationClickable: true,
+		loop: true,
+		spaceBetween: 20,
+		autoplay: 5000,
+		speed: 3000,
+		//grabCursor: true,
+		autoplayDisableOnInteraction: false
+	});
 		
-		var swiper_grtz = new Swiper(".grtz_swiper", {
-			//pagination: '.swiper-pagination',
-			//slidesPerView: 2,
-			//preloadImages: false,
-			//nextButton: '.swiper-button-next',
-			//prevButton: '.swiper-button-prev',
-			//lazyLoading: true,
-			//effect: 'coverflow',
-			effect: 'cube',
-			//direction: 'vertical',
-			paginationClickable: true,
-			loop: true,
-			spaceBetween: 20,
-			autoplay: 5000,
-			speed: 3000,
-			//grabCursor: true,
-			autoplayDisableOnInteraction: false
-		});
-			
+	var swiper_fjfy = new Swiper(".fjfy_swiper", {
+		//pagination: '.swiper-pagination',
+		slidesPerView: 3,
+		//preloadImages: false,
+		nextButton: '.swiper-button-next',
+		prevButton: '.swiper-button-prev',
+		//lazyLoading: true,
+		//effect: 'coverflow',
+		//effect: 'cube',
+		//direction: 'vertical',
+		//paginationClickable: true,
+		loop: true,
+		spaceBetween: 10,
+		autoplay: 5000,
+		speed: 3000,
+		//grabCursor: true,
+		autoplayDisableOnInteraction: false
+	});
+	
+	var swiper_zjll = new Swiper(".fjfy_zjll", {
+		//pagination: '.swiper-pagination',
+		slidesPerView: 4,
+		//preloadImages: false,
+		nextButton: '.swiper-button-next',
+		prevButton: '.swiper-button-prev',
+		//lazyLoading: true,
+		//effect: 'coverflow',
+		//effect: 'cube',
+		//direction: 'vertical',
+		//paginationClickable: true,
+		loop: true,
+		spaceBetween: 10,
+		autoplay: 5000,
+		speed: 3000,
+		//grabCursor: true,
+		autoplayDisableOnInteraction: false
+	});
+		
+	
 
 
     //图片焦点图切换
