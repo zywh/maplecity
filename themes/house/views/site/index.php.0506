@@ -114,10 +114,7 @@ width:100%;
         <div class="lm_oneleft">
             <div class="video">
                 <div class="lm_label"><img src="/static/images/MLS123456/video.jpg" ></div>
-                <div class="videocont" id="video_wrap" style="width:262px; height:171px">
-				<embed src="http://player.youku.com/player.php/sid/XMTU2MDE2NDk5Ng==/v.swf" allowFullScreen="true" quality="high" width="262px" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
-				</div>
-				
+                <div class="videocont" id="video_wrap" style="width:262px; height:171px"></div>
                 <div class="lmlistbox">
                     <?php foreach($video as $obj){ ?>
                     <div class="lmlist" style="height:30px; line-height:30px; border-bottom:1px dashed #8a8a8a; "><a href="<?php echo Yii::app()->createUrl('site/viewVideo', array('id' => $obj->id)); ?>" target="_blank" style="font-size:14px; font-family:'宋体';"><?php echo $obj->title; ?></a><span style="font-size:14px; font-family:'宋体';"><?php echo date('Y-m-d', $obj->date); ?></span></div>
@@ -805,9 +802,6 @@ foreach($resultshazai as $househaizai){
 <!-- 合作伙伴结束 -->
 
 <script type="text/javascript">
-
-
-/*
     flowplayer("video_wrap", "<?php echo Yii::app()->theme->baseUrl; ?>/js/flowplayer-3.2.12.swf", {
         clip: {
             url: "<?php echo Yii::app()->request->baseUrl; ?>"+"/"+"<?php echo $home_video->url; ?>",
@@ -826,8 +820,6 @@ foreach($resultshazai as $househaizai){
             }
         }
     });
-	
-	*/
 
     $(document).ready(function(){
 		
