@@ -661,7 +661,7 @@ foreach($resultshazai as $househaizai){
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>TRAVEL.旅游资讯</div>
 	</div>
-    <div class="lm_five_up"><a href=""><img src="/static/images/lvyou.jpg" /></a></div>
+  
     <div class="lm_five_down">
 			
         <div class="lm_five_down_news">
