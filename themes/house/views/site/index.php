@@ -836,13 +836,13 @@ foreach($resultshazai as $househaizai){
 			pagination: '.swiper-pagination',
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
-			effect: 'fade',
+			//effect: 'fade',
 			preloadImages: false,
 			lazyLoading: true,
 			paginationClickable: true,
 			loop: true,
 			autoplay: 5000,
-			speed: 2000,
+			speed: 1000,
 			autoplayDisableOnInteraction: false
 		
 

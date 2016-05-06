@@ -80,9 +80,23 @@ _top:       expression(eval(document.compatMode &&
 .gallery-thumbs .swiper-slide-active {
 	opacity: 1;
 }
+.swiper-pagination-bullet {
+	/*width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	color:#ff4103;*/
+	opacity: 0.8;
+	background: #fff;
+}
+.swiper-pagination-bullet-active {
+	/*color:#fff;*/
+	background: #ff4103;
+	opacity: 0.8;
+}
 
-.swiper-pagination-bullet { opacity: 1; background: #fff; }
-.swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
+
 
 </style>
 <script type="text/javascript">
@@ -405,6 +419,10 @@ var galleryTop = new Swiper('.gallery-top', {
 	nextButton: '.swiper-button-next',
 	pagination: '.swiper-pagination',
 	prevButton: '.swiper-button-prev',
+	//paginationBulletRender: function (index, className) {
+		//return '<span class="' + className + '">' + (index + 1) + '</span>';
+	//},
+	//paginationClickable: true,
 	loop: true,
 	autoplay: 4000,
 	speed: 3000,
