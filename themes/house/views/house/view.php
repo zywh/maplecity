@@ -54,8 +54,8 @@ _top:       expression(eval(document.compatMode &&
 .nytb_dz a:hover{ color:#FF6600}
 
 
-.ssss1 .swiper-slide img { 
-	width: 100%; height: 463px;  
+.grtz_con .swiper-slide img { 
+	width: 100%; height: 263px;  
 }
 
 .house-image-slide {
@@ -1416,17 +1416,17 @@ if($house->s_r=="Sale"){
 			   </div>
  
 <!-- House Recommend Start -->            
-	<div class="grtz">
+	<div class="swiper-container grtz_con" >
 		<div class="grtz_title"><span>热点推荐</span></div>
 		
-		<div class="swiper-container grtz_con" >
+		
 			<div class="swiper-wrapper">
 			<?php 
 			$sqlhaozi = "select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!=".$house->id." and recommend=1 limit 0,5";
 			$resultshazai = $db->createCommand($sqlhaozi)->query();
 			foreach($resultshazai as $househaizai){
-				$county=$housefujin["county"];
-				$ml_num=$housefujin["ml_num"];
+				$county=$househaizai["county"];
+				$ml_num=$househaizai["ml_num"];
 				$pic = get_firstimage($county,$ml_num);	
 			?>
 
@@ -1436,7 +1436,7 @@ if($house->s_r=="Sale"){
 					</a>
 					<div class='grtz-titlebox'>
 						<div class='grtz-titletext'>
-							<span><?php echo echo $househaizai["addr"];  ?> </span>
+							<span><?php echo $househaizai["addr"];  ?> </span>
 							<span><?php echo $househaizai["lp_dol"]/10000; ?>万加元</span>
 						</div>
 					</div>
@@ -1447,10 +1447,8 @@ if($house->s_r=="Sale"){
 			
 			
 			</div>
-		<div class="swiper-pagination"></div>
-		</div>
-		
-		<div class="housebottom"></div>
+			<div class="swiper-pagination"></div>
+			<div class="housebottom"></div>
 	</div>
 
     <div class="c1"></div>
@@ -1963,24 +1961,27 @@ daolumap();
 </script>
 
 <script type="text/javascript">
-    flowplayer("video_wrap", "<?php echo Yii::app()->theme->baseUrl; ?>/js/flowplayer-3.2.12.swf", {
-        clip: {
-            url: "<?php echo Yii::app()->request->baseUrl; ?>" + "/" + "<?php echo $house->video_url; ?>",
-            autoPlay: false,
-            autoBuffering: true
-        },
-        plugins: {
-            controls: {
-                play: true, //开端按钮
-                volume: true, //音量按钮
-                mute: true, //静音按钮
-                fullscreen: true, //全屏按钮
-                scrubber: true, //进度条
-                time: true, //是否显示时候信息
-                autoHide: true    //功能条是否主动隐蔽
-            }
-        }
-    });
+
+
+		
+		var swiper_grtz = new Swiper(".grtz_con", {
+			pagination: '.swiper-pagination',
+			//slidesPerView: 2,
+			//preloadImages: false,
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			//lazyLoading: true,
+			//  effect: 'coverflow',
+			direction: 'vertical',
+			paginationClickable: true,
+			loop: true,
+			autoplay: 5000,
+			speed: 3000,
+			//grabCursor: true,
+			autoplayDisableOnInteraction: false
+		});
+			
+
 
     //图片焦点图切换
     var sj = 5000;
