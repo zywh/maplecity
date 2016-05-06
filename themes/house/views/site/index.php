@@ -19,9 +19,7 @@
 	
 .s2 .swiper-slide img { 
 width: 330px; height: 253px;  
-padding:4px;
-border:1px solid #888787;
-background-color:#fff;
+
 }
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
 .swiper-pagination-bullet-active { opacity: 1; background: #ff4103; }
@@ -175,7 +173,9 @@ $zhinan=$housezhinan["image"];
         <div class="lm_oneright">
 
              <div class="hot">
-               <a href=""><img src="/static/images/hot_title.jpg"/></a>
+               <div class='homepage-title-bar-short'> 
+					<div class='homepage-title-text'>HOT.今日推荐</div>
+				</div>
                <div class="hot_con">
                
 <?php 
@@ -239,14 +239,20 @@ foreach($resultshazai as $househaizai){
 				
 				 <?php foreach($subject_list as $project){ ?>
 					<div class="swiper-slide" >
-					<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
-					<img src="<?php 
-					echo Yii::app()->request->baseUrl;?>/<?php 
-					$s = str_replace("uploads","tn_uploads",$project->room_type_image);
-					//echo $project->room_type_image; 
-					echo $s;
-					?>" >
-					</a>
+						<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
+						<img src="<?php 
+						echo Yii::app()->request->baseUrl;?>/<?php 
+						$s = str_replace("uploads","tn_uploads",$project->room_type_image);
+						//echo $project->room_type_image; 
+						echo $s;
+						?>" >
+						</a>
+						<div class='projects-title-box'>
+							<div class='projects-title'>
+								<span>项目名称：<?php echo $project->name; ?> </span>
+								<span>项目城市：<?php echo $project->cityname; ?> </span>
+							</div>
+						</div>
 					
 					</div>
 				<?php }?> 
@@ -831,13 +837,6 @@ foreach($resultshazai as $househaizai){
 			prevButton: '.swiper-button-prev',
 			//lazyLoading: true,
 			  effect: 'coverflow',
-        coverflow: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true
-        },
 			paginationClickable: true,
 			spaceBetween: 22,
 			loop: true,

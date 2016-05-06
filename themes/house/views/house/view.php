@@ -1428,40 +1428,7 @@ foreach($resultshazai as $househaizai){
     </div>
     
     <div class="c1"></div>
-    
-    <div class="grtz">
-      <div class="grtz_title"><span>豪宅推荐</span></div>
-      <div class="grtz_con">
-        <ul>
-        <?php 
-$sqlhaozi = "select h.*,m.municipality_cname as cname from h_house h,h_mname m where h.municipality=m.municipality AND 
-h.lp_dol>3000000 and h.yr_built = '6-15' AND
-h.area in ('Toronto','Peel','York','Halton') AND
-h.bath_tot > 3  order by h.pix_updt desc limit 0,3";
-$resultshazai = $db->createCommand($sqlhaozi)->query();
-foreach($resultshazai as $househaizai){
-?>
-          <li>
-            <dl>
-              <dt>
-                                    <?php if($househaizai["house_image"]==""){?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
-                      <?php }else{?>
-                                 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
-                      <?php }?>
-              </dt>
-              <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
-			  <dd class="bt">城市：<?php echo $househaizai["cname"]; ?></dd>              
-              <dd><font color="#CC6600"><?php echo $househaizai["lp_dol"]/10000;?></font>万加元</dd>
-            </dl>
-            <div class="cl"></div>
-          </li>
-<?php }?>
-        </ul>
-      </div>
-      <div class="housebottom"></div>
-    </div> 
-            
+ 
             
         </div>
         
