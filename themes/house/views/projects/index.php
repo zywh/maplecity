@@ -9,7 +9,7 @@
 
     <div class="enjoydown">
         <div class="enjoydownlabel">
-            <div class="enjoydownlabel_left">项目推荐<span> Recommended Projects</span></div>
+            <div class="enjoydownlabel_left">HOT.热点推荐</div>
             <div class="enjoydownlabel_right">
                 <span>共有<?php echo $count; ?>项目</span>
   

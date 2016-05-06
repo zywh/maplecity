@@ -18,7 +18,9 @@
 }
 	
 .s2 .swiper-slide img { 
-width: 330px; height: 253px;  
+height: 350px; 
+width:100%;
+ 
 
 }
 .swiper-pagination-bullet { opacity: 1; background: #fff; }
@@ -171,11 +173,13 @@ $zhinan=$housezhinan["image"];
         </div>
         
         <div class="lm_oneright">
-
+			
              <div class="hot">
+			  <a style='text-decoration:none;' href="index.php?r=house">
                <div class='homepage-title-bar-short'> 
-					<div class='homepage-title-text'>HOT.今日推荐</div>
+					<div class='homepage-title-text'>TODAY.今日推荐</div>
 				</div>
+				</a>
                <div class="hot_con">
                
 <?php 
@@ -230,9 +234,11 @@ foreach($resultshazai as $househaizai){
 <!-- Hot开始 -->
 <div class="lm_four"> 
 <div class="swiper-hotproject">
+	<a style='text-decoration:none;' href="index.php?r=projects">
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>HOT.热点推荐</div>
 	</div>
+	</a>
   
    <div class="swiper-container s2" >
 		<div class="swiper-wrapper">
@@ -242,9 +248,10 @@ foreach($resultshazai as $househaizai){
 						<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
 						<img src="<?php 
 						echo Yii::app()->request->baseUrl;?>/<?php 
-						$s = str_replace("uploads","tn_uploads",$project->room_type_image);
-						//echo $project->room_type_image; 
-						echo $s;
+						//$s = str_replace("uploads","tn_uploads",$project->room_type_image);
+						//echo $s;
+						echo $project->room_type_image; 
+						
 						?>" >
 						</a>
 						<div class='projects-title-box'>
@@ -282,7 +289,7 @@ foreach($resultshazai as $househaizai){
 	 <div class="lm_fourup">
 		 <a style='text-decoration:none;' href="index.php?r=news/canadaNews">
 		 <div class='homepage-title-bar'> 
-			<div class='homepage-title-text'>NEWS.加国咨询</div>
+			<div class='homepage-title-text'>NEWS.加国资讯</div>
 		</div>
 		</a>
     </div>
@@ -463,10 +470,11 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大留学开始 -->
 <div class="lm_five" >
-
+	 <a style='text-decoration:none;' href="index.php?r=news/canadaNews2">
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>EDUCATION.留学资讯</div>
 	</div>
+	</a>
   
     <div class="lm_five_down">
 <!--			<div class="lm_four_banner"><a href="<?php echo Yii::app()->createUrl('news/canadaNews2', array('catalog_id'=>17)); ?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/index/b_3.jpg" /></a></div>-->
@@ -564,9 +572,11 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大移民开始 -->
 <div class="lm_five">
+	 <a style='text-decoration:none;' href="index.php?r=news/canadaNews3">
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>IMMIGRATION.移民资讯</div>
 	</div>
+	</a>
    
     <div class="lm_five_down" >
 			
@@ -664,9 +674,11 @@ foreach($resultshazai as $househaizai){
 
 <!-- 加拿大旅游开始 -->
 <div class="lm_five">
+	<a style='text-decoration:none;' href="index.php?r=news/canadaNews4">
 	<div class='homepage-title-bar'> 
 		<div class='homepage-title-text'>TRAVEL.旅游资讯</div>
 	</div>
+	</a>
   
     <div class="lm_five_down">
 			
@@ -831,12 +843,12 @@ foreach($resultshazai as $househaizai){
 		
 		var swiper2 = new Swiper(".s2", {
 			pagination: '.swiper-pagination',
-			slidesPerView: 3,
+			slidesPerView: 2,
 			//preloadImages: false,
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
 			//lazyLoading: true,
-			  effect: 'coverflow',
+			//  effect: 'coverflow',
 			paginationClickable: true,
 			spaceBetween: 22,
 			loop: true,
