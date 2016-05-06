@@ -9,7 +9,7 @@
 
     <div class="enjoydown">
         <div class="enjoydownlabel">
-            <div class="enjoydownlabel_left">HOT.热点推荐</div>
+            <div class="enjoydownlabel_left">HOT<span> 热点推荐</span></div>
             <div class="enjoydownlabel_right">
                 <span>共有<?php echo $count; ?>项目</span>
   
@@ -35,9 +35,7 @@
                             <span style="height: 120px; overflow: hidden;">
                                 项目概况：<br /><?php echo strip_tags($project->summary); ?>
                             </span>
-                            <span>
-                                 项目重点：<br /><?php echo $project->point; ?>
-                            </span>
+                          
                             <span>
                                  开发商<br /><i><?php echo $project->developer_intro; ?></i>
                             </span>
