@@ -841,7 +841,7 @@ foreach($resultshazai as $househaizai){
 			lazyLoading: true,
 			paginationClickable: true,
 			loop: true,
-			autoplay: 5000,
+			autoplay: 7000,
 			speed: 1000,
 			autoplayDisableOnInteraction: false
 		

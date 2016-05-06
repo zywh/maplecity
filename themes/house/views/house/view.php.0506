@@ -1417,41 +1417,33 @@ if($house->s_r=="Sale"){
  
 <!-- House Recommend Start -->            
 	<div class="grtz">
-		<div class="grtz_title"><span>热点推荐</span></div>
-		
-		<div class="swiper-container grtz_con" >
-			<div class="swiper-wrapper">
-			<?php 
-			$sqlhaozi = "select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!=".$house->id." and recommend=1 limit 0,5";
-			$resultshazai = $db->createCommand($sqlhaozi)->query();
-			foreach($resultshazai as $househaizai){
-				$county=$housefujin["county"];
-				$ml_num=$housefujin["ml_num"];
-				$pic = get_firstimage($county,$ml_num);	
-			?>
-
-				<div class="swiper-slide" >
-					<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>">
-						<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
-					</a>
-					<div class='grtz-titlebox'>
-						<div class='grtz-titletext'>
-							<span><?php echo echo $househaizai["addr"];  ?> </span>
-							<span><?php echo $househaizai["lp_dol"]/10000; ?>万加元</span>
-						</div>
-					</div>
-			
-				</div>
-			
-			<?php }?>
-			
-			
-			</div>
-		<div class="swiper-pagination"></div>
-		</div>
-		
-		<div class="housebottom"></div>
-	</div>
+      <div class="grtz_title"><span>热点推荐</span></div>
+      <div class="grtz_con">
+        <ul>
+        <?php 
+		$sqlhaozi = "select * from h_house where lp_dol<3000000 and id!=".$house->id." and recommend=1 limit 0,3";
+		$resultshazai = $db->createCommand($sqlhaozi)->query();
+		foreach($resultshazai as $househaizai){
+		?>
+          <li>
+            <dl>
+              <dt>
+					<?php if($househaizai["house_image"]==""){?>
+				 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src='/static/images/zanwu.jpg' width="120" height="72"/></a>
+			  <?php }else{?>
+						 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $househaizai["house_image"]; ?>"  width="120" height="72"/></a>
+			  <?php }?>
+              </dt>
+              <dd class="bt"><?php echo $househaizai["addr"]; ?></dd>
+              <dd><font color="#CC6600"><?php echo $househaizai["lp_dol"]/10000;?></font>万加元</dd>
+            </dl>
+            <div class="cl"></div>
+          </li>
+<?php }?>
+        </ul>
+      </div>
+      <div class="housebottom"></div>
+    </div>
 
     <div class="c1"></div>
 <!-- House Recommend End--> 
