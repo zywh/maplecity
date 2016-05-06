@@ -18,7 +18,7 @@
 }
 	
 .s2 .swiper-slide img { 
-height: 350px; 
+height: 270px; 
 width:100%;
  
 
@@ -251,9 +251,9 @@ foreach($resultshazai as $househaizai){
 						<a href="<?php echo Yii::app()->createUrl('projects/more',array('id'=>$project->id)); ?>">
 						<img src="<?php 
 						echo Yii::app()->request->baseUrl;?>/<?php 
-						//$s = str_replace("uploads","tn_uploads",$project->room_type_image);
-						//echo $s;
-						echo $project->room_type_image; 
+						$s = str_replace("uploads","tn_uploads",$project->room_type_image);
+						echo $s;
+						//echo $project->room_type_image; 
 						
 						?>" >
 						</a>
@@ -841,8 +841,8 @@ foreach($resultshazai as $househaizai){
 			lazyLoading: true,
 			paginationClickable: true,
 			loop: true,
-			autoplay: 7000,
-			speed: 1000,
+			autoplay: 10000,
+			speed: 400,
 			autoplayDisableOnInteraction: false
 		
 
@@ -851,12 +851,12 @@ foreach($resultshazai as $househaizai){
 		
 		var swiper2 = new Swiper(".s2", {
 			pagination: '.swiper-pagination',
-			slidesPerView: 2,
+			slidesPerView: 3,
 			//preloadImages: false,
 			nextButton: '.swiper-button-next',
 			prevButton: '.swiper-button-prev',
 			//lazyLoading: true,
-			//  effect: 'coverflow',
+			effect: 'coverflow',
 			paginationClickable: true,
 			spaceBetween: 22,
 			loop: true,

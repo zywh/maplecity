@@ -54,7 +54,7 @@ _top:       expression(eval(document.compatMode &&
 .nytb_dz a:hover{ color:#FF6600}
 
 
-.grtz_con .swiper-slide img { 
+.grtz_swiper .swiper-slide img { 
 	width: 100%; height: 263px;  
 }
 
@@ -257,6 +257,7 @@ $slng=$_GET["lng"];
 		$county = preg_replace('/\s+/', '', $county);
 		$county = str_replace("&","",$county);
 		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		//$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
 		$num_files = 0;
 		if(is_dir($dir)){
 			$picfiles = scandir($dir);
@@ -1416,11 +1417,13 @@ if($house->s_r=="Sale"){
 			   </div>
  
 <!-- House Recommend Start -->            
-	<div class="swiper-container grtz_con" >
+	
+		
+		
+		<div class="swiper-container grtz_swiper" >
 		<div class="grtz_title"><span>热点推荐</span></div>
-		
-		
 			<div class="swiper-wrapper">
+			
 			<?php 
 			$sqlhaozi = "select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!=".$house->id." and recommend=1 limit 0,5";
 			$resultshazai = $db->createCommand($sqlhaozi)->query();
@@ -1447,8 +1450,7 @@ if($house->s_r=="Sale"){
 			
 			
 			</div>
-			<div class="swiper-pagination"></div>
-			<div class="housebottom"></div>
+			
 	</div>
 
     <div class="c1"></div>
@@ -1964,17 +1966,19 @@ daolumap();
 
 
 		
-		var swiper_grtz = new Swiper(".grtz_con", {
-			pagination: '.swiper-pagination',
+		var swiper_grtz = new Swiper(".grtz_swiper", {
+			//pagination: '.swiper-pagination',
 			//slidesPerView: 2,
 			//preloadImages: false,
-			nextButton: '.swiper-button-next',
-			prevButton: '.swiper-button-prev',
+			//nextButton: '.swiper-button-next',
+			//prevButton: '.swiper-button-prev',
 			//lazyLoading: true,
-			//  effect: 'coverflow',
-			direction: 'vertical',
+			//effect: 'coverflow',
+			effect: 'cube',
+			//direction: 'vertical',
 			paginationClickable: true,
 			loop: true,
+			spaceBetween: 20,
 			autoplay: 5000,
 			speed: 3000,
 			//grabCursor: true,
