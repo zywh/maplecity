@@ -54,47 +54,6 @@ _top:       expression(eval(document.compatMode &&
 .nytb_dz a:hover{ color:#FF6600}
 
 
-.grtz_swiper .swiper-slide img { 
-	width: 100%; height: 263px;  
-}
-
-.fjfy_swiper .swiper-slide img { 
-	width: 100%; height: 263px;  
-}
-
-.house-image-slide {
-	background-size: cover;
-	background-position: center;
-}
-
-.gallery-top {
-	height: 80%;
-	width: 100%;
-}
-.gallery-thumbs {
-	height: 20%;
-	box-sizing: border-box;
-	padding: 10px 0;
-}
-.gallery-thumbs .swiper-slide {
-	width: 25%;
-	height: 100%;
-	opacity: 0.5;
-}
-.gallery-thumbs .swiper-slide-active {
-	opacity: 1;
-}
-.swiper-pagination-bullet {
-	opacity: 0.8;
-	background: #fff;
-}
-.swiper-pagination-bullet-active {
-	background: #ff4103;
-	opacity: 0.8;
-}
-
-
-
 </style>
 <script type="text/javascript">
 function showDiv(){
@@ -1461,7 +1420,7 @@ if($house->s_r=="Sale"){
 <a name="fjin" id="fjin"></a>
 <div class="cl"></div>
 
-<div class="fjfy_box">
+<div class="swiper_box">
 	<div class="fyxqdown_left_title">
 		<a class="fyxqdown_left_cur" id="rdian" href="javascript:;">附近房源</a><div class="cl"></div>
 	</div>
@@ -1486,7 +1445,7 @@ if($house->s_r=="Sale"){
 				</a>
 				<div class='fjfy-titlebox'>
 					<div class='fjfy-titletext'>
-						<span>地址：<?php echo $housefujin["addr"];  ?> </span>
+						<span>地址：<?php echo $housefujin["addr"]."".$housefujin["municipality"]; ?> </span>
 						<span>价格：<?php echo $housefujin["lp_dol"]/10000; ?>万加元</span>
 					</div>
 				</div>
@@ -1504,269 +1463,63 @@ if($house->s_r=="Sale"){
 </div>
  
  
- 
- <script language="javascript" type="text/javascript">
-<!--//--><![CDATA[//><!--
-//图片滚动列表 mengjia 070816
-var Speedxxk = 500; //速度(毫秒)
-var Spacexxk = 100; //每次移动(px)
-var PageWidthxxk = 1035; //翻页宽度
-var fillxxk = 1; //整体移位
-var MoveLockxxk = false;
-var MoveTimeObjxxk;
-var Compxxk = 0;
-var AutoPlayObjxxk = null;
-GetObjxxk("List2xxk").innerHTML = GetObjxxk("List1xxk").innerHTML;
-GetObjxxk('ISL_Contxxk').scrollLeft = fillxxk;
-GetObjxxk("ISL_Contxxk").onmouseover = function(){clearInterval(AutoPlayObjxxk);}
-GetObjxxk("ISL_Contxxk").onmouseout = function(){AutoPlay();}
-AutoPlay();
-function GetObjxxk(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval
 
-('document.all.'+objName)}}
-function AutoPlayxxk(){ //自动滚动
-clearInterval(AutoPlayObjxxk);
-AutoPlayObjxxk = setInterval('ISL_GoDownxxk();ISL_StopDownxxk();',5000); //间隔时间
-}
-function ISL_GoUpxxk(){ //上翻开始
-if(MoveLockxxk) return;
-clearInterval(AutoPlayObjxxk);
-MoveLockxxk = true;
-MoveTimeObjxxk = setInterval('ISL_ScrUpxxk();',Speedxxk);
-}
-function ISL_StopUpxxk(){ //上翻停止
-clearInterval(MoveTimeObjxxk);
-if(GetObjxxk('ISL_Contxxk').scrollLeft % PageWidthxxk - fillxxk != 0){
-Compxxk = fillxxk - (GetObjxxk('ISL_Contxxk').scrollLeft % PageWidthxxk);
-CompScrxxk();
-}else{
-MoveLockxxk = false;
-}
-AutoPlayxxk();
-}
-function ISL_ScrUpxxk(){ //上翻动作
-if(GetObjxxk('ISL_Contxxk').scrollLeft <= 0){GetObjxxk('ISL_Contxxk').scrollLeft = GetObjxxk
-
-('ISL_Contxxk').scrollLeft + GetObjxxk('List1xxk').offsetWidth}
-GetObjxxk('ISL_Contxxk').scrollLeft -= Spacexxk ;
-}
-function ISL_GoDownxxk(){ //下翻
-clearInterval(MoveTimeObjxxk);
-if(MoveLockxxk) return;
-clearInterval(AutoPlayObjxxk);
-MoveLockxxk = true;
-ISL_ScrDownxxk();
-MoveTimeObjxxk = setInterval('ISL_ScrDownxxk()',Speedxxk);
-}
-function ISL_StopDownxxk(){ //下翻停止
-clearInterval(MoveTimeObjxxk);
-if(GetObjxxk('ISL_Contxxk').scrollLeft % PageWidthxxk - fillxxk != 0 ){
-Compxxk = PageWidthxxk - GetObjxxk('ISL_Contxxk').scrollLeft % PageWidthxxk + fillxxk;
-CompScrxxk();
-}else{
-MoveLockxxk = false;
-}
-AutoPlayxxk();
-}
-function ISL_ScrDownxxk(){ //下翻动作
-if(GetObjxxk('ISL_Contxxk').scrollLeft >= GetObjxxk('List1xxk').scrollWidth){GetObjxxk('ISL_Contxxk').scrollLeft =
-
-GetObjxxk('ISL_Contxxk').scrollLeft - GetObjxxk('List1xxk').scrollWidth;}
-GetObjxxk('ISL_Contxxk').scrollLeft += Spacexxk ;
-}
-function CompScrxxk(){
-var numxxk;
-if(Compxxk == 0){MoveLockxxk = false;return;}
-if(Compxxk < 0){ //上翻
-if(Compxxk < -Spacexxk){
-   Compxxk += Spacexxk;
-   numxxk = Spacexxk;
-}else{
-   numxxk = -Compxxk;
-   Compxxk = 0;
-}
-GetObjxxk('ISL_Contxxk').scrollLeft -= numxxk;
-setTimeout('CompScrxxk()',Speedxxk);
-}else{ //下翻
-if(Compxxk > Spacexxk){
-   Compxxk -= Spacexxk;
-   numxxk = Spacexxk;
-}else{
-   numxxk = Compxxk;
-   Compxxk = 0;
-}
-GetObjxxk('ISL_Contxxk').scrollLeft += numxxk;
-setTimeout('CompScrxxk()',Speedxxk);
-}
-}
-//--><!]]>
-</script>
  
- 
- <a name="liulan" id="liulan"></a>
- 
- 
-        <a href="javascript:;" name="rdfy" style="text-indent:-99999em; display:block;margin-bottom:25px;zoom: 1;">1</a>
-        <div class="fjfy_box">
-            <div class="fyxqdown_left_title">
-                <a class="fyxqdown_left_cur" id="rdian" href="javascript:;">最近浏览</a><div class="cl"></div>
-            </div>
+<a name="liulan" id="liulan"></a>
+<div class="swiper_box">
+	<div class="fyxqdown_left_title">
+		<a class="fyxqdown_left_cur" id="rdian" href="javascript:;">最近浏览</a><div class="cl"></div>
+	</div>
             
 
-      <div class="rollBox">
-<a href="javascript:;" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()" onmouseout="ISL_StopDown()" class="img1" hidefocus="true"></a>
-     <div class="Cont" id="ISL_Cont">
-      <div class="ScrCont">
-       <div id="List1">
-        <!-- 图片列表 begin -->
-<?php 
-$array=explode(',',$_COOKIE["fzd_house"]);
-foreach($array as $key=> $house){
-	if($house!=""){
-		?> <div class="pic">
-					<div class="playerdetail">
-			<div class="detailimg">
-		<?php
-		//根据房源编号查询房源信息
-
-		$sqlfy = "select * from h_house where ml_num = '".$house."'";
-		$resultsqlfy = $db->createCommand($sqlfy)->query();
-		foreach($resultsqlfy as $housefy){
-			$idhousefy= $housefy["id"];
-			//$house_image = $housefy["image"];
-			$county = $housefy["county"];
-			$ml_num = $housefy["ml_num"];
-			$pic = get_firstimage($county,$ml_num);
-			$addr=$housefy["addr"];
-			$community=$housefy["community"];
-			$lp_dol=$housefy["lp_dol"];
-		}
-			?>
-			 <a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>" >
-			 <img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="237" height="193"/>
-			 </a>
-
-			</div>
-			<div class="teanames"><?php echo $house;?></div>
-			<div class="teadetail" style="width:210px;">地址：<?php echo mb_substr($addr,0,18,'utf-8'); ?><br />城市：<?php echo mb_substr($community,0,18,'utf-8');?><br/>价格：<span><font color="#FF3300"><?php echo $lp_dol/10000; ?></font>万加元</span></div>
-		   
-					
+	 <!--Swiper begin -->
+	<div class="swiper-container zjll_swiper" >
+		<div class="swiper-wrapper">
+		
+		<?php 
+		$array=explode(',',$_COOKIE["fzd_house"]);
+		foreach($array as $key=> $house){
+			if($house!=""){
+				$sqlfy = "select * from h_house where ml_num = '".$house."'";
+				$resultsqlfy = $db->createCommand($sqlfy)->query();
+				foreach($resultsqlfy as $housefy){
+					$idhousefy= $housefy["id"];
+					$county = $housefy["county"];
+					$ml_num = $housefy["ml_num"];
+					$pic = get_firstimage($county,$ml_num);
+					$addr=$housefy["addr"];
+					$community=$housefy["community"];
+					$lp_dol=$housefy["lp_dol"];
+					$municipality = $housefy["municipality"];
+				}
+				?>
+				
+				
+			<div class="swiper-slide" >
+				<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>">
+					<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
+				</a>
+				<div class='zjll-titlebox'>
+					<div class='zjll-titletext'>
+						<span>地址：<?php echo $addr.",".$municipality; ?> </span>
+						<span>价格：<?php echo $lp_dol/10000; ?>万加元</span>
+					</div>
 				</div>
-         </div>
-	<?php
-	}
-}
-
-?> 
-        <!-- 图片列表 end -->
-       </div>
-       <div id="List2"></div>
-      </div>
-     </div>
-<a href="javascript:;"  onmousedown="ISL_GoUp()" onmouseup="ISL_StopUp()" onmouseout="ISL_StopUp()" class="img2" hidefocus="true"></a>
-    </div>
+		
+			</div>
+		
+		<?php
+			}
+		} 
+		?> 
+		</div>
+		<div class="swiper-button-next swiper-button-white"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+	</div>
+		
+    <!-- Swiper end -->
       
-
-      
-  <script language="javascript" type="text/javascript">
-<!--//--><![CDATA[//><!--
-//图片滚动列表 mengjia 070816
-var Speed = 1000; //速度(毫秒)
-var Space = 10; //每次移动(px)
-var PageWidth = 1035; //翻页宽度
-var fill = 0; //整体移位
-var MoveLock = false;
-var MoveTimeObj;
-var Comp = 0;
-var AutoPlayObj = null;
-GetObj("List2").innerHTML = GetObj("List1").innerHTML;
-GetObj('ISL_Cont').scrollLeft = fill;
-GetObj("ISL_Cont").onmouseover = function(){clearInterval(AutoPlayObj);}
-GetObj("ISL_Cont").onmouseout = function(){AutoPlay();}
-AutoPlay();
-function GetObj(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval
-
-('document.all.'+objName)}}
-function AutoPlay(){ //自动滚动
-clearInterval(AutoPlayObj);
-AutoPlayObj = setInterval('ISL_GoDown();ISL_StopDown();',5000); //间隔时间
-}
-function ISL_GoUp(){ //上翻开始
-if(MoveLock) return;
-clearInterval(AutoPlayObj);
-MoveLock = true;
-MoveTimeObj = setInterval('ISL_ScrUp();',Speed);
-}
-function ISL_StopUp(){ //上翻停止
-clearInterval(MoveTimeObj);
-if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0){
-Comp = fill - (GetObj('ISL_Cont').scrollLeft % PageWidth);
-CompScr();
-}else{
-MoveLock = false;
-}
-AutoPlay();
-}
-function ISL_ScrUp(){ //上翻动作
-if(GetObj('ISL_Cont').scrollLeft <= 0){GetObj('ISL_Cont').scrollLeft = GetObj
-
-('ISL_Cont').scrollLeft + GetObj('List1').offsetWidth}
-GetObj('ISL_Cont').scrollLeft -= Space ;
-}
-function ISL_GoDown(){ //下翻
-clearInterval(MoveTimeObj);
-if(MoveLock) return;
-clearInterval(AutoPlayObj);
-MoveLock = true;
-ISL_ScrDown();
-MoveTimeObj = setInterval('ISL_ScrDown()',Speed);
-}
-function ISL_StopDown(){ //下翻停止
-clearInterval(MoveTimeObj);
-if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0 ){
-Comp = PageWidth - GetObj('ISL_Cont').scrollLeft % PageWidth + fill;
-CompScr();
-}else{
-MoveLock = false;
-}
-AutoPlay();
-}
-function ISL_ScrDown(){ //下翻动作
-if(GetObj('ISL_Cont').scrollLeft >= GetObj('List1').scrollWidth){GetObj('ISL_Cont').scrollLeft =
-
-GetObj('ISL_Cont').scrollLeft - GetObj('List1').scrollWidth;}
-GetObj('ISL_Cont').scrollLeft += Space ;
-}
-function CompScr(){
-var num;
-if(Comp == 0){MoveLock = false;return;}
-if(Comp < 0){ //上翻
-if(Comp < -Space){
-   Comp += Space;
-   num = Space;
-}else{
-   num = -Comp;
-   Comp = 0;
-}
-GetObj('ISL_Cont').scrollLeft -= num;
-setTimeout('CompScr()',Speed);
-}else{ //下翻
-if(Comp > Space){
-   Comp -= Space;
-   num = Space;
-}else{
-   num = Comp;
-   Comp = 0;
-}
-GetObj('ISL_Cont').scrollLeft += num;
-setTimeout('CompScr()',Speed);
-}
-}
-//--><!]]>
-</script>
-    
-      
- </div>
+</div>
 <script>
 window.onload=function()//用window的onload事件，窗体加载完毕的时候
 {
@@ -1884,74 +1637,7 @@ daolumap();
         });
 
     });
-    //附近房源左右滚动效果
-    $(function() {
-        var i = 4
-        var cont = $(".fjfy_gd_body img").size();
-        var kd = (cont * 198) + "px";
-        var last = (cont - i) * 198 + "px";
-        var page = 1;
-        var o = cont - 3;
-        var page_cont = cont;
-        $(".fjfy_gd_body_left").click(function() {
-            if (page == 1) {
-                $(".fjfy_gd_body").animate({"margin-left": '-=' + last}, 1000);
-                page = o;
-            }
-            else {
-                $(".fjfy_gd_body").animate({"margin-left": "+=198px"}, 1000);
-                page--;
-            }
-            $("i").text(page);
-        });
 
-        $(".fjfy_gd_body_right").click(function() {
-            if (page == o) {
-                $(".fjfy_gd_body").animate({"margin-left": "0"}, 1000);
-                page = 1;
-            }
-            else {
-                $(".fjfy_gd_body").animate({"margin-left": "-=198px"}, 1000);
-                page++;
-            }
-            $("i").text(page);
-        });
-
-    });
-    //热点推荐左右滚动效果
-    $(function() {
-        var i = 4
-        var cont = $(".fjfy_rd_body img").size();
-        var kd = (cont * 198) + "px";
-        var last = (cont - i) * 198 + "px";
-        var page = 1;
-        var o = cont - 3;
-        var page_cont = cont;
-        $(".fjfy_rd_body_left").click(function() {
-            if (page == 1) {
-                $(".fjfy_rd_body").animate({"margin-left": '-=' + last}, 1000);
-                page = o;
-            }
-            else {
-                $(".fjfy_rd_body").animate({"margin-left": "+=198px"}, 1000);
-                page--;
-            }
-            $("i").text(page);
-        });
-
-        $(".fjfy_rd_body_right").click(function() {
-            if (page == o) {
-                $(".fjfy_rd_body").animate({"margin-left": "0"}, 1000);
-                page = 1;
-            }
-            else {
-                $(".fjfy_rd_body").animate({"margin-left": "-=198px"}, 1000);
-                page++;
-            }
-            $("i").text(page);
-        });
-
-    });
 </script>
 
 <script type="text/javascript">
@@ -1996,15 +1682,15 @@ daolumap();
 		autoplayDisableOnInteraction: false
 	});
 	
-	var swiper_zjll = new Swiper(".fjfy_zjll", {
+	var swiper_zjll = new Swiper(".zjll_swiper", {
 		//pagination: '.swiper-pagination',
-		slidesPerView: 4,
+		slidesPerView: 3,
 		//preloadImages: false,
 		nextButton: '.swiper-button-next',
 		prevButton: '.swiper-button-prev',
 		//lazyLoading: true,
 		//effect: 'coverflow',
-		//effect: 'cube',
+		//effect: 'flip',
 		//direction: 'vertical',
 		//paginationClickable: true,
 		loop: true,
