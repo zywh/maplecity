@@ -182,8 +182,8 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 		
 		$county = preg_replace('/\s+/', '', $county);
 		$county = str_replace("&","",$county);
-		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
-		#$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		//$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
+		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
 		$num_files = 0;
 		if(is_dir($dir)){
 			$picfiles = scandir($dir);
@@ -268,7 +268,7 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 		<div class="fyss_tjjg">
 			<div class="fyss_tjjgcity">
 			<form>
-			<input name="cityname" type="text" required id="cityname" value="输入城市( 中文/英文 ) /地址/MLS#" 
+			<input name="cityname" type="text" required id="cityname" value="输入城市( 中文/英文 ) / 地址/ MLS#" 
 			onblur="
 			
 			if (this.value == '') {
@@ -763,7 +763,7 @@ background: url(/themes/house/images/ss_btn.jpg) 0 0 no-repeat;
 		$pic1 = get_firstimage($county,$ml_num);
 		
   		?>
-		<a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd12_2=<?php echo $_GET["cd12_2"];?>&cd12_3=<?php echo $_GET["cd12_3"];?>&cd12_4=<?php echo $_GET["cd12_4"];?>&cd12_5=<?php echo $_GET["cd12_5"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" width="416" height="312" /></a>
+		<a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $house->id)); ?>&cd1=<?php echo $_GET["cd1"];?>&cd2=<?php echo $_GET["cd2"];?>&cd3=<?php echo $_GET["cd3"];?>&cd4=<?php echo $_GET["cd4"];?>&cd5=<?php echo $_GET["cd5"];?>&cd6=<?php echo $_GET["cd6"];?>&cd7=<?php echo $_GET["cd7"];?>&cd8=<?php echo $_GET["cd8"];?>&cd9=<?php echo $_GET["cd9"];?>&cd10=<?php echo $_GET["cd10"];?>&cd11=<?php echo $_GET["cd11"];?>&cd12=<?php echo $_GET["cd12"];?>&cd12_2=<?php echo $_GET["cd12_2"];?>&cd12_3=<?php echo $_GET["cd12_3"];?>&cd12_4=<?php echo $_GET["cd12_4"];?>&cd12_5=<?php echo $_GET["cd12_5"];?>&cd13=<?php echo $_GET["cd13"];?>&cd14=<?php echo $_GET["cd14"];?>&cd15=<?php echo $_GET["cd15"];?>&cd16=<?php echo $_GET["cd16"];?>&cd17=<?php echo $_GET["cd17"];?>&cd18=<?php echo $_GET["cd18"];?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic1; ?>" style="margin:5px;" width="416" height="305" /></a>
      
       
 	  

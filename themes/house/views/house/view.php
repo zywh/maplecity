@@ -212,8 +212,8 @@ $slng=$_GET["lng"];
 		
 		$county = preg_replace('/\s+/', '', $county);
 		$county = str_replace("&","",$county);
-		//$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
-		$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
+		$dir="mlspic/crea/creamid/".$county."/Photo".$ml_num."/";
+		//$dir="mlspic/crea/".$county."/Photo".$ml_num."/";
 		$num_files = 0;
 		if(is_dir($dir)){
 			$picfiles = scandir($dir);
@@ -325,10 +325,10 @@ $slng=$_GET["lng"];
 		}
 				?>
                 <?php if($idshang!=""){?>
-                <a href="index.php?r=house/view&id=<?php echo $idshang;?>#004" <?php if($idxia==""){?>style="margin-left:140px;"<?php }else{?>style="margin-left:45px;"<?php }?>>上一套房源</a>
+                <a href="index.php?r=house/view&id=<?php echo $idshang;?>#004" <?php if($idxia==""){?>style="margin-left:0px;"<?php }else{?>style="margin-left:0;"<?php }?>>上一套房源</a>
                 <?php }?>
                 <?php if($idxia!=""){?>
-                <a href="index.php?r=house/view&id=<?php echo $idxia;?>#004" <?php if($idshang==""){?>style="margin-left:140px;"<?php }?>>下一套房源</a>
+                <a href="index.php?r=house/view&id=<?php echo $idxia;?>#004" <?php if($idshang==""){?>style="margin-left:0px;"<?php }?>>下一套房源</a>
                 <?php }?>
               <div class="cl"></div>
             </div>
@@ -1377,7 +1377,7 @@ if($house->s_r=="Sale"){
 		
 		
 		<div class="swiper-container grtz_swiper" >
-		<div class="grtz_title"><span>热点推荐</span></div>
+		<div class="grtz_title"><span>今日推荐</span></div>
 			<div class="swiper-wrapper">
 			
 			<?php 
@@ -1395,8 +1395,8 @@ if($house->s_r=="Sale"){
 					</a>
 					<div class='grtz-titlebox'>
 						<div class='grtz-titletext'>
-							<span><?php echo $househaizai["addr"];  ?> </span>
-							<span><?php echo $househaizai["lp_dol"]/10000; ?>万加元</span>
+							<span>地址：<?php echo $househaizai["addr"];  ?> </span>
+							<span>价格：<?php echo $househaizai["lp_dol"]/10000; ?>万加元</span>
 						</div>
 					</div>
 			
@@ -1433,7 +1433,15 @@ if($house->s_r=="Sale"){
 		$sqlfujian = "select * from h_house where zip='".$house->zip."' or community ='".$house->community."' and id!=".$house->id." limit 0,6";
 		$resultsfujian = $db->createCommand($sqlfujian)->query();
 		foreach($resultsfujian as $housefujin){
-
+			if ($housefujin["s_r"] == 'Lease'){
+				$sr = '出租';
+				$price = $housefujin["lp_dol"]."加元/月";
+			}else {
+				$sr ='出售';
+				$price = $housefujin["lp_dol"]/10000;
+				$price = $price.'万加元';
+			}
+			
 			$county=$housefujin["county"];
 			$ml_num=$housefujin["ml_num"];
 			$pic = get_firstimage($county,$ml_num);
@@ -1445,8 +1453,8 @@ if($house->s_r=="Sale"){
 				</a>
 				<div class='fjfy-titlebox'>
 					<div class='fjfy-titletext'>
-						<span>地址：<?php echo $housefujin["addr"]."".$housefujin["municipality"]; ?> </span>
-						<span>价格：<?php echo $housefujin["lp_dol"]/10000; ?>万加元</span>
+						<span>地址：<?php echo $housefujin["addr"].", ".$housefujin["municipality"].", ".$housefujin["county"]; ?> </span>
+						<span>租/售：<?php echo $sr;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价格：<?php echo $price; ?></span>
 					</div>
 				</div>
 		
@@ -1491,6 +1499,14 @@ if($house->s_r=="Sale"){
 					$community=$housefy["community"];
 					$lp_dol=$housefy["lp_dol"];
 					$municipality = $housefy["municipality"];
+					if ($housefy["s_r"] == 'Lease'){
+						$sr = '出租';
+						$price = $housefy["lp_dol"]."加元/月";
+					}else {
+						$sr ='出售';
+						$price = $housefy["lp_dol"]/10000;
+						$price = $price.'万加元';
+					}
 				}
 				?>
 				
@@ -1501,8 +1517,8 @@ if($house->s_r=="Sale"){
 				</a>
 				<div class='zjll-titlebox'>
 					<div class='zjll-titletext'>
-						<span>地址：<?php echo $addr.",".$municipality; ?> </span>
-						<span>价格：<?php echo $lp_dol/10000; ?>万加元</span>
+						<span>地址：<?php echo $addr.", ".$municipality.", ".$county; ?> </span>
+						<span>租/售：<?php echo $sr;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价格：<?php echo $price; ?></span>
 					</div>
 				</div>
 		
@@ -1645,40 +1661,24 @@ daolumap();
 
 	
 	var swiper_grtz = new Swiper(".grtz_swiper", {
-		//pagination: '.swiper-pagination',
-		//slidesPerView: 2,
-		//preloadImages: false,
-		//nextButton: '.swiper-button-next',
-		//prevButton: '.swiper-button-prev',
-		//lazyLoading: true,
-		//effect: 'coverflow',
-		effect: 'cube',
-		//direction: 'vertical',
-		paginationClickable: true,
+		
+		effect: 'fade',
 		loop: true,
-		spaceBetween: 20,
 		autoplay: 5000,
 		speed: 3000,
-		//grabCursor: true,
 		autoplayDisableOnInteraction: false
 	});
 		
 	var swiper_fjfy = new Swiper(".fjfy_swiper", {
 		//pagination: '.swiper-pagination',
 		slidesPerView: 3,
-		//preloadImages: false,
+	
 		nextButton: '.swiper-button-next',
 		prevButton: '.swiper-button-prev',
-		//lazyLoading: true,
-		//effect: 'coverflow',
-		//effect: 'cube',
-		//direction: 'vertical',
-		//paginationClickable: true,
 		loop: true,
 		spaceBetween: 10,
 		autoplay: 5000,
 		speed: 3000,
-		//grabCursor: true,
 		autoplayDisableOnInteraction: false
 	});
 	
@@ -1888,4 +1888,18 @@ daolumap();
             }
         }
     }
+	
+	
+	$(document).ready(function() {
+		var jl=$(".nav").offset().top;
+		$(window).scroll(function(){
+			var djl=$(this).scrollTop();
+			if(djl>=jl){
+				$(".nav").addClass("navfd");
+			}
+			else{
+				$(".nav").removeClass("navfd")			
+			}	
+		 });
+   });		   
 </script>
