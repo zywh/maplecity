@@ -722,7 +722,7 @@ $(function(){
 			//$(".c2").html("平方米")
 			//$(".c3").html("米")
 		   $(this).addClass("dlh_active");
-		   $(this).text("米 > 英制");
+		   $(this).text("米 > 英尺");
       }
 	})
 })
@@ -857,7 +857,7 @@ $(function(){
 			$(".t1").html("长(M)")
 			$(".t2").html("宽(M)")
 			$(".t3").html("面积(㎡)")
-		    $(this).text("米 > 英制");
+		    $(this).text("米 > 英尺");
 
 
 	   } 
@@ -865,7 +865,7 @@ $(function(){
 		    $(".t1").html("长（英尺）")
 			$(".t2").html("宽（英尺）")
 			$(".t3").html("面积（平方英尺）")
-		    $(this).text("英制 > 米");
+		    $(this).text("英尺 > 米");
 		    $(this).addClass("dlh_active");
 			
 
@@ -1676,7 +1676,7 @@ daolumap();
 		nextButton: '.swiper-button-next',
 		prevButton: '.swiper-button-prev',
 		loop: true,
-		spaceBetween: 10,
+		spaceBetween: 20,
 		autoplay: 5000,
 		speed: 3000,
 		autoplayDisableOnInteraction: false

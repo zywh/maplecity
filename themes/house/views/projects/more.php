@@ -9,7 +9,7 @@
 
 .swiper-container { background-color:#888787;}
 .swiper-slide img { 
-	width: 330px; height: 330px;  
+	width: 330px; height: 265px;  
 	padding:4px;
     border:1px solid #888787;
     background-color:#fff;}
