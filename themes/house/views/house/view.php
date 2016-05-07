@@ -1672,7 +1672,7 @@ daolumap();
 	var swiper_fjfy = new Swiper(".fjfy_swiper", {
 		//pagination: '.swiper-pagination',
 		slidesPerView: 3,
-	
+		effect: 'coverflow',
 		nextButton: '.swiper-button-next',
 		prevButton: '.swiper-button-prev',
 		loop: true,
@@ -1689,12 +1689,12 @@ daolumap();
 		nextButton: '.swiper-button-next',
 		prevButton: '.swiper-button-prev',
 		//lazyLoading: true,
-		//effect: 'coverflow',
+		effect: 'coverflow',
 		//effect: 'flip',
 		//direction: 'vertical',
 		//paginationClickable: true,
 		loop: true,
-		spaceBetween: 10,
+		spaceBetween: 20,
 		autoplay: 5000,
 		speed: 3000,
 		//grabCursor: true,
