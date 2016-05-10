@@ -43,8 +43,8 @@ class School extends CActiveRecord
 		return array(
 			array('lat, lng, language, city, province, zip, email, grade, schoolnumber, url', 'required'),
 			array('type', 'numerical', 'integerOnly'=>true),
-			array('pingfen', 'numerical'),
-			array('school, paiming, xingzhi, tel', 'length', 'max'=>100),
+			array('pingfen, paiming', 'numerical'),
+			array('school, xingzhi, tel', 'length', 'max'=>100),
 			array('address', 'length', 'max'=>255),
 			array('lat, lng', 'length', 'max'=>8),
 			array('language, city, province, zip, email, grade, schoolnumber', 'length', 'max'=>20),
