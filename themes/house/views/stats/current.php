@@ -182,6 +182,16 @@
 					}
 				},
 				data: result.city,
+			    "aoColumnDefs": [            
+					 {
+					   "aTargets": [1], // Column to target
+					   "mRender": function ( data, type, full ) {
+						 // 'full' is the row's data object, and 'data' is this column's data
+						 // e.g. 'full[0]' is the comic id, and 'data' is the comic title
+						 return '<a href="/index.php?r=house/index&type=sale&cd2=' + data + '">' + data + '</a>';
+					   }
+					 }
+				],
 				columns: [
 					{ title: "城市名" },
 					{ title: "城市英文名" },
