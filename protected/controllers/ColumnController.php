@@ -52,7 +52,7 @@ class ColumnController extends XFrontBase
 		ini_set("log_errors", 1);
 		ini_set("error_log", "/tmp/php-error.log");
 		
-		$maxmarkers = 200;  
+		$maxmarkers = 5000;  
         $result = array();
 		$result['SchoolList'] = array();
 			
@@ -75,6 +75,11 @@ class ColumnController extends XFrontBase
 				$criteria->addCondition('type =0');
 			} 
 			
+						
+			if(!empty($_POST['province'])) {
+				$criteria->addCondition('province="'.$_POST['province'].'"');
+			} 
+			
 			$chinese = preg_match("/\p{Han}+/u", $_POST['xingzhi']);
 			//XingZhi
 			if(!empty($_POST['xingzhi']) && !($chinese)) {
@@ -92,97 +97,26 @@ class ColumnController extends XFrontBase
 				$criteria->addCondition("paiming <='".$_POST['rank']."'");
 						
 			} 		
-			
-			//lat and long selection
-            if (!empty($_POST['bounds'])) {
-                $latlon = explode(',', $_POST['bounds']);
-                $minLat = floatval($latlon[0]);
-                $maxLat = floatval($latlon[2]);
-                $minLon = floatval($latlon[1]);
-                $maxLon = floatval($latlon[3]);
-                $criteria->addCondition("lat <= :maxLat");
-                $criteria->params += array(':maxLat' => $maxLat);
-                $criteria->addCondition("lat >= :minLat");
-                $criteria->params += array(':minLat' => $minLat);
-                $criteria->addCondition("lng <= :maxLon");
-                $criteria->params += array(':maxLon' => $maxLon);
-                $criteria->addCondition("lng >= :minLon");
-                $criteria->params += array(':minLon' => $minLon);
-		
 
-
-            }
-
-			//Filter Invalid Lat
-			$criteria->addCondition("lat > 20");
 			
 			//End of Condition
 			
 			$count = School::model()->count($criteria);
 			
-						
-			//Display grid list if # of maxmarker is large
-			if ( $count >= $maxmarkers) {
-				$result['type'] = "grid";
-				$criteria->addCondition("pingfen >0");
-				error_log("Count:".$count."Grid Mode");
-				$criteria->limit = 2000;
-				$school = School::model()->findAll($criteria);
-				$result['Message'] = '成功';
-				$gridx =  ( $_POST['gridx'])? ( $_POST['gridx']): 5;
-				$gridy =  ( $_POST['gridy'])? ( $_POST['gridy']): 5;
 
-				$tiley = (($maxLat - $minLat ) / $gridy) ;
-				$tilex = (($maxLon - $minLon ) / $gridx) ;
-				//Generate grid center Lat/Lng
-				for ( $x=1; $x <= $gridx ; $x++){
-					for ( $y=1; $y <= $gridy ; $y++){
-						$gridCenterlat = $minLat + ($tiley/2) + ($y -1)*$tiley ;
-						$gridCenterlng = $minLon + ($tilex/2) + ($x -1)*$tilex ;
-						$result['gridList']["G".$x.$y]['GeocodeLat'] = $gridCenterlat;
-						$result['gridList']["G".$x.$y]['GeocodeLng'] = $gridCenterlng;
-									
-					}
-				}
-				//Get count of school in each tile
-				foreach ($school as $val) {
-				
-					$gridlat = ceil((($val->lat - $minLat ) / $tiley));
-					$gridlng = ceil((($val->lng - $minLon) / $tilex));
-					$rating = $val-> pingfen;
-					$result['gridList']["G".$gridlng.$gridlat]['GridName'] = "G".$gridlng.$gridlat;
-					$result['gridList']["G".$gridlng.$gridlat]['SchoolCount']++; 
-					$result['gridList']["G".$gridlng.$gridlat]['TotalRating'] += $rating; 
-					
-				}
-       		}
 			
 			//Display school list if maxmarker is less
-			if ( $count < $maxmarkers) {
-				$result['type'] = "school";
+		
+			
 				$criteria->order = "paiming";
 				$school = School::model()->findAll($criteria);
-				$result['Message'] = '成功';
 				foreach ($school as $val) {
-					$schoolList = array();
-					$schoolList['School'] = $val->school;
-					$schoolList['Paiming'] = !empty( $val->paiming)?  $val->paiming :'无';
-					$schoolList['Pingfen'] = !empty( $val->pingfen)?  $val->pingfen :'无';
-					$schoolList['Grade'] = $val->grade;
-					$schoolList['City'] = $val->city;
-					$schoolList['Zip'] = $val->zip;
-					$schoolList['Province'] = $val->province;
-					$schoolList['Tel'] = $val->tel;
-					$schoolList['Address'] = $val->address;
-					$schoolList['Lat'] = $val->lat;
-					$schoolList['Lng'] = $val->lng;
-					$schoolList['URL'] = $val->url;
-					$result['SchoolList'][] = $schoolList;
-
-
+					$paiming = !empty( $val->paiming)?  $val->paiming :'无';
+					$rating = !empty( $val->pingfen)?  $val->pingfen :'无';
+					$result["SchoolList"][] = array($paiming,$val->school,$val->grade,$val->address,$val->city,$val->tel);
 				}
  
-       		}
+       		
 		}
 		
 		echo json_encode($result);
