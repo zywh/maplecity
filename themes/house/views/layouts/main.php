@@ -157,7 +157,7 @@
                         
                         <div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'enjoy') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('enjoy/index'); ?>">豪宅鉴赏</a>
                             <div class="navtc">
-                                <div class="navtcbox" style="display:none;">
+                                <div class="navtcbox haozhai" style="display:none;">
                                     <?php foreach($city_list as $obj){ ?>
                                         <a href="<?php echo Yii::app()->createUrl('enjoy/index', array('sheng' => $obj->id)); ?>"><?php echo $obj->name; ?></a>
                                     <?php } ?>
@@ -361,7 +361,8 @@ $(document).ready(function() {
 		$(this).find(".nav_up").addClass("on_a");
 		var navwidth=$(this).find(".nav_up").width();
 		$(this).find(".navtcbox").width(navwidth);
-		$(this).find(".navtcbox.projects").width('300px');
+		$(this).find(".navtcbox.projects").width('279px');
+		$(this).find(".navtcbox.haozhai").width('187px');
 		
 		$(this).find(".navtcbox").stop(true).delay(400).slideDown();
 	});

@@ -12,7 +12,7 @@ td{ border:1px solid #d8d8d8;  }
                      <P><a href="/">首页 &nbsp;&nbsp;>&nbsp;&nbsp;</a><a>学区专栏&nbsp;&nbsp;>&nbsp;&nbsp;</a></P>
                      </div>
                 <div class="xuequ_top" style=" font-size:18px; margin-top:2px;">
-                    　小学排名
+                    　小学排名 (排名来源：The Fraser Institute 2014-2015)
                 </div>
                 </div>     
         <table width="1013" border="0" cellspacing="0"  cellpadding="0" style="background-image:url(/themes/house/images/xuequxiao.jpg)">
@@ -53,7 +53,7 @@ foreach($resultshazai as $househaizai){
               <div class="xuequ_wrap">
               <div class="xuequ_con">
                 <div class="xuequ_top" style=" font-size:18px; margin-top:2px;">
-                    　中学排名
+                    　中学排名(排名来源：The Fraser Institute 2014-2015)
                 </div>
                 </div>     
                 <table width="1013" border="0" cellspacing="0"  cellpadding="0" style="background-image:url(/themes/house/images/xuequzhong.jpg)">
