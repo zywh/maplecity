@@ -134,7 +134,7 @@ var schoolmap = {
 	   
 		
 			$.ajax({
-				url: 'index.php?r=map/getSchoolList',
+				url: 'index.php?r=column/getSchoolList',
 				type: 'POST',
 				dataType: 'json',
 				data: {
