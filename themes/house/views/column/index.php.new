@@ -74,8 +74,7 @@ switch ($province) {
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			province: province,
-			type: 'e'
+			province: province 					
 		},
 		success: function(result) {	
 						
@@ -112,7 +111,7 @@ switch ($province) {
 					   "mRender": function ( data, type, full ) {
 						 // 'full' is the row's data object, and 'data' is this column's data
 						 // e.g. 'full[0]' is the comic id, and 'data' is the comic title
-						 return '<a href="/index.php?r=column/map&id=' + full[6] +'">' + data + '</a>';
+						 return '<a href="/index.php?r=column/more&lat=' + full[6] + '&lng=' + full[7] + '">' + data + '</a>';
 					   }
 					 }
 				],
@@ -124,74 +123,7 @@ switch ($province) {
 					{ title: "城市" },
 					{ title: "电话" },
 				],
-				//"order": [[ 0, "asc" ]],
-				"pageLength": 20
-
-			
-			} );			
-			//Chart Province Start:House number by Province Bar chart			
-			
-		}
-		
-	 });
-	 
-	 
-	 $.ajax({
-		url: 'index.php?r=column/getSchoolList',
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			province: province,
-			type: 's'
-		},
-		success: function(result) {	
-						
-			//Start Table3
-		    $('#table_sschool').DataTable( {
-				"language":{
-					"sProcessing":   "处理中...",
-					"sLengthMenu":   "显示 _MENU_ 项结果",
-					"sZeroRecords":  "没有匹配结果",
-					"sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-					"sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-					"sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-					"sInfoPostFix":  "",
-					"sSearch":       "搜索(学校 / 城市）:",
-					"sUrl":          "",
-					"sEmptyTable":     "表中数据为空",
-					"sLoadingRecords": "载入中...",
-					"sInfoThousands":  ",",
-					"oPaginate": {
-						"sFirst":    "首页",
-						"sPrevious": "上页",
-						"sNext":     "下页",
-						"sLast":     "末页"
-					},
-					"oAria": {
-						"sSortAscending":  ": 以升序排列此列",
-						"sSortDescending": ": 以降序排列此列"
-					}
-				},
-				data: result.SchoolList,
-			    "aoColumnDefs": [            
-					 {
-					   "aTargets": [1], // Column to target
-					   "mRender": function ( data, type, full ) {
-						 // 'full' is the row's data object, and 'data' is this column's data
-						 // e.g. 'full[0]' is the comic id, and 'data' is the comic title
-						 return '<a href="/index.php?r=column/map&id=' + full[6] +'">' + data + '</a>';
-					   }
-					 }
-				],
-				columns: [
-					{ title: "排名" },
-					{ title: "学校" },
-					{ title: "年级" },
-					{ title: "地址" },
-					{ title: "城市" },
-					{ title: "电话" },
-				],
-				//"order": [[ 0, "asc" ]],
+				"order": [[ 0, "asc" ]],
 				"pageLength": 20
 
 			

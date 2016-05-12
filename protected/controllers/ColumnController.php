@@ -92,11 +92,11 @@ class ColumnController extends XFrontBase
 			} 
 			
 			//Rank
-			if(!empty($_POST['rank'])&& intval($_POST['rank']) > 0) {
+			
 				//$criteria->order = "paiming ASC";
-				$criteria->addCondition("paiming <='".$_POST['rank']."'");
-						
-			} 		
+				$criteria->addCondition("paiming >=1");
+					
+				
 
 			
 			//End of Condition
@@ -113,7 +113,7 @@ class ColumnController extends XFrontBase
 				foreach ($school as $val) {
 					$paiming = !empty( $val->paiming)?  $val->paiming :'无';
 					$rating = !empty( $val->pingfen)?  $val->pingfen :'无';
-					$result["SchoolList"][] = array($paiming,$val->school,$val->grade,$val->address,$val->city,$val->tel);
+					$result["SchoolList"][] = array($paiming,$val->school,$val->grade,$val->address,$val->city,$val->tel,$val->id);
 				}
  
        		
