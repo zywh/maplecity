@@ -165,7 +165,18 @@
                             </div>
                         </div>
                         
-						<div class="navlist"><a class="nav_up <?php if (Yii::app()->controller->id == 'column') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('column/index'); ?>">学区专栏</a></div>
+						<div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'column') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('column/index'); ?>">学区专栏</a>
+						
+						   <div class="navtc">
+                                <div class="navtcbox" style="display:none;">
+								<a href="<?php echo Yii::app()->createUrl('column/index&province=ON'); ?>">安省</a>
+								<a href="<?php echo Yii::app()->createUrl('column/index&province=BC'); ?>">BC省</a>
+								<a href="<?php echo Yii::app()->createUrl('column/index&province=AB'); ?>">阿尔伯塔</a>
+								
+                                </div>
+                            </div>
+						
+						</div>
                         
 						<div class="navlist nav-wrap"><a class="nav_up <?php if (Yii::app()->controller->id == 'news') echo 'nav_active'; ?>" href="<?php echo Yii::app()->createUrl('news/canadaNews'); ?>">新闻&nbsp;资讯</a>
                             <div class="navtc">
@@ -274,7 +285,7 @@
   </div>
   <div class="footdown" style=" padding-top:30px;">
     <div class="footdownone"> <a href="index.php?r=about/about1&id=27">关于我们</a> <a href="index.php?r=about/about1&id=31">加入我们</a> <a href="index.php?r=about/about1&id=28">媒体报道</a> <a href="index.php?r=hotrecommend/index">海外房展</a> <a href="index.php?r=about/partner">公司动态</a> <a href="index.php?r=about/about1&id=30">联系我们</a> <a href="index.php?r=about/about1&id=40">投资须知</a> </div>
-    <div class="footdowntwo">邮箱:info-china@maplecity.com.cn Copyright©2015 MAPLECITY Inc. &nbsp;All Rights Reserved    <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏ICP备10045531号-4</a></div>
+    <div class="footdowntwo">邮箱:info@maplecity.com.cn Copyright©2016 MAPLECITY Inc. &nbsp;All Rights Reserved    <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">苏ICP备10045531号-4</a></div>
   </div>
 </div>
 <!-- foot结束 -->

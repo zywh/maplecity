@@ -6,6 +6,7 @@ td{ border:1px solid #d8d8d8;  }
 </style>
 <?php 
 $leibie=(int)$_GET["leibie"];
+$province   = Yii::app()->request->getQuery('province', 'ON');
 if($leibie==0){
 $nametype="小学";
 }
@@ -27,14 +28,15 @@ $nametype="中学";
                           <tr style=" background:#e2e2e2; height:32px;">
                             <td width="66">排名</td>
                             <td width="220">学校</td>
-                            <td width="103">评分</td>
+                            <td width="80">评分</td>
                             <td width="103">性质</td>
-                            <td width="165">电话</td>
+                            <td width="135">电话</td>
                             <td width="356">地址</td>
+							<td width="100">城市</td>
             </tr>
 <?php
 $db = Yii::app()->db; 
-$sqlhaozi = "select * from h_school where type=".$leibie." order by pingfen desc ";
+$sqlhaozi = "select * from h_school where type=".$leibie." and province='".$province."' and paiming >0 order by pingfen desc ";
 $resultshazai = $db->createCommand($sqlhaozi)->query();
 foreach($resultshazai as $househaizai){
 ?>
@@ -46,6 +48,7 @@ foreach($resultshazai as $househaizai){
                             <td><?php echo $househaizai["xingzhi"]; ?></td>
                             <td><?php echo $househaizai["tel"]; ?></td>
                             <td><?php echo $househaizai["address"]; ?></td>
+							 <td><?php echo $househaizai["city"]; ?></td>
                           </tr>
 <?php }?> 
         </table>

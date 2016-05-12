@@ -10,26 +10,11 @@ class ColumnController extends XFrontBase
     public function actionIndex(){
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/column.css');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/template-native.js');
+		
+ 
 
-        $house_list = House::model()->findAll(array(
-            'select'    => 'id, name, prepay, house_image',
-            'condition' => 'investType_id = :investType_id',
-            'params'     => array(':investType_id' => 1),
-            'order'     => 'id DESC',
-            'limit'     => 10
-        ));
-        $city_list = City::model()->findAll();
-        $district_list = District::model()->findAll();
-        $propertyType_list = PropertyType::model()->findAll();
-
-        $data = array(
-            'house_list'        => $house_list,
-            'city_list'         => $city_list,
-            'district_list'     => $district_list,
-            'propertyType_list' => $propertyType_list,
-        );
-
-        $this->render('index', $data);
+       //$this->render('index', $data);
+	   $this->render('index', $data);
 
     }
 	
