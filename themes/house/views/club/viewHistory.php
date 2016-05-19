@@ -119,14 +119,14 @@ function statsurl (chart){
 			$sqft=$housefy["sqft"];
 		}
 		?>
-	                <div class="syss_fclist_left"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="261" height="307" /></a></div>
-	                <div class="syss_fclist_right">
+	                <div class="syss_fclist_left"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/<?php echo $pic; ?>" width="261" height="280" /></a></div>
+	                <div class="syss_fclist_right" style="height:auto; padding-top:8px;">
                     <div class="syss_zt"><?php if ($is_sell == 1) {
         echo '在售';
     } else {
         echo '出租';
     } ?></div>
-                    <div class="syss_fcone">MSL：<?php echo $$ml_num; ?></div>
+                    <div class="syss_fcone" style="width:200px;">MSL：<?php echo $ml_num; ?></div>
                     <div class="syss_fctwo"><a href="<?php echo Yii::app()->createUrl('house/view', array('id' => $idhousefy)); ?>" target="_blank"><?php echo $house; ?></a></div>
                     <div class="syss_fcthree">
                         <?php
