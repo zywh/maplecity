@@ -297,7 +297,7 @@
         <li>
             <a class="u-sildeFade">
                 <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/top_2.png" width="47" height="49" class="shows" />
-                <img src="/themes/house/images/lianxi1.png"  class="hides" usemap="#taklhtml"/>
+                <img src="/themes/house/images/lianxi1.png?<?php echo mt_rand(10,100);?>"  class="hides" usemap="#taklhtml"/>
             </a>
         </li>
         <li>
