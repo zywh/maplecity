@@ -541,7 +541,7 @@ echo '城市';
 			<div class="fyxq_ptss">
 			<div class="fyxq_phone"><img src="new/images/phone.jpg" width="78" height="78" /></div>
 			<div class="fyxq_rx">服务热线：<br/>
-			  <img src="new/images/plat.jpg" width="23" height="15" /><span>400-9900-393</span>
+			  <img src="new/images/plat.jpg" width="23" height="15" /><span>400-870-1029</span>
 			</div>
 			 <div class="cl"></div>
 			</div>
@@ -1040,7 +1040,7 @@ $(function(){
                                   <div class="dl_jm_left">
                         <div class="dl_jm_left_info">
                             <div class="dl_jm_left_info_one">如需帮助，请致电</div>
-                            <div class="dl_jm_left_info_two">400-9900-393</div>
+                            <div class="dl_jm_left_info_two">400-870-1029</div>
                             
                         </div>
                         
