@@ -13,7 +13,7 @@
         <div class="headleft"><a href="<?php echo Yii::app()->createUrl('site/index'); ?>"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/layout/logo.jpg" border="0" /></a></div>
         <div class="headright">
             <span class="headrightone">加拿大房产置业平台</span>
-            <span class="headrighttwo">400-870-1029</span>
+            <span class="headrighttwo">400-9900-393</span>
         </div>
         <div class="cl"></div>
     </div>

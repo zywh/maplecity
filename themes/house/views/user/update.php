@@ -13,7 +13,7 @@
         <div class="headleft"><a href="<?php echo Yii::app()->createUrl('site/index'); ?>"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/layout/logo.jpg" border="0" /></a></div>
         <div class="headright">
             <span class="headrightone">加拿大房产置业平台</span>
-            <span class="headrighttwo">400-870-1029</span>
+            <span class="headrighttwo">400-9900-393</span>
         </div>
         <div class="cl"></div>
     </div>
@@ -23,7 +23,7 @@
         <div class="dl_jm_left">
             <div class="dl_jm_left_info">
                 <div class="dl_jm_left_info_one">如需帮助，请致电</div>
-                <div class="dl_jm_left_info_two">400-870-1029</div>
+                <div class="dl_jm_left_info_two">400-9900-393</div>
                 <div class="dl_jm_left_info_three"><a href="#">立即咨询</a></div>
             </div>
         </div>

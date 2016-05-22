@@ -39,7 +39,7 @@
         <div class="headleft"><a href="<?php echo Yii::app()->createUrl('site/index'); ?>"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/layout/logo.jpg" border="0" /></a></div>
         <div class="headright" style="width:auto">
             <span class="headrightone" style="width:auto">加拿大房产置业平台</span>
-            <span class="headrighttwo" style="width:auto; margin-top:15px; padding-top:10px;">400-870-1029</span>
+            <span class="headrighttwo" style="width:auto; margin-top:15px; padding-top:10px;">400-9900-393</span>
         </div>
         <div class="cl"></div>
     </div>
