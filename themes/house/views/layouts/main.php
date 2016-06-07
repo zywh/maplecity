@@ -406,5 +406,7 @@ $(document).ready(function() {
 });
 </script>   
 
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA2NzU3OV80MTE1MzlfNDAwOTkwMDM5M18"></script>
+
     </body>
 </html>
