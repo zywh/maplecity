@@ -389,7 +389,7 @@ $db = Yii::app()->db;
                 <?php }else{?>
                 <a class="kf" href="javascript:showDiv()"><img  src="new/images/kf.jpg" /></a>
                 <?php }?>
-                <a class="kf" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes"><img src="new/images/zix.jpg" /></a>
+                <a class="kf" href="http://wpa.qq.com/msgrd?v=3&amp;uin=4009900393&amp;site=qq&amp;menu=yes"><img src="new/images/zix.jpg" /></a>
 
 <div id="popDiv" class="mydiv" style="display:none;">
 <div class="guanbi"><a href="javascript:closeDiv()">关闭</a></div>

@@ -554,7 +554,7 @@ echo '城市';
 			 <div class="kf" style="background-image:url('/themes/house/images/zix.jpg')"><a href="javascript:showDiv()">　预约看房</a></div>
 			 <?php }?>
 			
-			 <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1969378190&amp;site=qq&amp;menu=yes">在线咨询</a></div>
+			 <div class="kf" style="background-image:url('/themes/house/images/kf.jpg')"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=4009900393&amp;site=qq&amp;menu=yes">在线咨询</a></div>
 			  <div class="kf" style="background-image:url('/themes/house/images/kfxxk.jpg')"><a href="javascript:window.close()">退回房源列表</a></div>
 
 <div id="popDiv" class="mydiv" style="display:none;">
