@@ -313,7 +313,7 @@
             </a>
         </li>
         <li>
-            <a href="tencent://message/?uin=1969378190&Site=maplecity.com.cn&Menu=yes">
+            <a href="tencent://message/?uin=4009900393&Site=maplecity.com.cn&Menu=yes">
                 <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/ll04.png" width="131" height="49" class="hides"/>
                 <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/top_1.png" width="47" height="49" class="shows" />
             </a>
