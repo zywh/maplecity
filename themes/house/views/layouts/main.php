@@ -405,9 +405,9 @@ $(document).ready(function() {
 	
 });
 </script>   
-
-<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA2NzU3OV80MTMyNTlfNDAwOTkwMDM5M18">
-</script>
+<!-- WPA Button Begin -->
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA2NzU3OV80MTU1MjRfNDAwOTkwMDM5M18"></script>
+<!-- WPA Button End -->
 
     </body>
 </html>
