@@ -928,4 +928,3 @@ foreach($resultshazai as $househaizai){
     });
 </script>
 
-
