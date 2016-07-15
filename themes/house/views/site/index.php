@@ -927,3 +927,72 @@ foreach($resultshazai as $househaizai){
         });				
     });
 </script>
+
+<!-- 客服ga -->
+<style type="text/css">
+.custom_style_02 .content_box { width:130px; _width:129px; background:none; }
+.custom_style_02 .content_title { height:45px; background:url(static/images/service/custom_style_02.gif) no-repeat 0 -100px; }
+.custom_style_02 .content_list { background:url(static/images/service/custom_style_02.gif) repeat-y -266px 0; padding:5px 8px; }
+.custom_style_02 .content_list .qqserver p span { display:none;}
+.custom_style_02 .content_bottom { height:15px; background:url(static/images/service/custom_style_02.gif) no-repeat 0 -147px; }
+.custom_style_02 .close_btn { right:6px; top:5px;}
+.custom_style_02 .close_btn, .custom_style_02 .close_btn a { width:18px; height:18; background:url(static/images/service/custom_style_02.gif) no-repeat -122px -52px; }
+.custom_style_02 .close_btn a:hover { background-position:-122px -52px; }
+.custom_style_02 .show_btn { width:23px; height:80px; background:url(static/images/service/custom_style_02.gif) no-repeat 0 0;  }
+</style>
+<script type="text/javascript" src="static/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.fixed.1.5.1.js"></script>
+<script language="javascript">
+//must window loading,don't use the document loading
+$(window).load(function(){
+		
+	//悬浮客服
+	$("#fixedBox").fix({
+		position 		: "left",	//悬浮位置 - left或right
+		//horizontal  	: 50,		//水平方向的位置 - 默认为数字
+		//vertical    	: 100,      //垂直方向的位置 - 默认为null
+		halfTop     	: true,	    //是否垂直居中位置
+		//minStatue     : false,	//是否最小化
+		//hideCloseBtn 	: false,	//是否隐藏关闭按钮
+		//skin 			: "blue",	//皮肤
+		showBtnWidth 	: 23,       //show_btn_width
+		contentBoxWidth : 130		//side_content_width
+	});
+
+});
+</script>
+
+<!-- S 客服 -->
+<div class="fixed_box custom_style_02" id="fixedBox" style="display:none;">
+    <div class="content_box">
+        <div class="content_inner">
+        	<div class="close_btn"><a title="关闭"><span>关闭</span></a></div>
+            <div class="content_title"><span>客服中心</span></div>
+            <div class="content_list">            	
+                <div class="qqserver">
+                                    <p>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <span>枫之都</span>
+                    	</a>
+                    </p>
+                    <p>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <span>枫之都</span>
+                    	</a>
+                    </p>
+                    <p>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <span>枫之都</span>
+                    	</a>
+                    </p>             
+                </div> 
+            </div>
+            <div class="content_bottom"></div>
+        </div>
+    </div>
+    <div class="show_btn"><span>展开客服</span></div>
+</div>
+<!-- E 客服 -->
