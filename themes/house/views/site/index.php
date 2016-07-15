@@ -929,6 +929,7 @@ foreach($resultshazai as $househaizai){
 </script>
 
 <!-- 客服ga -->
+<link rel="stylesheet" href="static/css/service.css" >
 <style type="text/css">
 .custom_style_02 .content_box { width:130px; _width:129px; background:none; }
 .custom_style_02 .content_title { height:45px; background:url(static/images/service/custom_style_02.gif) no-repeat 0 -100px; }
@@ -963,7 +964,7 @@ $(window).load(function(){
 </script>
 
 <!-- S 客服 -->
-<div class="fixed_box custom_style_02" id="fixedBox" style="display:none;">
+<div class="fixed_box custom_style_02" id="fixedBox">
     <div class="content_box">
         <div class="content_inner">
         	<div class="close_btn"><a title="关闭"><span>关闭</span></a></div>
@@ -972,19 +973,19 @@ $(window).load(function(){
                 <div class="qqserver">
                                     <p>
                         <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
-                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:2030581141:41" alt="点击这里给我发消息" title="点击这里给我发消息">
                           <span>枫之都</span>
                     	</a>
                     </p>
                     <p>
                         <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
-                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:2030581141:41" alt="点击这里给我发消息" title="点击这里给我发消息">
                           <span>枫之都</span>
                     	</a>
                     </p>
                     <p>
                         <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
-                          <img border="0" src="http://wpa.qq.com/pa?p=2:168660460:41" alt="点击这里给我发消息" title="点击这里给我发消息">
+                          <img border="0" src="http://wpa.qq.com/pa?p=2:2030581141:41" alt="点击这里给我发消息" title="点击这里给我发消息">
                           <span>枫之都</span>
                     	</a>
                     </p>             
