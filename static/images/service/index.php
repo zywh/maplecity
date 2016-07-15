@@ -972,13 +972,13 @@ $(window).load(function(){
             <div class="content_list">            	
                 <div class="qqserver">
                     <p>
-                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4009900393&site=qq&menu=yes">
                           <img border="0" src="http://wpa.qq.com/pa?p=2:2030581141:41" alt="点击这里给我发消息" title="点击这里给我发消息">
                           <span>枫之都</span>
                     	</a>
                     </p>
                     <p>
-                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2030581141&site=qq&menu=yes">
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4009900393&site=qq&menu=yes">
                           <img border="0" src="http://wpa.qq.com/pa?p=2:2030581141:41" alt="点击这里给我发消息" title="点击这里给我发消息">
                           <span>枫之都</span>
                     	</a>
