@@ -3098,3 +3098,256 @@ Stack trace:
 REQUEST_URI=/index.php?r=house/view&id=42102&action=add
 HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=42102
 ---
+2016/08/07 17:17:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'mUQAdGOgcZdleuvq', 'æ¯', '78332002283', '2016-08-15', '72623', '282270067').
+2016/08/07 17:17:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'mUQAdGOgcZdleuvq', 'æ¯', '78332002283', '2016-08-15', '72623', '282270067')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('72623')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=72623&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=72623
+---
+2016/08/07 17:25:36 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/08/07 17:25:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('1789996')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=1789996
+---
+2016/08/07 17:25:37 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/08/07 17:25:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('1789996')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=1789996
+---
+2016/08/07 17:26:05 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/08/07 17:26:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('13911')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=13911&cd1=0&cd2=Mississauga&cd3=0&cd4=3&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=&cd12_3=&cd12_4=&cd12_5=&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/08/07 17:29:43 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'byhTcbNHSeAjtL', 'æ¯', '33294368422', '2016-08-15', '20067', '5190772').
+2016/08/07 17:29:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'byhTcbNHSeAjtL', 'æ¯', '33294368422', '2016-08-15', '20067', '5190772')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('20067')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=20067&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=20067
+---
+2016/08/07 17:30:08 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'yTanqsJarqfstSZtugB', 'å¦', '38174425962', '2016-08-15', '125471', 'R2095356').
+2016/08/07 17:30:08 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'yTanqsJarqfstSZtugB', 'å¦', '38174425962', '2016-08-15', '125471', 'R2095356')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('125471')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=125471&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=125471
+---
+2016/08/07 17:42:01 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'yDiYfQbWDxWPmgo', 'æ¯', '65364269189', '2016-08-12', '71982', 'C4065947').
+2016/08/07 17:42:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'yDiYfQbWDxWPmgo', 'æ¯', '65364269189', '2016-08-12', '71982', 'C4065947')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('71982')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=71982&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=71982
+---
+2016/08/07 17:42:55 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'kpwicvLPQUwHAwJn', 'å¦', '99742130256', '2016-08-09', '71546', '1013889').
+2016/08/07 17:42:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'kpwicvLPQUwHAwJn', 'å¦', '99742130256', '2016-08-09', '71546', '1013889')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('71546')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=71546&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=71546
+---
+2016/08/07 17:43:14 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'lelYYilmKMdNjmBzXH', 'æ¯', '28159408131', '2016-08-15', '32028', '481950274').
+2016/08/07 17:43:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'lelYYilmKMdNjmBzXH', 'æ¯', '28159408131', '2016-08-15', '32028', '481950274')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('32028')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=32028&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=32028
+---
+2016/08/07 17:46:03 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/08/07 17:46:03 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('7832')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?id=7832&r=house/view
+---
+2016/08/07 17:46:04 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/08/07 17:46:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('7832')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?id=7832&r=house/view
+---
