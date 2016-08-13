@@ -1637,3 +1637,72 @@ Stack trace:
 #17 {main}
 REQUEST_URI=/index.php?r=house/view&id=1481852
 ---
+2016/08/13 17:24:43 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'JWxHqTPDTj', 'å¦', '21014594092', '2016-08-25', '17334', '410968000336302').
+2016/08/13 17:24:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'JWxHqTPDTj', 'å¦', '21014594092', '2016-08-25', '17334', '410968000336302')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('17334')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=17334&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=17334
+---
+2016/08/13 17:32:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'YFzgrxJjenymhXBSap', 'æ¯', '47917353600', '2016-08-23', '34008', 'E4008796').
+2016/08/13 17:32:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA6\xC2\x98\xC2\xAF' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'YFzgrxJjenymhXBSap', 'æ¯', '47917353600', '2016-08-23', '34008', 'E4008796')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('34008')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=34008&action=add
+HTTP_REFERER=http://www.maplecity.com.cn/index.php?r=house/view&id=34008
+---
+2016/08/13 18:08:54 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'OmKxDWvhrTdKd', 'å¦', '26371929787', '2016-08-20', '6666', 'W3574815').
+2016/08/13 18:08:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xC3\xA5\xC2\x90\xC2\xA6' for column 'touzi' at row 1. The SQL statement executed was: INSERT INTO `h_yuyue` (`uname`,`address`,`touzi`,`tel`,`yuyuedate`,`houseid`,`housemls`) VALUES ('JimmiXS', 'OmKxDWvhrTdKd', 'å¦', '26371929787', '2016-08-20', '6666', 'W3574815')' in /var/www/html/framework/yiilite.php:9423
+Stack trace:
+#0 /var/www/html/themes/house/views/house/view.php(617): CDbCommand->execute()
+#1 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#2 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#3 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#5 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#6 [internal function]: HouseController->actionView('6666')
+#7 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#8 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#9 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#10 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#13 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#14 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#15 /var/www/html/index.php(23): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=house/view&id=6666&action=add
+HTTP_REFERER=http://citym.ca/index.php?r=house/view&id=6666
+---
