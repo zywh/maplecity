@@ -376,7 +376,7 @@ class SiteController extends XFrontBase
      */
     public function actionLogin ()
     {
-        $this->layout = " ";
+       $this->layout = " ";
         Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/jquery-1.9.1.js');
         Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/login.css');
         $original = Yii::app()->request->getQuery('original');

@@ -10,6 +10,7 @@
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/fczx.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.jslides.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/koala.min.1.5.js"></script>
+		<script src="https://cdn.auth0.com/js/lock/10.0/lock.min.js"></script>
         <title><?php 
 		if(Yii::app()->controller->id=="site"){echo "加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
 		elseif(Yii::app()->controller->id=="hotrecommend"){echo "热点推荐 - 加拿大房产_加拿大房价_加拿大房地产_加拿大买房_枫之都";}
@@ -25,6 +26,11 @@
         <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?libraries=places&language=zh-cn"></script>
         <script type="text/javascript" src="<?php echo $this->_baseUrl ?>/static/map/js/richmarker-compiled.js"></script>
         <script type="text/javascript" src="<?php echo $this->_baseUrl ?>/static/map/js/markercluster.js"></script>
+		
+		
+		
+		
+		
         <?php }?>
         <style>
 #leftsead{width:131px;height:143px;position:fixed;bottom:250px;right:20px; z-index:999;}
@@ -56,9 +62,25 @@
                     <?php if (empty($this->_account['userId'])) { ?>
                         <div class="topdl_before">
                             <div class="loginbox">
+							<script type="text/javascript">
+						  var lock = new Auth0Lock('sfyFhgeWtYy5x1W5fOwFg2FEqnHRHae3', 'mapleapp.auth0.com', {
+							auth: {
+							  redirectUrl: 'http://maplecity.com.cn',
+							  responseType: 'code',
+							  params: {
+								scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+							  }
+							}
+						  });
+						</script>
+						<a onclick="lock.show();">Login</a>
+
+							<!--
                                 <a href="<?php echo Yii::app()->createUrl('site/login'); ?>" id="login">登录</a>
                                 <a href="<?php echo Yii::app()->createUrl('user/register'); ?>" id="register">注册</a>
                                 <a href="<?php echo Yii::app()->createUrl('site/forgetPassword'); ?>" id="forget" target="_blank">忘记密码</a>
+							
+							-->
 							</div>
                             <div class="cl"></div>
                         </div>
