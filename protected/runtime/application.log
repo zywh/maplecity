@@ -2536,3 +2536,454 @@ Stack trace:
 #17 {main}
 REQUEST_URI=/index.php?id=10639&r=house/view
 ---
+2016/10/11 12:28:52 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/10/11 12:28:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('11850')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?id=11850&r=house/view
+---
+2016/10/11 12:58:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login'
+---
+2016/10/11 12:58:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login'
+---
+2016/10/11 12:58:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login'
+---
+2016/10/11 12:58:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login' and '1'='1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login' and '1'=...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login' and '1'=...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login'%20and%20'1'='1
+---
+2016/10/11 12:58:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login' and '1'='2" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login' and '1'=...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login' and '1'=...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login'%20and%20'1'='2
+---
+2016/10/11 12:58:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login and 1453=1453" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login and 1453=...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login and 1453=...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login%20and%201453=1453
+---
+2016/10/11 12:58:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "login and 1453=1454" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('login and 1453=...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('login and 1453=...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/login and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/login%20and%201453=1454
+---
+2016/10/11 12:58:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register'
+---
+2016/10/11 12:58:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register'
+---
+2016/10/11 12:58:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register'
+---
+2016/10/11 12:58:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register' and '1'='1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register' and '...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register' and '...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register' ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register'%20and%20'1'='1
+---
+2016/10/11 12:58:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register' and '1'='2" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register' and '...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register' and '...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register' ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register'%20and%20'1'='2
+---
+2016/10/11 12:58:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register and 1453=1453" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register and 14...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register and 14...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register a...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register%20and%201453=1453
+---
+2016/10/11 12:58:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "register and 1453=1454" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('register and 14...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('register and 14...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('user/register a...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=user/register%20and%201453=1454
+---
+2016/10/11 12:58:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword'
+---
+2016/10/11 12:58:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword'
+---
+2016/10/11 12:58:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword'
+---
+2016/10/11 12:58:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword' and '1'='1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword'...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword'...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword'%20and%20'1'='1
+---
+2016/10/11 12:58:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword' and '1'='2" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword'...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword'...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword'%20and%20'1'='2
+---
+2016/10/11 12:58:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword and 1453=1453" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword ...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword ...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword%20and%201453=1453
+---
+2016/10/11 12:58:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "forgetPassword and 1453=1454" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('forgetPassword ...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('forgetPassword ...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('site/forgetPass...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=site/forgetPassword%20and%201453=1454
+---
+2016/10/11 12:58:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current'
+---
+2016/10/11 12:58:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current'
+---
+2016/10/11 12:58:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current'
+---
+2016/10/11 12:58:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current' and '1'='1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current' and '1...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current' and '1...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current' ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current'%20and%20'1'='1
+---
+2016/10/11 12:58:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current' and '1'='2" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current' and '1...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current' and '1...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current' ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current'%20and%20'1'='2
+---
+2016/10/11 12:58:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current and 1453=1453" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current and 145...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current and 145...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current a...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current%20and%201453=1453
+---
+2016/10/11 12:58:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "current and 1453=1454" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('current and 145...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('current and 145...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats/current a...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=stats/current%20and%201453=1454
+---
+2016/10/11 12:58:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats'"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats'')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats'
+---
+2016/10/11 12:58:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats'"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats'')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats'
+---
+2016/10/11 12:58:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats'"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats'')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats'
+---
+2016/10/11 12:58:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats' and '1'='1"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats' and '1'=...')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats'%20and%20'1'='1
+---
+2016/10/11 12:58:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats' and '1'='2"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats' and '1'=...')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats'%20and%20'1'='2
+---
+2016/10/11 12:58:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats and 1453=1453"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats and 1453=...')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats%20and%201453=1453
+---
+2016/10/11 12:58:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "stats and 1453=1454"。' in /var/www/html/framework/yiilite.php:1765
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('stats and 1453=...')
+#1 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#2 /var/www/html/index.php(23): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=stats%20and%201453=1454
+---
+2016/10/11 13:02:38 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/10/11 13:02:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('9769')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=9769
+---
+2016/10/11 13:02:56 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/10/11 13:02:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('9777')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=9777
+---
+2016/10/11 13:04:13 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/10/11 13:04:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('12465')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=12465
+---
+2016/10/11 13:08:00 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/10/11 13:08:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(519): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('8887')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=8887
+---
