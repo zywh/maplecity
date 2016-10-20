@@ -38,6 +38,11 @@ class MapController extends XFrontBase {
 
             //根据条件查询地图
             $criteria = new CDbCriteria();
+			
+			//VOW limits
+			$criteria->addCondition('src != "VOW"');
+			
+			//select
             $criteria->select = 'id,ml_num,zip,county,municipality,lp_dol,num_kit,construction_year,depth,front_ft,br,addr,house_image,longitude,latitude,area,bath_tot';
 
 			//Search By Lease or Sale

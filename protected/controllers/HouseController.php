@@ -99,6 +99,9 @@ class HouseController extends XFrontBase
         //按搜索条件查询房源信息
         $criteria = new CDbCriteria();
 		
+		//VOW limits
+		$criteria->addCondition('src != "VOW"');
+		
 		//Search By Sale or Lease Type
 		//$criteria->addCondition('s_r ="Sale"');
 		
