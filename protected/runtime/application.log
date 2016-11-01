@@ -6437,3 +6437,646 @@ Stack trace:
 #17 {main}
 REQUEST_URI=/index.php?r=house/view&id=39032
 ---
+2016/11/02 00:23:27 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:23:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('31311')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?id=31311&r=house/view
+---
+2016/11/02 00:23:28 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:23:28 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('31311')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?id=31311&r=house/view
+---
+2016/11/02 00:38:15 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:38:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('27742')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=27742
+---
+2016/11/02 00:40:25 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:40:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('206500')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=206500&cd1=4&cd2=0&cd3=3&cd4=3&cd5=&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=0&cd12=0&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&page=
+---
+2016/11/02 00:54:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house/view'&id=126671'&cd1=0'&cd2=0'&cd3=0'&cd4=8'&cd5=0'&cd6=0'&cd7=0'&cd8=0'&cd9=0'&cd10=0'&cd11=1'&cd12=1'&cd12_2=0'&cd12_3=0'&cd12_4=0'&cd12_5=0'&cd13=0'&cd14=0'&cd15=0'&cd16=0'&cd17=0'&cd18=0'"
+---
+2016/11/02 00:54:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view2121121121212.1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view21211211212...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view21211211212...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view21211...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view2121121121212.1
+---
+2016/11/02 00:54:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3D1
+---
+2016/11/02 00:54:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1>1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1>1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1>1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3E1
+---
+2016/11/02 00:54:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27x
+---
+2016/11/02 00:54:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27y
+---
+2016/11/02 00:54:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view"%20and%20"x"%3D"x
+---
+2016/11/02 00:54:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 00:54:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view AND 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view AND 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view AND 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view AND ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20AND%201=1
+---
+2016/11/02 00:54:17 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:54:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671212112112...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=1266712121121121212.1
+---
+2016/11/02 00:54:22 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:54:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671" and "x"...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=126671%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 00:56:18 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:56:18 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('23135')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&id=23135
+---
+2016/11/02 00:57:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house/view'&id=126671'&cd1=0'&cd2=0'&cd3=0'&cd4=8'&cd5=0'&cd6=0'&cd7=0'&cd8=0'&cd9=0'&cd10=0'&cd11=1'&cd12=1'&cd12_2=0'&cd12_3=0'&cd12_4=0'&cd12_5=0'&cd13=0'&cd14=0'&cd15=0'&cd16=0'&cd17=0'&cd18=0'"
+---
+2016/11/02 00:57:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view2121121121212.1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view21211211212...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view21211211212...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view21211...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view2121121121212.1
+---
+2016/11/02 00:57:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3D1
+---
+2016/11/02 00:57:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1>1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1>1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1>1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3E1
+---
+2016/11/02 00:57:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27x
+---
+2016/11/02 00:57:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27y
+---
+2016/11/02 00:57:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view"%20and%20"x"%3D"x
+---
+2016/11/02 00:57:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 00:57:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view AND 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view AND 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view AND 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view AND ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20AND%201=1
+---
+2016/11/02 00:58:00 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:58:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671212112112...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=1266712121121121212.1
+---
+2016/11/02 00:58:10 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 00:58:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671" and "x"...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=126671%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 01:01:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house/view'&id=126671'&cd1=0'&cd2=0'&cd3=0'&cd4=8'&cd5=0'&cd6=0'&cd7=0'&cd8=0'&cd9=0'&cd10=0'&cd11=1'&cd12=1'&cd12_2=0'&cd12_3=0'&cd12_4=0'&cd12_5=0'&cd13=0'&cd14=0'&cd15=0'&cd16=0'&cd17=0'&cd18=0'"
+---
+2016/11/02 01:01:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view2121121121212.1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view21211211212...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view21211211212...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view21211...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view2121121121212.1
+---
+2016/11/02 01:01:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3D1
+---
+2016/11/02 01:01:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view and 1>1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view and 1>1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view and 1>1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view and ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20and%201%3E1
+---
+2016/11/02 01:01:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27x
+---
+2016/11/02 01:01:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' and 'x'='y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' and 'x'='...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' and 'x'='...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%27%20and%20%27x%27%3D%27y
+---
+2016/11/02 01:01:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="x" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view"%20and%20"x"%3D"x
+---
+2016/11/02 01:01:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view" and "x"="y" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view" and "x"="...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view" and "x"="...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view" and...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 01:01:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view AND 1=1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view AND 1=1')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view AND 1=1')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view AND ...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&r=house/view%20AND%201=1
+---
+2016/11/02 01:01:34 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 01:01:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671212112112...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=1266712121121121212.1
+---
+2016/11/02 01:01:49 [error] [system.db.CDbCommand] CDbCommand::() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5.
+2016/11/02 01:01:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand 无法执行 SQL 语句: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and recommend=1 limit 0,5' at line 1. The SQL statement executed was: select * from h_house where lp_dol<3000000 and lp_dol > 1000000 and id!= and recommend=1 limit 0,5' in /var/www/html/framework/yiilite.php:9510
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(9429): CDbCommand->queryInternal('', 0, Array)
+#1 /var/www/html/themes/house/views/house/view.php(1385): CDbCommand->query()
+#2 /var/www/html/framework/yiilite.php(3493): require('/var/www/html/t...')
+#3 /var/www/html/framework/yiilite.php(3472): CBaseController->renderInternal('/var/www/html/t...', Array, true)
+#4 /var/www/html/framework/yiilite.php(3904): CBaseController->renderFile('/var/www/html/t...', Array, true)
+#5 /var/www/html/framework/yiilite.php(3872): CController->renderPartial('view', Array, true)
+#6 /var/www/html/protected/controllers/HouseController.php(522): CController->render('view', Array)
+#7 [internal function]: HouseController->actionView('126671" and "x"...')
+#8 /var/www/html/framework/yiilite.php(4121): ReflectionMethod->invokeArgs(Object(HouseController), Array)
+#9 /var/www/html/framework/yiilite.php(4138): CAction->runWithParamsInternal(Object(HouseController), Object(ReflectionMethod), Array)
+#10 /var/www/html/framework/yiilite.php(3652): CInlineAction->runWithParams(Array)
+#11 /var/www/html/framework/yiilite.php(3637): CController->runAction(Object(CInlineAction))
+#12 /var/www/html/framework/yiilite.php(3627): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/html/framework/yiilite.php(1761): CController->run('view')
+#14 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view')
+#15 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#16 /var/www/html/index.php(23): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=house/view&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0&id=126671%22%20and%20%22x%22%3D%22y
+---
+2016/11/02 01:05:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' AnD sLeep(3) ANd '1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' AnD sLeep...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' AnD sLeep...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' AnD...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%20AnD%20sLeep%283%29%20ANd%20%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:05:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'&&sLEEp(3)&&'1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'&&sLEEp(3)...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'&&sLEEp(3)...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'&&sL...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%26%26sLEEp%283%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:05:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view?'||SLeeP(3...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view?'||SLeeP(3...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view?'||S...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%00%27%7C%7CSLeeP%283%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:05:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' aND BeNChMaRK(2999999,Md5(NoW())) AnD '1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' aND BeNCh...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' aND BeNCh...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' aND...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%20aND%20BeNChMaRK%282999999%2CMd5%28NoW%28%29%29%29%20AnD%20%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:05:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'&&BeNChMaRK(2999999,mD5(NOW()))&&'1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'&&BeNChMaR...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'&&BeNChMaR...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'&&Be...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%26%26BeNChMaRK%282999999%2CmD5%28NOW%28%29%29%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house/view'&id=126671'&cd1=0'&cd2=0'&cd3=0'&cd4=8'&cd5=0'&cd6=0'&cd7=0'&cd8=0'&cd9=0'&cd10=0'&cd11=1'&cd12=1'&cd12_2=0'&cd12_3=0'&cd12_4=0'&cd12_5=0'&cd13=0'&cd14=0'&cd15=0'&cd16=0'&cd17=0'&cd18=0'
+---
+2016/11/02 01:06:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' AnD sLeep(3) ANd '1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' AnD sLeep...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' AnD sLeep...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' AnD...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%20AnD%20sLeep%283%29%20ANd%20%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'&&sLEEp(3)&&'1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'&&sLEEp(3)...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'&&sLEEp(3)...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'&&sL...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%26%26sLEEp%283%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view?'||SLeeP(3...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view?'||SLeeP(3...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view?'||S...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%00%27%7C%7CSLeeP%283%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view' aND BeNChMaRK(2999999,Md5(NoW())) AnD '1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view' aND BeNCh...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view' aND BeNCh...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view' aND...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%20aND%20BeNChMaRK%282999999%2CMd5%28NoW%28%29%29%29%20AnD%20%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'&&BeNChMaRK(2999999,mD5(NOW()))&&'1" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'&&BeNChMaR...')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'&&BeNChMaR...')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'&&Be...')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house%2Fview%27%26%26BeNChMaRK%282999999%2CmD5%28NOW%28%29%29%29%26%26%271&id=126671&cd1=0&cd2=0&cd3=0&cd4=8&cd5=0&cd6=0&cd7=0&cd8=0&cd9=0&cd10=0&cd11=1&cd12=1&cd12_2=0&cd12_3=0&cd12_4=0&cd12_5=0&cd13=0&cd14=0&cd15=0&cd16=0&cd17=0&cd18=0
+---
+2016/11/02 01:06:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "view'" 动作.' in /var/www/html/framework/yiilite.php:3750
+Stack trace:
+#0 /var/www/html/framework/yiilite.php(3632): CController->missingAction('view'')
+#1 /var/www/html/framework/yiilite.php(1761): CController->run('view'')
+#2 /var/www/html/framework/yiilite.php(1681): CWebApplication->runController('house/view'')
+#3 /var/www/html/framework/yiilite.php(1202): CWebApplication->processRequest()
+#4 /var/www/html/index.php(23): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=house/view'&id=126671'&cd1=0'&cd2=0'&cd3=0'&cd4=8'&cd5=0'&cd6=0'&cd7=0'&cd8=0'&cd9=0'&cd10=0'&cd11=1'&cd12=1'&cd12_2=0'&cd12_3=0'&cd12_4=0'&cd12_5=0'&cd13=0'&cd14=0'&cd15=0'&cd16=0'&cd17=0'&cd18=0'
+---
