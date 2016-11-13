@@ -22,6 +22,10 @@ class HouseController extends XFrontBase
 	private $CREA_TN_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamtn/";//CDN CREA Thumbnail
 	private $CREA_MID_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamid/"; //CDN CREA Medium Image 
 	
+	private $CREA_IMG_HOST = "http://creac.citym.ca/";//CDN CREA Large Image URL
+	private $CREA_TN_HOST = "http://creac.citym.ca/creamtn/";//CDN CREA Thumbnail
+	private $CREA_MID_HOST = "http://creac.citym.ca/creamid/"; //CDN CREA Medium Image 
+	
     private $MAPLEAPP_SPA_SECRET = "Wg1qczn2IKXHEfzOCtqFbFCwKhu-kkqiAKlBRx_7VotguYFnKOWZMJEuDVQMXVnG";
     private $MAPLEAPP_SPA_AUD = ['9fNpEj70wvf86dv5DeXPijTnkLVX5QZi'];
     private $PROFILE_FAVLIST_MAX = 20;
@@ -725,7 +729,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 			
 			//Return CDN and non-CDN thumbnail and medium picture
 			if ( $fullList == 0){
-				if (( $pic_num > 0)&&($src !="CREA" )) { //Treb picture meta data is updated after 2016/10/29
+				if ( $pic_num > 0) { //Treb picture meta data is updated after 2016/10/29
 				
 					$p1 = $this->TREB_MID_HOST."Photo".$ml_num."/"."Photo".$ml_num."-1.jpeg";
 					$p2 = $this->CREA_MID_HOST.$county."/Photo".$ml_num."/".$ml_num."-1.jpg";
@@ -772,7 +776,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 			
 			//Return CDN and non-CDN full picture list
 			if ( $fullList == 1){
-				if (( $pic_num > 0)&&($src !="CREA" )) { //Treb picture meta data is updated after 2016/10/29
+				if ( $pic_num > 0) { //Treb picture meta data is updated after 2016/10/29
 					for ($x = 1; $x <= $pic_num; $x++) {
 						
 						$p1 = $this->TREB_IMG_HOST."Photo".$ml_num."/"."Photo".$ml_num."-".$x.".jpeg";
