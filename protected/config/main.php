@@ -39,7 +39,7 @@ return array(
 	),
 	'components'=>array(
 		 'myClass' => array(
-            	'class' => 'ext.components.MyClass',
+            	'class' => 'ext.MyClass',
         	),
       		'log'=>array(
             'class'=>'CLogRouter',

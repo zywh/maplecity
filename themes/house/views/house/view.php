@@ -343,7 +343,8 @@ $slng=$_GET["lng"];
 	<div class="swiper-container gallery-top" >
 		<div class="swiper-wrapper" >
 			<?php 
-			$imageList = get_imagelist($house->county,$house->ml_num);
+			$imageList = Yii::app()->myClass->getPicture($house->county,$house->ml_num,$house->src,1,$house->pic_num)['cdn_photos'];
+			//$imageList = get_imagelist($house->county,$house->ml_num);
 			foreach($imageList as $i){ ?>
 			<div class="swiper-slide house-image-slide" 
 			 style="background-image:url(<?php echo $i; ?>)">
