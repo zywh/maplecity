@@ -43,7 +43,7 @@ class MapController extends XFrontBase {
 			$criteria->addCondition('src != "VOW"');
 			
 			//select
-            $criteria->select = 'id,ml_num,zip,county,municipality,lp_dol,num_kit,construction_year,depth,front_ft,br,addr,house_image,longitude,latitude,area,bath_tot';
+            $criteria->select = 'id,ml_num,zip,county,municipality,lp_dol,num_kit,construction_year,depth,front_ft,br,addr,house_image,longitude,latitude,area,bath_tot,src,pic_num';
 
 			//Search By Lease or Sale
             if ($_POST['type'] == "rent" )  {
@@ -264,6 +264,7 @@ class MapController extends XFrontBase {
                     //Get image from county
 					
 					$county = $val->county;
+					/*
 					$county = preg_replace('/\s+/', '', $county);
 					$county = str_replace("&","",$county);
 					$dir="mlspic/crea/".$county."/Photo".$val->ml_num."/";
@@ -281,6 +282,9 @@ class MapController extends XFrontBase {
 					}else {
 						$mapHouseList['CoverImg'] = 'uploads/201501/29cd77e5f187df554a1ff9facdc190e2.jpg';
 					}
+					*/
+					$mapHouseList['CoverImg'] = Yii::app()->myClass->getPicture($county,$val->ml_num,$val->src,0,$val->pic_num)['CdnCoverImg'] ;
+					
 
 
 					//$mapHouseList['CoverImg'] = !empty($val->house_image) ? $val->house_image : 'uploads/201501/29cd77e5f187df554a1ff9facdc190e2.jpg';

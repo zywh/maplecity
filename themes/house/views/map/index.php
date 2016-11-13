@@ -769,7 +769,7 @@
 					if ( houseCount < maxMarkers ) {
 						$(data.Data.MapHouseList).each(function(index) {
 		
-						var imgurl = "/" + this.CoverImg;
+						var imgurl = this.CoverImg;
 						var BuildYear = "";
 						if (this.BuildYear != null && this.BuildYear > 100) {
 							BuildYear = (new Date()).getFullYear() - this.BuildYear + "年";
@@ -813,7 +813,7 @@
 						
 						var html = "<div class='map_info_title'>" 
 						+ this.Address + ", " + this.CountryName + ", " + this.ProvinceEname
-						+ "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" 
+						+ "</div><div class='map_info_content'><div class='map_info_left'><img src='"
 						+ imgurl + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span> "
 						+ hprice + "</p> <p><a href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" 
 						+ this.Id + "' target='_blank'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>地 址：" 
@@ -874,7 +874,7 @@
         var info = $(obj);
         var html = "<div class='map_info_title'>" 
 		+ $(info).attr("Address") + ", " + $(info).attr("CountryName") + ", " + $(info).attr("ProvinceEname") + " " + $(info).attr("Zip")
-		+ "</div><div class='map_info_content'><div class='map_info_left'><img src='<?php echo Yii::app()->request->baseUrl; ?>" 
+		+ "</div><div class='map_info_content'><div class='map_info_left'><img src='"
 		+ $(info).attr("imgurl") + "' style='width:188px;height:148px'/></div><div class='map_info_right'><p class='orange map_info_price'><i class='common_bg'></i><span>价 格：</span>" 
 		+ $(info).attr("Price") + "<br /></p><p><a class='preferential common_bg' target='blank'  href='<?php echo Yii::app()->createUrl('house/view'); ?>&id=" + 
 		$(info).attr("Id") + "'>查看详情</a></p><p class='map_info_address'><i class='common_bg'></i>城 市：" 

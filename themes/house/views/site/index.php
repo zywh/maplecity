@@ -184,7 +184,7 @@ $zhinan=$housezhinan["image"];
                
 <?php 
 $sqlhaozi = "
-	select h.id id,h.county county,h.ml_num ml_num,h.lp_dol/10000 price,h.municipality citye, h.addr addr ,m.municipality_cname city,p.name province
+	select h.id id,h.county county,h.ml_num ml_num,h.lp_dol/10000 price,h.municipality citye, h.addr addr ,m.municipality_cname city,p.name province,h.pic_num pic_num,h.src src 
 	from h_house h,h_mname m,h_city p
 	where h.municipality = m.municipality
 	AND h.county = p.englishname
@@ -206,7 +206,11 @@ foreach($resultshazai as $househaizai){
 								 
 								$county = $househaizai["county"];
 								$ml_num = $househaizai["ml_num"];
-								$picfile = get_firstimage($county,$ml_num);
+								$pic_num = $househaizai["pic_num"];
+								$src = $househaizai["src"];
+								
+								//$picfile = get_firstimage($county,$ml_num);
+								$picfile = Yii::app()->myClass->getPicture($county,$ml_num,$src,0,$pic_num)['CdnCoverImg'] ;
 
 									  ?><a href="<?php echo Yii::app()->createUrl('house/view', array('id'=>$househaizai["id"])); ?>" target="_blank"><img src="<?php echo $picfile; ?>" width="307" height="197"/></a>
 							

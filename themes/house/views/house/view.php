@@ -1387,12 +1387,16 @@ if($house->s_r=="Sale"){
 			foreach($resultshazai as $househaizai){
 				$county=$househaizai["county"];
 				$ml_num=$househaizai["ml_num"];
-				$pic = get_firstimage($county,$ml_num);	
+				$src=$househaizai["src"];
+				$pic_num=$househaizai["pic_num"];
+				//$pic = get_firstimage($county,$ml_num);	
+				$pic = Yii::app()->myClass->getPicture($county,$ml_num,$src,0,$pic_num)['CdnCoverImg'] ;
+				
 			?>
 
 				<div class="swiper-slide" >
 					<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$househaizai["id"])); ?>">
-						<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
+						<img src="<?php echo $pic; ?>" >
 					</a>
 					<div class='grtz-titlebox'>
 						<div class='grtz-titletext'>
@@ -1445,12 +1449,16 @@ if($house->s_r=="Sale"){
 			
 			$county=$housefujin["county"];
 			$ml_num=$housefujin["ml_num"];
-			$pic = get_firstimage($county,$ml_num);
+			$pic_num=$housefujin["pic_num"];
+			$src=$housefujin["src"];
+			//$pic = get_firstimage($county,$ml_num);
+			$pic = Yii::app()->myClass->getPicture($county,$ml_num,$src,0,$pic_num)['CdnCoverImg'] ;
+			
 			?>
 
 			<div class="swiper-slide" >
 				<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$housefujin["id"])); ?>">
-					<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
+					<img src="<?php echo $pic; ?>" >
 				</a>
 				<div class='fjfy-titlebox'>
 					<div class='fjfy-titletext'>
@@ -1495,7 +1503,10 @@ if($house->s_r=="Sale"){
 					$idhousefy= $housefy["id"];
 					$county = $housefy["county"];
 					$ml_num = $housefy["ml_num"];
-					$pic = get_firstimage($county,$ml_num);
+					$src= $housefy["src"];
+					$pic_num = $housefy["pic_num"];
+					//$pic = get_firstimage($county,$ml_num);
+					$pic = Yii::app()->myClass->getPicture($county,$ml_num,$src,0,$pic_num)['CdnCoverImg'] ;
 					$addr=$housefy["addr"];
 					$community=$housefy["community"];
 					$lp_dol=$housefy["lp_dol"];
@@ -1514,7 +1525,7 @@ if($house->s_r=="Sale"){
 				
 			<div class="swiper-slide" >
 				<a href="<?php echo Yii::app()->createUrl('house/view',array('id'=>$idhousefy)); ?>">
-					<img src="<?php echo Yii::app()->request->baseUrl;?>/<?php echo $pic; ?>" >
+					<img src="<?php echo $pic; ?>" >
 				</a>
 				<div class='zjll-titlebox'>
 					<div class='zjll-titletext'>
