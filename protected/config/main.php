@@ -38,6 +38,9 @@ return array(
 		)
 	),
 	'components'=>array(
+		 'myClass' => array(
+            	'class' => 'ext.components.MyClass',
+        	),
       		'log'=>array(
             'class'=>'CLogRouter',
             'routes'=>array(

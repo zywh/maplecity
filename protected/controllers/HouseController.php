@@ -18,9 +18,9 @@ class HouseController extends XFrontBase
 	private $TREB_IMG_HOST = "http://1546690846.rsc.cdn77.org/treb/";//CDN Treb Large Image URL
 	private $TREB_TN_HOST = "http://1546690846.rsc.cdn77.org/trebtn/"; //CDN Treb Thumbnail
 	private $TREB_MID_HOST = "http://1546690846.rsc.cdn77.org/trebmid/";//CDN Treb Medium Image URL
-	private $CREA_IMG_HOST = "http://ca.maplecity.com.cn/mlspic/crea/";//CDN CREA Large Image URL
-	private $CREA_TN_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamtn/";//CDN CREA Thumbnail
-	private $CREA_MID_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamid/"; //CDN CREA Medium Image 
+	//private $CREA_IMG_HOST = "http://ca.maplecity.com.cn/mlspic/crea/";//CDN CREA Large Image URL
+	//private $CREA_TN_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamtn/";//CDN CREA Thumbnail
+	//private $CREA_MID_HOST = "http://ca.maplecity.com.cn/mlspic/crea/creamid/"; //CDN CREA Medium Image 
 	
 	private $CREA_IMG_HOST = "http://creac.citym.ca/";//CDN CREA Large Image URL
 	private $CREA_TN_HOST = "http://creac.citym.ca/creamtn/";//CDN CREA Thumbnail
@@ -719,7 +719,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
     }
 		
 	
-		function getPicture($county,$ml_num,$src,$fullList,$pic_num){
+	public	function getPicture($county,$ml_num,$src,$fullList,$pic_num){
 			
 			$county = preg_replace('/\s+/', '', $county);
 			$county = str_replace("&","",$county);
@@ -826,7 +826,7 @@ $criteria->addCondition('prop_feat1_out like "%Library%" or prop_feat2_out like 
 	}
 	
 	
-	function maskVOW($src, $unmasked, $masked = ''){
+	public function maskVOW($src, $unmasked, $masked = ''){
 		if ($src != 'VOW') {
 			return $unmasked;
 		} else if ($this->isValidIdToken()) {  
